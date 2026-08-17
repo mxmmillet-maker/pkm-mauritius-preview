@@ -3,7 +3,7 @@ const { logoSrc = '/logo-white.png', columns = [] } = Astro.props;
 // columns : [{ title, links: [{ label, href }] }]
 ---
 <footer>
-  <img src={logoSrc} alt="PKM — Paradise Kitesurfing Mauritius" height="28" style="margin-bottom:20px" />
+  <img class="footer-logo" src={logoSrc} alt="PKM — Paradise Kitesurfing Mauritius" width="800" height="293" />
   <div class="fgrid">
     {columns.map((col) => (
       <div>
@@ -23,5 +23,6 @@ const { logoSrc = '/logo-white.png', columns = [] } = Astro.props;
   }
   footer h4 { font-family: var(--font-display); color: #fff; font-size: .95rem; margin: 0 0 8px; }
   footer a { color: #C3D6D4; text-decoration: none; display: block; padding: 5px 0; }
+  .footer-logo { display: block; width: auto; height: 58px; margin-bottom: 22px; }
   .fgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 22px; }
 </style>

@@ -13,7 +13,7 @@ const currentPath = Astro.url.pathname;
 ---
 <header class="topbar">
   <a class="logo" href={`/${locale}/`}>
-    <img src={logoSrc} alt="PKM — Paradise Kitesurfing Mauritius" height="30" />
+    <img src={logoSrc} alt="PKM — Paradise Kitesurfing Mauritius" width="800" height="293" />
   </a>
   <div class="topright">
     <nav class="lang" aria-label={locale === 'fr' ? 'Langue' : 'Language'}>
@@ -42,7 +42,7 @@ const currentPath = Astro.url.pathname;
     padding: 11px 18px;
   }
   .logo { display: flex; align-items: center; text-decoration: none; }
-  .logo img { display: block; width: auto; }
+  .logo img { display: block; width: auto; height: 42px; }
   .topright { display: flex; align-items: center; gap: 6px; }
   .lang { display: flex; gap: 6px; }
   .pill {
@@ -74,6 +74,7 @@ const currentPath = Astro.url.pathname;
 
   @media (min-width: 900px) {
     .topbar { padding-inline: max(24px, calc((100vw - 1120px) / 2)); }
+    .logo img { height: 46px; }
     .burger { display: none; }
     .menu {
       display: flex;
