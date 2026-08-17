@@ -34,8 +34,21 @@ par Pexels :
   https://www.pexels.com/photo/man-kitesurfing-over-waves-15944400/
 - navigation dans les vagues par Serg Alesenko —
   https://www.pexels.com/photo/kitesurfing-on-waves-on-sea-coast-18696580/
+- wingfoil par Fuka jaz —
+  https://www.pexels.com/photo/teenager-boy-gliding-over-turquoise-seas-surface-on-a-wing-foil-board-18388674/
 
 Licence : https://www.pexels.com/license/
+
+Les marques Google et TripAdvisor restent la propriété de leurs détenteurs.
+Leurs logos servent uniquement à identifier les plateformes d'avis et suivent
+les ressources de marque publiées par Google et les outils marketing proposés
+par TripAdvisor :
+
+- https://about.google/intl/fr/brand-resource-center/
+- https://www.tripadvisor.com/business/marketing-tools
+
+Les courts extraits affichés sur l'accueil renvoient vers les fiches publiques
+pour permettre de consulter le contexte et les avis complets.
 
 Les faits variables (tarifs, téléphones, avis, politique de réservation) sont
 centralisés dans `src/data/site.json`. Les données de vent sont dans

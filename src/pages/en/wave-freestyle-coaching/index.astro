@@ -7,7 +7,7 @@ import site from '../../../data/site.json';
 
 const translations = { fr: '/fr/perfectionnement/', en: '/en/wave-freestyle-coaching/' };
 const waPhone = site.phones[0].replace(/\D/g, '');
-const waLink = `https://wa.me/${waPhone}?text=${encodeURIComponent("Hello Gary, I'd like to organise an advanced coaching session at Le Morne.")}`;
+const waLink = `https://wa.me/${waPhone}?text=${encodeURIComponent("Hello PKM team, I'd like to organise an advanced coaching session at Le Morne.")}`;
 
 const faqItems = [
   {
@@ -16,7 +16,7 @@ const faqItems = [
   },
   {
     question: 'Can a couple with two levels share a session?',
-    answer: 'Yes when both goals are compatible with the area and conditions. One rider can work on upwind riding or toeside while the other develops transitions or positioning. Gary confirms the format before the session.',
+    answer: 'Yes when both goals are compatible with the area and conditions. One rider can work on upwind riding or toeside while the other develops transitions or positioning. The team confirms the format before the session.',
   },
   {
     question: 'What level do I need to start wave riding?',
@@ -106,7 +106,7 @@ const faqItems = [
   <section class="pad mixed-levels">
     <span class="kicker">Couples</span>
     <h2>Two levels in one session when it makes sense</h2>
-    <p class="sub">One rider can work on toeside or upwind riding while the other consolidates transitions or a directional board. If the gap or conditions make the format ineffective, Gary suggests two coordinated slots.</p>
+    <p class="sub">One rider can work on toeside or upwind riding while the other consolidates transitions or a directional board. If the gap or conditions make the format ineffective, the team suggests two coordinated slots.</p>
     <div class="offer-lite"><b>Groups:</b> 10% off from 3 people booked together, combined with the first supervised session free.</div>
     <Button variant="wa" href={waLink}>Describe the group's levels</Button>
   </section>

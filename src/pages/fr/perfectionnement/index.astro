@@ -7,7 +7,7 @@ import site from '../../../data/site.json';
 
 const translations = { fr: '/fr/perfectionnement/', en: '/en/wave-freestyle-coaching/' };
 const waPhone = site.phones[0].replace(/\D/g, '');
-const waLink = `https://wa.me/${waPhone}?text=${encodeURIComponent("Bonjour Gary, j'aimerais organiser un coaching de perfectionnement au Morne.")}`;
+const waLink = `https://wa.me/${waPhone}?text=${encodeURIComponent("Bonjour l'équipe PKM, j'aimerais organiser un coaching de perfectionnement au Morne.")}`;
 
 const faqItems = [
   {
@@ -16,7 +16,7 @@ const faqItems = [
   },
   {
     question: 'Peut-on faire une séance en couple avec deux niveaux ?',
-    answer: "Oui si les deux objectifs restent compatibles avec la zone et les conditions. L'un peut travailler sa remontée au vent ou son toeside pendant que l'autre progresse sur les transitions ou le placement. Gary valide le format avant la séance.",
+    answer: "Oui si les deux objectifs restent compatibles avec la zone et les conditions. L'un peut travailler sa remontée au vent ou son toeside pendant que l'autre progresse sur les transitions ou le placement. L’équipe valide le format avant la séance.",
   },
   {
     question: 'Quel niveau pour commencer les vagues ?',
@@ -106,7 +106,7 @@ const faqItems = [
   <section class="pad mixed-levels">
     <span class="kicker">Couples</span>
     <h2>Deux niveaux, une même séance quand c’est pertinent</h2>
-    <p class="sub">Un rider peut travailler le toeside ou la remontée au vent pendant que l’autre consolide ses transitions ou sa directionnelle. Si l’écart de niveau ou les conditions rendent le format peu efficace, Gary propose deux créneaux coordonnés.</p>
+    <p class="sub">Un rider peut travailler le toeside ou la remontée au vent pendant que l’autre consolide ses transitions ou sa directionnelle. Si l’écart de niveau ou les conditions rendent le format peu efficace, l’équipe propose deux créneaux coordonnés.</p>
     <div class="offer-lite"><b>Groupe :</b> 10 % de réduction dès 3 personnes réservées ensemble, cumulable avec la première séance surveillée offerte.</div>
     <Button variant="wa" href={waLink}>Décrire les niveaux du groupe</Button>
   </section>

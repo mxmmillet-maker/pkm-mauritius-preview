@@ -9,7 +9,8 @@ import site from '../../data/site.json';
 
 const translations = { fr: '/fr/', en: '/en/' };
 const waPhone = site.phones[0].replace(/\D/g, '');
-const waLink = `https://wa.me/${waPhone}?text=${encodeURIComponent("Hello Gary, I'd like to organise kitesurfing sessions at Le Morne.")}`;
+const waLink = `https://wa.me/${waPhone}?text=${encodeURIComponent("Hello PKM team, I'd like to organise sessions at Le Morne.")}`;
+const googleReviewsUrl = 'https://www.google.com/maps/search/?api=1&query=Paradise+Kitesurfing+Mauritius+Le+Morne';
 
 const profiles = [
   {
@@ -36,6 +37,12 @@ const profiles = [
     href: '/en/wave-freestyle-coaching/#waves', image: '/images/kitesurf-wave-riding-pexels.jpg',
     alt: 'A kitesurfer riding in waves near the coast', linkLabel: 'See the wave pathway',
   },
+  {
+    eyebrow: 'Wingfoil', title: 'I want to try wingfoiling',
+    text: 'A first session, first flights or foil progression, in a private or semi-private format.',
+    href: '/en/prices/#wingfoil', image: '/images/wingfoil-pexels.jpg',
+    alt: 'A wingfoiler gliding above turquoise water', linkLabel: 'See wingfoil sessions',
+  },
 ];
 
 const faqItems = [
@@ -53,14 +60,14 @@ const faqItems = [
   },
   {
     question: 'How do I book?',
-    answer: 'Send your dates, level and group size. Gary replies on WhatsApp with a suggested programme and available slots. A 10% deposit then confirms the booking.',
+    answer: 'Send your dates, level and group size. The team replies on WhatsApp with a suggested programme and available slots. A 10% deposit then confirms the booking.',
   },
 ];
 ---
 
 <Layout
   title="Kitesurfing School in Le Morne, Mauritius | Paradise Kitesurfing Mauritius"
-  description="Beginner lessons, comeback sessions, freestyle and wave coaching at Le Morne. Programmes for families and mixed levels with Gary and his team."
+  description="Beginner lessons, comeback sessions, freestyle, wave coaching and wingfoiling at Le Morne. Programmes for families and mixed levels."
   locale="en"
   translations={translations}
   tarifsHref="/en/prices/"
@@ -77,7 +84,7 @@ const faqItems = [
     <div class="hero-photo__copy">
       <span class="kicker">Le Morne, Mauritius</span>
       <h1>From your first waterstart to the waves of Le Morne</h1>
-      <p>Beginner, returning rider or already independent, you build a programme with Gary around your level and the day's conditions.</p>
+      <p>Beginner, returning rider or already independent, the team builds a programme with you around your level and the day's conditions.</p>
       <div class="hero-actions">
         <Button variant="wa" href={waLink}>Talk on WhatsApp</Button>
         <Button variant="line" href="/en/kitesurf-lessons/">Explore the lessons</Button>
@@ -87,9 +94,24 @@ const faqItems = [
   </section>
 
   <section class="trust-strip pad" aria-label="Trust markers">
-    <div><b>{site.googleReviews.rating.toFixed(1)} / 5</b><span>Google · {site.googleReviews.count} reviews</span></div>
-    <a href={site.tripAdvisorReviews.url} target="_blank" rel="noreferrer"><b>{site.tripAdvisorReviews.rating.toFixed(1)} / 5</b><span>TripAdvisor · {site.tripAdvisorReviews.count} reviews</span></a>
-    <div><b>10% off</b><span>From 3 people booked together</span></div>
+    <a class="trust-card trust-card--google" href={googleReviewsUrl} target="_blank" rel="noreferrer">
+      <span class="trust-brand"><img src="/images/google-g.svg" alt="" width="24" height="24" /><strong>Google</strong></span>
+      <span class="trust-score"><b>{site.googleReviews.rating.toFixed(1)}</b><span class="stars" aria-label="5 stars">★★★★★</span></span>
+      <small>{site.googleReviews.count} public reviews</small>
+      <span class="trust-link">Read the reviews →</span>
+    </a>
+    <a class="trust-card trust-card--tripadvisor" href={site.tripAdvisorReviews.url} target="_blank" rel="noreferrer">
+      <span class="trust-brand"><img src="/images/tripadvisor.svg" alt="" width="28" height="28" /><strong>TripAdvisor</strong></span>
+      <span class="trust-score"><b>{site.tripAdvisorReviews.rating.toFixed(1)}</b><span class="stars" aria-label="5 stars">★★★★★</span></span>
+      <small>{site.tripAdvisorReviews.count} public reviews</small>
+      <span class="trust-link">Read the reviews →</span>
+    </a>
+    <a class="trust-card trust-card--deal" href="/en/book/">
+      <span class="deal-badge">10% off</span>
+      <strong>Family & group offer</strong>
+      <small>From 3 people booked together</small>
+      <span class="trust-link">Build the trip →</span>
+    </a>
   </section>
 
   <section class="pad profile-section">
@@ -177,37 +199,67 @@ const faqItems = [
 
   <section class="pad school-section">
     <div class="school-intro">
-      <span class="kicker">The school</span>
-      <h2>A team on the lagoon since 2017</h2>
-      <p>Gary has taught at Le Morne since 2011. He organises sessions, answers on WhatsApp and adjusts the programme to conditions.</p>
+      <span class="kicker">The team</span>
+      <h2>Several people, from your first message to the water</h2>
+      <p>On WhatsApp, with the equipment, on the lagoon and in the boat, the team works together to prepare sessions and adapt the programme to conditions.</p>
       <div class="auth">
+        <div><b>Welcome</b><span>WhatsApp replies and planning</span></div>
+        <div><b>Instructors</b><span>several profiles present in season</span></div>
+        <div><b>Logistics</b><span>Duotone fleet, preparation and boat</span></div>
         <div><b>2 max.</b><span>students per instructor</span></div>
-        <div><b>Duotone</b><span>a recent fleet in several sizes</span></div>
-        <div><b>Boat</b><span>available according to programme and conditions</span></div>
-        <div><b>VHF</b><span>for suitable learning formats</span></div>
       </div>
     </div>
-    <div class="school-photo">
-      <img src="/images/kitesurf-lesson-pexels.jpg" alt="Instructor supporting a student during a lesson" width="1800" height="1187" loading="lazy" />
-      <span>Kitesurfing lesson · illustrative photo</span>
+    <div class="team-gallery" aria-label="The team in action">
+      <figure>
+        <img src="/images/kitesurf-lesson-pexels.jpg" alt="Instructor supporting a student during a lesson" width="1800" height="1187" loading="lazy" />
+        <figcaption>On the water · illustrative photo</figcaption>
+      </figure>
+      <figure>
+        <img src="/images/kitesurf-family-lesson-pexels.jpg" alt="Instructor preparing a kite with a young student" width="1600" height="1067" loading="lazy" />
+        <figcaption>Preparation · illustrative photo</figcaption>
+      </figure>
     </div>
   </section>
 
   <section class="pad reviews-section">
     <span class="kicker">Reviews</span>
     <h2>Two platforms, the same recurring strengths</h2>
+    <p class="sub">A few extracts from public reviews. Swipe the cards on mobile, then open the platform to read each review in full.</p>
     <div class="review-platforms">
       <article>
-        <span class="stars" aria-label="5 stars">★★★★★</span>
+        <span class="platform-title"><img src="/images/google-g.svg" alt="" width="24" height="24" />Google</span>
         <h3>Google · {site.googleReviews.count} reviews</h3>
         <p>Public feedback highlights patience, safety and personal support.</p>
+        <a href={googleReviewsUrl} target="_blank" rel="noreferrer">See Google reviews →</a>
       </article>
       <article>
-        <span class="stars" aria-label="5 stars">★★★★★</span>
+        <span class="platform-title"><img src="/images/tripadvisor.svg" alt="" width="28" height="28" />TripAdvisor</span>
         <h3>TripAdvisor · {site.tripAdvisorReviews.count} reviews</h3>
         <p>The listing shows a score of {site.tripAdvisorReviews.rating.toFixed(1)} / 5.</p>
         <a href={site.tripAdvisorReviews.url} target="_blank" rel="noreferrer">See TripAdvisor reviews →</a>
       </article>
+    </div>
+    <div class="review-snaps" aria-label="Customer review extracts">
+      <a class="review-snap" href={googleReviewsUrl} target="_blank" rel="noreferrer">
+        <span class="review-snap__top"><span><img src="/images/google-g.svg" alt="" width="20" height="20" />Google</span><span class="stars" aria-label="5 stars">★★★★★</span></span>
+        <blockquote>“I felt very safe and fully supported throughout.”</blockquote>
+        <span class="review-snap__meta"><b>Nicolas O.</b><small>October 2025</small></span>
+      </a>
+      <a class="review-snap" href={googleReviewsUrl} target="_blank" rel="noreferrer">
+        <span class="review-snap__top"><span><img src="/images/google-g.svg" alt="" width="20" height="20" />Google</span><span class="stars" aria-label="5 stars">★★★★★</span></span>
+        <blockquote>“Great teachers and amazingly patient.”</blockquote>
+        <span class="review-snap__meta"><b>Neil B.</b><small>October 2025</small></span>
+      </a>
+      <a class="review-snap" href={site.tripAdvisorReviews.url} target="_blank" rel="noreferrer">
+        <span class="review-snap__top"><span><img src="/images/tripadvisor.svg" alt="" width="23" height="23" />TripAdvisor</span><span class="stars" aria-label="5 stars">★★★★★</span></span>
+        <blockquote>“Patient, friendly, welcoming, professional and always with a big smile.”</blockquote>
+        <span class="review-snap__meta"><b>Z0e2011</b><small>July 2024</small></span>
+      </a>
+      <a class="review-snap" href={site.tripAdvisorReviews.url} target="_blank" rel="noreferrer">
+        <span class="review-snap__top"><span><img src="/images/tripadvisor.svg" alt="" width="23" height="23" />TripAdvisor</span><span class="stars" aria-label="5 stars">★★★★★</span></span>
+        <blockquote>“The staff was incredibly friendly, patient, and adaptive.”</blockquote>
+        <span class="review-snap__meta"><b>Vlassis T.</b><small>October 2023</small></span>
+      </a>
     </div>
   </section>
 
@@ -220,9 +272,9 @@ const faqItems = [
   <section class="pad final-cta" id="capture">
     <span class="kicker">Nou ale?</span>
     <h2>Plan your course, coaching or individual sessions</h2>
-    <p>Send your dates and the levels in your group. Gary suggests a realistic programme on WhatsApp.</p>
+    <p>Send your dates and the levels in your group. The team suggests a realistic programme on WhatsApp.</p>
     <div class="hero-actions">
-      <Button variant="wa" href={waLink}>Talk to Gary</Button>
+      <Button variant="wa" href={waLink}>Talk to the team</Button>
       <Button variant="line" href="/en/book/">Describe my trip</Button>
     </div>
   </section>

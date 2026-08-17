@@ -9,7 +9,8 @@ import site from '../../data/site.json';
 
 const translations = { fr: '/fr/', en: '/en/' };
 const waPhone = site.phones[0].replace(/\D/g, '');
-const waLink = `https://wa.me/${waPhone}?text=${encodeURIComponent("Bonjour Gary, j'aimerais organiser des séances de kitesurf au Morne.")}`;
+const waLink = `https://wa.me/${waPhone}?text=${encodeURIComponent("Bonjour l'équipe PKM, j'aimerais organiser des séances au Morne.")}`;
+const googleReviewsUrl = 'https://www.google.com/maps/search/?api=1&query=Paradise+Kitesurfing+Mauritius+Le+Morne';
 
 const profiles = [
   {
@@ -36,6 +37,12 @@ const profiles = [
     href: '/fr/perfectionnement/#vagues', image: '/images/kitesurf-wave-riding-pexels.jpg',
     alt: 'Un kitesurfeur navigue dans les vagues près de la côte', linkLabel: 'Voir le parcours vagues',
   },
+  {
+    eyebrow: 'Wingfoil', title: 'Je veux essayer le wingfoil',
+    text: 'Découverte, premiers vols ou progression sur le foil, en formule privée ou semi-privée.',
+    href: '/fr/tarifs/#wingfoil', image: '/images/wingfoil-pexels.jpg',
+    alt: 'Un wingfoiler glisse au-dessus d’une eau turquoise', linkLabel: 'Voir les sessions wingfoil',
+  },
 ];
 
 const faqItems = [
@@ -53,14 +60,14 @@ const faqItems = [
   },
   {
     question: 'Comment réserver ?',
-    answer: "Envoie tes dates, ton niveau et le nombre de participants. Gary te répond sur WhatsApp avec un programme et les créneaux disponibles. Un acompte de 10 % confirme ensuite la réservation.",
+    answer: "Envoie tes dates, ton niveau et le nombre de participants. L’équipe te répond sur WhatsApp avec un programme et les créneaux disponibles. Un acompte de 10 % confirme ensuite la réservation.",
   },
 ];
 ---
 
 <Layout
   title="École de kitesurf au Morne, Île Maurice — Paradise Kitesurfing Mauritius"
-  description="Cours débutants, reprise, coaching freestyle et vagues au Morne. Programmes adaptés aux familles et aux niveaux mixtes, avec Gary et son équipe."
+  description="Cours débutants, reprise, coaching freestyle, vagues et wingfoil au Morne. Programmes adaptés aux familles et aux niveaux mixtes."
   locale="fr"
   translations={translations}
   tarifsHref="/fr/tarifs/"
@@ -77,7 +84,7 @@ const faqItems = [
     <div class="hero-photo__copy">
       <span class="kicker">Le Morne, île Maurice</span>
       <h1>Du premier waterstart aux vagues du Morne</h1>
-      <p>Débutant, en reprise ou déjà autonome, tu construis avec Gary un programme adapté à ton niveau et aux conditions du jour.</p>
+      <p>Débutant, en reprise ou déjà autonome, l’équipe construit avec toi un programme adapté à ton niveau et aux conditions du jour.</p>
       <div class="hero-actions">
         <Button variant="wa" href={waLink}>Discuter sur WhatsApp</Button>
         <Button variant="line" href="/fr/cours-de-kitesurf/">Découvrir les cours</Button>
@@ -87,9 +94,24 @@ const faqItems = [
   </section>
 
   <section class="trust-strip pad" aria-label="Repères de confiance">
-    <div><b>{site.googleReviews.rating.toFixed(1).replace('.', ',')} / 5</b><span>Google · {site.googleReviews.count} avis</span></div>
-    <a href={site.tripAdvisorReviews.url} target="_blank" rel="noreferrer"><b>{site.tripAdvisorReviews.rating.toFixed(1).replace('.', ',')} / 5</b><span>TripAdvisor · {site.tripAdvisorReviews.count} avis</span></a>
-    <div><b>−10 %</b><span>Dès 3 personnes réservées ensemble</span></div>
+    <a class="trust-card trust-card--google" href={googleReviewsUrl} target="_blank" rel="noreferrer">
+      <span class="trust-brand"><img src="/images/google-g.svg" alt="" width="24" height="24" /><strong>Google</strong></span>
+      <span class="trust-score"><b>{site.googleReviews.rating.toFixed(1).replace('.', ',')}</b><span class="stars" aria-label="5 étoiles">★★★★★</span></span>
+      <small>{site.googleReviews.count} avis publics</small>
+      <span class="trust-link">Voir les avis →</span>
+    </a>
+    <a class="trust-card trust-card--tripadvisor" href={site.tripAdvisorReviews.url} target="_blank" rel="noreferrer">
+      <span class="trust-brand"><img src="/images/tripadvisor.svg" alt="" width="28" height="28" /><strong>TripAdvisor</strong></span>
+      <span class="trust-score"><b>{site.tripAdvisorReviews.rating.toFixed(1).replace('.', ',')}</b><span class="stars" aria-label="5 étoiles">★★★★★</span></span>
+      <small>{site.tripAdvisorReviews.count} avis publics</small>
+      <span class="trust-link">Voir les avis →</span>
+    </a>
+    <a class="trust-card trust-card--deal" href="/fr/reserver/">
+      <span class="deal-badge">−10 %</span>
+      <strong>Offre famille & groupe</strong>
+      <small>Dès 3 personnes réservées ensemble</small>
+      <span class="trust-link">Composer le séjour →</span>
+    </a>
   </section>
 
   <section class="pad profile-section">
@@ -177,37 +199,67 @@ const faqItems = [
 
   <section class="pad school-section">
     <div class="school-intro">
-      <span class="kicker">L’école</span>
-      <h2>Une équipe présente sur le lagon depuis 2017</h2>
-      <p>Gary enseigne au Morne depuis 2011. Il organise les séances, répond sur WhatsApp et adapte le programme aux conditions.</p>
+      <span class="kicker">L’équipe</span>
+      <h2>Plusieurs personnes, du premier message à la mise à l’eau</h2>
+      <p>Sur WhatsApp, au matériel, sur le lagon et en bateau, l’équipe se relaie pour préparer les séances et adapter le programme aux conditions.</p>
       <div class="auth">
+        <div><b>Accueil</b><span>réponse et planning sur WhatsApp</span></div>
+        <div><b>Moniteurs</b><span>plusieurs profils présents en saison</span></div>
+        <div><b>Logistique</b><span>parc Duotone, préparation et bateau</span></div>
         <div><b>2 max.</b><span>élèves par moniteur</span></div>
-        <div><b>Duotone</b><span>un parc récent, avec plusieurs tailles</span></div>
-        <div><b>Bateau</b><span>disponible selon le programme et les conditions</span></div>
-        <div><b>VHF</b><span>pour les formats d’apprentissage adaptés</span></div>
       </div>
     </div>
-    <div class="school-photo">
-      <img src="/images/kitesurf-lesson-pexels.jpg" alt="Moniteur accompagnant une élève pendant une leçon" width="1800" height="1187" loading="lazy" />
-      <span>Cours de kitesurf · photo d’ambiance</span>
+    <div class="team-gallery" aria-label="L’équipe en action">
+      <figure>
+        <img src="/images/kitesurf-lesson-pexels.jpg" alt="Moniteur accompagnant une élève pendant une leçon" width="1800" height="1187" loading="lazy" />
+        <figcaption>Sur l’eau · photo d’ambiance</figcaption>
+      </figure>
+      <figure>
+        <img src="/images/kitesurf-family-lesson-pexels.jpg" alt="Moniteur préparant une aile avec un jeune élève" width="1600" height="1067" loading="lazy" />
+        <figcaption>Préparation · photo d’ambiance</figcaption>
+      </figure>
     </div>
   </section>
 
   <section class="pad reviews-section">
     <span class="kicker">Avis</span>
     <h2>Deux plateformes, les mêmes points forts</h2>
+    <p class="sub">Quelques extraits d’avis publics. Fais glisser les cartes sur mobile, puis ouvre la plateforme pour lire les retours complets.</p>
     <div class="review-platforms">
       <article>
-        <span class="stars" aria-label="5 étoiles">★★★★★</span>
+        <span class="platform-title"><img src="/images/google-g.svg" alt="" width="24" height="24" />Google</span>
         <h3>Google · {site.googleReviews.count} avis</h3>
         <p>Les retours publics mettent en avant la patience, la sécurité et l’accompagnement personnalisé.</p>
+        <a href={googleReviewsUrl} target="_blank" rel="noreferrer">Voir les avis Google →</a>
       </article>
       <article>
-        <span class="stars" aria-label="5 étoiles">★★★★★</span>
+        <span class="platform-title"><img src="/images/tripadvisor.svg" alt="" width="28" height="28" />TripAdvisor</span>
         <h3>TripAdvisor · {site.tripAdvisorReviews.count} avis</h3>
         <p>La fiche affiche une note de {site.tripAdvisorReviews.rating.toFixed(1).replace('.', ',')} / 5.</p>
         <a href={site.tripAdvisorReviews.url} target="_blank" rel="noreferrer">Voir les avis TripAdvisor →</a>
       </article>
+    </div>
+    <div class="review-snaps" aria-label="Extraits d’avis clients">
+      <a class="review-snap" href={googleReviewsUrl} target="_blank" rel="noreferrer">
+        <span class="review-snap__top"><span><img src="/images/google-g.svg" alt="" width="20" height="20" />Google</span><span class="stars" aria-label="5 étoiles">★★★★★</span></span>
+        <blockquote>« Je me suis senti très en sécurité et pleinement accompagné. »</blockquote>
+        <span class="review-snap__meta"><b>Nicolas O.</b><small>Octobre 2025 · traduit de l’anglais</small></span>
+      </a>
+      <a class="review-snap" href={googleReviewsUrl} target="_blank" rel="noreferrer">
+        <span class="review-snap__top"><span><img src="/images/google-g.svg" alt="" width="20" height="20" />Google</span><span class="stars" aria-label="5 étoiles">★★★★★</span></span>
+        <blockquote>« De très bons moniteurs, incroyablement patients. »</blockquote>
+        <span class="review-snap__meta"><b>Neil B.</b><small>Octobre 2025 · traduit de l’anglais</small></span>
+      </a>
+      <a class="review-snap" href={site.tripAdvisorReviews.url} target="_blank" rel="noreferrer">
+        <span class="review-snap__top"><span><img src="/images/tripadvisor.svg" alt="" width="23" height="23" />TripAdvisor</span><span class="stars" aria-label="5 étoiles">★★★★★</span></span>
+        <blockquote>« Patients, accueillants, professionnels et toujours avec un grand sourire. »</blockquote>
+        <span class="review-snap__meta"><b>Z0e2011</b><small>Juillet 2024 · traduit de l’anglais</small></span>
+      </a>
+      <a class="review-snap" href={site.tripAdvisorReviews.url} target="_blank" rel="noreferrer">
+        <span class="review-snap__top"><span><img src="/images/tripadvisor.svg" alt="" width="23" height="23" />TripAdvisor</span><span class="stars" aria-label="5 étoiles">★★★★★</span></span>
+        <blockquote>« Une équipe extrêmement sympathique, patiente et adaptable. »</blockquote>
+        <span class="review-snap__meta"><b>Vlassis T.</b><small>Octobre 2023 · traduit de l’anglais</small></span>
+      </a>
     </div>
   </section>
 
@@ -220,9 +272,9 @@ const faqItems = [
   <section class="pad final-cta" id="capture">
     <span class="kicker">Nou ale ?</span>
     <h2>Organise ton stage, ton coaching ou tes séances</h2>
-    <p>Envoie tes dates et les niveaux du groupe. Gary te propose un programme réaliste sur WhatsApp.</p>
+    <p>Envoie tes dates et les niveaux du groupe. L’équipe te propose un programme réaliste sur WhatsApp.</p>
     <div class="hero-actions">
-      <Button variant="wa" href={waLink}>Discuter avec Gary</Button>
+      <Button variant="wa" href={waLink}>Discuter avec l’équipe</Button>
       <Button variant="line" href="/fr/reserver/">Décrire mon séjour</Button>
     </div>
   </section>
