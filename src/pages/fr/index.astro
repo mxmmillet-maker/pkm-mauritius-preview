@@ -1,0 +1,229 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Button from '../../components/Button.astro';
+import PriceFrom from '../../components/PriceFrom.astro';
+import ProfileSlider from '../../components/ProfileSlider.astro';
+import Faq from '../../components/Faq.astro';
+import { sportsActivityLocation, faqPage, breadcrumbList } from '../../lib/schema';
+import site from '../../data/site.json';
+
+const translations = { fr: '/fr/', en: '/en/' };
+const waPhone = site.phones[0].replace(/\D/g, '');
+const waLink = `https://wa.me/${waPhone}?text=${encodeURIComponent("Bonjour Gary, j'aimerais organiser des séances de kitesurf au Morne.")}`;
+
+const profiles = [
+  {
+    eyebrow: 'Première fois', title: 'Je débute',
+    text: 'Découvrir l’aile, le waterstart et avancer vers un ride surveillé sur le lagon.',
+    href: '/fr/cours-de-kitesurf/', image: '/images/kitesurf-family-lesson-pexels.jpg',
+    alt: 'Un jeune élève apprend à manier une aile avec un moniteur', linkLabel: 'Voir les cours débutants',
+  },
+  {
+    eyebrow: 'Reprise', title: 'Je veux reprendre confiance',
+    text: 'Une remise à l’eau adaptée à ton niveau pour retrouver tes repères sans repartir de zéro.',
+    href: '/fr/cours-de-kitesurf/#reprise', image: '/images/kitesurf-lesson-pexels.jpg',
+    alt: 'Une élève accompagnée par son moniteur pendant une séance de kitesurf', linkLabel: 'Préparer ma reprise',
+  },
+  {
+    eyebrow: 'Freestyle', title: 'Je veux passer un cap',
+    text: 'Remontée au vent, toeside, transitions, premiers sauts ou rotations selon ton objectif.',
+    href: '/fr/perfectionnement/#freestyle', image: '/images/kitesurf-freestyle-jump-pexels.jpg',
+    alt: 'Un kitesurfeur effectue un saut au-dessus de l’eau', linkLabel: 'Explorer le coaching freestyle',
+  },
+  {
+    eyebrow: 'Vagues', title: 'Je veux rider les vagues',
+    text: 'Placement, jibe, lecture de vague et autonomie progressive entre Small Reef et Manawa.',
+    href: '/fr/perfectionnement/#vagues', image: '/images/kitesurf-wave-riding-pexels.jpg',
+    alt: 'Un kitesurfeur navigue dans les vagues près de la côte', linkLabel: 'Voir le parcours vagues',
+  },
+];
+
+const faqItems = [
+  {
+    question: 'Peut-on venir avec des niveaux différents ?',
+    answer: "Oui. Une famille ou un couple peut construire un programme commun avec des séances différentes : débutant au lagon, reprise en confiance, coaching freestyle ou accompagnement dans les vagues. À partir de trois personnes réservées ensemble, une réduction de 10 % s'applique.",
+  },
+  {
+    question: "Que se passe-t-il s'il n'y a pas de vent ?",
+    answer: 'La séance est déplacée sur un autre créneau sans frais. Le programme est ajusté à la météo pendant ton séjour.',
+  },
+  {
+    question: 'Combien coûte un cours de kitesurf au Morne ?',
+    answer: "Le cours semi-privé de 2 h est à Rs 4 500 par personne et le cours privé à Rs 8 000. Le matériel et les équipements de sécurité prévus pour la formule sont compris.",
+  },
+  {
+    question: 'Comment réserver ?',
+    answer: "Envoie tes dates, ton niveau et le nombre de participants. Gary te répond sur WhatsApp avec un programme et les créneaux disponibles. Un acompte de 10 % confirme ensuite la réservation.",
+  },
+];
+---
+
+<Layout
+  title="École de kitesurf au Morne, Île Maurice — Paradise Kitesurfing Mauritius"
+  description="Cours débutants, reprise, coaching freestyle et vagues au Morne. Programmes adaptés aux familles et aux niveaux mixtes, avec Gary et son équipe."
+  locale="fr"
+  translations={translations}
+  tarifsHref="/fr/tarifs/"
+  waHref="/fr/reserver/"
+  jsonLd={[
+    sportsActivityLocation(),
+    faqPage(faqItems),
+    breadcrumbList([{ name: 'Accueil', url: `${site.url}/fr/` }]),
+  ]}
+>
+  <section class="hero-photo pad">
+    <img class="hero-photo__media" src="/images/kitesurf-lagoon-aerial-pexels.jpg" alt="Kitesurfeur vu du ciel le long d’un récif dans une eau turquoise" width="1800" height="1013" fetchpriority="high" />
+    <span class="hero-photo__shade" aria-hidden="true"></span>
+    <div class="hero-photo__copy">
+      <span class="kicker">Le Morne, île Maurice</span>
+      <h1>Du premier waterstart aux vagues du Morne</h1>
+      <p>Débutant, en reprise ou déjà autonome, tu construis avec Gary un programme adapté à ton niveau et aux conditions du jour.</p>
+      <div class="hero-actions">
+        <Button variant="wa" href={waLink}>Discuter sur WhatsApp</Button>
+        <Button variant="line" href="/fr/cours-de-kitesurf/">Découvrir les cours</Button>
+      </div>
+      <small class="hero-photo__credit">Photo d’ambiance, libre d’usage</small>
+    </div>
+  </section>
+
+  <section class="trust-strip pad" aria-label="Repères de confiance">
+    <div><b>{site.googleReviews.rating.toFixed(1).replace('.', ',')} / 5</b><span>Google · {site.googleReviews.count} avis</span></div>
+    <a href={site.tripAdvisorReviews.url} target="_blank" rel="noreferrer"><b>{site.tripAdvisorReviews.rating.toFixed(1).replace('.', ',')} / 5</b><span>TripAdvisor · {site.tripAdvisorReviews.count} avis</span></a>
+    <div><b>−10 %</b><span>Dès 3 personnes réservées ensemble</span></div>
+  </section>
+
+  <section class="pad profile-section">
+    <span class="kicker">Ton programme</span>
+    <h2>Tu veux faire quoi sur l’eau ?</h2>
+    <p class="sub">Fais glisser les cartes. Chacun peut suivre son propre parcours, même quand vous venez en famille ou en couple.</p>
+    <ProfileSlider items={profiles} label="Choisir un parcours selon son niveau" />
+  </section>
+
+  <section class="pad spot-section">
+    <div>
+      <span class="kicker">Le spot</span>
+      <h2>Le lagon, un vrai terrain de progression</h2>
+      <p class="sub">Il y a du très flat pour travailler un geste, du clapot pour tenter ses premiers sauts et assez d’espace pour s’éloigner des autres cours. Le fond sableux et les zones où l’on a pied rendent l’apprentissage plus confortable.</p>
+    </div>
+    <div class="windbox">
+      <h3>Quand venir</h3>
+      <div class="wgrid">
+        <div class="peak"><b>Juin → septembre</b><small>18 à 35 nœuds · saison forte</small></div>
+        <div><b>Avril, mai, oct., nov.</b><small>10 à 25 nœuds · plus chaud</small></div>
+        <div><b>Déc. → mars</b><small>10 à 25 nœuds · moins de jours ventés</small></div>
+        <div><b>Toute l’année</b><small>Eau entre 22 et 28 °C</small></div>
+      </div>
+      <p class="data-note">Des repères saisonniers, pas une promesse météo : les créneaux sont ajustés à la prévision réelle de ton séjour.</p>
+    </div>
+  </section>
+
+  <section class="pad progression-section">
+    <span class="kicker">Perfectionnement</span>
+    <h2>Progresser en freestyle ou en surf</h2>
+    <p class="sub">Deux chemins différents, avec un point de départ choisi après une première lecture de ton niveau.</p>
+    <div class="track-grid">
+      <article class="track-card" id="freestyle">
+        <span>Freestyle · lagon</span>
+        <h3>Gagner en contrôle puis en amplitude</h3>
+        <ol>
+          <li><b>Reprise</b><small>Cap, remontée au vent, transitions</small></li>
+          <li><b>Intermédiaire</b><small>Toeside, pop, premiers sauts</small></li>
+          <li><b>Avancé</b><small>Rotations et objectifs ciblés</small></li>
+        </ol>
+        <a href="/fr/perfectionnement/#freestyle">Voir le coaching freestyle →</a>
+      </article>
+      <article class="track-card track-card--wave" id="vagues">
+        <span>Surf · récif</span>
+        <h3>De la directionnelle à l’autonomie dans les vagues</h3>
+        <ol>
+          <li><b>Small Reef</b><small>Jibe, placement, premières lignes</small></li>
+          <li><b>Chameaux et Manawa</b><small>Lecture, turns, zone stratégique</small></li>
+          <li><b>One Eye</b><small>Seulement si niveau et conditions adaptés</small></li>
+        </ol>
+        <a href="/fr/perfectionnement/#vagues">Voir le parcours vagues →</a>
+      </article>
+    </div>
+    <div class="reassure">
+      <b>Tu débutes ? Le lagon suffit largement.</b>
+      <p>On y trouve du flat, du clapot, de l’espace et plusieurs zones de travail. Tu peux progresser toute la semaine sans aller sur le récif.</p>
+    </div>
+  </section>
+
+  <section class="pad family-offer">
+    <div>
+      <span class="kicker">Familles et couples</span>
+      <h2>Un séjour commun, plusieurs niveaux</h2>
+      <p>Un parent autonome peut travailler les vagues pendant qu’un autre reprend confiance et qu’un jeune débute. Un couple peut aussi partager une séance avec deux objectifs différents lorsque le format le permet.</p>
+      <ul class="clean-list">
+        <li>10 % de réduction dès 3 personnes réservées ensemble</li>
+        <li>Programme construit selon le niveau de chacun</li>
+        <li>Première séance surveillée offerte, offre cumulable</li>
+      </ul>
+      <Button variant="primary" href="/fr/reserver/">Composer notre programme</Button>
+    </div>
+    <img src="/images/kitesurf-family-lesson-pexels.jpg" alt="Un élève apprend à piloter une aile avec son moniteur" width="1600" height="1067" loading="lazy" />
+  </section>
+
+  <section class="pad prices-preview">
+    <span class="kicker">Repères tarifaires</span>
+    <h2>Choisir une première formule</h2>
+    <div class="fromgrid">
+      <PriceFrom label="Cours à partir de" amount="4 500" currency="Rs · ≈ 90 €" detail="2 h en semi-privé, par personne" />
+      <PriceFrom label="Location à partir de" amount="2 250" currency="Rs · ≈ 45 €" detail="2 h, aile et planche" />
+    </div>
+    <div class="offer-lite"><b>Location dégressive :</b> 2 h, journée ou semaine. Le tarif baisse quand la durée augmente.</div>
+    <Button variant="ghost" href="/fr/tarifs/">Comparer toutes les formules</Button>
+  </section>
+
+  <section class="pad school-section">
+    <div class="school-intro">
+      <span class="kicker">L’école</span>
+      <h2>Une équipe présente sur le lagon depuis 2017</h2>
+      <p>Gary enseigne au Morne depuis 2011. Il organise les séances, répond sur WhatsApp et adapte le programme aux conditions.</p>
+      <div class="auth">
+        <div><b>2 max.</b><span>élèves par moniteur</span></div>
+        <div><b>Duotone</b><span>un parc récent, avec plusieurs tailles</span></div>
+        <div><b>Bateau</b><span>disponible selon le programme et les conditions</span></div>
+        <div><b>VHF</b><span>pour les formats d’apprentissage adaptés</span></div>
+      </div>
+    </div>
+    <div class="school-photo">
+      <img src="/images/kitesurf-lesson-pexels.jpg" alt="Moniteur accompagnant une élève pendant une leçon" width="1800" height="1187" loading="lazy" />
+      <span>Cours de kitesurf · photo d’ambiance</span>
+    </div>
+  </section>
+
+  <section class="pad reviews-section">
+    <span class="kicker">Avis</span>
+    <h2>Deux plateformes, les mêmes points forts</h2>
+    <div class="review-platforms">
+      <article>
+        <span class="stars" aria-label="5 étoiles">★★★★★</span>
+        <h3>Google · {site.googleReviews.count} avis</h3>
+        <p>Les retours publics mettent en avant la patience, la sécurité et l’accompagnement personnalisé.</p>
+      </article>
+      <article>
+        <span class="stars" aria-label="5 étoiles">★★★★★</span>
+        <h3>TripAdvisor · {site.tripAdvisorReviews.count} avis</h3>
+        <p>La fiche affiche une note de {site.tripAdvisorReviews.rating.toFixed(1).replace('.', ',')} / 5.</p>
+        <a href={site.tripAdvisorReviews.url} target="_blank" rel="noreferrer">Voir les avis TripAdvisor →</a>
+      </article>
+    </div>
+  </section>
+
+  <section class="pad faq-section">
+    <span class="kicker">FAQ</span>
+    <h2>Questions fréquentes</h2>
+    <Faq items={faqItems} />
+  </section>
+
+  <section class="pad final-cta" id="capture">
+    <span class="kicker">Nou ale ?</span>
+    <h2>Organise ton stage, ton coaching ou tes séances</h2>
+    <p>Envoie tes dates et les niveaux du groupe. Gary te propose un programme réaliste sur WhatsApp.</p>
+    <div class="hero-actions">
+      <Button variant="wa" href={waLink}>Discuter avec Gary</Button>
+      <Button variant="line" href="/fr/reserver/">Décrire mon séjour</Button>
+    </div>
+  </section>
+</Layout>

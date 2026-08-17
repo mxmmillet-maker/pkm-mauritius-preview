@@ -1,0 +1,79 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import Faq from '../../../../components/Faq.astro';
+import Button from '../../../../components/Button.astro';
+import { faqPage, breadcrumbList } from '../../../../lib/schema';
+import site from '../../../../data/site.json';
+
+const translations = {
+  fr: '/fr/guide/combien-de-temps-apprendre-kitesurf/',
+  en: '/en/guide/how-long-to-learn-kitesurfing/',
+};
+
+const faqItems = [
+  {
+    question: 'Combien d’heures faut-il pour être autonome en kitesurf ?',
+    answer: 'En moyenne 10 à 12 heures de cours, réparties sur 5 à 7 jours, selon les standards IKO. Certains élèves y arrivent en 3 jours intensifs, d’autres en 8.',
+  },
+  {
+    question: 'Le niveau en sports de glisse influence-t-il la progression ?',
+    answer: 'Oui. Wakeboard, planche à voile ou surf donnent un temps d’avance sur l’équilibre et la lecture de la planche, mais pas sur le pilotage de la voile, qui s’apprend au même rythme pour tout le monde.',
+  },
+  {
+    question: 'Peut-on apprendre en une seule semaine de vacances ?',
+    answer: 'Oui, c’est le format le plus courant : 2 h de cours par jour sur 5 à 7 jours suffisent à atteindre l’autonomie dans de bonnes conditions de vent.',
+  },
+];
+---
+<Layout
+  title="Combien de temps pour apprendre le kitesurf ? — PKM"
+  description="Compter 10 à 12 heures de cours, réparties sur 5 à 7 jours, pour devenir autonome en kitesurf. Détail jour par jour de la progression, du pilotage de la voile à la navigation."
+  locale="fr"
+  translations={translations}
+  tarifsHref="/fr/tarifs/"
+  waHref="/fr/reserver/"
+  jsonLd={[
+    faqPage(faqItems),
+    breadcrumbList([
+      { name: 'Accueil', url: `${site.url}/fr/` },
+      { name: 'Guides', url: `${site.url}/fr/guide/` },
+      { name: 'Combien de temps pour apprendre', url: `${site.url}/fr/guide/combien-de-temps-apprendre-kitesurf/` },
+    ]),
+  ]}
+>
+  <section class="pad">
+    <span class="kicker">Guide</span>
+    <h1>Combien de temps pour apprendre le kitesurf ?</h1>
+    <p class="sub">
+      Compter <b>10 à 12 heures de cours</b>, réparties sur <b>5 à 7 jours</b>,
+      pour naviguer seul dans de bonnes conditions — c'est le repère standard
+      utilisé par les écoles certifiées IKO.
+    </p>
+  </section>
+
+  <section class="pad">
+    <h2>La progression, jour par jour</h2>
+    <p><b>Jour 1</b> — pilotage de la voile à sec sur la plage, puis premiers vols réels depuis le bord.</p>
+    <p><b>Jour 2</b> — entrée dans l'eau, bodydrag (se faire tirer par la voile sans planche) et récupération de la planche.</p>
+    <p><b>Jour 3</b> — premiers waterstarts (se relever sur la planche), premières glissades courtes.</p>
+    <p><b>Jour 4</b> — waterstarts réguliers, glissades plus longues dans les deux directions.</p>
+    <p><b>Jour 5</b> — distance de glisse allongée, moins de chutes.</p>
+    <p><b>Jours 6-7 (en option)</b> — remontée au vent, transitions, début de niveau intermédiaire.</p>
+  </section>
+
+  <section class="pad">
+    <h2>Ce qui accélère ou ralentit la progression</h2>
+    <p>Un bon niveau en wakeboard, planche à voile ou surf aide sur l'équilibre, pas sur le pilotage de la voile.</p>
+    <p>Le vent compte autant que le nombre d'heures : progresser dans 10 nœuds prend plus de temps que dans 20.</p>
+    <p>Un cours privé (un élève, un moniteur) va plus vite qu'un cours collectif, mécaniquement.</p>
+  </section>
+
+  <section class="pad" style="text-align:center">
+    <Button variant="primary" href="/fr/tarifs/">Voir les formules de cours</Button>
+  </section>
+
+  <section class="pad">
+    <h2>Questions fréquentes</h2>
+    <Faq items={faqItems} />
+  </section>
+</Layout>

@@ -1,0 +1,181 @@
+---
+/* Page tarifs FR. Les montants fixes sont centralisés dans site.json. */
+import Layout from '../../../layouts/Layout.astro';
+import Badge from '../../../components/Badge.astro';
+import Button from '../../../components/Button.astro';
+import { offer, breadcrumbList } from '../../../lib/schema';
+import site from '../../../data/site.json';
+
+const translations = { fr: '/fr/tarifs/', en: '/en/prices/' };
+---
+<Layout
+  title="Tarifs kitesurf et wingfoil au Morne, Île Maurice — PKM"
+  description="Prix 2026 des cours de kitesurf et wingfoil à Paradise Kitesurfing Mauritius, Le Morne : privé, semi-privé, location, coaching, downwind. Par personne, matériel compris."
+  locale="fr"
+  translations={translations}
+  tarifsHref="/fr/tarifs/"
+  waHref="/fr/reserver/"
+  jsonLd={[
+    offer({
+      name: 'Cours privé de kitesurf, 2 h',
+      description: 'Cours privé avec moniteur, 2 h, Le Morne, matériel compris.',
+      price: site.prices.kitesurfPrive['2h'],
+      url: `${site.url}/fr/tarifs/`,
+    }),
+    breadcrumbList([
+      { name: 'Accueil', url: `${site.url}/fr/` },
+      { name: 'Tarifs', url: `${site.url}/fr/tarifs/` },
+    ]),
+  ]}
+>
+  <section class="pad" style="padding-bottom:20px">
+    <h1 style="font-size:1.9rem">Tarifs kitesurf et wingfoil au Morne</h1>
+    <p class="sub">Prix 2026, par personne, matériel compris. Roupies mauriciennes et équivalent en euros.</p>
+    <div style="display:flex;gap:7px;flex-wrap:wrap;margin-top:12px">
+      <span class="tag">Aile et planche</span><span class="tag">Casque et gilet</span><span class="tag">Combinaison</span><span class="tag">Équipement selon la formule</span>
+    </div>
+  </section>
+
+  <section class="pad" style="padding-top:6px">
+    <h2 style="text-transform:uppercase;letter-spacing:.08em;font-size:.78rem;color:var(--ink-soft)">Kitesurf</h2>
+
+    <div class="group-deal">
+      <span>Familles et groupes</span>
+      <b>10 % de réduction dès 3 personnes réservées ensemble</b>
+      <p>Chacun peut choisir une formule adaptée à son niveau. La réduction est cumulable avec la première séance surveillée offerte.</p>
+    </div>
+
+    <div class="pcard hot" style="margin:12px 0 14px">
+      <div class="h">
+        <h3>Cours privé <Badge>Le plus pris</Badge></h3>
+        <div class="s">1 moniteur pour 1 élève</div>
+      </div>
+      <div class="body">
+        <div class="row"><span>2 heures</span><b>Rs 8 000<span class="eur">160 €</span></b></div>
+        <div class="row"><span>6 heures<br /><small style="color:var(--sage-deep)">jusqu'au ride surveillé</small><br /><span class="pill-offer">+ 1 séance surveillée offerte</span></span><b>Rs 23 250<span class="eur">465 €</span></b></div>
+        <div class="row"><span>8 heures</span><b>Rs 31 000<span class="eur">620 €</span></b></div>
+        <div class="row"><span>10 heures<br /><small style="color:var(--sage-deep)">autonomie complète et IKO</small></span><b>Rs 38 000<span class="eur">760 €</span></b></div>
+      </div>
+    </div>
+
+    <div class="pcard" style="margin-bottom:14px">
+      <div class="h">
+        <h3>Cours semi-privé</h3>
+        <div class="s">1 moniteur pour 2 élèves · une aile et une planche chacun · prix par personne</div>
+      </div>
+      <div class="body">
+        <div class="row"><span>2 heures</span><b>Rs 4 500<span class="eur">90 €</span></b></div>
+        <div class="row"><span>6 heures<br /><small style="color:var(--sage-deep)">jusqu'au ride surveillé</small><br /><span class="pill-offer">+ 1 séance surveillée offerte</span></span><b>Rs 12 500<span class="eur">250 €</span></b></div>
+        <div class="row"><span>8 heures</span><b>Rs 16 250<span class="eur">325 €</span></b></div>
+        <div class="row"><span>10 heures<br /><small style="color:var(--sage-deep)">autonomie complète et IKO</small></span><b>Rs 19 250<span class="eur">385 €</span></b></div>
+      </div>
+    </div>
+
+    <div class="pcard" style="margin-bottom:14px">
+      <div class="h">
+        <h3>Location de matériel</h3>
+        <div class="s">Twintip et strapless · tarif dégressif pour les riders autonomes</div>
+      </div>
+      <div class="body">
+        <div class="row"><span>Aile + planche · 2 h<br /><small>format court</small></span><b>Rs 2 250<span class="eur">45 €</span></b></div>
+        <div class="row"><span>Aile + planche · 1 jour<br /><small style="color:var(--sage-deep)">Rs 500 de moins que deux locations de 2 h</small></span><b>Rs 4 000<span class="eur">80 €</span></b></div>
+        <div class="row"><span>Aile + planche · 1 semaine<br /><small style="color:var(--sage-deep)">tarif longue durée</small></span><b>Rs 27 000<span class="eur">540 €</span></b></div>
+        <div class="row"><span>Supervision + location · 2 h<br /><small style="color:var(--sage-deep)">matériel fourni</small></span><b>Rs 3 250<span class="eur">65 €</span></b></div>
+        <div class="row"><span>Supervision seule · 2 h<br /><small style="color:var(--sage-deep)">avec ton propre matériel</small><br /><span class="pill-offer">Offerte si réservé en ligne</span></span><b>Rs 1 500<span class="eur">30 €</span></b></div>
+        <p class="sub" style="font-size:.88rem;padding-top:12px">
+          Plus tu gardes le matériel, plus le tarif moyen baisse. Twintip ou
+          strapless selon disponibilité, avec changement de taille si les
+          conditions évoluent. Harnais, casque et gilet compris.
+        </p>
+        <div style="background:var(--sage-pale);border-radius:13px;padding:13px 14px;margin-top:14px">
+          <div style="font-family:var(--font-display);font-weight:600;font-size:.88rem;margin-bottom:5px">Ce que comprend une séance surveillée</div>
+          <p class="sub" style="font-size:.86rem;margin:0">
+            Un moniteur te garde à l'œil depuis la plage ou depuis l'eau,
+            t'aide au décollage et à l'atterrissage de l'aile, et vient te
+            chercher si ça tourne mal. La correction technique, elle, se
+            travaille en cours ou en coaching.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard" style="margin-bottom:14px;border-color:var(--sage)">
+      <div class="h" style="background:var(--sage-pale)">
+        <h3>Coaching à l'heure <Badge>Sur devis</Badge></h3>
+        <div class="s">Twintip ou strapless. Une heure ou deux pour travailler un objectif précis avec un moniteur qui ride à tes côtés.</div>
+        <span class="pill-offer">+ 1 séance surveillée offerte</span>
+      </div>
+      <div class="body">
+        <p class="sub" style="font-size:.88rem;padding-top:12px">
+          <b>En twintip</b> : remontée au vent, premier saut, transitions,
+          rotations.<br />
+          <b>En strapless</b> : passage du twintip à la directionnelle,
+          jibe, premières vagues à Small Reef puis Manawa.<br />
+          Avec ton matériel, ou avec le nôtre en supplément. Réservable la
+          veille pour le lendemain selon la fenêtre de vent. Le prix est
+          confirmé sur WhatsApp selon la durée et le matériel nécessaire.
+        </p>
+        <Button variant="ghost" block href="/fr/reserver/">Demander un devis</Button>
+      </div>
+    </div>
+
+    <h2 style="text-transform:uppercase;letter-spacing:.08em;font-size:.78rem;color:var(--ink-soft);margin-top:26px">Wingfoil</h2>
+
+    <div class="pcard" style="margin:12px 0 14px">
+      <div class="h"><h3>Wingfoil privé</h3><div class="s">1 moniteur pour 1 élève</div></div>
+      <div class="body">
+        <div class="row"><span>2 heures</span><b>Rs 8 500<span class="eur">170 €</span></b></div>
+        <div class="row"><span>6 heures</span><b>Rs 24 500<span class="eur">490 €</span></b></div>
+        <div class="row"><span>8 heures</span><b>Rs 32 500<span class="eur">650 €</span></b></div>
+        <div class="row"><span>10 heures</span><b>Rs 39 500<span class="eur">790 €</span></b></div>
+      </div>
+    </div>
+
+    <div class="pcard" style="margin-bottom:14px">
+      <div class="h"><h3>Wingfoil semi-privé</h3><div class="s">Prix par personne</div></div>
+      <div class="body">
+        <div class="row"><span>2 heures</span><b>Rs 7 000<span class="eur">140 €</span></b></div>
+        <div class="row"><span>6 heures</span><b>Rs 20 000<span class="eur">400 €</span></b></div>
+        <div class="row"><span>8 heures</span><b>Rs 26 500<span class="eur">530 €</span></b></div>
+        <div class="row"><span>10 heures</span><b>Rs 32 500<span class="eur">650 €</span></b></div>
+      </div>
+    </div>
+
+    <div class="pcard" style="margin-bottom:14px">
+      <div class="h"><h3>Downwind et cours VIP</h3><div class="s">Sur devis</div></div>
+      <div class="body">
+        <p class="sub" style="font-size:.9rem;padding-top:10px">
+          Le tarif dépend du nombre de participants : bateau de sécurité,
+          skipper et guide sont mutualisés. Downwind à partir de 4 personnes,
+          8 maximum. Réponse chiffrée sous 2 h sur WhatsApp.
+        </p>
+        <Button variant="ghost" block href="/fr/reserver/">Demander un prix</Button>
+      </div>
+    </div>
+
+    <div style="background:var(--surface);border-radius:16px;padding:18px;margin-top:8px">
+      <h3>Ce que le tarif comprend toujours</h3>
+      <p class="sub" style="font-size:.9rem;margin:8px 0 0">
+        Le matériel et les équipements de sécurité indiqués dans la formule,
+        ainsi que les honoraires du moniteur pour un cours. La radio VHF est
+        utilisée sur les formats d'apprentissage adaptés, pas annoncée pour
+        le coaching avancé. En cas d'absence de vent, la séance est reportée
+        sans frais.
+      </p>
+    </div>
+  </section>
+
+  <section class="pad">
+    <p class="sub">
+      Envie de comparer avec le reste du marché ? <a href="/fr/guide/budget-kitesurf-ile-maurice/" style="color:var(--coral);font-weight:600;text-decoration:none">Voir les fourchettes de prix constatées au Morne →</a>
+    </p>
+  </section>
+</Layout>
+
+<style>
+  .tag {
+    display: inline-flex; align-items: center; font-family: var(--font-display);
+    font-weight: 500; font-size: .74rem; padding: 5px 10px; border-radius: var(--radius-pill);
+    background: var(--sage-pale); color: var(--sage-deep);
+  }
+</style>

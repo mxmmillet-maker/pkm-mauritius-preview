@@ -1,0 +1,129 @@
+---
+/*
+  Page cours FR — contenu réel, source PKM-maquette-mobile.html (section
+  "PAGE COURS TYPE"). Remplace l'ancienne version en 3 étapes inventées par
+  le déroulé réel heure par heure de la maquette.
+*/
+import Layout from '../../../layouts/Layout.astro';
+import Faq from '../../../components/Faq.astro';
+import Button from '../../../components/Button.astro';
+import { faqPage, breadcrumbList, course } from '../../../lib/schema';
+import site from '../../../data/site.json';
+
+const translations = { fr: '/fr/cours-de-kitesurf/', en: '/en/kitesurf-lessons/' };
+const waPhone = site.phones[0].replace(/\D/g, '');
+const waLink = `https://wa.me/${waPhone}?text=${encodeURIComponent("Bonjour Gary, j'aimerais choisir entre un cours privé et semi-privé.")}`;
+
+const faqItems = [
+  {
+    question: 'Faut-il savoir nager ?',
+    answer: "Oui, être à l'aise dans l'eau est nécessaire. Le lagon a pied sur la majeure partie de la zone d'apprentissage, mais un gilet d'impact est fourni et porté en permanence.",
+  },
+  {
+    question: 'Faut-il avoir fait un autre sport de glisse ?',
+    answer: "Non. Le kitesurf s'apprend d'abord avec les mains, pas avec les pieds. Une expérience en wakeboard ou en snowboard aide sur la phase planche, pas sur le pilotage.",
+  },
+  {
+    question: 'Combien de temps entre deux séances ?',
+    answer: "L'idéal est un jour sur deux, ou deux jours consécutifs puis une pause. Enchaîner 6 h dans la même journée est contre-productif : la fatigue efface les acquis.",
+  },
+  {
+    question: 'Peut-on partager un cours avec deux niveaux différents ?',
+    answer: "Oui lorsque l'écart permet au moniteur de garder les deux personnes en sécurité et de donner un objectif à chacune. Pour des niveaux trop éloignés, Gary proposera plutôt deux créneaux coordonnés.",
+  },
+];
+---
+<Layout
+  title="Cours débutant de kitesurf au Morne — PKM"
+  description="Six heures pour rider en surveillé sur le lagon, dix pour être autonome. Privé ou à deux, à partir de Rs 4 500 la séance de 2 h. Le déroulé heure par heure."
+  locale="fr"
+  translations={translations}
+  tarifsHref="/fr/tarifs/"
+  waHref="/fr/reserver/"
+  jsonLd={[
+    faqPage(faqItems),
+    course({
+      name: 'Cours débutant de kitesurf au Morne',
+      description: 'Progression heure par heure, de la sécurité et du pilotage de l\'aile jusqu\'au ride surveillé et à l\'autonomie complète.',
+    }),
+    breadcrumbList([
+      { name: 'Accueil', url: `${site.url}/fr/` },
+      { name: 'Cours de kitesurf', url: `${site.url}/fr/cours-de-kitesurf/` },
+    ]),
+  ]}
+>
+  <section class="pad" style="padding-bottom:18px">
+    <span class="kicker">Cours de kitesurf</span>
+    <h1 style="font-size:1.85rem">Cours débutant au Morne</h1>
+    <p class="sub">
+      Une progression adaptée à ton niveau, de la prise en main de l'aile à
+      l'autonomie. Privé ou à deux, à partir de Rs 4 500 la séance de 2 h.
+    </p>
+    <div style="display:flex;gap:10px;margin-top:16px">
+      <Button variant="primary" href="/fr/reserver/">Réserver</Button>
+      <Button variant="ghost" href="/fr/tarifs/">Les tarifs</Button>
+    </div>
+  </section>
+
+  <section class="pad" style="padding-top:6px">
+    <h2>Comment se déroule un cours</h2>
+    <p class="course-note">Ce déroulé donne un repère. Le rythme change selon le vent, la fatigue, l'aisance dans l'eau et les acquis de chacun.</p>
+    <div class="course-timeline">
+      <div class="course-step">
+        <span>01</span>
+        <div><b>Première phase · sécurité et pilotage</b>
+        <span>Fenêtre de vol, systèmes de largage, positionnement. Pilotage de l'aile école les pieds dans le sable, puis dans l'eau.</span>
+        </div>
+      </div>
+      <div class="course-step">
+        <span>02</span>
+        <div><b>Deuxième phase · body drag</b>
+        <span>Se déplacer dans l'eau tracté par l'aile, remonter au vent, récupérer sa planche. L'étape que tout le monde saute et qui coûte deux séances plus tard.</span>
+        </div>
+      </div>
+      <div class="course-step">
+        <span>03</span>
+        <div><b>Troisième phase · waterstart et premiers bords</b>
+        <span>Se mettre debout, partir, s'arrêter. La plupart des élèves y arrivent dans cette fenêtre. À la fin du pack de 6 h, tu navigues sur le lagon avec un moniteur qui te garde à l'œil. Ces séances de supervision se réservent à part, à Rs 1 500 les 2 h. La première est offerte quand la réservation a été faite en ligne.</span>
+        </div>
+      </div>
+      <div class="course-step">
+        <span>04</span>
+        <div><b>Quatrième phase · vers l'autonomie</b>
+        <span>Naviguer dans les deux sens, remonter au vent, redécoller seul, gérer son matériel de A à Z. C'est là que tu peux louer sans supervision, et passer la certification IKO.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pad family-offer" id="reprise">
+    <div>
+      <span class="kicker">Reprise et niveaux mixtes</span>
+      <h2>Reprendre sans repartir de zéro</h2>
+      <p>Tu as déjà tiré tes premiers bords, mais ta dernière session remonte ? Gary commence par vérifier le pilotage, le largage et le cap, puis te remet rapidement sur l'objectif qui compte pour toi.</p>
+      <ul class="clean-list">
+        <li>Remise en confiance avant la première vraie session du séjour</li>
+        <li>Couples possibles avec deux objectifs différents</li>
+        <li>10 % de réduction dès 3 personnes réservées ensemble</li>
+      </ul>
+    </div>
+    <img src="/images/kitesurf-family-lesson-pexels.jpg" alt="Un jeune élève apprend à piloter une aile avec un moniteur" width="1600" height="1067" loading="lazy" />
+  </section>
+
+  <section class="pad" style="background:var(--surface)">
+    <h2>Privé ou semi-privé ?</h2>
+    <p class="sub">
+      Le semi-privé coûte environ moitié moins par personne, avec du matériel
+      individuel pour chacun. On progresse presque aussi vite, à condition
+      d'avoir un niveau et une morphologie compatibles. En privé, le rythme est
+      entièrement le tien et la progression est plus rapide sur les
+      premières heures.
+    </p>
+    <Button variant="wa" block href={waLink}>Demander conseil sur WhatsApp</Button>
+  </section>
+
+  <section class="pad">
+    <h2>Questions sur les cours débutants</h2>
+    <Faq items={faqItems} />
+  </section>
+</Layout>

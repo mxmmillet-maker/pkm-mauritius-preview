@@ -1,0 +1,229 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Button from '../../components/Button.astro';
+import PriceFrom from '../../components/PriceFrom.astro';
+import ProfileSlider from '../../components/ProfileSlider.astro';
+import Faq from '../../components/Faq.astro';
+import { sportsActivityLocation, faqPage, breadcrumbList } from '../../lib/schema';
+import site from '../../data/site.json';
+
+const translations = { fr: '/fr/', en: '/en/' };
+const waPhone = site.phones[0].replace(/\D/g, '');
+const waLink = `https://wa.me/${waPhone}?text=${encodeURIComponent("Hello Gary, I'd like to organise kitesurfing sessions at Le Morne.")}`;
+
+const profiles = [
+  {
+    eyebrow: 'First time', title: "I'm a beginner",
+    text: 'Learn to fly the kite, waterstart and work towards supervised riding on the lagoon.',
+    href: '/en/kitesurf-lessons/', image: '/images/kitesurf-family-lesson-pexels.jpg',
+    alt: 'A young student learning to control a kite with an instructor', linkLabel: 'See beginner lessons',
+  },
+  {
+    eyebrow: 'Comeback', title: 'I want my confidence back',
+    text: 'A return-to-water session built around your level, without making you start from scratch.',
+    href: '/en/kitesurf-lessons/#comeback', image: '/images/kitesurf-lesson-pexels.jpg',
+    alt: 'A student supported by an instructor during a kitesurfing lesson', linkLabel: 'Plan my comeback',
+  },
+  {
+    eyebrow: 'Freestyle', title: 'I want to move up a level',
+    text: 'Upwind riding, toeside, transitions, first jumps or rotations according to your goal.',
+    href: '/en/wave-freestyle-coaching/#freestyle', image: '/images/kitesurf-freestyle-jump-pexels.jpg',
+    alt: 'A kitesurfer jumping above the water', linkLabel: 'Explore freestyle coaching',
+  },
+  {
+    eyebrow: 'Waves', title: 'I want to ride waves',
+    text: 'Positioning, jibes, wave reading and progressive independence from Small Reef to Manawa.',
+    href: '/en/wave-freestyle-coaching/#waves', image: '/images/kitesurf-wave-riding-pexels.jpg',
+    alt: 'A kitesurfer riding in waves near the coast', linkLabel: 'See the wave pathway',
+  },
+];
+
+const faqItems = [
+  {
+    question: 'Can we come with different levels?',
+    answer: 'Yes. A family or couple can build one programme with different sessions: beginner lagoon lessons, a confidence refresher, freestyle coaching or wave guidance. A 10% reduction applies from three people booked together.',
+  },
+  {
+    question: 'What happens if there is no wind?',
+    answer: 'The session is moved to another slot at no cost. The programme is adjusted to the weather during your stay.',
+  },
+  {
+    question: 'How much is a kitesurfing lesson at Le Morne?',
+    answer: 'A 2-hour semi-private lesson is Rs 4,500 per person and a private lesson is Rs 8,000. The gear and safety equipment specified for the package are included.',
+  },
+  {
+    question: 'How do I book?',
+    answer: 'Send your dates, level and group size. Gary replies on WhatsApp with a suggested programme and available slots. A 10% deposit then confirms the booking.',
+  },
+];
+---
+
+<Layout
+  title="Kitesurfing School in Le Morne, Mauritius | Paradise Kitesurfing Mauritius"
+  description="Beginner lessons, comeback sessions, freestyle and wave coaching at Le Morne. Programmes for families and mixed levels with Gary and his team."
+  locale="en"
+  translations={translations}
+  tarifsHref="/en/prices/"
+  waHref="/en/book/"
+  jsonLd={[
+    sportsActivityLocation(),
+    faqPage(faqItems),
+    breadcrumbList([{ name: 'Home', url: `${site.url}/en/` }]),
+  ]}
+>
+  <section class="hero-photo pad">
+    <img class="hero-photo__media" src="/images/kitesurf-lagoon-aerial-pexels.jpg" alt="Kitesurfer seen from above beside a reef in turquoise water" width="1800" height="1013" fetchpriority="high" />
+    <span class="hero-photo__shade" aria-hidden="true"></span>
+    <div class="hero-photo__copy">
+      <span class="kicker">Le Morne, Mauritius</span>
+      <h1>From your first waterstart to the waves of Le Morne</h1>
+      <p>Beginner, returning rider or already independent, you build a programme with Gary around your level and the day's conditions.</p>
+      <div class="hero-actions">
+        <Button variant="wa" href={waLink}>Talk on WhatsApp</Button>
+        <Button variant="line" href="/en/kitesurf-lessons/">Explore the lessons</Button>
+      </div>
+      <small class="hero-photo__credit">Free-to-use illustrative photo</small>
+    </div>
+  </section>
+
+  <section class="trust-strip pad" aria-label="Trust markers">
+    <div><b>{site.googleReviews.rating.toFixed(1)} / 5</b><span>Google · {site.googleReviews.count} reviews</span></div>
+    <a href={site.tripAdvisorReviews.url} target="_blank" rel="noreferrer"><b>{site.tripAdvisorReviews.rating.toFixed(1)} / 5</b><span>TripAdvisor · {site.tripAdvisorReviews.count} reviews</span></a>
+    <div><b>10% off</b><span>From 3 people booked together</span></div>
+  </section>
+
+  <section class="pad profile-section">
+    <span class="kicker">Your programme</span>
+    <h2>What do you want to do on the water?</h2>
+    <p class="sub">Swipe through the cards. Each person can follow their own pathway, even when you come as a family or couple.</p>
+    <ProfileSlider items={profiles} label="Choose a pathway based on your level" />
+  </section>
+
+  <section class="pad spot-section">
+    <div>
+      <span class="kicker">The spot</span>
+      <h2>The lagoon is a proper progression playground</h2>
+      <p class="sub">There is very flat water for working on a move, chop for trying first jumps and enough space to move away from other lessons. The sandy bottom and standing areas make learning more comfortable.</p>
+    </div>
+    <div class="windbox">
+      <h3>When to come</h3>
+      <div class="wgrid">
+        <div class="peak"><b>June → September</b><small>18 to 35 knots · main season</small></div>
+        <div><b>April, May, Oct., Nov.</b><small>10 to 25 knots · warmer</small></div>
+        <div><b>Dec. → March</b><small>10 to 25 knots · fewer windy days</small></div>
+        <div><b>Year-round</b><small>Water between 22 and 28°C</small></div>
+      </div>
+      <p class="data-note">Seasonal guidance, not a weather promise: slots are adjusted to the actual forecast during your stay.</p>
+    </div>
+  </section>
+
+  <section class="pad progression-section">
+    <span class="kicker">Coaching</span>
+    <h2>Progress in freestyle or wave riding</h2>
+    <p class="sub">Two different pathways, with a starting point chosen after assessing your current level.</p>
+    <div class="track-grid">
+      <article class="track-card" id="freestyle">
+        <span>Freestyle · lagoon</span>
+        <h3>Build control, then add amplitude</h3>
+        <ol>
+          <li><b>Comeback</b><small>Holding ground, upwind riding, transitions</small></li>
+          <li><b>Intermediate</b><small>Toeside, pop, first jumps</small></li>
+          <li><b>Advanced</b><small>Rotations and specific goals</small></li>
+        </ol>
+        <a href="/en/wave-freestyle-coaching/#freestyle">See freestyle coaching →</a>
+      </article>
+      <article class="track-card track-card--wave" id="waves">
+        <span>Surf · reef</span>
+        <h3>From a directional board to independence in waves</h3>
+        <ol>
+          <li><b>Small Reef</b><small>Jibe, positioning, first lines</small></li>
+          <li><b>Chameaux and Manawa</b><small>Reading, turns, strategic zone</small></li>
+          <li><b>One Eye</b><small>Only when level and conditions are suitable</small></li>
+        </ol>
+        <a href="/en/wave-freestyle-coaching/#waves">See the wave pathway →</a>
+      </article>
+    </div>
+    <div class="reassure">
+      <b>Just starting? The lagoon is more than enough.</b>
+      <p>It offers flat water, chop, space and several working areas. You can progress all week without heading to the reef.</p>
+    </div>
+  </section>
+
+  <section class="pad family-offer">
+    <div>
+      <span class="kicker">Families and couples</span>
+      <h2>One trip, several levels</h2>
+      <p>One parent can work on waves while another gets their confidence back and a younger rider starts learning. A couple can also share a session with two different goals when the format allows it.</p>
+      <ul class="clean-list">
+        <li>10% off from 3 people booked together</li>
+        <li>A programme built around each person's level</li>
+        <li>First supervised session free, offer can be combined</li>
+      </ul>
+      <Button variant="primary" href="/en/book/">Build our programme</Button>
+    </div>
+    <img src="/images/kitesurf-family-lesson-pexels.jpg" alt="A student learning to control a kite with an instructor" width="1600" height="1067" loading="lazy" />
+  </section>
+
+  <section class="pad prices-preview">
+    <span class="kicker">Price guide</span>
+    <h2>Choose a starting package</h2>
+    <div class="fromgrid">
+      <PriceFrom label="Lessons from" amount="4,500" currency="Rs · about €90" detail="2h semi-private, per person" />
+      <PriceFrom label="Rental from" amount="2,250" currency="Rs · about €45" detail="2h, kite and board" />
+    </div>
+    <div class="offer-lite"><b>Sliding rental rates:</b> 2 hours, day or week. The rate falls as the duration grows.</div>
+    <Button variant="ghost" href="/en/prices/">Compare all packages</Button>
+  </section>
+
+  <section class="pad school-section">
+    <div class="school-intro">
+      <span class="kicker">The school</span>
+      <h2>A team on the lagoon since 2017</h2>
+      <p>Gary has taught at Le Morne since 2011. He organises sessions, answers on WhatsApp and adjusts the programme to conditions.</p>
+      <div class="auth">
+        <div><b>2 max.</b><span>students per instructor</span></div>
+        <div><b>Duotone</b><span>a recent fleet in several sizes</span></div>
+        <div><b>Boat</b><span>available according to programme and conditions</span></div>
+        <div><b>VHF</b><span>for suitable learning formats</span></div>
+      </div>
+    </div>
+    <div class="school-photo">
+      <img src="/images/kitesurf-lesson-pexels.jpg" alt="Instructor supporting a student during a lesson" width="1800" height="1187" loading="lazy" />
+      <span>Kitesurfing lesson · illustrative photo</span>
+    </div>
+  </section>
+
+  <section class="pad reviews-section">
+    <span class="kicker">Reviews</span>
+    <h2>Two platforms, the same recurring strengths</h2>
+    <div class="review-platforms">
+      <article>
+        <span class="stars" aria-label="5 stars">★★★★★</span>
+        <h3>Google · {site.googleReviews.count} reviews</h3>
+        <p>Public feedback highlights patience, safety and personal support.</p>
+      </article>
+      <article>
+        <span class="stars" aria-label="5 stars">★★★★★</span>
+        <h3>TripAdvisor · {site.tripAdvisorReviews.count} reviews</h3>
+        <p>The listing shows a score of {site.tripAdvisorReviews.rating.toFixed(1)} / 5.</p>
+        <a href={site.tripAdvisorReviews.url} target="_blank" rel="noreferrer">See TripAdvisor reviews →</a>
+      </article>
+    </div>
+  </section>
+
+  <section class="pad faq-section">
+    <span class="kicker">FAQ</span>
+    <h2>Frequently asked questions</h2>
+    <Faq items={faqItems} />
+  </section>
+
+  <section class="pad final-cta" id="capture">
+    <span class="kicker">Nou ale?</span>
+    <h2>Plan your course, coaching or individual sessions</h2>
+    <p>Send your dates and the levels in your group. Gary suggests a realistic programme on WhatsApp.</p>
+    <div class="hero-actions">
+      <Button variant="wa" href={waLink}>Talk to Gary</Button>
+      <Button variant="line" href="/en/book/">Describe my trip</Button>
+    </div>
+  </section>
+</Layout>

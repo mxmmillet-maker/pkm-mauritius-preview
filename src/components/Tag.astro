@@ -1,0 +1,12 @@
+---
+// Pilule d'info neutre (ex. niveau, catégorie). Pour une mise en avant forte, utiliser <Badge>.
+---
+<span class="tag"><slot /></span>
+<style>
+  .tag {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-family: var(--font-display); font-weight: 500; font-size: .74rem;
+    padding: 5px 10px; border-radius: var(--radius-pill);
+    background: var(--sage-pale); color: var(--sage-deep);
+  }
+</style>

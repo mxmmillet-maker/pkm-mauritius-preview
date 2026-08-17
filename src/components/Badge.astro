@@ -1,0 +1,12 @@
+---
+// Mise en avant forte (ex. "offre en ligne", "recommandé"). À utiliser avec parcimonie.
+---
+<span class="badge"><slot /></span>
+<style>
+  .badge {
+    display: inline-block; background: var(--sun); color: var(--ink);
+    font-family: var(--font-display); font-weight: 600; font-size: .65rem;
+    letter-spacing: .05em; text-transform: uppercase; padding: 3px 9px;
+    border-radius: var(--radius-pill);
+  }
+</style>

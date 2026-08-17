@@ -1,0 +1,68 @@
+---
+export interface ProfileItem {
+  eyebrow: string;
+  title: string;
+  text: string;
+  href: string;
+  image: string;
+  alt: string;
+  linkLabel: string;
+}
+
+const { items, label } = Astro.props as { items: ProfileItem[]; label: string };
+---
+
+<div class="profile-rail" aria-label={label}>
+  {items.map((item) => (
+    <a class="profile-card" href={item.href}>
+      <img src={item.image} alt={item.alt} width="1600" height="1067" loading="lazy" />
+      <span class="profile-shade" aria-hidden="true"></span>
+      <span class="profile-copy">
+        <small>{item.eyebrow}</small>
+        <strong>{item.title}</strong>
+        <span>{item.text}</span>
+        <b>{item.linkLabel} <span aria-hidden="true">→</span></b>
+      </span>
+    </a>
+  ))}
+</div>
+
+<style>
+  .profile-rail {
+    display: grid; grid-auto-flow: column; grid-auto-columns: minmax(260px, 82vw);
+    gap: 14px; overflow-x: auto; padding: 4px 2px 16px; scroll-snap-type: x mandatory;
+    scrollbar-width: thin; scrollbar-color: var(--sage) transparent;
+  }
+  .profile-card {
+    position: relative; min-height: 390px; overflow: hidden; border-radius: var(--radius-md);
+    color: #fff; text-decoration: none; scroll-snap-align: start; background: var(--ink);
+    box-shadow: var(--shadow); isolation: isolate;
+  }
+  .profile-card img {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+    transition: transform .35s ease;
+  }
+  .profile-shade {
+    position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(180deg, rgba(10,44,48,.02) 25%, rgba(10,44,48,.9) 100%);
+  }
+  .profile-copy {
+    position: absolute; inset: auto 0 0; z-index: 2; display: grid; gap: 6px; padding: 24px 20px;
+  }
+  .profile-copy small {
+    font-family: var(--font-display); font-size: .68rem; font-weight: 600;
+    letter-spacing: .13em; text-transform: uppercase; color: var(--sage-pale);
+  }
+  .profile-copy strong { font-family: var(--font-display); font-size: 1.5rem; line-height: 1.1; }
+  .profile-copy > span { font-size: .87rem; line-height: 1.45; color: rgba(255,255,255,.86); }
+  .profile-copy b { margin-top: 5px; font-family: var(--font-display); font-size: .86rem; }
+  .profile-card:hover img, .profile-card:focus-visible img { transform: scale(1.035); }
+  .profile-card:focus-visible { outline: 3px solid var(--sun); outline-offset: 3px; }
+
+  @media (min-width: 900px) {
+    .profile-rail { grid-auto-columns: minmax(270px, 31%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .profile-card img { transition: none; }
+  }
+</style>

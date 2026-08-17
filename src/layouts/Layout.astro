@@ -1,0 +1,131 @@
+---
+import '@fontsource/outfit/500.css';
+import '@fontsource/outfit/600.css';
+import '@fontsource/outfit/700.css';
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/500.css';
+import '../styles/tokens.css';
+import '../styles/blocks.css';
+
+import Topbar from '../components/Topbar.astro';
+import Dock from '../components/Dock.astro';
+import Footer from '../components/Footer.astro';
+import { NAV, hreflangLinks } from '../lib/i18n';
+import site from '../data/site.json';
+
+/*
+  title / description : uniques par page, jamais génériques (règle SEO du brief).
+  locale               : 'fr' | 'en'
+  translations         : { fr: '/fr/...', en: '/en/...' } — équivalents réels de CETTE page
+  jsonLd               : tableau d'objets schema.org (voir lib/schema.js)
+  tarifsHref / waHref  : liens du Dock, propres à chaque page/langue
+*/
+const {
+  title,
+  description,
+  locale,
+  translations = {},
+  jsonLd = [],
+  tarifsHref,
+  waHref,
+} = Astro.props;
+
+const canonical = new URL(translations[locale] ?? Astro.url.pathname, Astro.site);
+const alternates = hreflangLinks(translations, Astro.site);
+const footerColumns = locale === 'fr'
+  ? [
+      { title: 'École', links: [
+        { label: 'Cours de kitesurf', href: '/fr/cours-de-kitesurf/' },
+        { label: 'Tarifs', href: '/fr/tarifs/' },
+        { label: 'Réserver', href: '/fr/reserver/' },
+      ] },
+      { title: 'Préparer son séjour', links: [
+        { label: 'Le spot du Morne', href: '/fr/kitesurf-le-morne/' },
+        { label: 'Guides', href: '/fr/guide/' },
+        { label: 'Questions fréquentes', href: '/fr/questions-frequentes/' },
+      ] },
+    ]
+  : [
+      { title: 'School', links: [
+        { label: 'Kitesurf lessons', href: '/en/kitesurf-lessons/' },
+        { label: 'Prices', href: '/en/prices/' },
+        { label: 'Book', href: '/en/book/' },
+      ] },
+      { title: 'Plan your trip', links: [
+        { label: 'The Le Morne spot', href: '/en/kitesurf-le-morne/' },
+        { label: 'Guides', href: '/en/guide/' },
+        { label: 'Frequently asked questions', href: '/en/faq/' },
+      ] },
+    ];
+---
+<!doctype html>
+<html lang={locale}>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <script is:inline>document.documentElement.classList.add('js');</script>
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content={site.name} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <link rel="canonical" href={canonical} />
+  {alternates.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  {jsonLd.map((schema) => (
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  ))}
+</head>
+<body>
+  <Topbar locale={locale} translations={translations} nav={NAV[locale] ?? []} />
+  <main>
+    <slot />
+  </main>
+  <Footer columns={footerColumns}>
+    <p style="margin-top:16px;color:#7C9A98">
+      © {new Date().getFullYear()} {site.name} — {site.spot}
+    </p>
+  </Footer>
+  <Dock
+    tarifsHref={tarifsHref}
+    waHref={waHref}
+    tarifsLabel={locale === 'fr' ? 'Tarifs' : 'Prices'}
+    waLabel={locale === 'fr' ? 'Réserver' : 'Book'}
+  />
+
+  <script>
+    // Apparition progressive des sections au scroll — voir tokens.css pour le
+    // pourquoi (inspiré du site Nissan Micra repéré par Max, ramené à ce
+    // qu'un site statique économe peut se permettre). Zéro dépendance,
+    // ~15 lignes, natif au navigateur (IntersectionObserver).
+    // La toute première section de la page (le hero) n'est jamais concernée :
+    // elle doit s'afficher immédiatement, sans attendre le JS.
+    const sections = document.querySelectorAll('main section:not(:first-of-type)');
+    sections.forEach((el) => el.setAttribute('data-reveal', ''));
+
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in');
+              io.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+      );
+      sections.forEach((el) => io.observe(el));
+    } else {
+      // Navigateur trop ancien pour IntersectionObserver : on affiche tout,
+      // pas de contenu caché derrière une fonctionnalité indisponible.
+      sections.forEach((el) => el.classList.add('in'));
+    }
+  </script>
+</body>
+</html>

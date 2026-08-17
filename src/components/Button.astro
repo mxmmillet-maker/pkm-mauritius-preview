@@ -1,0 +1,42 @@
+---
+/*
+  Bouton unique du système. Toujours passer par ce composant plutôt que de
+  recoder un <a> ou un <button> stylé à la main ailleurs.
+
+  variant :
+    - "primary" (corail) → action qui reste sur le site (voir les tarifs, envoyer un formulaire)
+    - "wa"      (vert)   → EXCLUSIVEMENT un lien qui ouvre WhatsApp (wa.me/...)
+    - "line"    (contour clair sur fond sombre)
+    - "ghost"   (contour sombre sur fond clair)
+  block : true → prend toute la largeur disponible
+*/
+export interface Props {
+  variant?: 'primary' | 'wa' | 'line' | 'ghost';
+  href?: string;
+  block?: boolean;
+  type?: 'button' | 'submit';
+}
+const { variant = 'primary', href, block = false, type = 'button' } = Astro.props;
+const Tag = href ? 'a' : 'button';
+---
+<Tag
+  class:list={['btn', `btn-${variant}`, { 'btn-block': block }]}
+  href={href}
+  type={href ? undefined : type}
+>
+  <slot />
+</Tag>
+
+<style>
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    font-family: var(--font-display); font-weight: 500; font-size: 1rem;
+    padding: 15px 22px; border-radius: var(--radius-pill); border: 0;
+    text-decoration: none; cursor: pointer; min-height: var(--tap-min);
+  }
+  .btn-primary { background: var(--coral); color: #fff; }
+  .btn-wa { background: var(--wa); color: #fff; }
+  .btn-line { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,.4); }
+  .btn-ghost { background: #fff; color: var(--ink); border: 1.5px solid var(--ink); }
+  .btn-block { display: flex; width: 100%; }
+</style>

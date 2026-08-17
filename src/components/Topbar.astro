@@ -1,0 +1,100 @@
+---
+import { LOCALES } from '../lib/i18n';
+
+/*
+  locale       : langue de la page courante ('fr' | 'en' | ...)
+  translations : { fr: '/fr/', en: '/en/' } — équivalents réels de CETTE page
+  logoSrc      : chemin du logo (fond clair)
+  nav          : [{ label, href }]
+*/
+const { locale, translations = {}, logoSrc = '/logo.png', nav = [] } = Astro.props;
+const liveLocales = Object.entries(LOCALES).filter(([, l]) => l.live);
+const currentPath = Astro.url.pathname;
+---
+<header class="topbar">
+  <a class="logo" href={`/${locale}/`}>
+    <img src={logoSrc} alt="PKM — Paradise Kitesurfing Mauritius" height="30" />
+  </a>
+  <div class="topright">
+    <nav class="lang" aria-label={locale === 'fr' ? 'Langue' : 'Language'}>
+      {liveLocales.map(([code, l]) => (
+        translations[code]
+          ? <a class:list={['pill', { on: code === locale }]} href={translations[code]} aria-current={code === locale ? 'page' : undefined}>{l.label}</a>
+          : null
+      ))}
+    </nav>
+    <button class="burger" id="burger" aria-expanded="false" aria-controls="mobile-menu" aria-label="Menu">
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<nav id="mobile-menu" class="menu" aria-label={locale === 'fr' ? 'Navigation principale' : 'Main navigation'}>
+  {nav.map((item) => <a href={item.href} aria-current={currentPath === item.href ? 'page' : undefined}>{item.label}</a>)}
+</nav>
+
+<style>
+  .topbar {
+    position: sticky; top: 0; z-index: 40;
+    background: rgba(255,255,255,.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 11px 18px;
+  }
+  .logo { display: flex; align-items: center; text-decoration: none; }
+  .logo img { display: block; width: auto; }
+  .topright { display: flex; align-items: center; gap: 6px; }
+  .lang { display: flex; gap: 6px; }
+  .pill {
+    font-family: var(--font-display); font-weight: 600; font-size: .74rem;
+    border: 1px solid var(--line); background: #fff; border-radius: var(--radius-pill);
+    padding: 6px 10px; color: var(--ink-soft); text-decoration: none;
+  }
+  .pill.on { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .burger {
+    width: 40px; height: 40px; border: 0; background: var(--surface);
+    border-radius: 11px; display: grid; place-items: center; cursor: pointer;
+  }
+  .burger span, .burger span::before, .burger span::after {
+    display: block; width: 17px; height: 2px; background: var(--ink); border-radius: 2px;
+  }
+  .burger span { position: relative; }
+  .burger span::before, .burger span::after { content: ""; position: absolute; left: 0; }
+  .burger span::before { top: -5px; }
+  .burger span::after { top: 5px; }
+
+  .menu { display: none; border-bottom: 1px solid var(--line); background: #fff; padding: 6px 12px 12px; }
+  .menu.open { display: block; }
+  .menu a {
+    display: block; padding: 12px 8px; font-family: var(--font-display); font-weight: 600;
+    font-size: 1rem; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--surface);
+  }
+  .menu a:last-child { border: 0; }
+  .menu a[aria-current="page"] { color: var(--coral); }
+
+  @media (min-width: 900px) {
+    .topbar { padding-inline: max(24px, calc((100vw - 1120px) / 2)); }
+    .burger { display: none; }
+    .menu {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      padding: 6px max(24px, calc((100vw - 1120px) / 2));
+      border-bottom: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+    .menu a { border: 0; padding: 9px 11px; font-size: .9rem; border-radius: var(--radius-pill); }
+    .menu a:hover, .menu a:focus-visible { background: var(--surface); }
+  }
+</style>
+
+<script>
+  // Menu mobile — vanilla JS minimal, pas de framework (voir brief : site économe).
+  const burger = document.getElementById('burger');
+  const menu = document.getElementById('mobile-menu');
+  burger?.addEventListener('click', () => {
+    const open = menu.classList.toggle('open');
+    burger.setAttribute('aria-expanded', String(open));
+  });
+</script>

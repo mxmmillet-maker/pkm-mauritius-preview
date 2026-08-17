@@ -1,0 +1,119 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Faq from '../../../components/Faq.astro';
+import Button from '../../../components/Button.astro';
+import { faqPage, breadcrumbList, course } from '../../../lib/schema';
+import site from '../../../data/site.json';
+
+const translations = { fr: '/fr/perfectionnement/', en: '/en/wave-freestyle-coaching/' };
+const waPhone = site.phones[0].replace(/\D/g, '');
+const waLink = `https://wa.me/${waPhone}?text=${encodeURIComponent("Hello Gary, I'd like to organise an advanced coaching session at Le Morne.")}`;
+
+const faqItems = [
+  {
+    question: 'How does coaching work without a helmet microphone?',
+    answer: 'For advanced and wave coaching, the instructor rides with you. Instructions are set before launching, observed on the water and reviewed between runs. No onboard microphone is currently advertised for this format.',
+  },
+  {
+    question: 'Can a couple with two levels share a session?',
+    answer: 'Yes when both goals are compatible with the area and conditions. One rider can work on upwind riding or toeside while the other develops transitions or positioning. Gary confirms the format before the session.',
+  },
+  {
+    question: 'What level do I need to start wave riding?',
+    answer: 'You should ride both ways, go upwind, manage your own gear and avoid a marked area. The first step is practised on a directional board and in a suitable zone before considering Manawa.',
+  },
+  {
+    question: 'Can I go straight to One Eye?',
+    answer: 'No. Access depends on your real level, swell, wind and traffic. One Eye is only considered after assessment, with suitable support and safety arrangements.',
+  },
+];
+---
+
+<Layout
+  title="Freestyle and Wave Coaching in Le Morne | PKM"
+  description="Personal coaching at Le Morne for upwind riding, toeside, freestyle, directional boards and surf. Programmes for couples and mixed levels."
+  locale="en"
+  translations={translations}
+  tarifsHref="/en/prices/"
+  waHref="/en/book/"
+  jsonLd={[
+    faqPage(faqItems),
+    course({
+      name: 'Freestyle and wave coaching in Le Morne',
+      description: 'Personal coaching on the lagoon and in waves, with a goal chosen according to level and conditions.',
+    }),
+    breadcrumbList([
+      { name: 'Home', url: `${site.url}/en/` },
+      { name: 'Coaching', url: `${site.url}/en/wave-freestyle-coaching/` },
+    ]),
+  ]}
+>
+  <section class="pad family-offer coaching-hero">
+    <div>
+      <span class="kicker">Advanced coaching</span>
+      <h1>One clear goal, one session built around your riding</h1>
+      <p>You can already ride. Coaching helps consolidate independence, unlock a move or learn where to position yourself in the waves of Le Morne.</p>
+      <div class="hero-actions">
+        <Button variant="wa" href={waLink}>Talk about my level</Button>
+        <Button variant="ghost" href="/en/prices/">See prices</Button>
+      </div>
+    </div>
+    <img src="/images/kitesurf-wave-riding-pexels.jpg" alt="Kitesurfer riding in waves" width="1600" height="1067" fetchpriority="high" />
+  </section>
+
+  <section class="pad progression-section">
+    <span class="kicker">Two pathways</span>
+    <h2>Freestyle on the lagoon or independence in waves</h2>
+    <p class="sub">The exact content is chosen after discussing your level and reading the conditions.</p>
+    <div class="track-grid">
+      <article class="track-card" id="freestyle">
+        <span>Freestyle · lagoon</span>
+        <h3>Make your riding more solid and fluid</h3>
+        <ol>
+          <li><b>Independent base</b><small>Holding ground, upwind riding, managing the area</small></li>
+          <li><b>Control</b><small>Toeside, transitions, changing direction</small></li>
+          <li><b>Progression</b><small>Pop, first jumps and rotations at your level</small></li>
+        </ol>
+        <p>Flat water isolates a movement. Chop then helps place it back into real riding.</p>
+      </article>
+      <article class="track-card track-card--wave" id="waves">
+        <span>Surf · reef</span>
+        <h3>Read the wave and choose your zone</h3>
+        <ol>
+          <li><b>Directional board</b><small>Position, jibe, moving over from twintip</small></li>
+          <li><b>Small Reef</b><small>First lines and positioning without skipping steps</small></li>
+          <li><b>Chameaux and Manawa</b><small>Turns, priority, strategic zone and independence</small></li>
+        </ol>
+        <p>One Eye remains a separate step, considered only after assessing the rider and conditions.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="pad ride-together">
+    <div>
+      <span class="kicker">On the water</span>
+      <h2>The instructor rides with you</h2>
+      <p>There is currently no onboard microphone in your helmet for these advanced sessions. Support is organised differently:</p>
+      <div class="proofs">
+        <div class="proof"><b>Before launching</b><span>An observable goal, a working area and the safety points.</span></div>
+        <div class="proof"><b>While riding</b><span>The instructor rides with you, observes your lines and demonstrates positioning.</span></div>
+        <div class="proof"><b>Between runs</b><span>A short review, one precise correction, then another attempt.</span></div>
+      </div>
+    </div>
+    <img src="/images/kitesurf-freestyle-jump-pexels.jpg" alt="Kitesurfer jumping above waves" width="1600" height="1067" loading="lazy" />
+  </section>
+
+  <section class="pad mixed-levels">
+    <span class="kicker">Couples</span>
+    <h2>Two levels in one session when it makes sense</h2>
+    <p class="sub">One rider can work on toeside or upwind riding while the other consolidates transitions or a directional board. If the gap or conditions make the format ineffective, Gary suggests two coordinated slots.</p>
+    <div class="offer-lite"><b>Groups:</b> 10% off from 3 people booked together, combined with the first supervised session free.</div>
+    <Button variant="wa" href={waLink}>Describe the group's levels</Button>
+  </section>
+
+  <section class="pad faq-section">
+    <span class="kicker">FAQ</span>
+    <h2>Questions about advanced coaching</h2>
+    <Faq items={faqItems} />
+  </section>
+</Layout>

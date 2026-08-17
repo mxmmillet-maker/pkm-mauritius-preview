@@ -1,0 +1,55 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { breadcrumbList } from '../../../lib/schema';
+import site from '../../../data/site.json';
+
+const translations = { fr: '/fr/guide/', en: '/en/guide/' };
+
+const guides = [
+  { title: 'Best time to kitesurf in Mauritius', desc: 'Wind, month by month.', href: '/en/guide/kitesurfing-mauritius-best-season/' },
+  { title: 'The Le Morne spot', desc: 'Lagoon, reef, tides, zones by level.', href: '/en/kitesurf-le-morne/' },
+  { title: 'How long to learn?', desc: 'The day-by-day progression.', href: '/en/guide/how-long-to-learn-kitesurfing/' },
+  { title: 'How much does it cost?', desc: 'Real market price ranges.', href: '/en/guide/kitesurfing-mauritius-cost/' },
+  { title: 'FAQ', desc: 'Everything we get asked before booking.', href: '/en/faq/' },
+];
+---
+<Layout
+  title="Kitesurfing Guides for Mauritius — PKM"
+  description="Wind by month, the Le Morne spot, how long it takes to learn, budget: every practical guide to plan your kitesurfing trip to Mauritius."
+  locale="en"
+  translations={translations}
+  tarifsHref="/en/prices/"
+  waHref="/en/book/"
+  jsonLd={[breadcrumbList([
+    { name: 'Home', url: `${site.url}/en/` },
+    { name: 'Guides', url: `${site.url}/en/guide/` },
+  ])]}
+>
+  <section class="pad">
+    <span class="kicker">Guides</span>
+    <h1>Everything to plan your kitesurfing trip</h1>
+  </section>
+  <section class="pad">
+    <div class="picker">
+      {guides.map((g) => (
+        <a class="pick" href={g.href}>
+          <div class="t"><b>{g.title}</b><small>{g.desc}</small></div>
+          <span class="ar">→</span>
+        </a>
+      ))}
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .picker { display: grid; gap: 10px; }
+  .pick {
+    display: flex; align-items: center; gap: 13px; padding: 15px;
+    border: 1px solid var(--line); border-radius: 15px; background: #fff;
+    text-decoration: none; color: var(--ink); box-shadow: var(--shadow);
+  }
+  .pick .t { flex: 1; }
+  .pick .t b { font-family: var(--font-display); font-weight: 500; font-size: 1rem; display: block; }
+  .pick .t small { color: var(--ink-soft); font-size: .83rem; }
+  .pick .ar { color: var(--sage-deep); font-size: 1.2rem; }
+</style>

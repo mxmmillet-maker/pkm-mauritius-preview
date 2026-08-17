@@ -1,0 +1,94 @@
+---
+/*
+  Micro-formulaire court → capture le numéro AVANT la bascule WhatsApp
+  (voir doc stratégie §8 "Tunnel WhatsApp"). Volontairement minimal : chaque
+  champ en plus coûte environ 10 % de complétion.
+
+  TODO backend (pas encore fait dans cette étape de préparation) :
+  1. Créer le Cloudflare Worker qui reçoit ce formulaire et écrit dans un
+     Google Sheet (voir doc stratégie §8, "Phase 1, coût nul").
+  2. Remplacer ENDPOINT ci-dessous par l'URL réelle du Worker.
+  En attendant, le formulaire redirige directement vers WhatsApp : ça fonctionne
+  dès aujourd'hui, la capture du numéro en base viendra se greffer par-dessus
+  sans rien changer au visuel.
+*/
+const { waPhone, labels = {} } = Astro.props;
+const t = {
+  firstName: 'Prénom',
+  phone: 'Numéro (WhatsApp)',
+  arrival: 'Date d’arrivée',
+  departure: 'Date de départ',
+  level: 'Niveau',
+  levelOptions: ['Débutant', 'Confirmé', 'Perfectionnement'],
+  submit: 'Envoyer sur WhatsApp',
+  legal: 'En envoyant ce formulaire, tu acceptes d’être recontacté par WhatsApp au sujet de ta demande.',
+  ...labels,
+};
+---
+<form class="lead-form" id="lead-form" data-wa-phone={waPhone}>
+  <div class="field">
+    <label for="firstName">{t.firstName}</label>
+    <input id="firstName" name="firstName" type="text" required minlength="1" />
+  </div>
+  <div class="field">
+    <label for="phone">{t.phone}</label>
+    <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required />
+  </div>
+  <div class="date-grid">
+    <div class="field">
+      <label for="arrival">{t.arrival}</label>
+      <input id="arrival" name="arrival" type="date" />
+    </div>
+    <div class="field">
+      <label for="departure">{t.departure}</label>
+      <input id="departure" name="departure" type="date" />
+    </div>
+  </div>
+  <div class="field">
+    <label for="level">{t.level}</label>
+    <select id="level" name="level">
+      {t.levelOptions.map((opt) => <option>{opt}</option>)}
+    </select>
+  </div>
+  <button class="btn btn-wa btn-block" type="submit">
+    <svg aria-hidden="true" viewBox="0 0 24 24"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.009-.371-.011-.57-.011-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.29.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.981.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884a9.82 9.82 0 0 1 7.021 2.91 9.825 9.825 0 0 1 2.9 7.034c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.14 1.588 5.945L.057 24l6.3-1.654a11.88 11.88 0 0 0 5.69 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.82 11.82 0 0 0-3.481-8.413Z" /></svg>
+    {t.submit}
+  </button>
+  <p class="legal">{t.legal}</p>
+</form>
+
+<style>
+  .lead-form { background: var(--surface); border-radius: 20px; padding: 22px 18px; }
+  .field { margin-bottom: 13px; }
+  .date-grid { display: grid; gap: 0; }
+  label { display: block; font-family: var(--font-display); font-weight: 600; font-size: .83rem; margin-bottom: 5px; }
+  input, select {
+    width: 100%; font-family: var(--font-body); font-size: 16px; padding: 14px;
+    border: 1px solid var(--line); border-radius: 12px; background: #fff;
+    color: var(--ink); min-height: var(--tap-min);
+  }
+  input:focus, select:focus { outline: 2px solid var(--sage-deep); outline-offset: 1px; border-color: transparent; }
+  button svg { width: 20px; height: 20px; flex: 0 0 auto; }
+  .legal { font-size: .76rem; color: var(--ink-soft); line-height: 1.5; margin: 12px 0 0; }
+  @media (min-width: 900px) {
+    .lead-form { max-width: 680px; padding: 28px; }
+    .date-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  }
+</style>
+
+<script>
+  // Redirection WhatsApp immédiate. La capture en base (Cloudflare Worker → Google
+  // Sheet) viendra se brancher ici sans changer ce qui suit — voir TODO en tête de fichier.
+  const form = document.getElementById('lead-form');
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const phone = form.dataset.waPhone;
+    const start = data.get('arrival') || 'à préciser';
+    const end = data.get('departure') || 'à préciser';
+    const msg = document.documentElement.lang === 'en'
+      ? `Hello PKM! I'm ${data.get('firstName')}, interested in ${data.get('level')}. I'll be on the island from ${start} to ${end}. My number: ${data.get('phone')}`
+      : `Bonjour PKM ! Je suis ${data.get('firstName')}, intéressé(e) par ${data.get('level')}. Je suis sur l'île du ${start} au ${end}. Mon numéro : ${data.get('phone')}`;
+    window.location.href = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
+  });
+</script>

@@ -1,0 +1,119 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Faq from '../../../components/Faq.astro';
+import Button from '../../../components/Button.astro';
+import { faqPage, breadcrumbList, course } from '../../../lib/schema';
+import site from '../../../data/site.json';
+
+const translations = { fr: '/fr/perfectionnement/', en: '/en/wave-freestyle-coaching/' };
+const waPhone = site.phones[0].replace(/\D/g, '');
+const waLink = `https://wa.me/${waPhone}?text=${encodeURIComponent("Bonjour Gary, j'aimerais organiser un coaching de perfectionnement au Morne.")}`;
+
+const faqItems = [
+  {
+    question: 'Comment se passe le coaching sans micro dans le casque ?',
+    answer: "Pour le perfectionnement et les vagues, le moniteur ride avec toi. Les consignes sont posées avant le départ, observées sur l'eau puis reprises entre deux bords. Aucun micro embarqué n'est annoncé pour ce format actuellement.",
+  },
+  {
+    question: 'Peut-on faire une séance en couple avec deux niveaux ?',
+    answer: "Oui si les deux objectifs restent compatibles avec la zone et les conditions. L'un peut travailler sa remontée au vent ou son toeside pendant que l'autre progresse sur les transitions ou le placement. Gary valide le format avant la séance.",
+  },
+  {
+    question: 'Quel niveau pour commencer les vagues ?',
+    answer: "Il faut au minimum naviguer des deux côtés, remonter au vent, gérer son matériel seul et savoir éviter une zone. La première étape se travaille en directionnelle et sur une zone adaptée avant d'envisager Manawa.",
+  },
+  {
+    question: 'Peut-on aller directement à One Eye ?',
+    answer: "Non. L'accès dépend du niveau réel, de la houle, du vent et de la fréquentation. One Eye n'est proposée qu'après évaluation, avec un accompagnement et un dispositif adaptés.",
+  },
+];
+---
+
+<Layout
+  title="Coaching freestyle et vagues au Morne | PKM"
+  description="Coaching personnalisé au Morne pour progresser en remontée au vent, toeside, freestyle, directionnelle et surf. Parcours adaptés aux couples et niveaux mixtes."
+  locale="fr"
+  translations={translations}
+  tarifsHref="/fr/tarifs/"
+  waHref="/fr/reserver/"
+  jsonLd={[
+    faqPage(faqItems),
+    course({
+      name: 'Coaching freestyle et vagues au Morne',
+      description: 'Accompagnement personnalisé sur le lagon et dans les vagues, avec un objectif défini selon le niveau et les conditions.',
+    }),
+    breadcrumbList([
+      { name: 'Accueil', url: `${site.url}/fr/` },
+      { name: 'Perfectionnement', url: `${site.url}/fr/perfectionnement/` },
+    ]),
+  ]}
+>
+  <section class="pad family-offer coaching-hero">
+    <div>
+      <span class="kicker">Perfectionnement</span>
+      <h1>Un objectif précis, une séance construite autour de ton ride</h1>
+      <p>Tu sais déjà naviguer. Le coaching sert à consolider ton autonomie, débloquer un geste ou apprendre à te placer dans les vagues du Morne.</p>
+      <div class="hero-actions">
+        <Button variant="wa" href={waLink}>Parler de mon niveau</Button>
+        <Button variant="ghost" href="/fr/tarifs/">Voir les tarifs</Button>
+      </div>
+    </div>
+    <img src="/images/kitesurf-wave-riding-pexels.jpg" alt="Kitesurfeur naviguant dans les vagues" width="1600" height="1067" fetchpriority="high" />
+  </section>
+
+  <section class="pad progression-section">
+    <span class="kicker">Deux parcours</span>
+    <h2>Freestyle sur le lagon ou autonomie dans les vagues</h2>
+    <p class="sub">Le contenu exact est choisi après un échange sur ton niveau et une lecture des conditions.</p>
+    <div class="track-grid">
+      <article class="track-card" id="freestyle">
+        <span>Freestyle · lagon</span>
+        <h3>Rendre ton ride plus solide et plus fluide</h3>
+        <ol>
+          <li><b>Base autonome</b><small>Cap, remontée au vent, gestion de zone</small></li>
+          <li><b>Contrôle</b><small>Toeside, transitions, changement de direction</small></li>
+          <li><b>Progression</b><small>Pop, premiers sauts, rotations selon ton niveau</small></li>
+        </ol>
+        <p>Le flat aide à isoler un geste. Le clapot permet ensuite de le replacer dans une navigation plus réelle.</p>
+      </article>
+      <article class="track-card track-card--wave" id="vagues">
+        <span>Surf · récif</span>
+        <h3>Apprendre à lire la vague et choisir sa zone</h3>
+        <ol>
+          <li><b>Directionnelle</b><small>Position, jibe, passage du twintip au surf</small></li>
+          <li><b>Small Reef</b><small>Premières lignes et placement sans brûler les étapes</small></li>
+          <li><b>Chameaux et Manawa</b><small>Turns, priorité, zone stratégique et autonomie</small></li>
+        </ol>
+        <p>One Eye reste une étape à part, décidée uniquement après évaluation du rider et des conditions.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="pad ride-together">
+    <div>
+      <span class="kicker">Sur l’eau</span>
+      <h2>Le moniteur ride avec toi</h2>
+      <p>Pour ces séances avancées, il n’y a pas actuellement de micro embarqué dans ton casque. L’accompagnement s’organise autrement :</p>
+      <div class="proofs">
+        <div class="proof"><b>Avant le départ</b><span>Un objectif observable, une zone de travail et les points de sécurité.</span></div>
+        <div class="proof"><b>Pendant le ride</b><span>Le moniteur navigue avec toi, observe tes trajectoires et montre le placement.</span></div>
+        <div class="proof"><b>Entre deux bords</b><span>Débrief court, correction précise, puis nouvel essai.</span></div>
+      </div>
+    </div>
+    <img src="/images/kitesurf-freestyle-jump-pexels.jpg" alt="Kitesurfeur réalisant un saut au-dessus des vagues" width="1600" height="1067" loading="lazy" />
+  </section>
+
+  <section class="pad mixed-levels">
+    <span class="kicker">Couples</span>
+    <h2>Deux niveaux, une même séance quand c’est pertinent</h2>
+    <p class="sub">Un rider peut travailler le toeside ou la remontée au vent pendant que l’autre consolide ses transitions ou sa directionnelle. Si l’écart de niveau ou les conditions rendent le format peu efficace, Gary propose deux créneaux coordonnés.</p>
+    <div class="offer-lite"><b>Groupe :</b> 10 % de réduction dès 3 personnes réservées ensemble, cumulable avec la première séance surveillée offerte.</div>
+    <Button variant="wa" href={waLink}>Décrire les niveaux du groupe</Button>
+  </section>
+
+  <section class="pad faq-section">
+    <span class="kicker">FAQ</span>
+    <h2>Questions sur le perfectionnement</h2>
+    <Faq items={faqItems} />
+  </section>
+</Layout>

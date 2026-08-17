@@ -1,0 +1,79 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import Faq from '../../../../components/Faq.astro';
+import Button from '../../../../components/Button.astro';
+import { faqPage, breadcrumbList } from '../../../../lib/schema';
+import site from '../../../../data/site.json';
+
+const translations = {
+  fr: '/fr/guide/combien-de-temps-apprendre-kitesurf/',
+  en: '/en/guide/how-long-to-learn-kitesurfing/',
+};
+
+const faqItems = [
+  {
+    question: 'How many hours does it take to ride independently?',
+    answer: 'On average 10 to 12 hours of lessons, spread over 5 to 7 days, per IKO standards. Some students get there in 3 intensive days, others in 8.',
+  },
+  {
+    question: 'Does prior board-sport experience help?',
+    answer: 'Yes. Wakeboarding, windsurfing or surfing give a head start on balance and board feel, but not on kite control, which takes the same time for everyone.',
+  },
+  {
+    question: 'Can you learn in a single week of vacation?',
+    answer: 'Yes, it is the most common format: 2 hours of lessons a day over 5 to 7 days is enough to reach independence in good wind conditions.',
+  },
+];
+---
+<Layout
+  title="How Long Does It Take to Learn Kitesurfing? — PKM"
+  description="Expect 10 to 12 hours of lessons, spread over 5 to 7 days, to become an independent kitesurfer. Day-by-day breakdown of the progression, from kite control to riding."
+  locale="en"
+  translations={translations}
+  tarifsHref="/en/prices/"
+  waHref="/en/book/"
+  jsonLd={[
+    faqPage(faqItems),
+    breadcrumbList([
+      { name: 'Home', url: `${site.url}/en/` },
+      { name: 'Guides', url: `${site.url}/en/guide/` },
+      { name: 'How long to learn', url: `${site.url}/en/guide/how-long-to-learn-kitesurfing/` },
+    ]),
+  ]}
+>
+  <section class="pad">
+    <span class="kicker">Guide</span>
+    <h1>How long does it take to learn kitesurfing?</h1>
+    <p class="sub">
+      Expect <b>10 to 12 hours of lessons</b>, spread over <b>5 to 7 days</b>,
+      to ride on your own in good conditions — the standard benchmark used by
+      IKO-certified schools.
+    </p>
+  </section>
+
+  <section class="pad">
+    <h2>The progression, day by day</h2>
+    <p><b>Day 1</b> — kite control on the beach, then first real flights from the shore.</p>
+    <p><b>Day 2</b> — getting in the water: body-dragging (being pulled by the kite without a board) and board recovery.</p>
+    <p><b>Day 3</b> — first water-starts (getting up on the board), first short rides.</p>
+    <p><b>Day 4</b> — consistent water-starts, longer rides in both directions.</p>
+    <p><b>Day 5</b> — longer riding distance, fewer crashes.</p>
+    <p><b>Days 6-7 (optional)</b> — riding upwind, transitions, start of intermediate level.</p>
+  </section>
+
+  <section class="pad">
+    <h2>What speeds up or slows down progress</h2>
+    <p>A good level in wakeboarding, windsurfing or surfing helps with balance, not with kite control.</p>
+    <p>Wind matters as much as hours logged: progressing in 10 knots takes longer than in 20.</p>
+    <p>A private lesson (one student, one instructor) is mechanically faster than a group lesson.</p>
+  </section>
+
+  <section class="pad" style="text-align:center">
+    <Button variant="primary" href="/en/prices/">See lesson packages</Button>
+  </section>
+
+  <section class="pad">
+    <h2>Frequently asked questions</h2>
+    <Faq items={faqItems} />
+  </section>
+</Layout>

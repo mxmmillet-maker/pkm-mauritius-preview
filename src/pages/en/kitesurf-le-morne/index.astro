@@ -1,0 +1,88 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Faq from '../../../components/Faq.astro';
+import { faqPage, breadcrumbList } from '../../../lib/schema';
+import site from '../../../data/site.json';
+
+const translations = { fr: '/fr/kitesurf-le-morne/', en: '/en/kitesurf-le-morne/' };
+
+const faqItems = [
+  {
+    question: 'Is the Le Morne lagoon suitable for beginners?',
+    answer: 'Yes. The lagoon is shallow (50cm to 1.5m depending on the tide) and protected by a reef, creating flat water that is ideal for learning.',
+  },
+  {
+    question: 'Does the tide matter at Le Morne?',
+    answer: 'Yes. At low tide, coral becomes exposed and hazardous. At high tide, the water gets deeper and currents strengthen — an instructor adjusts the riding zone accordingly.',
+  },
+  {
+    question: 'How do you get to the Le Morne spot?',
+    answer: 'From La Gaulette, follow the road toward Morne Brabant until you reach the Riu hotel. Parking is available in the shaded areas near the launch zone.',
+  },
+];
+---
+<Layout
+  title="Le Morne Kitesurf Spot, Mauritius — Full Guide"
+  description="Le Morne is the most renowned kitesurf spot in the Indian Ocean: a shallow lagoon protected by a reef, ideal for beginners and advanced riders alike. Access, tides, zones, hazards."
+  locale="en"
+  translations={translations}
+  tarifsHref="/en/prices/"
+  waHref="/en/book/"
+  jsonLd={[
+    faqPage(faqItems),
+    breadcrumbList([
+      { name: 'Home', url: `${site.url}/en/` },
+      { name: 'Le Morne', url: `${site.url}/en/kitesurf-le-morne/` },
+    ]),
+  ]}
+>
+  <section class="pad">
+    <span class="kicker">The spot</span>
+    <h1>Le Morne, the Indian Ocean's benchmark kitesurf spot</h1>
+    <p class="sub">
+      Le Morne is a shallow lagoon protected by a coral reef, forming flat
+      water that's rare at this scale. That's what makes it as sought-after
+      by beginners as by advanced riders.
+    </p>
+  </section>
+
+  <section class="pad">
+    <h2>The lagoon and the reef</h2>
+    <p>Depth ranges from 50cm to 1.5m depending on the tide.</p>
+    <p>The reef shelters the lagoon from swell and forms waves further out, reserved for experienced riders.</p>
+    <p>At low tide, coral becomes exposed just centimeters under the surface — a real hazard for feet and equipment.</p>
+    <p>At high tide, the water gets deeper and currents strengthen.</p>
+  </section>
+
+  <section class="pad">
+    <h2>Zones by level</h2>
+    <p><b>Beginner</b> — the shallow part of the lagoon, away from advanced riders.</p>
+    <p><b>Intermediate</b> — deeper parts of the lagoon, more room to progress.</p>
+    <p><b>Expert</b> — beyond the reef, where the waves form, reserved for those who already handle currents and swell.</p>
+  </section>
+
+  <section class="pad">
+    <h2>Access and parking</h2>
+    <p>From La Gaulette, follow the road toward Morne Brabant until you reach the Riu hotel.</p>
+    <p>Parking is available in the shaded, grassy areas near the launch zone.</p>
+  </section>
+
+  <section class="pad">
+    <h2>Precautions</h2>
+    <p>Wear protective reef shoes against coral and sea urchins.</p>
+    <p>Stonefish are rare but present on this type of seabed — one more reason not to walk barefoot.</p>
+    <p>The spot can get crowded in peak season — an instructor helps pick the right time slot and zone.</p>
+  </section>
+
+  <section class="pad">
+    <p class="sub">
+      [Content to be validated by a PKM instructor before publishing — this
+      is a safety page, not just a spot overview.]
+    </p>
+  </section>
+
+  <section class="pad">
+    <h2>Frequently asked questions</h2>
+    <Faq items={faqItems} />
+  </section>
+</Layout>

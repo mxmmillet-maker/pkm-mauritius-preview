@@ -1,0 +1,132 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import WindMonthTable from '../../../../components/WindMonthTable.astro';
+import Faq from '../../../../components/Faq.astro';
+import { faqPage, breadcrumbList } from '../../../../lib/schema';
+import { windRows } from '../../../../data/wind';
+import site from '../../../../data/site.json';
+
+const translations = {
+  fr: '/fr/guide/kitesurf-maurice-saison-vent/',
+  en: '/en/guide/kitesurfing-mauritius-best-season/',
+};
+
+const faqItems = [
+  {
+    question: 'What is the best season for kitesurfing in Mauritius?',
+    answer: 'May to October, driven by the southeast trade winds. July and August are the most reliable months, with wind on nearly every day.',
+  },
+  {
+    question: 'Can you kitesurf in Mauritius outside the trade wind season?',
+    answer: 'Yes, but less often: from November to April the wind is more irregular, with sessions possible some weeks, often driven by the afternoon thermal breeze.',
+  },
+  {
+    question: 'What kite size do you need at Le Morne?',
+    answer: 'In peak season (July–August) a 7–9 m² kite is enough for most riders. In low season, expect to need 12–14 m².',
+  },
+  {
+    question: 'Why does Le Morne statistically get more wind than the rest of the island?',
+    answer: "Because of the venturi effect: the Le Morne Brabant mountain forces the trade wind to squeeze around its sides, accelerating it by 3 to 5 knots compared to Mauritius' general forecast.",
+  },
+  {
+    question: 'What is the best wind direction at Le Morne?',
+    answer: 'Southeast — the dominant trade wind direction more than 70% of the time in season. It keeps the whole lagoon in the wind while the reef still protects the riding zone.',
+  },
+];
+---
+<Layout
+  title="Best Time for Kitesurfing in Mauritius — Wind by Month — PKM"
+  description="The best kitesurfing season in Mauritius runs from May to October, driven by the southeast trade winds. Month-by-month table: wind strength, reliability, water temperature, kite size."
+  locale="en"
+  translations={translations}
+  tarifsHref="/en/prices/"
+  waHref="/en/book/"
+  jsonLd={[
+    faqPage(faqItems),
+    breadcrumbList([
+      { name: 'Home', url: `${site.url}/en/` },
+      { name: 'Guides', url: `${site.url}/en/guide/` },
+      { name: 'Best season', url: `${site.url}/en/guide/kitesurfing-mauritius-best-season/` },
+    ]),
+  ]}
+>
+  <section class="pad">
+    <span class="kicker">Guide</span>
+    <h1>When to go kitesurfing in Mauritius</h1>
+    <p class="sub">
+      At PKM, peak season runs <b>June to September</b> (18 to 35 knots).
+      Wind stays rideable most of the year: 10 to 25 knots in April, May,
+      October and November, and still 10 to 25 knots but with fewer windy
+      days from December to March.
+    </p>
+  </section>
+
+  <section class="pad">
+    <h2>Wind at Le Morne, from PKM</h2>
+    <div class="windbox">
+      <h3>When to come</h3>
+      <div class="wgrid">
+        <div class="peak"><b>June → September</b><small>18 to 35 knots · peak season</small></div>
+        <div><b>April, May, Oct., Nov.</b><small>10 to 25 knots · warmer</small></div>
+        <div><b>Dec. → March</b><small>10 to 25 knots · fewer windy days</small></div>
+        <div><b>Year-round</b><small>Water between 22 and 28°C</small></div>
+      </div>
+    </div>
+    <p class="sub" style="font-size:.86rem;margin-top:10px">
+      Figures given by the school itself — the most reliable source for this
+      spot, ahead of any aggregated online average.
+    </p>
+  </section>
+
+  <section class="pad" style="background:var(--surface)">
+    <h2>Wind, month by month — market data</h2>
+    <p class="sub">
+      This more detailed table comes from an aggregation of public wind data
+      for Mauritius, not from PKM. It gives indicative ranges, not a
+      day-by-day forecast, and still needs cross-checking with a PKM
+      instructor before treating it as fully reliable.
+    </p>
+    <WindMonthTable rows={windRows('en')} headers={{ month: 'Month', wind: 'Wind', reliability: 'Reliability', water: 'Water', kite: 'Kite (75kg)' }} />
+  </section>
+
+  <section class="pad">
+    <h2>How to read this table</h2>
+    <p>The dominant wind is a southeast trade wind, more than 70% of the time.</p>
+    <p>From June to September, exceeding 25 knots at Le Morne is not unusual.</p>
+    <p>From November to April, sessions are still possible some weeks, often in the afternoon thanks to the thermal breeze.</p>
+    <p>Booking 2 to 4 months ahead remains the best way to secure a slot in peak season.</p>
+  </section>
+
+  <section class="pad">
+    <h2>Why Le Morne statistically gets more wind</h2>
+    <p>The Le Morne Brabant mountain acts like a funnel: when the southeast trade wind meets it, it's forced to squeeze around the sides of the massif.</p>
+    <p>The same volume of air passes through a narrower space, so it speeds up — the venturi effect, the same principle as water jetting out faster from a pinched hose.</p>
+    <p>In practice, that means 3 to 5 knots more at the Le Morne lagoon than the general forecast given for Mauritius.</p>
+  </section>
+
+  <section class="pad">
+    <h2>What's the best wind direction</h2>
+    <p>Southeast, without hesitation — the dominant trade wind, blowing more than 70% of the time in season.</p>
+    <p>With a southeast wind, the whole width of the lagoon stays in the wind, and the reef keeps protecting the riding zone.</p>
+    <p>Wind from other directions is still possible but rarer, and changes the riding zone instructors recommend.</p>
+  </section>
+
+  <section class="pad">
+    <h2>How to read a wind forecast before you come</h2>
+    <p>Look at strength AND direction, never one without the other — 20 knots from the southeast is nothing like 20 knots from the northwest at Le Morne.</p>
+    <p>Mentally add 3 to 5 knots to Mauritius' general forecast to approach the lagoon's real conditions, because of the venturi effect explained above.</p>
+    <p>Trust a 3-4 day forecast more than a 10-day one: reliability drops fast beyond 4-5 days, even in peak season.</p>
+    <p class="sub">[A specific forecast tool to recommend here once validated by a PKM instructor — several local stations exist, some more reliable than others for Le Morne specifically.]</p>
+  </section>
+
+  <section class="pad">
+    <p class="sub">
+      Confirmed rider, curious where the wind hits at Manawa or One Eye? <a href="/en/wave-freestyle-coaching/" style="color:var(--coral);font-weight:600;text-decoration:none">See the wave & freestyle coaching guide →</a>
+    </p>
+  </section>
+
+  <section class="pad">
+    <h2>Frequently asked questions</h2>
+    <Faq items={faqItems} />
+  </section>
+</Layout>

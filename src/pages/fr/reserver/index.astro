@@ -1,0 +1,69 @@
+---
+/*
+  Page réservation FR — contenu réel, source PKM-maquette-mobile.html
+  (section "PAGE RESERVATION"). site.phones est un tableau (voir
+  src/data/site.json) : on prend le premier numéro pour le lien WhatsApp.
+*/
+import Layout from '../../../layouts/Layout.astro';
+import LeadForm from '../../../components/LeadForm.astro';
+import { breadcrumbList } from '../../../lib/schema';
+import site from '../../../data/site.json';
+
+const translations = { fr: '/fr/reserver/', en: '/en/book/' };
+const waPhone = site.phones[0].replace(/\D/g, '');
+---
+<Layout
+  title="Réserver un cours de kitesurf — PKM Le Morne"
+  description="Indique tes dates et ton niveau. Réponse sur WhatsApp avec un programme, les créneaux disponibles et la prévision de vent, sous 2 h en journée."
+  locale="fr"
+  translations={translations}
+  tarifsHref="/fr/tarifs/"
+  waHref="/fr/reserver/"
+  jsonLd={[breadcrumbList([
+    { name: 'Accueil', url: `${site.url}/fr/` },
+    { name: 'Réserver', url: `${site.url}/fr/reserver/` },
+  ])]}
+>
+  <section class="pad">
+    <h1 style="font-size:1.85rem">Réserver</h1>
+    <p class="sub">
+      Indique tes dates et ce que tu veux travailler. Gary revient vers toi
+      sur WhatsApp avec un programme, les créneaux et la prévision de vent.
+    </p>
+    <LeadForm
+      waPhone={waPhone}
+      labels={{
+        firstName: 'Prénom',
+        phone: 'Numéro WhatsApp',
+        arrival: 'Date d’arrivée sur l’île',
+        departure: 'Date de départ',
+        level: 'Ce qui t\'intéresse',
+        levelOptions: ['Séjour famille ou groupe, niveaux mixtes', 'Cours débutant', 'Reprise en confiance', 'Cours privé', 'Cours semi-privé', 'Cours enfant', 'Wingfoil', 'Location de matériel', 'Coaching freestyle', 'Coaching vagues', 'Supervision', 'Downwind ou VIP'],
+        submit: 'Continuer sur WhatsApp',
+        legal: 'Réponse sous 2 h entre 8 h et 19 h, heure de Maurice. Ton numéro sert uniquement à traiter cette demande.',
+      }}
+    />
+    <div class="booking-benefits">
+      <span class="kicker">Offres réservées en ligne</span>
+      <div class="proofs">
+        <div class="proof"><b>10 % dès 3 personnes</b><span>Pour une famille ou un groupe réservé ensemble, même avec des niveaux différents.</span></div>
+        <div class="proof"><b>Première supervision offerte</b><span>Offre cumulable avec la réduction groupe.</span></div>
+        <div class="proof"><b>Pas de vent</b><span>La séance est déplacée sur un autre créneau sans frais.</span></div>
+      </div>
+    </div>
+    <div style="background:var(--surface);border-radius:16px;padding:18px;margin-top:16px">
+      <h3>Ou directement</h3>
+      <p class="sub" style="font-size:.9rem;margin:8px 0 12px">
+        {site.phones.join(' · ')} · {site.email}
+      </p>
+      <p class="sub" style="font-size:.86rem;margin:0">
+        Réservation confirmée par un acompte de 10 % (virement ou PayPal).
+        Solde sur place en roupies, euros, dollars, livres ou par carte.
+      </p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .booking-benefits { margin-top: 18px; padding: 18px; border-radius: var(--radius-md); background: var(--sage-pale); }
+</style>

@@ -1,0 +1,99 @@
+---
+/*
+  Page FAQ FR. Les réponses sur la politique propre à PKM (vent, âge, matériel,
+  réservation) viennent de PKM-maquette-mobile.html — ce ne sont plus des
+  placeholders "[à confirmer]", elles sont dans le contenu déjà validé.
+  Les questions de marché général (prix moyen à Maurice, durée d'apprentissage,
+  saison, IKO...) restent des données générales, vraies quelle que soit l'école
+  — voir doc stratégie du projet §6.
+  Une question a été retirée : le transport hôtel/location n'est mentionné nulle
+  part dans la maquette. Publier une réponse inventée irait à l'encontre de la
+  règle du projet ("ne jamais inventer un placeholder qui pourrait partir en
+  production") — à demander à Gary avant de l'ajouter.
+*/
+import Layout from '../../../layouts/Layout.astro';
+import Faq from '../../../components/Faq.astro';
+import { faqPage, breadcrumbList } from '../../../lib/schema';
+import site from '../../../data/site.json';
+
+const translations = { fr: '/fr/questions-frequentes/', en: '/en/faq/' };
+
+const faqItems = [
+  {
+    question: 'Combien coûte un cours de kitesurf au Morne, chez PKM ?',
+    answer: "Un cours privé de 2 h coûte Rs 8 000 (environ 160 €). En semi-privé à deux, Rs 4 500 par personne (environ 90 €). Le pack 6 h, qui amène au ride surveillé, est à Rs 23 250 en privé et Rs 12 500 en semi-privé par personne. Détail complet sur la page tarifs.",
+  },
+  {
+    question: 'Combien de temps faut-il pour apprendre le kitesurf ?',
+    answer: "Chez PKM, le pack de 6 heures amène la plupart des élèves au ride surveillé sur le lagon. Dix heures permettent l'autonomie complète : naviguer dans les deux sens, redécoller seul, gérer son matériel — et passer la certification IKO.",
+  },
+  {
+    question: "Quelle est la meilleure période pour kiter au Morne ?",
+    answer: "De juin à septembre, le vent souffle fort, entre 18 et 35 nœuds : c'est la saison forte. En avril, mai, octobre et novembre, il est plus modéré (10 à 25 nœuds) mais plus chaud. De décembre à mars, il y a moins de jours ventés. L'eau reste entre 22 et 28 °C toute l'année.",
+  },
+  {
+    question: 'Faut-il savoir nager pour faire du kitesurf ?',
+    answer: "Oui, être à l'aise dans l'eau est nécessaire. Le lagon du Morne a pied sur la majeure partie de la zone d'apprentissage, et un gilet d'impact est fourni et porté en permanence.",
+  },
+  {
+    question: "À partir de quel âge un enfant peut-il commencer ?",
+    answer: "À partir de 8 ou 9 ans selon la taille et l'aisance dans l'eau. Uniquement en cours privé, avec casque, gilet d'impact et radio VHF.",
+  },
+  {
+    question: 'Le matériel est-il fourni pendant les cours ?',
+    answer: "Le matériel et les équipements de sécurité prévus pour la formule sont compris. La radio VHF est utilisée sur les formats d'apprentissage adaptés ; elle n'est pas annoncée pour le coaching avancé ou vagues, où le moniteur ride avec toi.",
+  },
+  {
+    question: 'Quelle est la différence entre kitesurf et wingfoil ?',
+    answer: "Le kitesurf utilise une voile reliée par des lignes ; le wingfoil utilise une aile tenue à la main au-dessus d'une planche à foil. PKM enseigne les deux, en privé ou semi-privé.",
+  },
+  {
+    question: "Qu'est-ce que la certification IKO, et pourquoi ça compte ?",
+    answer: "L'IKO (International Kiteboarding Organization) est l'organisme de certification de référence mondial pour les moniteurs de kitesurf. Gary, le fondateur de PKM, est certifié IKO depuis 2012, un an après avoir commencé à enseigner.",
+  },
+  {
+    question: "Que se passe-t-il s'il n'y a pas de vent le jour du cours ?",
+    answer: "La séance est décalée sur un autre créneau, sans frais et sans démarche de ta part.",
+  },
+  {
+    question: 'Les cours sont-ils vraiment encadrés à deux élèves maximum par moniteur ?',
+    answer: "Oui, chez PKM, deux élèves maximum par moniteur, sans exception — même en formule semi-privée. Plusieurs moniteurs sont présents en saison.",
+  },
+  {
+    question: "Comment réserver et payer ?",
+    answer: "Par WhatsApp ou par le formulaire du site. Un acompte de 10 % confirme le créneau, par virement ou PayPal. Le solde se règle sur place en roupies, euros, dollars, livres, ou par carte bancaire. Réserve au minimum 24 h à l'avance, une à deux semaines en haute saison (juin-septembre).",
+  },
+  {
+    question: "Qu'est-ce qui est proposé au-delà des cours débutant ?",
+    answer: "Un coaching à l'heure pour progresser du twintip vers le strapless, jusqu'aux vagues de Small Reef puis Manawa. Détail sur la page perfectionnement.",
+  },
+];
+---
+<Layout
+  title="Questions fréquentes sur le kitesurf au Morne — PKM"
+  description="Prix, durée d'apprentissage, saison, âge minimum, matériel fourni, réservation : toutes les réponses aux questions les plus posées sur les cours de kitesurf chez Paradise Kitesurfing Mauritius."
+  locale="fr"
+  translations={translations}
+  tarifsHref="/fr/tarifs/"
+  waHref="/fr/reserver/"
+  jsonLd={[
+    faqPage(faqItems),
+    breadcrumbList([
+      { name: 'Accueil', url: `${site.url}/fr/` },
+      { name: 'Questions fréquentes', url: `${site.url}/fr/questions-frequentes/` },
+    ]),
+  ]}
+>
+  <section class="pad">
+    <span class="kicker">Questions fréquentes</span>
+    <h1>Tout ce qu'on nous demande avant de réserver</h1>
+    <p class="sub">
+      Prix, durée d'apprentissage, saison, âge, matériel — les réponses
+      directes, sans détour.
+    </p>
+  </section>
+
+  <section class="pad">
+    <Faq items={faqItems} />
+  </section>
+</Layout>

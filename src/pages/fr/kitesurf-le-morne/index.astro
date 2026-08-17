@@ -1,0 +1,88 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Faq from '../../../components/Faq.astro';
+import { faqPage, breadcrumbList } from '../../../lib/schema';
+import site from '../../../data/site.json';
+
+const translations = { fr: '/fr/kitesurf-le-morne/', en: '/en/kitesurf-le-morne/' };
+
+const faqItems = [
+  {
+    question: 'Le lagon du Morne convient-il aux débutants ?',
+    answer: "Oui. Le lagon est peu profond (50 cm à 1,5 m selon la marée) et protégé par un récif, ce qui crée une eau plate idéale pour apprendre.",
+  },
+  {
+    question: 'Faut-il se méfier de la marée au Morne ?',
+    answer: "Oui. À marée basse, des coraux affleurent et deviennent un danger. À marée haute, l'eau devient plus profonde et les courants se renforcent — un moniteur ajuste la zone de navigation en fonction.",
+  },
+  {
+    question: 'Comment accéder au spot du Morne ?',
+    answer: "Depuis La Gaulette, suivre la route en direction du Morne Brabant jusqu'à l'hôtel Riu. Le stationnement se fait dans les zones ombragées proches de la mise à l'eau.",
+  },
+];
+---
+<Layout
+  title="Le spot de kitesurf du Morne, Île Maurice — Guide complet"
+  description="Le Morne est le spot de kitesurf le plus réputé de l'océan Indien : lagon peu profond protégé par un récif, conditions idéales pour débutants comme confirmés. Accès, marées, zones, dangers."
+  locale="fr"
+  translations={translations}
+  tarifsHref="/fr/tarifs/"
+  waHref="/fr/reserver/"
+  jsonLd={[
+    faqPage(faqItems),
+    breadcrumbList([
+      { name: 'Accueil', url: `${site.url}/fr/` },
+      { name: 'Le Morne', url: `${site.url}/fr/kitesurf-le-morne/` },
+    ]),
+  ]}
+>
+  <section class="pad">
+    <span class="kicker">Le spot</span>
+    <h1>Le Morne, le spot de kitesurf de référence de l'océan Indien</h1>
+    <p class="sub">
+      Le Morne est un lagon peu profond, protégé par un récif corallien, qui
+      forme une eau plate rare à cette échelle. C'est ce qui en fait un spot
+      aussi recherché des débutants que des riders confirmés.
+    </p>
+  </section>
+
+  <section class="pad">
+    <h2>Le lagon et le récif</h2>
+    <p>La profondeur varie de 50 cm à 1,5 m selon la marée.</p>
+    <p>Le récif protège le lagon de la houle et forme des vagues plus loin, réservées aux riders expérimentés.</p>
+    <p>À marée basse, des coraux affleurent à quelques centimètres sous la surface — un vrai danger pour les pieds et pour le matériel.</p>
+    <p>À marée haute, l'eau gagne en profondeur et les courants se renforcent.</p>
+  </section>
+
+  <section class="pad">
+    <h2>Zones par niveau</h2>
+    <p><b>Débutant</b> — la zone peu profonde du lagon, à l'écart des riders confirmés.</p>
+    <p><b>Confirmé</b> — les zones plus profondes du lagon, davantage d'espace pour progresser.</p>
+    <p><b>Expert</b> — au-delà du récif, où se forment les vagues, réservé à ceux qui maîtrisent déjà les courants et la houle.</p>
+  </section>
+
+  <section class="pad">
+    <h2>Accès et stationnement</h2>
+    <p>Depuis La Gaulette, suivre la route en direction du Morne Brabant jusqu'à l'hôtel Riu.</p>
+    <p>Le stationnement se fait dans les zones herbeuses et ombragées proches de la mise à l'eau.</p>
+  </section>
+
+  <section class="pad">
+    <h2>Précautions</h2>
+    <p>Porter des chaussons de protection contre les coraux et les oursins.</p>
+    <p>Le rascasse (poisson-pierre) est rare mais présente sur ce type de fond — une bonne raison de plus de ne pas marcher pieds nus.</p>
+    <p>Le spot peut être fréquenté en haute saison — un moniteur aide à choisir le bon créneau et la bonne zone.</p>
+  </section>
+
+  <section class="pad annot-note">
+    <p class="sub">
+      [Contenu à faire valider par un moniteur PKM avant publication — c'est
+      une page de sécurité, pas seulement de présentation du spot.]
+    </p>
+  </section>
+
+  <section class="pad">
+    <h2>Questions fréquentes</h2>
+    <Faq items={faqItems} />
+  </section>
+</Layout>

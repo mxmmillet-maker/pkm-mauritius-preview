@@ -1,0 +1,55 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { breadcrumbList } from '../../../lib/schema';
+import site from '../../../data/site.json';
+
+const translations = { fr: '/fr/guide/', en: '/en/guide/' };
+
+const guides = [
+  { title: 'Quand faire du kitesurf à Maurice ?', desc: 'Le vent, mois par mois.', href: '/fr/guide/kitesurf-maurice-saison-vent/' },
+  { title: 'Le spot du Morne', desc: 'Lagon, récif, marées, zones par niveau.', href: '/fr/kitesurf-le-morne/' },
+  { title: 'Combien de temps pour apprendre ?', desc: 'La progression jour par jour.', href: '/fr/guide/combien-de-temps-apprendre-kitesurf/' },
+  { title: 'Combien coûte un cours de kitesurf ?', desc: 'Les vraies fourchettes du marché.', href: '/fr/guide/budget-kitesurf-ile-maurice/' },
+  { title: 'Questions fréquentes', desc: 'Tout ce qu\'on nous demande avant de réserver.', href: '/fr/questions-frequentes/' },
+];
+---
+<Layout
+  title="Guides kitesurf à Maurice — PKM"
+  description="Vent mois par mois, spot du Morne, durée d'apprentissage, budget : tous les guides pratiques pour préparer son séjour kitesurf à Maurice."
+  locale="fr"
+  translations={translations}
+  tarifsHref="/fr/tarifs/"
+  waHref="/fr/reserver/"
+  jsonLd={[breadcrumbList([
+    { name: 'Accueil', url: `${site.url}/fr/` },
+    { name: 'Guides', url: `${site.url}/fr/guide/` },
+  ])]}
+>
+  <section class="pad">
+    <span class="kicker">Guides</span>
+    <h1>Tout pour préparer ton séjour kitesurf</h1>
+  </section>
+  <section class="pad">
+    <div class="picker">
+      {guides.map((g) => (
+        <a class="pick" href={g.href}>
+          <div class="t"><b>{g.title}</b><small>{g.desc}</small></div>
+          <span class="ar">→</span>
+        </a>
+      ))}
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .picker { display: grid; gap: 10px; }
+  .pick {
+    display: flex; align-items: center; gap: 13px; padding: 15px;
+    border: 1px solid var(--line); border-radius: 15px; background: #fff;
+    text-decoration: none; color: var(--ink); box-shadow: var(--shadow);
+  }
+  .pick .t { flex: 1; }
+  .pick .t b { font-family: var(--font-display); font-weight: 500; font-size: 1rem; display: block; }
+  .pick .t small { color: var(--ink-soft); font-size: .83rem; }
+  .pick .ar { color: var(--sage-deep); font-size: 1.2rem; }
+</style>

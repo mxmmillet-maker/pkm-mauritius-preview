@@ -1,0 +1,126 @@
+---
+/*
+  EN lessons page — mirrors src/pages/fr/cours-de-kitesurf/index.astro.
+*/
+import Layout from '../../../layouts/Layout.astro';
+import Faq from '../../../components/Faq.astro';
+import Button from '../../../components/Button.astro';
+import { faqPage, breadcrumbList, course } from '../../../lib/schema';
+import site from '../../../data/site.json';
+
+const translations = { fr: '/fr/cours-de-kitesurf/', en: '/en/kitesurf-lessons/' };
+const waPhone = site.phones[0].replace(/\D/g, '');
+const waLink = `https://wa.me/${waPhone}?text=${encodeURIComponent("Hello Gary, I'd like help choosing between private and semi-private lessons.")}`;
+
+const faqItems = [
+  {
+    question: 'Do I need to know how to swim?',
+    answer: "Yes, being comfortable in the water is necessary. You can stand on most of the learning area of the lagoon, but an impact vest is provided and worn at all times.",
+  },
+  {
+    question: 'Do I need experience in another board sport?',
+    answer: "No. Kitesurfing is learned with your hands first, not your feet. Wakeboard or snowboard experience helps with the board phase, not the kite piloting.",
+  },
+  {
+    question: 'How much time between two sessions?',
+    answer: "Ideally every other day, or two days in a row followed by a break. Doing 6 hours in one day is counter-productive: fatigue erases what you've learned.",
+  },
+  {
+    question: 'Can two different levels share a lesson?',
+    answer: 'Yes when the gap allows the instructor to keep both people safe and give each one a clear goal. If the levels are too far apart, Gary will suggest two coordinated slots instead.',
+  },
+];
+---
+<Layout
+  title="Beginner Kitesurfing Lessons in Le Morne — PKM"
+  description="Six hours to ride supervised on the lagoon, ten to be independent. Private or for two, from Rs 4,500 for a 2h session. The hour-by-hour breakdown."
+  locale="en"
+  translations={translations}
+  tarifsHref="/en/prices/"
+  waHref="/en/book/"
+  jsonLd={[
+    faqPage(faqItems),
+    course({
+      name: 'Beginner kitesurfing lessons in Le Morne',
+      description: 'Hour-by-hour progression, from kite safety and piloting to supervised riding and full independence.',
+    }),
+    breadcrumbList([
+      { name: 'Home', url: `${site.url}/en/` },
+      { name: 'Kitesurf lessons', url: `${site.url}/en/kitesurf-lessons/` },
+    ]),
+  ]}
+>
+  <section class="pad" style="padding-bottom:18px">
+    <span class="kicker">Kitesurf lessons</span>
+    <h1 style="font-size:1.85rem">Beginner lessons in Le Morne</h1>
+    <p class="sub">
+      A progression adapted to your level, from first kite control to
+      independence. Private or for two, from Rs 4,500 for a 2h session.
+    </p>
+    <div style="display:flex;gap:10px;margin-top:16px">
+      <Button variant="primary" href="/en/book/">Book</Button>
+      <Button variant="ghost" href="/en/prices/">Prices</Button>
+    </div>
+  </section>
+
+  <section class="pad" style="padding-top:6px">
+    <h2>How a lesson unfolds</h2>
+    <p class="course-note">This sequence is a guide. The pace changes with the wind, fatigue, confidence in the water and each rider's previous experience.</p>
+    <div class="course-timeline">
+      <div class="course-step">
+        <span>01</span>
+        <div><b>First phase · safety and kite control</b>
+        <span>Wind window, release systems, positioning. Piloting a training kite, feet in the sand, then in the water.</span>
+        </div>
+      </div>
+      <div class="course-step">
+        <span>02</span>
+        <div><b>Second phase · body dragging</b>
+        <span>Moving through the water pulled by the kite, riding upwind, recovering your board. The step everyone wants to skip and that costs two sessions later.</span>
+        </div>
+      </div>
+      <div class="course-step">
+        <span>03</span>
+        <div><b>Third phase · waterstart and first runs</b>
+        <span>Standing up, going, stopping. Most students get there in this window. By the end of the 6h package, you're riding the lagoon with an instructor watching you. These supervision sessions are booked separately, Rs 1,500 for 2h. The first one is free if booked online.</span>
+        </div>
+      </div>
+      <div class="course-step">
+        <span>04</span>
+        <div><b>Fourth phase · towards independence</b>
+        <span>Riding both directions, going upwind, relaunching alone, handling your own gear from A to Z. This is when you can rent without supervision, and take the IKO certification.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pad family-offer" id="comeback">
+    <div>
+      <span class="kicker">Comebacks and mixed levels</span>
+      <h2>Get back on the water without starting again</h2>
+      <p>You have already ridden but your last session was a while ago? Gary checks kite control, release systems and your ability to hold ground, then moves quickly to the goal that matters to you.</p>
+      <ul class="clean-list">
+        <li>A confidence refresher before the first full session of your trip</li>
+        <li>Couples can work on two different goals</li>
+        <li>10% off from 3 people booked together</li>
+      </ul>
+    </div>
+    <img src="/images/kitesurf-family-lesson-pexels.jpg" alt="A young student learning to control a kite with an instructor" width="1600" height="1067" loading="lazy" />
+  </section>
+
+  <section class="pad" style="background:var(--surface)">
+    <h2>Private or semi-private?</h2>
+    <p class="sub">
+      Semi-private costs roughly half as much per person, with individual
+      gear for each student. Progress is nearly as fast, provided both
+      students have a similar level and build. In private lessons, the pace
+      is entirely yours and progress is faster in the first few hours.
+    </p>
+    <Button variant="wa" block href={waLink}>Ask for advice on WhatsApp</Button>
+  </section>
+
+  <section class="pad">
+    <h2>Questions about beginner lessons</h2>
+    <Faq items={faqItems} />
+  </section>
+</Layout>

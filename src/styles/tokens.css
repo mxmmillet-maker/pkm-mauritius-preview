@@ -1,0 +1,116 @@
+/*
+  Tokens PKM — source unique de vérité pour les couleurs, la typo, les espacements.
+  Recopiés depuis le brief design (projet Claude, doc "pkm-brief-design-system.md").
+  Ne jamais coder une couleur ou une taille "en dur" dans un composant : toujours
+  passer par une de ces variables, pour que tout le site reste cohérent.
+*/
+:root {
+  /* Couleurs — neutres */
+  --ink: #0A2C30;
+  --ink-soft: #3D6165;
+  --white: #FFFFFF;
+  --surface: #FBF3E7;
+  --line: #E7DCC9;
+
+  /* Couleurs — famille teal (secondaire) */
+  --sage: #528285;
+  --sage-light: #8FB2B3;
+  --sage-deep: #3F686B;
+  --sage-pale: #E4EFEC;
+  --lagoon: #16A9A0;
+  --sand-deep: #F3E7D2;
+
+  /* Couleur d'action — tout ce qui reste sur le site */
+  --coral: #D33E28;
+  --coral-light: #F5765C;
+
+  --sun: #F5A623;
+  --ocean: #276F98;
+
+  /* Vert — exclusivement les CTA qui ouvrent WhatsApp (voir brief §2bis) */
+  --wa: #0F7A40;
+
+  /* Typo */
+  --font-display: 'Outfit', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+
+  /* Ombre unique du système — ne pas en inventer d'autres */
+  --shadow: 0 1px 3px rgba(10, 44, 48, .08);
+
+  /* Rayons */
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-pill: 99px;
+
+  /* Zone tactile minimale (mobile-first) */
+  --tap-min: 48px;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--white);
+  padding-bottom: calc(76px + env(safe-area-inset-bottom));
+}
+h1, h2, h3 { font-family: var(--font-display); margin: 0 0 .5em; letter-spacing: -.01em; text-wrap: balance; }
+h1 { font-size: clamp(2.05rem, 7vw, 3.6rem); font-weight: 700; line-height: 1.06; }
+h2 { font-size: clamp(1.45rem, 4vw, 2.25rem); font-weight: 600; line-height: 1.14; }
+h3 { font-size: 1.03rem; font-weight: 600; }
+p { margin: 0 0 14px; line-height: 1.62; text-wrap: pretty; }
+.sub { color: var(--ink-soft); font-size: .95rem; }
+.kicker {
+  font-family: var(--font-display); font-weight: 600; font-size: .7rem;
+  letter-spacing: .15em; text-transform: uppercase; color: var(--coral);
+  margin-bottom: 8px; display: block;
+}
+
+/* Mise en page générique des pages. Les axes sont volontairement
+   séparés : un padding raccourci sur .pad annulait auparavant l'espacement
+   vertical de toutes les sections. */
+.pad { padding-inline: max(20px, calc((100vw - 960px) / 2)); }
+main section { padding-block: 44px; }
+
+/*
+  Animations — inspirées du site Nissan Micra "Play It Your Way" repéré par
+  Max, mais ramenées à ce qu'un site statique économe peut se permettre.
+  Ce site-là est une expérience 3D WebGL (moteur de rendu temps réel pour
+  faire tourner une voiture et changer sa couleur) : hors sujet et hors
+  budget pour une école de kite qui vise 0 € d'hébergement et un score
+  Lighthouse mobile élevé. Ce qui est repris ici, c'est l'esprit — un site
+  qui bouge un peu quand on interagit — pas la technique.
+
+  Coût réel de tout ce qui suit : quelques lignes de CSS (gratuites) + un
+  script de 15 lignes sans dépendance (voir Layout.astro). Aucune librairie,
+  aucun Ko significatif ajouté au poids de la page.
+*/
+
+/* Apparition progressive des sections au scroll (jamais la toute première
+   section d'une page — le hero doit s'afficher immédiatement, sans quoi
+   Google mesure un temps d'affichage du contenu principal dégradé). */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity .5s ease, transform .5s ease;
+}
+.js [data-reveal].in { opacity: 1; transform: translateY(0); }
+
+/* Micro-interaction au survol/tap des cartes cliquables — sobre, pas de
+   rebond ni de rotation, cohérent avec le ton "exigeant, pas gadget". */
+.pick, .from, .wind-table-wrap { transition: transform .15s ease, box-shadow .15s ease; }
+.pick:hover, .pick:focus-visible { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(10,44,48,.12); }
+
+/* Personne ne voit d'animation s'il a demandé à en voir le moins possible. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js [data-reveal] { transition: none; opacity: 1; transform: none; }
+  .pick, .from, .wind-table-wrap { transition: none; }
+}
+
+@media (min-width: 900px) {
+  body { padding-bottom: 0; }
+  main section { padding-block: 68px; }
+  main .hero { padding-block: 72px; }
+}

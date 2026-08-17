@@ -1,0 +1,132 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import WindMonthTable from '../../../../components/WindMonthTable.astro';
+import Faq from '../../../../components/Faq.astro';
+import { faqPage, breadcrumbList } from '../../../../lib/schema';
+import { windRows } from '../../../../data/wind';
+import site from '../../../../data/site.json';
+
+const translations = {
+  fr: '/fr/guide/kitesurf-maurice-saison-vent/',
+  en: '/en/guide/kitesurfing-mauritius-best-season/',
+};
+
+const faqItems = [
+  {
+    question: 'Quelle est la meilleure saison pour le kitesurf à Maurice ?',
+    answer: "De mai à octobre, portée par les alizés de sud-est. Juillet et août sont les mois les plus fiables, avec du vent presque tous les jours.",
+  },
+  {
+    question: 'Peut-on kiter à Maurice en dehors de la saison des alizés ?',
+    answer: "Oui, mais moins souvent : de novembre à avril le vent est plus irrégulier, avec des sessions possibles certaines semaines, souvent portées par la brise thermique de l'après-midi.",
+  },
+  {
+    question: 'Quelle taille de voile pour Le Morne ?',
+    answer: "En pleine saison (juillet-août), une voile de 7 à 9 m² suffit pour la plupart des riders. En basse saison, prévoir 12 à 14 m².",
+  },
+  {
+    question: 'Pourquoi y a-t-il statistiquement plus de vent au Morne qu\'ailleurs sur l\'île ?',
+    answer: "À cause de l'effet venturi : la montagne du Morne Brabant force l'alizé à se comprimer sur les côtés, ce qui l'accélère de 3 à 5 nœuds par rapport aux prévisions générales de Maurice.",
+  },
+  {
+    question: 'Quelle est la meilleure orientation de vent au Morne ?',
+    answer: "Le sud-est, l'orientation de l'alizé dominant plus de 70 % du temps en saison. C'est ce qui garde le lagon dans le vent tout en laissant le récif protéger la zone de navigation.",
+  },
+];
+---
+<Layout
+  title="Quand faire du kitesurf à Maurice ? Vent mois par mois — PKM"
+  description="La meilleure saison de kitesurf à Maurice court de mai à octobre, portée par les alizés de sud-est. Tableau mois par mois : force du vent, fiabilité, température de l'eau, taille de voile."
+  locale="fr"
+  translations={translations}
+  tarifsHref="/fr/tarifs/"
+  waHref="/fr/reserver/"
+  jsonLd={[
+    faqPage(faqItems),
+    breadcrumbList([
+      { name: 'Accueil', url: `${site.url}/fr/` },
+      { name: 'Guides', url: `${site.url}/fr/guide/` },
+      { name: 'Meilleure saison', url: `${site.url}/fr/guide/kitesurf-maurice-saison-vent/` },
+    ]),
+  ]}
+>
+  <section class="pad">
+    <span class="kicker">Guide</span>
+    <h1>Quand faire du kitesurf à Maurice ?</h1>
+    <p class="sub">
+      Chez PKM, la saison forte va de <b>juin à septembre</b> (18 à 35 nœuds).
+      Le vent reste rideable une bonne partie de l'année : 10 à 25 nœuds en
+      avril, mai, octobre et novembre, et encore 10 à 25 nœuds mais avec
+      moins de jours ventés de décembre à mars.
+    </p>
+  </section>
+
+  <section class="pad">
+    <h2>Le vent au Morne, par PKM</h2>
+    <div class="windbox">
+      <h3>Quand venir</h3>
+      <div class="wgrid">
+        <div class="peak"><b>Juin → septembre</b><small>18 à 35 nœuds · saison forte</small></div>
+        <div><b>Avril, mai, oct., nov.</b><small>10 à 25 nœuds · plus chaud</small></div>
+        <div><b>Déc. → mars</b><small>10 à 25 nœuds · moins de jours ventés</small></div>
+        <div><b>Toute l'année</b><small>Eau entre 22 et 28 °C</small></div>
+      </div>
+    </div>
+    <p class="sub" style="font-size:.86rem;margin-top:10px">
+      Chiffres donnés par l'école elle-même — la source la plus fiable pour ce
+      spot, avant toute moyenne agrégée en ligne.
+    </p>
+  </section>
+
+  <section class="pad" style="background:var(--surface)">
+    <h2>Le vent, mois par mois — données de marché</h2>
+    <p class="sub">
+      Ce tableau plus détaillé vient d'une agrégation de données vent
+      publiques pour Maurice, pas de PKM. Il donne des fourchettes
+      indicatives, pas une prévision du jour, et reste à faire recouper avec
+      un moniteur PKM avant de le considérer comme fiable à 100 %.
+    </p>
+    <WindMonthTable rows={windRows('fr')} />
+  </section>
+
+  <section class="pad">
+    <h2>Comment lire ce tableau</h2>
+    <p>Le vent dominant est un alizé de sud-est, plus de 70 % du temps.</p>
+    <p>De juin à septembre, dépasser 25 nœuds au Morne n'a rien d'exceptionnel.</p>
+    <p>De novembre à avril, des sessions restent possibles certaines semaines, souvent l'après-midi grâce à la brise thermique.</p>
+    <p>Réserver 2 à 4 mois à l'avance reste la meilleure garantie de trouver un créneau en pleine saison.</p>
+  </section>
+
+  <section class="pad">
+    <h2>Pourquoi il y a statistiquement plus de vent au Morne</h2>
+    <p>La montagne du Morne Brabant agit comme un entonnoir : quand l'alizé de sud-est la rencontre, il est forcé de se comprimer sur les côtés du massif.</p>
+    <p>Le même volume d'air passe par un espace plus étroit, donc il accélère — c'est l'effet venturi, le même principe qu'un jet d'eau qui sort plus fort d'un tuyau pincé.</p>
+    <p>Concrètement, ça se traduit par 3 à 5 nœuds de plus au lagon du Morne que dans la prévision générale donnée pour Maurice.</p>
+  </section>
+
+  <section class="pad">
+    <h2>Quelle orientation de vent est la meilleure</h2>
+    <p>Le sud-est, sans hésitation — c'est l'alizé dominant, celui qui souffle plus de 70 % du temps en saison.</p>
+    <p>Avec un vent de sud-est, le lagon reste dans le vent sur toute sa largeur, et le récif continue de protéger la zone de navigation.</p>
+    <p>Un vent d'une autre orientation reste possible mais plus rare, et change la zone de navigation recommandée par les moniteurs.</p>
+  </section>
+
+  <section class="pad">
+    <h2>Comment lire une prévision de vent avant de venir</h2>
+    <p>Regarder la force ET la direction, jamais l'une sans l'autre — 20 nœuds de sud-est n'ont rien à voir avec 20 nœuds de nord-ouest au Morne.</p>
+    <p>Ajouter mentalement 3 à 5 nœuds à la prévision générale de Maurice pour approcher la réalité du lagon, à cause de l'effet venturi expliqué ci-dessus.</p>
+    <p>Se fier à une prévision à 3-4 jours plutôt qu'à 10 jours : la fiabilité chute vite au-delà de 4-5 jours, y compris en pleine saison.</p>
+    <p class="sub">[Outil de prévision précis à recommander ici une fois validé par un moniteur PKM — plusieurs stations locales existent, certaines plus fiables que d'autres pour le Morne spécifiquement.]</p>
+  </section>
+
+  <section class="pad">
+    <p class="sub">
+      Rider confirmé, envie de savoir où souffle le vent à Manawa ou One Eye ? <a href="/fr/perfectionnement/" style="color:var(--coral);font-weight:600;text-decoration:none">Voir le guide vagues et perfectionnement →</a>
+    </p>
+  </section>
+
+  <section class="pad">
+    <h2>Questions fréquentes</h2>
+    <Faq items={faqItems} />
+  </section>
+</Layout>

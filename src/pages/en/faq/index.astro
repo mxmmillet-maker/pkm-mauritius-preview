@@ -1,0 +1,89 @@
+---
+/*
+  EN FAQ page — mirrors src/pages/fr/questions-frequentes/index.astro.
+*/
+import Layout from '../../../layouts/Layout.astro';
+import Faq from '../../../components/Faq.astro';
+import { faqPage, breadcrumbList } from '../../../lib/schema';
+import site from '../../../data/site.json';
+
+const translations = { fr: '/fr/questions-frequentes/', en: '/en/faq/' };
+
+const faqItems = [
+  {
+    question: 'How much does a kitesurfing lesson cost at Le Morne with PKM?',
+    answer: "A 2h private lesson costs Rs 8,000 (about €160). Semi-private (two people), Rs 4,500 per person (about €90). The 6h package, which gets you to supervised riding, is Rs 23,250 private and Rs 12,500 semi-private per person. Full details on the prices page.",
+  },
+  {
+    question: 'How long does it take to learn kitesurfing?',
+    answer: "With PKM, the 6-hour package gets most students to supervised riding on the lagoon. Ten hours gets you to full independence: riding both directions, relaunching alone, handling your own gear — and taking the IKO certification.",
+  },
+  {
+    question: 'What is the best time of year to kite at Le Morne?',
+    answer: "From June to September the wind blows strong, 18 to 35 knots: peak season. In April, May, October and November it's more moderate (10 to 25 knots) but warmer. From December to March there are fewer windy days. Water stays between 22 and 28°C year-round.",
+  },
+  {
+    question: 'Do I need to know how to swim to kitesurf?',
+    answer: "Yes, being comfortable in the water is necessary. You can stand on most of the Le Morne lagoon's learning area, and an impact vest is provided and worn at all times.",
+  },
+  {
+    question: 'From what age can a child start?',
+    answer: "From 8 or 9 years old depending on size and comfort in the water. Private lessons only, with helmet, impact vest and VHF radio.",
+  },
+  {
+    question: 'Is gear provided during lessons?',
+    answer: 'The gear and safety equipment specified for the package are included. VHF radio is used for suitable learning formats; it is not advertised for advanced or wave coaching, where the instructor rides with you.',
+  },
+  {
+    question: 'What is the difference between kitesurfing and wingfoiling?',
+    answer: "Kitesurfing uses a kite connected by lines; wingfoiling uses a hand-held wing above a foil board. PKM teaches both, private or semi-private.",
+  },
+  {
+    question: 'What is IKO certification, and why does it matter?',
+    answer: "IKO (International Kiteboarding Organization) is the world's reference certification body for kitesurfing instructors. Gary, PKM's founder, has been IKO-certified since 2012, a year after he started teaching.",
+  },
+  {
+    question: 'What happens if there is no wind on lesson day?',
+    answer: "The session is moved to another slot, free of charge and without you having to ask.",
+  },
+  {
+    question: 'Are lessons really capped at two students per instructor?',
+    answer: "Yes, at PKM, two students maximum per instructor, no exceptions — even in semi-private lessons. Several instructors are on hand in season.",
+  },
+  {
+    question: 'How do I book and pay?',
+    answer: "Via WhatsApp or the site's form. A 10% deposit confirms the slot, by bank transfer or PayPal. The balance is settled on site in rupees, euros, dollars, pounds, or by card. Book at least 24h ahead, one to two weeks in high season (June–September).",
+  },
+  {
+    question: 'What is offered beyond beginner lessons?',
+    answer: "Hourly coaching to progress from twintip to strapless, up to the waves at Small Reef then Manawa. Details on the wave & freestyle coaching page.",
+  },
+];
+---
+<Layout
+  title="Frequently Asked Questions about Kitesurfing in Le Morne — PKM"
+  description="Prices, learning time, season, minimum age, gear provided, booking: every answer to the most-asked questions about lessons at Paradise Kitesurfing Mauritius."
+  locale="en"
+  translations={translations}
+  tarifsHref="/en/prices/"
+  waHref="/en/book/"
+  jsonLd={[
+    faqPage(faqItems),
+    breadcrumbList([
+      { name: 'Home', url: `${site.url}/en/` },
+      { name: 'FAQ', url: `${site.url}/en/faq/` },
+    ]),
+  ]}
+>
+  <section class="pad">
+    <span class="kicker">FAQ</span>
+    <h1>Everything people ask before booking</h1>
+    <p class="sub">
+      Prices, learning time, season, age, gear — direct answers, no detours.
+    </p>
+  </section>
+
+  <section class="pad">
+    <Faq items={faqItems} />
+  </section>
+</Layout>

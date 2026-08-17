@@ -1,0 +1,95 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import Faq from '../../../../components/Faq.astro';
+import Button from '../../../../components/Button.astro';
+import { faqPage, breadcrumbList } from '../../../../lib/schema';
+import site from '../../../../data/site.json';
+
+const translations = {
+  fr: '/fr/guide/budget-kitesurf-ile-maurice/',
+  en: '/en/guide/kitesurfing-mauritius-cost/',
+};
+
+const faqItems = [
+  {
+    question: 'How much does a kitesurfing lesson cost in Mauritius?',
+    answer: 'Expect €80 to €130 per hour for a private lesson depending on the school, and €350 to €580 for a full 5-to-7-day course.',
+  },
+  {
+    question: 'Is renting equipment cheaper than lessons?',
+    answer: 'Yes, but it is only for riders who are already independent: €40 to €60 per day, €200 to €280 per week.',
+  },
+  {
+    question: 'Why do prices vary so much between schools?',
+    answer: 'Mostly the student-to-instructor ratio: a private lesson (1 student) mechanically costs more than a group lesson (up to 4 students), for the same instructor quality.',
+  },
+];
+---
+<Layout
+  title="How Much Does Kitesurfing Cost in Mauritius? — PKM"
+  description="A private kitesurfing lesson in Mauritius costs €80 to €130 per hour depending on the school. Real market price ranges — lessons, rental, courses — no sugarcoating."
+  locale="en"
+  translations={translations}
+  tarifsHref="/en/prices/"
+  waHref="/en/book/"
+  jsonLd={[
+    faqPage(faqItems),
+    breadcrumbList([
+      { name: 'Home', url: `${site.url}/en/` },
+      { name: 'Guides', url: `${site.url}/en/guide/` },
+      { name: 'Cost', url: `${site.url}/en/guide/kitesurfing-mauritius-cost/` },
+    ]),
+  ]}
+>
+  <section class="pad">
+    <span class="kicker">Guide</span>
+    <h1>How much does kitesurfing cost in Mauritius?</h1>
+    <p class="sub">
+      A private lesson averages <b>€80 to €130 per hour</b> across Le Morne's
+      schools. The price mostly comes down to one factor: how many students
+      per instructor.
+    </p>
+  </section>
+
+  <section class="pad">
+    <h2>Market price ranges</h2>
+    <p><b>Private lesson (2h)</b> — €80 to €100 at budget schools, up to €130 at premium ones.</p>
+    <p><b>Group lesson (2-4 students)</b> — €50 to €70 per person.</p>
+    <p><b>Semi-private lesson (2 students)</b> — €60 to €80 per person.</p>
+    <p><b>3-day course</b> — €220 to €280.</p>
+    <p><b>5-day course</b> — €350 to €450.</p>
+    <p><b>7-day course</b> — €450 to €580.</p>
+    <p><b>Full equipment rental</b> — €40 to €60 per day, €200 to €280 per week.</p>
+    <p class="sub">
+      Ranges from a Le Morne market comparison — observed spend of €87 to
+      €580 depending on the format (see the project's market-overview doc).
+    </p>
+  </section>
+
+  <section class="pad" style="background:var(--surface)">
+    <h2>Where PKM sits on these ranges</h2>
+    <p>
+      At Paradise Kitesurfing Mauritius, a 2h private lesson costs Rs 8,000
+      (about €160), at the higher end of the market range — the price of a
+      1-instructor-to-1-student ratio. Semi-private for two, Rs 4,500 per
+      person (about €90), in the middle of the range.
+    </p>
+    <p class="sub" style="font-size:.9rem">2026 rates, gear included. Full details on the prices page.</p>
+  </section>
+
+  <section class="pad">
+    <h2>Why prices vary so much</h2>
+    <p>The number one factor is the student-to-instructor ratio: a private lesson costs more than a 4-student group, for equal instructor quality.</p>
+    <p>Equipment matters too: schools that renew their fleet every season pass that cost on.</p>
+    <p>A safety boat, where one exists, carries a maintenance cost few schools can absorb — that also explains part of the price gap.</p>
+  </section>
+
+  <section class="pad" style="text-align:center">
+    <Button variant="primary" href="/en/prices/">See PKM prices</Button>
+  </section>
+
+  <section class="pad">
+    <h2>Frequently asked questions</h2>
+    <Faq items={faqItems} />
+  </section>
+</Layout>

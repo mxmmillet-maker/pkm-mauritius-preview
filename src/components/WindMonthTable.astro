@@ -1,0 +1,73 @@
+---
+/*
+  Tableau vent mois par mois — le levier GEO explicitement demandé : donnée
+  factuelle, en texte HTML (jamais une image), qu'un LLM peut citer telle quelle.
+
+  rows : [{ month, wind, reliability, water, kite }]
+  Les valeurs par défaut viennent d'une recherche web (voir commentaire en bas
+  de fichier) — À FAIRE VALIDER PAR GARY avant publication, un moniteur qui
+  navigue le spot tous les jours a un jugement plus fiable qu'une moyenne
+  agrégée en ligne.
+*/
+const { rows = [], headers } = Astro.props;
+const h = {
+  month: 'Mois', wind: 'Vent', reliability: 'Fiabilité', water: 'Eau', kite: 'Voile (75 kg)',
+  ...headers,
+};
+---
+<div class="wind-table-wrap">
+  <table class="wind-table">
+    <thead>
+      <tr>
+        <th>{h.month}</th><th>{h.wind}</th><th>{h.reliability}</th><th>{h.water}</th><th>{h.kite}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {rows.map((r, i) => (
+        <tr data-month-idx={i}>
+          <td>{r.month}</td><td>{r.wind}</td><td>{r.reliability}</td><td>{r.water}</td><td>{r.kite}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
+<script>
+  // Surligne la ligne du mois en cours — pas juste décoratif : ça montre
+  // directement au visiteur "voilà où tu es dans le tableau", sans qu'il
+  // ait à compter les lignes. Coût : quelques lignes, pas de dépendance.
+  document.querySelectorAll('.wind-table-wrap').forEach((wrap) => {
+    const currentMonth = new Date().getMonth();
+    const row = wrap.querySelector(`tr[data-month-idx="${currentMonth}"]`);
+    row?.classList.add('current-month');
+  });
+</script>
+
+<style>
+  .wind-table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius-md); }
+  .wind-table { width: 100%; border-collapse: collapse; font-size: .88rem; background: #fff; }
+  .wind-table th, .wind-table td { padding: 10px 12px; text-align: left; white-space: nowrap; }
+  .wind-table thead th {
+    font-family: var(--font-display); font-weight: 600; font-size: .72rem;
+    letter-spacing: .06em; text-transform: uppercase; color: var(--ink-soft);
+    background: var(--surface); border-bottom: 1px solid var(--line);
+  }
+  .wind-table tbody tr:not(:last-child) td { border-bottom: 1px solid var(--line); }
+  .wind-table tbody td:first-child { font-family: var(--font-display); font-weight: 600; color: var(--ink); }
+  .wind-table tbody tr.current-month td {
+    background: var(--sage-pale);
+    position: relative;
+  }
+  .wind-table tbody tr.current-month td:first-child { color: var(--sage-deep); }
+  .wind-table tbody tr.current-month td:first-child::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--coral);
+  }
+</style>
+
+<!--
+  Source des valeurs par défaut : agrégation de données vent publiques pour
+  Maurice / Le Morne (alizés SE, effet venturi local +3-5 nœuds), croisée avec
+  la fourchette "mai-octobre, 15-25 nœuds" déjà retenue dans le doc stratégie
+  du projet. À faire confirmer par un moniteur PKM avant publication — c'est
+  une donnée de sécurité, pas seulement de confort.
+-->

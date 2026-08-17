@@ -1,0 +1,68 @@
+---
+/*
+  EN booking page — mirrors src/pages/fr/reserver/index.astro.
+*/
+import Layout from '../../../layouts/Layout.astro';
+import LeadForm from '../../../components/LeadForm.astro';
+import { breadcrumbList } from '../../../lib/schema';
+import site from '../../../data/site.json';
+
+const translations = { fr: '/fr/reserver/', en: '/en/book/' };
+const waPhone = site.phones[0].replace(/\D/g, '');
+---
+<Layout
+  title="Book a Kitesurfing Lesson — PKM Le Morne"
+  description="Share your dates and level. Reply on WhatsApp with a programme, available slots and the wind forecast, within 2h during the day."
+  locale="en"
+  translations={translations}
+  tarifsHref="/en/prices/"
+  waHref="/en/book/"
+  jsonLd={[breadcrumbList([
+    { name: 'Home', url: `${site.url}/en/` },
+    { name: 'Book', url: `${site.url}/en/book/` },
+  ])]}
+>
+  <section class="pad">
+    <h1 style="font-size:1.85rem">Book</h1>
+    <p class="sub">
+      Share your dates and what you want to work on. Gary gets back to you on
+      WhatsApp with a programme, available slots and the wind forecast.
+    </p>
+    <LeadForm
+      waPhone={waPhone}
+      labels={{
+        firstName: 'First name',
+        phone: 'WhatsApp number',
+        arrival: 'Arrival date on the island',
+        departure: 'Departure date',
+        level: 'What you\'re interested in',
+        levelOptions: ['Family or group trip, mixed levels', 'Beginner lessons', 'Confidence refresher', 'Private lessons', 'Semi-private lessons', 'Kids lessons', 'Wingfoil', 'Gear rental', 'Freestyle coaching', 'Wave coaching', 'Supervision', 'Downwind or VIP'],
+        submit: 'Continue on WhatsApp',
+        legal: 'Reply within 2h between 8am and 7pm, Mauritius time. Your number is only used to handle this request.',
+      }}
+    />
+    <div class="booking-benefits">
+      <span class="kicker">Online booking offers</span>
+      <div class="proofs">
+        <div class="proof"><b>10% off from 3 people</b><span>For a family or group booked together, including mixed levels.</span></div>
+        <div class="proof"><b>First supervision free</b><span>This can be combined with the group reduction.</span></div>
+        <div class="proof"><b>No wind</b><span>The session is moved to another slot at no cost.</span></div>
+      </div>
+    </div>
+    <div style="background:var(--surface);border-radius:16px;padding:18px;margin-top:16px">
+      <h3>Or directly</h3>
+      <p class="sub" style="font-size:.9rem;margin:8px 0 12px">
+        {site.phones.join(' · ')} · {site.email}
+      </p>
+      <p class="sub" style="font-size:.86rem;margin:0">
+        Booking confirmed with a 10% deposit (bank transfer or PayPal). The
+        balance is settled on site in rupees, euros, dollars, pounds or by
+        card.
+      </p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .booking-benefits { margin-top: 18px; padding: 18px; border-radius: var(--radius-md); background: var(--sage-pale); }
+</style>

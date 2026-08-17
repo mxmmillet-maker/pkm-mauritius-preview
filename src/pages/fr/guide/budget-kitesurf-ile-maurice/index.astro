@@ -1,0 +1,96 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import Faq from '../../../../components/Faq.astro';
+import Button from '../../../../components/Button.astro';
+import { faqPage, breadcrumbList } from '../../../../lib/schema';
+import site from '../../../../data/site.json';
+
+const translations = {
+  fr: '/fr/guide/budget-kitesurf-ile-maurice/',
+  en: '/en/guide/kitesurfing-mauritius-cost/',
+};
+
+const faqItems = [
+  {
+    question: 'Combien coûte un cours de kitesurf à Maurice ?',
+    answer: 'Compter de 80 à 130 € l’heure de cours privé selon l’école, et entre 350 et 580 € pour un stage complet de 5 à 7 jours.',
+  },
+  {
+    question: 'La location de matériel est-elle moins chère que les cours ?',
+    answer: 'Oui, mais réservée aux riders déjà autonomes : 40 à 60 € par jour, 200 à 280 € par semaine.',
+  },
+  {
+    question: 'Pourquoi les prix varient-ils autant d’une école à l’autre ?',
+    answer: 'Surtout le ratio élève/moniteur : un cours privé (1 élève) coûte mécaniquement plus cher qu’un cours collectif (jusqu’à 4 élèves), à moniteur égal.',
+  },
+];
+---
+<Layout
+  title="Combien coûte un cours de kitesurf à Maurice ? — PKM"
+  description="Un cours privé de kitesurf à Maurice coûte entre 80 et 130 € de l'heure selon l'école. Fourchettes de prix du marché, cours, location, stages — sans enjoliver."
+  locale="fr"
+  translations={translations}
+  tarifsHref="/fr/tarifs/"
+  waHref="/fr/reserver/"
+  jsonLd={[
+    faqPage(faqItems),
+    breadcrumbList([
+      { name: 'Accueil', url: `${site.url}/fr/` },
+      { name: 'Guides', url: `${site.url}/fr/guide/` },
+      { name: 'Budget', url: `${site.url}/fr/guide/budget-kitesurf-ile-maurice/` },
+    ]),
+  ]}
+>
+  <section class="pad">
+    <span class="kicker">Guide</span>
+    <h1>Combien coûte un cours de kitesurf à Maurice ?</h1>
+    <p class="sub">
+      Un cours privé coûte en moyenne <b>80 à 130 € de l'heure</b> selon les
+      écoles du Morne. Le prix dépend surtout d'un facteur : le nombre
+      d'élèves par moniteur.
+    </p>
+  </section>
+
+  <section class="pad">
+    <h2>Fourchettes de prix constatées sur le marché</h2>
+    <p><b>Cours privé (2 h)</b> — 80 à 100 € en école d'entrée de gamme, jusqu'à 130 € en haut de gamme.</p>
+    <p><b>Cours collectif (2 à 4 élèves)</b> — 50 à 70 € par personne.</p>
+    <p><b>Cours semi-privé (2 élèves)</b> — 60 à 80 € par personne.</p>
+    <p><b>Stage 3 jours</b> — 220 à 280 €.</p>
+    <p><b>Stage 5 jours</b> — 350 à 450 €.</p>
+    <p><b>Stage 7 jours</b> — 450 à 580 €.</p>
+    <p><b>Location du matériel complet</b> — 40 à 60 € par jour, 200 à 280 € par semaine.</p>
+    <p class="sub">
+      Fourchettes issues d'une comparaison du marché du Morne — panier moyen
+      constaté 87 à 580 € selon le format (voir doc état des lieux du
+      projet).
+    </p>
+  </section>
+
+  <section class="pad" style="background:var(--surface)">
+    <h2>Où se situe PKM sur ces fourchettes</h2>
+    <p>
+      Chez Paradise Kitesurfing Mauritius, un cours privé de 2 h coûte
+      Rs 8 000 (environ 160 €), dans le haut de la fourchette de marché — le
+      prix d'un ratio d'1 moniteur pour 1 élève. En semi-privé à deux, Rs 4 500
+      par personne (environ 90 €), au milieu de la fourchette.
+    </p>
+    <p class="sub" style="font-size:.9rem">Tarifs 2026, matériel compris. Détail complet sur la page tarifs.</p>
+  </section>
+
+  <section class="pad">
+    <h2>Pourquoi le prix varie autant</h2>
+    <p>Le facteur numéro un est le ratio élève/moniteur : un cours privé coûte plus cher qu'un cours à 4, à qualité de moniteur égale.</p>
+    <p>Le matériel joue aussi : les écoles qui renouvellent leur flotte chaque saison répercutent ce coût.</p>
+    <p>Un bateau de sécurité, quand il existe, a un coût d'entretien que peu d'écoles supportent — c'est aussi ce qui explique une partie de l'écart de prix.</p>
+  </section>
+
+  <section class="pad" style="text-align:center">
+    <Button variant="primary" href="/fr/tarifs/">Voir les tarifs PKM</Button>
+  </section>
+
+  <section class="pad">
+    <h2>Questions fréquentes</h2>
+    <Faq items={faqItems} />
+  </section>
+</Layout>
