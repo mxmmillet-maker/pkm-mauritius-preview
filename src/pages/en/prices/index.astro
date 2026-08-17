@@ -1,12 +1,21 @@
 ---
 /* EN prices page — mirrors src/pages/fr/tarifs/index.astro. */
 import Layout from '../../../layouts/Layout.astro';
-import Badge from '../../../components/Badge.astro';
 import Button from '../../../components/Button.astro';
+import PricePack from '../../../components/PricePack.astro';
+import SectionNav from '../../../components/SectionNav.astro';
 import { offer, breadcrumbList } from '../../../lib/schema';
 import site from '../../../data/site.json';
 
 const translations = { fr: '/fr/tarifs/', en: '/en/prices/' };
+const sectionNav = [
+  { label: 'Private', href: '#private-lessons' },
+  { label: 'Semi-private', href: '#semi-private-lessons' },
+  { label: 'Rental', href: '#rental' },
+  { label: 'Coaching', href: '#coaching' },
+  { label: 'Wingfoil', href: '#wingfoil' },
+  { label: 'Included', href: '#included' },
+];
 ---
 <Layout
   title="Kitesurfing and Wingfoil Prices in Le Morne, Mauritius — PKM"
@@ -36,6 +45,8 @@ const translations = { fr: '/fr/tarifs/', en: '/en/prices/' };
     </div>
   </section>
 
+  <SectionNav items={sectionNav} label="Quick access to packages" />
+
   <section class="pad" style="padding-top:6px">
     <h2 style="text-transform:uppercase;letter-spacing:.08em;font-size:.78rem;color:var(--ink-soft)">Kitesurfing</h2>
 
@@ -45,37 +56,25 @@ const translations = { fr: '/fr/tarifs/', en: '/en/prices/' };
       <p>Each person can choose a package for their own level. The reduction can be combined with the first supervised session free.</p>
     </div>
 
-    <div class="pcard hot" style="margin:12px 0 14px">
-      <div class="h">
-        <h3>Private lesson <Badge>Most popular</Badge></h3>
-        <div class="s">1 instructor per student</div>
-      </div>
+    <PricePack id="private-lessons" eyebrow="Kitesurfing" title="Private lesson" subtitle="1 instructor per student" badge="Most popular" priceLabel="From" price="Rs 8,000" euro="€160 · 2h" open hot>
       <div class="body">
         <div class="row"><span>2 hours</span><b>Rs 8,000<span class="eur">€160</span></b></div>
         <div class="row"><span>6 hours<br /><small style="color:var(--sage-deep)">up to supervised riding</small><br /><span class="pill-offer">+ 1 supervised session free</span></span><b>Rs 23,250<span class="eur">€465</span></b></div>
         <div class="row"><span>8 hours</span><b>Rs 31,000<span class="eur">€620</span></b></div>
         <div class="row"><span>10 hours<br /><small style="color:var(--sage-deep)">full independence and IKO</small></span><b>Rs 38,000<span class="eur">€760</span></b></div>
       </div>
-    </div>
+    </PricePack>
 
-    <div class="pcard" style="margin-bottom:14px">
-      <div class="h">
-        <h3>Semi-private lesson</h3>
-        <div class="s">1 instructor per 2 students · one kite and board each · price per person</div>
-      </div>
+    <PricePack id="semi-private-lessons" eyebrow="Kitesurfing" title="Semi-private lesson" subtitle="1 instructor per 2 students · one kite and board each" priceLabel="Per person" price="Rs 4,500" euro="€90 · 2h">
       <div class="body">
         <div class="row"><span>2 hours</span><b>Rs 4,500<span class="eur">€90</span></b></div>
         <div class="row"><span>6 hours<br /><small style="color:var(--sage-deep)">up to supervised riding</small><br /><span class="pill-offer">+ 1 supervised session free</span></span><b>Rs 12,500<span class="eur">€250</span></b></div>
         <div class="row"><span>8 hours</span><b>Rs 16,250<span class="eur">€325</span></b></div>
         <div class="row"><span>10 hours<br /><small style="color:var(--sage-deep)">full independence and IKO</small></span><b>Rs 19,250<span class="eur">€385</span></b></div>
       </div>
-    </div>
+    </PricePack>
 
-    <div class="pcard" style="margin-bottom:14px">
-      <div class="h">
-        <h3>Gear rental</h3>
-        <div class="s">Twintip and strapless · sliding rates for independent riders</div>
-      </div>
+    <PricePack id="rental" eyebrow="Independent riders" title="Gear rental" subtitle="Twintip and strapless · sliding rates" priceLabel="From" price="Rs 2,250" euro="€45 · 2h">
       <div class="body">
         <div class="row"><span>Kite + board · 2h<br /><small>short format</small></span><b>Rs 2,250<span class="eur">€45</span></b></div>
         <div class="row"><span>Kite + board · 1 day<br /><small style="color:var(--sage-deep)">Rs 500 less than two 2h rentals</small></span><b>Rs 4,000<span class="eur">€80</span></b></div>
@@ -96,15 +95,11 @@ const translations = { fr: '/fr/tarifs/', en: '/en/prices/' };
           </p>
         </div>
       </div>
-    </div>
+    </PricePack>
 
-    <div class="pcard" style="margin-bottom:14px;border-color:var(--sage)">
-      <div class="h" style="background:var(--sage-pale)">
-        <h3>Hourly coaching <Badge>On request</Badge></h3>
-        <div class="s">Twintip or strapless. One or two hours on a precise goal with an instructor riding beside you.</div>
-        <span class="pill-offer">+ 1 supervised session free</span>
-      </div>
+    <PricePack id="coaching" eyebrow="Freestyle or waves" title="Hourly coaching" subtitle="A precise goal with an instructor riding beside you" badge="On request" priceLabel="Format" price="1 or 2h">
       <div class="body">
+        <span class="pill-offer">+ 1 supervised session free</span>
         <p class="sub" style="font-size:.88rem;padding-top:12px">
           <b>Twintip</b>: riding upwind, first jump, transitions, rotations.<br />
           <b>Strapless</b>: moving from twintip to directional, jibe, first
@@ -115,32 +110,29 @@ const translations = { fr: '/fr/tarifs/', en: '/en/prices/' };
         </p>
         <Button variant="ghost" block href="/en/book/">Ask for a quote</Button>
       </div>
-    </div>
+    </PricePack>
 
     <h2 id="wingfoil" style="text-transform:uppercase;letter-spacing:.08em;font-size:.78rem;color:var(--ink-soft);margin-top:26px">Wingfoil</h2>
 
-    <div class="pcard" style="margin:12px 0 14px">
-      <div class="h"><h3>Private wingfoil</h3><div class="s">1 instructor per student</div></div>
+    <PricePack id="private-wingfoil" eyebrow="Wingfoil" title="Private lesson" subtitle="1 instructor per student" priceLabel="From" price="Rs 8,500" euro="€170 · 2h" group="wingfoil-packs">
       <div class="body">
         <div class="row"><span>2 hours</span><b>Rs 8,500<span class="eur">€170</span></b></div>
         <div class="row"><span>6 hours</span><b>Rs 24,500<span class="eur">€490</span></b></div>
         <div class="row"><span>8 hours</span><b>Rs 32,500<span class="eur">€650</span></b></div>
         <div class="row"><span>10 hours</span><b>Rs 39,500<span class="eur">€790</span></b></div>
       </div>
-    </div>
+    </PricePack>
 
-    <div class="pcard" style="margin-bottom:14px">
-      <div class="h"><h3>Semi-private wingfoil</h3><div class="s">Price per person</div></div>
+    <PricePack id="semi-private-wingfoil" eyebrow="Wingfoil" title="Semi-private lesson" subtitle="Price per person" priceLabel="From" price="Rs 7,000" euro="€140 · 2h" group="wingfoil-packs">
       <div class="body">
         <div class="row"><span>2 hours</span><b>Rs 7,000<span class="eur">€140</span></b></div>
         <div class="row"><span>6 hours</span><b>Rs 20,000<span class="eur">€400</span></b></div>
         <div class="row"><span>8 hours</span><b>Rs 26,500<span class="eur">€530</span></b></div>
         <div class="row"><span>10 hours</span><b>Rs 32,500<span class="eur">€650</span></b></div>
       </div>
-    </div>
+    </PricePack>
 
-    <div class="pcard" style="margin-bottom:14px">
-      <div class="h"><h3>Downwind and VIP lessons</h3><div class="s">On request</div></div>
+    <PricePack id="downwind" eyebrow="Experience" title="Downwind and VIP lessons" subtitle="Shared boat, skipper and guide" priceLabel="Price" price="On request" group="wingfoil-packs">
       <div class="body">
         <p class="sub" style="font-size:.9rem;padding-top:10px">
           The price depends on the number of participants: safety boat,
@@ -149,9 +141,9 @@ const translations = { fr: '/fr/tarifs/', en: '/en/prices/' };
         </p>
         <Button variant="ghost" block href="/en/book/">Ask for a quote</Button>
       </div>
-    </div>
+    </PricePack>
 
-    <div style="background:var(--surface);border-radius:16px;padding:18px;margin-top:8px">
+    <div id="included" style="background:var(--surface);border-radius:16px;padding:18px;margin-top:8px">
       <h3>What the price always includes</h3>
       <p class="sub" style="font-size:.9rem;margin:8px 0 0">
         The gear and safety equipment listed for the package, plus the

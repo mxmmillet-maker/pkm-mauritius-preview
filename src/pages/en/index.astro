@@ -4,6 +4,7 @@ import Button from '../../components/Button.astro';
 import PriceFrom from '../../components/PriceFrom.astro';
 import ProfileSlider from '../../components/ProfileSlider.astro';
 import Faq from '../../components/Faq.astro';
+import SectionNav from '../../components/SectionNav.astro';
 import { sportsActivityLocation, faqPage, breadcrumbList } from '../../lib/schema';
 import site from '../../data/site.json';
 
@@ -11,6 +12,14 @@ const translations = { fr: '/fr/', en: '/en/' };
 const waPhone = site.phones[0].replace(/\D/g, '');
 const waLink = `https://wa.me/${waPhone}?text=${encodeURIComponent("Hello PKM team, I'd like to organise sessions at Le Morne.")}`;
 const googleReviewsUrl = 'https://www.google.com/maps/search/?api=1&query=Paradise+Kitesurfing+Mauritius+Le+Morne';
+const sectionNav = [
+  { label: 'Your pathway', href: '#pathway' },
+  { label: 'The spot', href: '#spot' },
+  { label: 'Coaching', href: '#coaching' },
+  { label: 'Prices', href: '#prices' },
+  { label: 'The team', href: '#team' },
+  { label: 'Reviews', href: '#reviews' },
+];
 
 const profiles = [
   {
@@ -114,14 +123,16 @@ const faqItems = [
     </a>
   </section>
 
-  <section class="pad profile-section">
+  <SectionNav items={sectionNav} label="Quick access to page sections" />
+
+  <section class="pad profile-section" id="pathway">
     <span class="kicker">Your programme</span>
     <h2>What do you want to do on the water?</h2>
     <p class="sub">Swipe through the cards. Each person can follow their own pathway, even when you come as a family or couple.</p>
     <ProfileSlider items={profiles} label="Choose a pathway based on your level" />
   </section>
 
-  <section class="pad spot-section">
+  <section class="pad spot-section" id="spot">
     <div>
       <span class="kicker">The spot</span>
       <h2>The lagoon is a proper progression playground</h2>
@@ -139,7 +150,7 @@ const faqItems = [
     </div>
   </section>
 
-  <section class="pad progression-section">
+  <section class="pad progression-section" id="coaching">
     <span class="kicker">Coaching</span>
     <h2>Progress in freestyle or wave riding</h2>
     <p class="sub">Two different pathways, with a starting point chosen after assessing your current level.</p>
@@ -186,7 +197,7 @@ const faqItems = [
     <img src="/images/kitesurf-family-lesson-pexels.jpg" alt="A student learning to control a kite with an instructor" width="1600" height="1067" loading="lazy" />
   </section>
 
-  <section class="pad prices-preview">
+  <section class="pad prices-preview" id="prices">
     <span class="kicker">Price guide</span>
     <h2>Choose a starting package</h2>
     <div class="fromgrid">
@@ -197,7 +208,7 @@ const faqItems = [
     <Button variant="ghost" href="/en/prices/">Compare all packages</Button>
   </section>
 
-  <section class="pad school-section">
+  <section class="pad school-section" id="team">
     <div class="school-intro">
       <span class="kicker">The team</span>
       <h2>Several people, from your first message to the water</h2>
@@ -221,7 +232,7 @@ const faqItems = [
     </div>
   </section>
 
-  <section class="pad reviews-section">
+  <section class="pad reviews-section" id="reviews">
     <span class="kicker">Reviews</span>
     <h2>Two platforms, the same recurring strengths</h2>
     <p class="sub">A few extracts from public reviews. Swipe the cards on mobile, then open the platform to read each review in full.</p>

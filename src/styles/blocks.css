@@ -315,11 +315,44 @@
 .group-deal > b { font-family: var(--font-display); font-size: 1.05rem; }
 .group-deal p { margin: 0; color: var(--ink-soft); font-size: .86rem; }
 
+/* Guide du Morne : niveaux lisibles et carte générale, sans faux point GPS. */
+.spot-zones { background: var(--surface); }
+.spot-zones__grid { display: grid; gap: 12px; margin-top: 20px; }
+.spot-zones__grid article {
+  display: grid; grid-template-columns: 38px 1fr; column-gap: 12px;
+  padding: 17px; border: 1px solid var(--line); border-radius: var(--radius-md); background: #fff;
+}
+.spot-zones__grid article > span {
+  grid-row: 1 / span 2; width: 36px; height: 36px; display: grid; place-items: center;
+  border-radius: 50%; background: var(--sage-pale); color: var(--sage-deep);
+  font-family: var(--font-display); font-size: .72rem; font-weight: 700;
+}
+.spot-zones__grid article > b { font-family: var(--font-display); font-size: .9rem; }
+.spot-zones__grid article > p { margin: 4px 0 0; color: var(--ink-soft); font-size: .82rem; }
+
+.spot-map { display: grid; gap: 24px; background: var(--sage-pale); }
+.spot-map__copy { align-self: center; }
+.spot-map__copy > p { color: var(--ink-soft); }
+.spot-map__copy > small { display: block; margin-top: 12px; color: var(--ink-soft); font-size: .7rem; line-height: 1.5; }
+.map-key { display: grid; gap: 8px; margin: 20px 0; }
+.map-key > span { display: flex; align-items: center; color: var(--ink-soft); font-size: .82rem; }
+.map-key b { margin-left: 8px; color: var(--ink); font-family: var(--font-display); }
+.map-dot { width: 10px; height: 10px; flex: 0 0 auto; border-radius: 50%; background: var(--lagoon); }
+.map-dot--reef { background: var(--sun); }
+.map-dot--wave { background: var(--coral); }
+.map-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.spot-map__frame {
+  min-height: 390px; overflow: hidden; border: 7px solid #fff; border-radius: var(--radius-md);
+  background: #fff; box-shadow: 0 14px 34px rgba(10,44,48,.12);
+}
+.spot-map__frame iframe { width: 100%; height: 100%; min-height: 376px; display: block; border: 0; }
+
 @media (max-width: 639px) {
   .trust-strip { grid-template-columns: 1fr; }
   .trust-card { min-height: 148px; }
   .hero-actions .btn { width: 100%; }
   .team-gallery { min-height: 330px; }
+  .map-actions .btn { width: 100%; }
 }
 
 @media (min-width: 900px) {
@@ -335,4 +368,6 @@
   .review-snaps { grid-auto-columns: minmax(270px, calc(33.333% - 8px)); }
   .course-timeline { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .ride-together { grid-template-columns: 1.05fr .95fr; }
+  .spot-zones__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .spot-map { grid-template-columns: .86fr 1.14fr; align-items: stretch; }
 }

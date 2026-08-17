@@ -1,12 +1,21 @@
 ---
 /* Page tarifs FR. Les montants fixes sont centralisés dans site.json. */
 import Layout from '../../../layouts/Layout.astro';
-import Badge from '../../../components/Badge.astro';
 import Button from '../../../components/Button.astro';
+import PricePack from '../../../components/PricePack.astro';
+import SectionNav from '../../../components/SectionNav.astro';
 import { offer, breadcrumbList } from '../../../lib/schema';
 import site from '../../../data/site.json';
 
 const translations = { fr: '/fr/tarifs/', en: '/en/prices/' };
+const sectionNav = [
+  { label: 'Cours privé', href: '#cours-prive' },
+  { label: 'Semi-privé', href: '#cours-semi-prive' },
+  { label: 'Location', href: '#location' },
+  { label: 'Coaching', href: '#coaching' },
+  { label: 'Wingfoil', href: '#wingfoil' },
+  { label: 'Inclus', href: '#inclus' },
+];
 ---
 <Layout
   title="Tarifs kitesurf et wingfoil au Morne, Île Maurice — PKM"
@@ -36,6 +45,8 @@ const translations = { fr: '/fr/tarifs/', en: '/en/prices/' };
     </div>
   </section>
 
+  <SectionNav items={sectionNav} label="Accès rapide aux formules" />
+
   <section class="pad" style="padding-top:6px">
     <h2 style="text-transform:uppercase;letter-spacing:.08em;font-size:.78rem;color:var(--ink-soft)">Kitesurf</h2>
 
@@ -45,37 +56,25 @@ const translations = { fr: '/fr/tarifs/', en: '/en/prices/' };
       <p>Chacun peut choisir une formule adaptée à son niveau. La réduction est cumulable avec la première séance surveillée offerte.</p>
     </div>
 
-    <div class="pcard hot" style="margin:12px 0 14px">
-      <div class="h">
-        <h3>Cours privé <Badge>Le plus pris</Badge></h3>
-        <div class="s">1 moniteur pour 1 élève</div>
-      </div>
+    <PricePack id="cours-prive" eyebrow="Kitesurf" title="Cours privé" subtitle="1 moniteur pour 1 élève" badge="Le plus pris" priceLabel="À partir de" price="Rs 8 000" euro="160 € · 2 h" open hot>
       <div class="body">
         <div class="row"><span>2 heures</span><b>Rs 8 000<span class="eur">160 €</span></b></div>
         <div class="row"><span>6 heures<br /><small style="color:var(--sage-deep)">jusqu'au ride surveillé</small><br /><span class="pill-offer">+ 1 séance surveillée offerte</span></span><b>Rs 23 250<span class="eur">465 €</span></b></div>
         <div class="row"><span>8 heures</span><b>Rs 31 000<span class="eur">620 €</span></b></div>
         <div class="row"><span>10 heures<br /><small style="color:var(--sage-deep)">autonomie complète et IKO</small></span><b>Rs 38 000<span class="eur">760 €</span></b></div>
       </div>
-    </div>
+    </PricePack>
 
-    <div class="pcard" style="margin-bottom:14px">
-      <div class="h">
-        <h3>Cours semi-privé</h3>
-        <div class="s">1 moniteur pour 2 élèves · une aile et une planche chacun · prix par personne</div>
-      </div>
+    <PricePack id="cours-semi-prive" eyebrow="Kitesurf" title="Cours semi-privé" subtitle="1 moniteur pour 2 élèves · une aile et une planche chacun" priceLabel="Par personne" price="Rs 4 500" euro="90 € · 2 h">
       <div class="body">
         <div class="row"><span>2 heures</span><b>Rs 4 500<span class="eur">90 €</span></b></div>
         <div class="row"><span>6 heures<br /><small style="color:var(--sage-deep)">jusqu'au ride surveillé</small><br /><span class="pill-offer">+ 1 séance surveillée offerte</span></span><b>Rs 12 500<span class="eur">250 €</span></b></div>
         <div class="row"><span>8 heures</span><b>Rs 16 250<span class="eur">325 €</span></b></div>
         <div class="row"><span>10 heures<br /><small style="color:var(--sage-deep)">autonomie complète et IKO</small></span><b>Rs 19 250<span class="eur">385 €</span></b></div>
       </div>
-    </div>
+    </PricePack>
 
-    <div class="pcard" style="margin-bottom:14px">
-      <div class="h">
-        <h3>Location de matériel</h3>
-        <div class="s">Twintip et strapless · tarif dégressif pour les riders autonomes</div>
-      </div>
+    <PricePack id="location" eyebrow="Riders autonomes" title="Location de matériel" subtitle="Twintip et strapless · tarif dégressif" priceLabel="À partir de" price="Rs 2 250" euro="45 € · 2 h">
       <div class="body">
         <div class="row"><span>Aile + planche · 2 h<br /><small>format court</small></span><b>Rs 2 250<span class="eur">45 €</span></b></div>
         <div class="row"><span>Aile + planche · 1 jour<br /><small style="color:var(--sage-deep)">Rs 500 de moins que deux locations de 2 h</small></span><b>Rs 4 000<span class="eur">80 €</span></b></div>
@@ -97,15 +96,11 @@ const translations = { fr: '/fr/tarifs/', en: '/en/prices/' };
           </p>
         </div>
       </div>
-    </div>
+    </PricePack>
 
-    <div class="pcard" style="margin-bottom:14px;border-color:var(--sage)">
-      <div class="h" style="background:var(--sage-pale)">
-        <h3>Coaching à l'heure <Badge>Sur devis</Badge></h3>
-        <div class="s">Twintip ou strapless. Une heure ou deux pour travailler un objectif précis avec un moniteur qui ride à tes côtés.</div>
-        <span class="pill-offer">+ 1 séance surveillée offerte</span>
-      </div>
+    <PricePack id="coaching" eyebrow="Freestyle ou vagues" title="Coaching à l’heure" subtitle="Un objectif précis avec un moniteur qui ride à tes côtés" badge="Sur devis" priceLabel="Format" price="1 ou 2 h">
       <div class="body">
+        <span class="pill-offer">+ 1 séance surveillée offerte</span>
         <p class="sub" style="font-size:.88rem;padding-top:12px">
           <b>En twintip</b> : remontée au vent, premier saut, transitions,
           rotations.<br />
@@ -117,32 +112,29 @@ const translations = { fr: '/fr/tarifs/', en: '/en/prices/' };
         </p>
         <Button variant="ghost" block href="/fr/reserver/">Demander un devis</Button>
       </div>
-    </div>
+    </PricePack>
 
     <h2 id="wingfoil" style="text-transform:uppercase;letter-spacing:.08em;font-size:.78rem;color:var(--ink-soft);margin-top:26px">Wingfoil</h2>
 
-    <div class="pcard" style="margin:12px 0 14px">
-      <div class="h"><h3>Wingfoil privé</h3><div class="s">1 moniteur pour 1 élève</div></div>
+    <PricePack id="wingfoil-prive" eyebrow="Wingfoil" title="Cours privé" subtitle="1 moniteur pour 1 élève" priceLabel="À partir de" price="Rs 8 500" euro="170 € · 2 h" group="wingfoil-packs">
       <div class="body">
         <div class="row"><span>2 heures</span><b>Rs 8 500<span class="eur">170 €</span></b></div>
         <div class="row"><span>6 heures</span><b>Rs 24 500<span class="eur">490 €</span></b></div>
         <div class="row"><span>8 heures</span><b>Rs 32 500<span class="eur">650 €</span></b></div>
         <div class="row"><span>10 heures</span><b>Rs 39 500<span class="eur">790 €</span></b></div>
       </div>
-    </div>
+    </PricePack>
 
-    <div class="pcard" style="margin-bottom:14px">
-      <div class="h"><h3>Wingfoil semi-privé</h3><div class="s">Prix par personne</div></div>
+    <PricePack id="wingfoil-semi-prive" eyebrow="Wingfoil" title="Cours semi-privé" subtitle="Prix par personne" priceLabel="À partir de" price="Rs 7 000" euro="140 € · 2 h" group="wingfoil-packs">
       <div class="body">
         <div class="row"><span>2 heures</span><b>Rs 7 000<span class="eur">140 €</span></b></div>
         <div class="row"><span>6 heures</span><b>Rs 20 000<span class="eur">400 €</span></b></div>
         <div class="row"><span>8 heures</span><b>Rs 26 500<span class="eur">530 €</span></b></div>
         <div class="row"><span>10 heures</span><b>Rs 32 500<span class="eur">650 €</span></b></div>
       </div>
-    </div>
+    </PricePack>
 
-    <div class="pcard" style="margin-bottom:14px">
-      <div class="h"><h3>Downwind et cours VIP</h3><div class="s">Sur devis</div></div>
+    <PricePack id="downwind" eyebrow="Expérience" title="Downwind et cours VIP" subtitle="Bateau, skipper et guide mutualisés" priceLabel="Tarif" price="Sur devis" group="wingfoil-packs">
       <div class="body">
         <p class="sub" style="font-size:.9rem;padding-top:10px">
           Le tarif dépend du nombre de participants : bateau de sécurité,
@@ -151,9 +143,9 @@ const translations = { fr: '/fr/tarifs/', en: '/en/prices/' };
         </p>
         <Button variant="ghost" block href="/fr/reserver/">Demander un prix</Button>
       </div>
-    </div>
+    </PricePack>
 
-    <div style="background:var(--surface);border-radius:16px;padding:18px;margin-top:8px">
+    <div id="inclus" style="background:var(--surface);border-radius:16px;padding:18px;margin-top:8px">
       <h3>Ce que le tarif comprend toujours</h3>
       <p class="sub" style="font-size:.9rem;margin:8px 0 0">
         Le matériel et les équipements de sécurité indiqués dans la formule,

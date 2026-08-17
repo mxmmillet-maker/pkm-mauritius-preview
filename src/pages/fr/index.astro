@@ -4,6 +4,7 @@ import Button from '../../components/Button.astro';
 import PriceFrom from '../../components/PriceFrom.astro';
 import ProfileSlider from '../../components/ProfileSlider.astro';
 import Faq from '../../components/Faq.astro';
+import SectionNav from '../../components/SectionNav.astro';
 import { sportsActivityLocation, faqPage, breadcrumbList } from '../../lib/schema';
 import site from '../../data/site.json';
 
@@ -11,6 +12,14 @@ const translations = { fr: '/fr/', en: '/en/' };
 const waPhone = site.phones[0].replace(/\D/g, '');
 const waLink = `https://wa.me/${waPhone}?text=${encodeURIComponent("Bonjour l'équipe PKM, j'aimerais organiser des séances au Morne.")}`;
 const googleReviewsUrl = 'https://www.google.com/maps/search/?api=1&query=Paradise+Kitesurfing+Mauritius+Le+Morne';
+const sectionNav = [
+  { label: 'Ton parcours', href: '#parcours' },
+  { label: 'Le spot', href: '#spot' },
+  { label: 'Coaching', href: '#coaching' },
+  { label: 'Tarifs', href: '#tarifs' },
+  { label: 'L’équipe', href: '#equipe' },
+  { label: 'Avis', href: '#avis' },
+];
 
 const profiles = [
   {
@@ -114,14 +123,16 @@ const faqItems = [
     </a>
   </section>
 
-  <section class="pad profile-section">
+  <SectionNav items={sectionNav} label="Accès rapide aux sections de la page" />
+
+  <section class="pad profile-section" id="parcours">
     <span class="kicker">Ton programme</span>
     <h2>Tu veux faire quoi sur l’eau ?</h2>
     <p class="sub">Fais glisser les cartes. Chacun peut suivre son propre parcours, même quand vous venez en famille ou en couple.</p>
     <ProfileSlider items={profiles} label="Choisir un parcours selon son niveau" />
   </section>
 
-  <section class="pad spot-section">
+  <section class="pad spot-section" id="spot">
     <div>
       <span class="kicker">Le spot</span>
       <h2>Le lagon, un vrai terrain de progression</h2>
@@ -139,7 +150,7 @@ const faqItems = [
     </div>
   </section>
 
-  <section class="pad progression-section">
+  <section class="pad progression-section" id="coaching">
     <span class="kicker">Perfectionnement</span>
     <h2>Progresser en freestyle ou en surf</h2>
     <p class="sub">Deux chemins différents, avec un point de départ choisi après une première lecture de ton niveau.</p>
@@ -186,7 +197,7 @@ const faqItems = [
     <img src="/images/kitesurf-family-lesson-pexels.jpg" alt="Un élève apprend à piloter une aile avec son moniteur" width="1600" height="1067" loading="lazy" />
   </section>
 
-  <section class="pad prices-preview">
+  <section class="pad prices-preview" id="tarifs">
     <span class="kicker">Repères tarifaires</span>
     <h2>Choisir une première formule</h2>
     <div class="fromgrid">
@@ -197,7 +208,7 @@ const faqItems = [
     <Button variant="ghost" href="/fr/tarifs/">Comparer toutes les formules</Button>
   </section>
 
-  <section class="pad school-section">
+  <section class="pad school-section" id="equipe">
     <div class="school-intro">
       <span class="kicker">L’équipe</span>
       <h2>Plusieurs personnes, du premier message à la mise à l’eau</h2>
@@ -221,7 +232,7 @@ const faqItems = [
     </div>
   </section>
 
-  <section class="pad reviews-section">
+  <section class="pad reviews-section" id="avis">
     <span class="kicker">Avis</span>
     <h2>Deux plateformes, les mêmes points forts</h2>
     <p class="sub">Quelques extraits d’avis publics. Fais glisser les cartes sur mobile, puis ouvre la plateforme pour lire les retours complets.</p>

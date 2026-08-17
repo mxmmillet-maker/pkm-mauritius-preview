@@ -1,0 +1,109 @@
+---
+const {
+  id,
+  eyebrow,
+  title,
+  subtitle,
+  badge,
+  priceLabel,
+  price,
+  euro,
+  open = false,
+  group = 'price-packs',
+  hot = false,
+} = Astro.props;
+---
+
+<details class:list={['pcard', 'pack-card', { hot }]} id={id} name={group} open={open || undefined}>
+  <summary class="pack-summary">
+    <span class="pack-copy">
+      <span class="pack-eyebrow">{eyebrow}</span>
+      <span class="pack-title">{title} {badge && <em>{badge}</em>}</span>
+      <span class="pack-subtitle">{subtitle}</span>
+    </span>
+    <span class="pack-price">
+      <small>{priceLabel}</small>
+      <strong>{price}</strong>
+      {euro && <span>{euro}</span>}
+    </span>
+    <span class="pack-toggle" aria-hidden="true">+</span>
+  </summary>
+  <div class="pack-body">
+    <slot />
+  </div>
+</details>
+
+<style>
+  .pack-card { margin: 12px 0 14px; scroll-margin-top: 128px; }
+  .pack-card[open] { border-color: var(--sage); box-shadow: 0 12px 30px rgba(10, 44, 48, .08); }
+
+  .pack-summary {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto 32px;
+    gap: 12px;
+    align-items: center;
+    min-height: 104px;
+    padding: 17px 16px;
+    cursor: pointer;
+    list-style: none;
+    transition: background .16s ease;
+  }
+
+  .pack-summary::-webkit-details-marker { display: none; }
+  .pack-summary:hover, .pack-summary:focus-visible { background: var(--sage-pale); }
+  .hot .pack-summary { background: linear-gradient(135deg, var(--sage-pale), #fff); }
+
+  .pack-copy, .pack-price { display: grid; min-width: 0; }
+  .pack-eyebrow {
+    margin-bottom: 4px;
+    color: var(--sage-deep);
+    font-family: var(--font-display);
+    font-size: .65rem;
+    font-weight: 600;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+  .pack-title { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; }
+  .pack-title em {
+    display: inline-flex;
+    margin-left: 5px;
+    padding: 3px 7px;
+    border-radius: var(--radius-pill);
+    background: var(--coral);
+    color: #fff;
+    font-size: .62rem;
+    font-style: normal;
+    vertical-align: 2px;
+  }
+  .pack-subtitle { margin-top: 4px; color: var(--ink-soft); font-size: .78rem; line-height: 1.4; }
+
+  .pack-price { justify-items: end; white-space: nowrap; }
+  .pack-price small { color: var(--ink-soft); font-size: .65rem; }
+  .pack-price strong { color: var(--ink); font-family: var(--font-display); font-size: .9rem; }
+  .pack-price > span { color: var(--ink-soft); font-size: .7rem; }
+
+  .pack-toggle {
+    width: 32px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--sage-deep);
+    color: #fff;
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    transition: transform .2s ease;
+  }
+  .pack-card[open] .pack-toggle { transform: rotate(45deg); }
+  .pack-body { border-top: 1px solid var(--line); }
+
+  @media (max-width: 520px) {
+    .pack-summary { grid-template-columns: minmax(0, 1fr) 30px; }
+    .pack-price { grid-column: 1; grid-row: 2; justify-items: start; grid-auto-flow: column; justify-content: start; align-items: baseline; gap: 5px; }
+    .pack-toggle { grid-column: 2; grid-row: 1 / span 2; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pack-summary, .pack-toggle { transition: none; }
+  }
+</style>

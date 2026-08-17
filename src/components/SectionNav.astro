@@ -1,0 +1,69 @@
+---
+const {
+  items = [],
+  label = 'Navigation dans la page',
+} = Astro.props;
+---
+
+<nav class="section-nav" aria-label={label}>
+  <div class="section-nav__rail">
+    {items.map((item) => (
+      <a href={item.href}>{item.label}</a>
+    ))}
+  </div>
+</nav>
+
+<style>
+  .section-nav {
+    position: sticky;
+    top: 65px;
+    z-index: 32;
+    padding-inline: max(20px, calc((100vw - 960px) / 2));
+    border-block: 1px solid var(--line);
+    background: color-mix(in srgb, var(--sage-pale) 92%, white);
+    box-shadow: 0 8px 18px rgba(10, 44, 48, .06);
+  }
+
+  .section-nav__rail {
+    display: flex;
+    gap: 5px;
+    padding-block: 8px;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scrollbar-width: none;
+  }
+
+  .section-nav__rail::-webkit-scrollbar { display: none; }
+
+  a {
+    flex: 0 0 auto;
+    min-height: 38px;
+    display: inline-flex;
+    align-items: center;
+    padding: 7px 13px;
+    border-radius: var(--radius-pill);
+    color: var(--sage-deep);
+    font-family: var(--font-display);
+    font-size: .78rem;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background .16s ease, color .16s ease, transform .16s ease;
+  }
+
+  a:hover,
+  a:focus-visible {
+    background: var(--sage-deep);
+    color: #fff;
+    transform: translateY(-1px);
+  }
+
+  @media (min-width: 900px) {
+    .section-nav__rail { justify-content: center; }
+    a { font-size: .84rem; padding-inline: 16px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    a { transition: none; }
+  }
+</style>

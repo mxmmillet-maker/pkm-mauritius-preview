@@ -1,10 +1,23 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
+import Button from '../../../components/Button.astro';
 import Faq from '../../../components/Faq.astro';
+import SectionNav from '../../../components/SectionNav.astro';
 import { faqPage, breadcrumbList } from '../../../lib/schema';
 import site from '../../../data/site.json';
 
 const translations = { fr: '/fr/kitesurf-le-morne/', en: '/en/kitesurf-le-morne/' };
+const waPhone = site.phones[0].replace(/\D/g, '');
+const meetingWa = `https://wa.me/${waPhone}?text=${encodeURIComponent("Bonjour l'équipe PKM, peux-tu m'envoyer le point de rendez-vous au Morne ?")}`;
+const mapsUrl = 'https://www.google.com/maps/search/?api=1&query=Le+Morne+Brabant+Mauritius';
+const osmEmbed = 'https://www.openstreetmap.org/export/embed.html?bbox=57.285%2C-20.505%2C57.405%2C-20.395&layer=mapnik';
+const sectionNav = [
+  { label: 'Lagon & récif', href: '#lagon-recif' },
+  { label: 'Niveaux', href: '#niveaux' },
+  { label: 'Carte', href: '#carte' },
+  { label: 'Précautions', href: '#precautions' },
+  { label: 'FAQ', href: '#faq' },
+];
 
 const faqItems = [
   {
@@ -46,7 +59,9 @@ const faqItems = [
     </p>
   </section>
 
-  <section class="pad">
+  <SectionNav items={sectionNav} label="Accès rapide au guide du spot" />
+
+  <section class="pad" id="lagon-recif">
     <h2>Le lagon et le récif</h2>
     <p>La profondeur varie de 50 cm à 1,5 m selon la marée.</p>
     <p>Le récif protège le lagon de la houle et forme des vagues plus loin, réservées aux riders expérimentés.</p>
@@ -54,20 +69,44 @@ const faqItems = [
     <p>À marée haute, l'eau gagne en profondeur et les courants se renforcent.</p>
   </section>
 
-  <section class="pad">
+  <section class="pad spot-zones" id="niveaux">
     <h2>Zones par niveau</h2>
-    <p><b>Débutant</b> — la zone peu profonde du lagon, à l'écart des riders confirmés.</p>
-    <p><b>Confirmé</b> — les zones plus profondes du lagon, davantage d'espace pour progresser.</p>
-    <p><b>Expert</b> — au-delà du récif, où se forment les vagues, réservé à ceux qui maîtrisent déjà les courants et la houle.</p>
+    <div class="spot-zones__grid">
+      <article><span>01</span><b>Débutant · lagon</b><p>Zone peu profonde, à l’écart des riders confirmés.</p></article>
+      <article><span>02</span><b>Confirmé · lagon & Small Reef</b><p>Plus d’espace, premières lignes et premières vagues accompagnées.</p></article>
+      <article><span>03</span><b>Avancé · Manawa</b><p>Lecture de la houle, placement et autonomie progressive.</p></article>
+      <article><span>04</span><b>Expert · One Eye</b><p>Seulement avec le niveau, la marée et les conditions adaptés.</p></article>
+    </div>
   </section>
 
-  <section class="pad">
+  <section class="pad" id="acces">
     <h2>Accès et stationnement</h2>
     <p>Depuis La Gaulette, suivre la route en direction du Morne Brabant jusqu'à l'hôtel Riu.</p>
     <p>Le stationnement se fait dans les zones herbeuses et ombragées proches de la mise à l'eau.</p>
   </section>
 
-  <section class="pad">
+  <section class="pad spot-map" id="carte">
+    <div class="spot-map__copy">
+      <span class="kicker">Se repérer</span>
+      <h2>Le Morne en un coup d’œil</h2>
+      <p>La carte situe la péninsule, La Gaulette et les grands accès. Elle ne remplace pas le briefing : la zone de navigation et le point de rendez-vous changent selon le vent, la marée et le programme.</p>
+      <div class="map-key" aria-label="Repères de niveau">
+        <span><i class="map-dot map-dot--lagoon"></i><b>Lagon</b> · apprentissage</span>
+        <span><i class="map-dot map-dot--reef"></i><b>Récif</b> · rider autonome</span>
+        <span><i class="map-dot map-dot--wave"></i><b>Vagues</b> · accompagné selon niveau</span>
+      </div>
+      <div class="map-actions">
+        <Button variant="primary" href={mapsUrl}>Ouvrir dans Google Maps</Button>
+        <Button variant="wa" href={meetingWa}>Recevoir le point de rendez-vous</Button>
+      </div>
+      <small>Carte générale OpenStreetMap. Le point exact de l’école reste à confirmer avant publication.</small>
+    </div>
+    <div class="spot-map__frame">
+      <iframe src={osmEmbed} title="Carte générale du Morne et de La Gaulette" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </section>
+
+  <section class="pad" id="precautions">
     <h2>Précautions</h2>
     <p>Porter des chaussons de protection contre les coraux et les oursins.</p>
     <p>Le rascasse (poisson-pierre) est rare mais présente sur ce type de fond — une bonne raison de plus de ne pas marcher pieds nus.</p>
@@ -81,7 +120,7 @@ const faqItems = [
     </p>
   </section>
 
-  <section class="pad">
+  <section class="pad" id="faq">
     <h2>Questions fréquentes</h2>
     <Faq items={faqItems} />
   </section>

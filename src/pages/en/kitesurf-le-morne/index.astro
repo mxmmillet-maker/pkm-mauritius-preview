@@ -1,10 +1,23 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
+import Button from '../../../components/Button.astro';
 import Faq from '../../../components/Faq.astro';
+import SectionNav from '../../../components/SectionNav.astro';
 import { faqPage, breadcrumbList } from '../../../lib/schema';
 import site from '../../../data/site.json';
 
 const translations = { fr: '/fr/kitesurf-le-morne/', en: '/en/kitesurf-le-morne/' };
+const waPhone = site.phones[0].replace(/\D/g, '');
+const meetingWa = `https://wa.me/${waPhone}?text=${encodeURIComponent("Hello PKM team, can you send me the meeting point at Le Morne?")}`;
+const mapsUrl = 'https://www.google.com/maps/search/?api=1&query=Le+Morne+Brabant+Mauritius';
+const osmEmbed = 'https://www.openstreetmap.org/export/embed.html?bbox=57.285%2C-20.505%2C57.405%2C-20.395&layer=mapnik';
+const sectionNav = [
+  { label: 'Lagoon & reef', href: '#lagoon-reef' },
+  { label: 'Levels', href: '#levels' },
+  { label: 'Map', href: '#map' },
+  { label: 'Precautions', href: '#precautions' },
+  { label: 'FAQ', href: '#faq' },
+];
 
 const faqItems = [
   {
@@ -46,7 +59,9 @@ const faqItems = [
     </p>
   </section>
 
-  <section class="pad">
+  <SectionNav items={sectionNav} label="Quick access to the spot guide" />
+
+  <section class="pad" id="lagoon-reef">
     <h2>The lagoon and the reef</h2>
     <p>Depth ranges from 50cm to 1.5m depending on the tide.</p>
     <p>The reef shelters the lagoon from swell and forms waves further out, reserved for experienced riders.</p>
@@ -54,27 +69,51 @@ const faqItems = [
     <p>At high tide, the water gets deeper and currents strengthen.</p>
   </section>
 
-  <section class="pad">
+  <section class="pad spot-zones" id="levels">
     <h2>Zones by level</h2>
-    <p><b>Beginner</b> — the shallow part of the lagoon, away from advanced riders.</p>
-    <p><b>Intermediate</b> — deeper parts of the lagoon, more room to progress.</p>
-    <p><b>Expert</b> — beyond the reef, where the waves form, reserved for those who already handle currents and swell.</p>
+    <div class="spot-zones__grid">
+      <article><span>01</span><b>Beginner · lagoon</b><p>Shallow water, away from advanced riders.</p></article>
+      <article><span>02</span><b>Intermediate · lagoon & Small Reef</b><p>More space, first lines and first guided waves.</p></article>
+      <article><span>03</span><b>Advanced · Manawa</b><p>Swell reading, positioning and progressive independence.</p></article>
+      <article><span>04</span><b>Expert · One Eye</b><p>Only with the right level, tide and conditions.</p></article>
+    </div>
   </section>
 
-  <section class="pad">
+  <section class="pad" id="access">
     <h2>Access and parking</h2>
     <p>From La Gaulette, follow the road toward Morne Brabant until you reach the Riu hotel.</p>
     <p>Parking is available in the shaded, grassy areas near the launch zone.</p>
   </section>
 
-  <section class="pad">
+  <section class="pad spot-map" id="map">
+    <div class="spot-map__copy">
+      <span class="kicker">Find your bearings</span>
+      <h2>Le Morne at a glance</h2>
+      <p>The map places the peninsula, La Gaulette and the main access routes. It does not replace the briefing: the riding zone and meeting point vary with wind, tide and programme.</p>
+      <div class="map-key" aria-label="Level guide">
+        <span><i class="map-dot map-dot--lagoon"></i><b>Lagoon</b> · learning</span>
+        <span><i class="map-dot map-dot--reef"></i><b>Reef</b> · independent rider</span>
+        <span><i class="map-dot map-dot--wave"></i><b>Waves</b> · guided by level</span>
+      </div>
+      <div class="map-actions">
+        <Button variant="primary" href={mapsUrl}>Open in Google Maps</Button>
+        <Button variant="wa" href={meetingWa}>Get the meeting point</Button>
+      </div>
+      <small>General OpenStreetMap view. The school’s exact point still needs confirmation before publication.</small>
+    </div>
+    <div class="spot-map__frame">
+      <iframe src={osmEmbed} title="General map of Le Morne and La Gaulette" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </section>
+
+  <section class="pad" id="precautions">
     <h2>Precautions</h2>
     <p>Wear protective reef shoes against coral and sea urchins.</p>
     <p>Stonefish are rare but present on this type of seabed — one more reason not to walk barefoot.</p>
     <p>The spot can get crowded in peak season — an instructor helps pick the right time slot and zone.</p>
   </section>
 
-  <section class="pad">
+  <section class="pad" id="faq">
     <p class="sub">
       [Content to be validated by a PKM instructor before publishing — this
       is a safety page, not just a spot overview.]
