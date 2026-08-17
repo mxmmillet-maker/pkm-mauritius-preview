@@ -9,6 +9,10 @@ if (!repository) {
 }
 
 const prefix = `/${repository}`;
+const escapedRepository = repository.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const unprefixedHref = new RegExp(`href="/(?!${escapedRepository}/)`, 'g');
+const unprefixedSrc = new RegExp(`src="/(?!${escapedRepository}/)`, 'g');
+const unprefixedRefresh = new RegExp(`content="0; url=/(?!${escapedRepository}/)`, 'g');
 const textExtensions = new Set(['.html', '.css', '.js']);
 
 async function walk(directory) {
@@ -26,9 +30,9 @@ async function walk(directory) {
 
     const source = await readFile(path, 'utf8');
     const prefixed = source
-      .replaceAll('href="/', `href="${prefix}/`)
-      .replaceAll('src="/', `src="${prefix}/`)
-      .replaceAll('content="0; url=/', `content="0; url=${prefix}/`);
+      .replace(unprefixedHref, `href="${prefix}/`)
+      .replace(unprefixedSrc, `src="${prefix}/`)
+      .replace(unprefixedRefresh, `content="0; url=${prefix}/`);
 
     if (prefixed !== source) await writeFile(path, prefixed);
   }
