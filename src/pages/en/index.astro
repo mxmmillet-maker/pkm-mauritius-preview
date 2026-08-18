@@ -32,7 +32,7 @@ const profiles = [
     eyebrow: 'Comeback', title: 'I want my confidence back',
     text: 'A return-to-water session built around your level, without making you start from scratch.',
     href: '/en/kitesurf-lessons/#comeback', image: '/images/pkm-confidence-lesson.webp',
-    alt: 'A student rebuilding confidence with a PKM instructor in the lagoon', linkLabel: 'Plan my comeback',
+    alt: 'A kitesurfer rebuilding confidence in front of Le Morne mountain', linkLabel: 'Plan my comeback',
   },
   {
     eyebrow: 'Freestyle', title: 'I want to move up a level',
@@ -88,7 +88,10 @@ const faqItems = [
   ]}
 >
   <section class="hero-photo pad">
-    <img class="hero-photo__media" src="/images/pkm-hero-desktop.webp" alt="Smiling kitesurfer riding across Le Morne lagoon" width="1920" height="1277" fetchpriority="high" />
+    <span class="hero-photo__media">
+      <img class="hero-photo__mobile" src="/images/pkm-hero-mobile.webp" alt="Kitesurfer jumping across Le Morne lagoon" width="900" height="1600" fetchpriority="high" />
+      <img class="hero-photo__desktop" src="/images/pkm-hero-desktop.webp" alt="Kitesurfer jumping across Le Morne lagoon" width="1920" height="1277" fetchpriority="high" />
+    </span>
     <span class="hero-photo__shade" aria-hidden="true"></span>
     <div class="hero-photo__copy">
       <span class="kicker">Le Morne, Mauritius</span>
@@ -148,6 +151,10 @@ const faqItems = [
       </div>
       <p class="data-note">Seasonal guidance, not a weather promise: slots are adjusted to the actual forecast during your stay.</p>
     </div>
+    <figure class="spot-aerial">
+      <img src="/images/pkm-le-morne-aerial.webp" alt="Aerial view of Le Morne Brabant, its lagoon and the coral reef" width="1920" height="1280" loading="lazy" />
+      <figcaption>Le Morne Brabant, the lagoon and the coral reef · Unsplash photo</figcaption>
+    </figure>
   </section>
 
   <section class="pad progression-section" id="coaching">
@@ -194,7 +201,7 @@ const faqItems = [
       </ul>
       <Button variant="primary" href="/en/book/">Build our programme</Button>
     </div>
-    <img src="/images/pkm-ground-lesson.webp" alt="A PKM instructor preparing a kite with a student on the beach" width="1600" height="1200" loading="lazy" />
+    <img src="/images/pkm-shared-stay.webp" alt="Smiling kitesurfer riding across Le Morne lagoon" width="1600" height="1200" loading="lazy" />
   </section>
 
   <section class="pad prices-preview" id="prices">
