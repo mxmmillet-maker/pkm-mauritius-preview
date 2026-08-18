@@ -25,32 +25,32 @@ const profiles = [
   {
     eyebrow: 'Première fois', title: 'Je débute',
     text: 'Découvrir l’aile, le waterstart et avancer vers un ride surveillé sur le lagon.',
-    href: '/fr/cours-de-kitesurf/', image: '/images/kitesurf-family-lesson-pexels.jpg',
-    alt: 'Un jeune élève apprend à manier une aile avec un moniteur', linkLabel: 'Voir les cours débutants',
+    href: '/fr/cours-de-kitesurf/', image: '/images/pkm-beginner-lesson.webp',
+    alt: 'Une élève apprend à piloter son aile dans le lagon avec un moniteur PKM', linkLabel: 'Voir les cours débutants',
   },
   {
     eyebrow: 'Reprise', title: 'Je veux reprendre confiance',
     text: 'Une remise à l’eau adaptée à ton niveau pour retrouver tes repères sans repartir de zéro.',
-    href: '/fr/cours-de-kitesurf/#reprise', image: '/images/kitesurf-lesson-pexels.jpg',
-    alt: 'Une élève accompagnée par son moniteur pendant une séance de kitesurf', linkLabel: 'Préparer ma reprise',
+    href: '/fr/cours-de-kitesurf/#reprise', image: '/images/pkm-confidence-lesson.webp',
+    alt: 'Une élève reprend ses repères avec un moniteur PKM dans le lagon', linkLabel: 'Préparer ma reprise',
   },
   {
     eyebrow: 'Freestyle', title: 'Je veux passer un cap',
     text: 'Remontée au vent, toeside, transitions, premiers sauts ou rotations selon ton objectif.',
-    href: '/fr/perfectionnement/#freestyle', image: '/images/kitesurf-freestyle-jump-pexels.jpg',
-    alt: 'Un kitesurfeur effectue un saut au-dessus de l’eau', linkLabel: 'Explorer le coaching freestyle',
+    href: '/fr/perfectionnement/#freestyle', image: '/images/pkm-freestyle-morne.webp',
+    alt: 'Un kitesurfeur effectue un saut devant la montagne du Morne', linkLabel: 'Explorer le coaching freestyle',
   },
   {
     eyebrow: 'Vagues', title: 'Je veux rider les vagues',
     text: 'Placement, jibe, lecture de vague et autonomie progressive entre Small Reef et Manawa.',
-    href: '/fr/perfectionnement/#vagues', image: '/images/kitesurf-wave-riding-pexels.jpg',
-    alt: 'Un kitesurfeur navigue dans les vagues près de la côte', linkLabel: 'Voir le parcours vagues',
+    href: '/fr/perfectionnement/#vagues', image: '/images/pkm-action-morne.webp',
+    alt: 'Un kitesurfeur prend un appui dynamique dans le clapot au Morne', linkLabel: 'Voir le parcours vagues',
   },
   {
     eyebrow: 'Wingfoil', title: 'Je veux essayer le wingfoil',
     text: 'Découverte, premiers vols ou progression sur le foil, en formule privée ou semi-privée.',
-    href: '/fr/tarifs/#wingfoil', image: '/images/wingfoil-pexels.jpg',
-    alt: 'Un wingfoiler glisse au-dessus d’une eau turquoise', linkLabel: 'Voir les sessions wingfoil',
+    href: '/fr/tarifs/#wingfoil', image: '/images/pkm-wingfoil.webp',
+    alt: 'Un wingfoiler PKM glisse dans le lagon du Morne', linkLabel: 'Voir les sessions wingfoil',
   },
 ];
 
@@ -89,7 +89,10 @@ const faqItems = [
   ]}
 >
   <section class="hero-photo hero-photo--refresh pad" data-hero-refresh>
-    <img class="hero-photo__media" data-hero-media src="/images/kitesurf-lagoon-aerial-pexels.jpg" alt="Kitesurfeur vu du ciel le long d’un récif dans une eau turquoise" width="1800" height="1013" fetchpriority="high" />
+    <picture class="hero-photo__media" data-hero-media>
+      <source media="(max-width: 699px)" srcset="/images/pkm-freestyle-morne.webp" />
+      <img src="/images/pkm-hero-desktop.webp" alt="Kitesurfeuse souriante naviguant dans le lagon du Morne" width="1920" height="1277" fetchpriority="high" />
+    </picture>
     <span class="hero-photo__shade" aria-hidden="true"></span>
     <div class="hero-photo__copy">
       <span class="hero-eyebrow">Kiteschool · Wingschool · Le Morne<br />Depuis {site.foundedYear}</span>
@@ -104,7 +107,7 @@ const faqItems = [
         <Button variant="wa" href={waLink}>Discuter sur WhatsApp</Button>
         <Button variant="line" href="/fr/cours-de-kitesurf/">Découvrir les cours</Button>
       </div>
-      <small class="hero-photo__credit">Photo d’ambiance, libre d’usage</small>
+      <small class="hero-photo__credit">Photos PKM · Le Morne</small>
     </div>
   </section>
 
@@ -207,7 +210,7 @@ const faqItems = [
       </ul>
       <Button variant="primary" href="/fr/reserver/">Composer notre programme</Button>
     </div>
-    <img src="/images/kitesurf-family-lesson-pexels.jpg" alt="Un élève apprend à piloter une aile avec son moniteur" width="1600" height="1067" loading="lazy" />
+    <img src="/images/pkm-ground-lesson.webp" alt="Un moniteur PKM prépare une aile avec une élève sur la plage" width="1600" height="1200" loading="lazy" />
   </section>
 
   <section class="pad prices-preview" id="tarifs">
@@ -249,12 +252,12 @@ const faqItems = [
     </div>
     <div class="team-gallery" aria-label="L’équipe en action">
       <figure>
-        <img src="/images/kitesurf-lesson-pexels.jpg" alt="Moniteur accompagnant une élève pendant une leçon" width="1800" height="1187" loading="lazy" />
-        <figcaption>Sur l’eau · photo d’ambiance</figcaption>
+        <img src="/images/pkm-equipment.webp" alt="Parc de planches et matériel PKM installé au Morne" width="1000" height="1169" loading="lazy" />
+        <figcaption>Parc de matériel · PKM</figcaption>
       </figure>
       <figure>
-        <img src="/images/kitesurf-family-lesson-pexels.jpg" alt="Moniteur préparant une aile avec un jeune élève" width="1600" height="1067" loading="lazy" />
-        <figcaption>Préparation · photo d’ambiance</figcaption>
+        <img src="/images/pkm-van.webp" alt="Camion Paradise Kitesurfing Mauritius au Morne" width="1280" height="960" loading="lazy" />
+        <figcaption>Camion de l’école · PKM</figcaption>
       </figure>
     </div>
   </section>
