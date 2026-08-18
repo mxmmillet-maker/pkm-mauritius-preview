@@ -50,7 +50,7 @@ const profiles = [
     eyebrow: 'Wingfoil', title: 'Je veux essayer le wingfoil',
     text: 'Découverte, premiers vols ou progression sur le foil, en formule privée ou semi-privée.',
     href: '/fr/tarifs/#wingfoil', image: '/images/pkm-wingfoil.webp',
-    alt: 'Un wingfoiler PKM glisse dans le lagon du Morne', linkLabel: 'Voir les sessions wingfoil',
+    alt: 'Un moniteur présente le maniement de l’aile de wing à deux élèves', linkLabel: 'Voir les sessions wingfoil',
   },
 ];
 
@@ -90,7 +90,9 @@ const faqItems = [
 >
   <section class="hero-photo hero-photo--refresh pad" data-hero-refresh>
     <span class="hero-photo__media" data-hero-media>
-      <img class="hero-photo__mobile" src="/images/pkm-hero-mobile.webp" alt="Kitesurfeur en plein saut dans le lagon du Morne" width="900" height="1600" fetchpriority="high" />
+      <img class="hero-photo__mobile is-active" data-hero-mobile="default" src="/images/pkm-hero-mobile.webp" alt="Kitesurfeur en plein saut dans le lagon du Morne" width="900" height="1600" fetchpriority="high" />
+      <img class="hero-photo__mobile" data-hero-mobile="spot" data-file="pkm-hero-mobile-spot.webp" alt="Vue aérienne du Morne Brabant et de son lagon" width="900" height="1600" />
+      <img class="hero-photo__mobile" data-hero-mobile="3685" data-file="pkm-hero-mobile-rfp3685.webp" alt="Kitesurfeur réalisant une rotation au-dessus du lagon" width="900" height="1600" />
       <img class="hero-photo__desktop" src="/images/pkm-hero-desktop.webp" alt="Kitesurfeur en plein saut dans le lagon du Morne" width="1920" height="1277" fetchpriority="high" />
     </span>
     <span class="hero-photo__shade" aria-hidden="true"></span>
@@ -107,7 +109,7 @@ const faqItems = [
         <Button variant="wa" href={waLink}>Discuter sur WhatsApp</Button>
         <Button variant="line" href="/fr/cours-de-kitesurf/">Découvrir les cours</Button>
       </div>
-      <small class="hero-photo__credit">Photos PKM · Le Morne</small>
+      <small class="hero-photo__credit" data-hero-credit>Photos PKM · Le Morne</small>
     </div>
   </section>
 
@@ -327,6 +329,22 @@ const faqItems = [
   <script>
     const hero = document.querySelector('[data-hero-refresh]');
     const heroMedia = hero?.querySelector('[data-hero-media]');
+    const mobileHeroChoice = new URLSearchParams(window.location.search).get('hero');
+    const mobileHeroVariants = hero?.querySelectorAll('[data-hero-mobile]');
+    if (mobileHeroVariants?.length && (mobileHeroChoice === 'spot' || mobileHeroChoice === '3685')) {
+      const defaultMobileHero = hero?.querySelector('[data-hero-mobile="default"]');
+      const selectedMobileHero = hero?.querySelector(`[data-hero-mobile="${mobileHeroChoice}"]`);
+      if (defaultMobileHero instanceof HTMLImageElement && selectedMobileHero instanceof HTMLImageElement) {
+        const sourceFile = selectedMobileHero.dataset.file;
+        if (sourceFile) selectedMobileHero.src = defaultMobileHero.src.replace(/pkm-hero-mobile\.webp$/, sourceFile);
+        mobileHeroVariants.forEach((image) => image.classList.remove('is-active'));
+        selectedMobileHero.classList.add('is-active');
+        const credit = hero?.querySelector('[data-hero-credit]');
+        if (credit) credit.textContent = mobileHeroChoice === 'spot'
+          ? 'Test mobile A · Vue aérienne du Morne'
+          : 'Test mobile B · RFP3685';
+      }
+    }
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (hero && heroMedia instanceof HTMLElement && !reducedMotion) {
       let heroFrame = 0;
