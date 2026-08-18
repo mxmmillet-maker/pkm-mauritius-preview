@@ -7,14 +7,19 @@ import { LOCALES } from '../lib/i18n';
   logoSrc      : chemin du logo (fond clair)
   nav          : [{ label, href }]
 */
-const { locale, translations = {}, logoSrc = '/logo.png', nav = [] } = Astro.props;
+const { locale, translations = {}, logoSrc = '/logo.png', nav = [], scrollRefresh = false } = Astro.props;
 const liveLocales = Object.entries(LOCALES).filter(([, l]) => l.live);
 const currentPath = Astro.url.pathname;
 ---
-<header class="topbar">
+<header class:list={['topbar', { 'topbar--refresh': scrollRefresh }]}>
   <a class="logo" href={`/${locale}/`}>
     <img src={logoSrc} alt="PKM — Paradise Kitesurfing Mauritius" width="800" height="293" />
   </a>
+  {scrollRefresh && (
+    <nav class="desktop-main" aria-label={locale === 'fr' ? 'Navigation principale' : 'Main navigation'}>
+      {nav.map((item) => <a href={item.href} aria-current={currentPath === item.href ? 'page' : undefined}>{item.label}</a>)}
+    </nav>
+  )}
   <div class="topright">
     <nav class="lang" aria-label={locale === 'fr' ? 'Langue' : 'Language'}>
       {liveLocales.map(([code, l]) => (
@@ -29,7 +34,7 @@ const currentPath = Astro.url.pathname;
   </div>
 </header>
 
-<nav id="mobile-menu" class="menu" aria-label={locale === 'fr' ? 'Navigation principale' : 'Main navigation'}>
+<nav id="mobile-menu" class:list={['menu', { 'menu--refresh': scrollRefresh }]} aria-label={locale === 'fr' ? 'Navigation principale' : 'Main navigation'}>
   {nav.map((item) => <a href={item.href} aria-current={currentPath === item.href ? 'page' : undefined}>{item.label}</a>)}
 </nav>
 
@@ -41,6 +46,7 @@ const currentPath = Astro.url.pathname;
     display: flex; align-items: center; justify-content: space-between;
     padding: 11px 18px;
   }
+  .desktop-main { display: none; }
   .logo { display: flex; align-items: center; text-decoration: none; }
   .logo img { display: block; width: auto; height: 42px; }
   .topright { display: flex; align-items: center; gap: 6px; }
@@ -87,6 +93,40 @@ const currentPath = Astro.url.pathname;
     }
     .menu a { border: 0; padding: 9px 11px; font-size: .9rem; border-radius: var(--radius-pill); }
     .menu a:hover, .menu a:focus-visible { background: var(--surface); }
+
+    .topbar--refresh {
+      height: var(--topbar-height, 84px); padding-block: 0;
+      transition: height .22s cubic-bezier(.2,.7,.3,1), background .22s ease, border-color .22s ease;
+    }
+    .topbar--refresh .logo img { height: 40px; transition: height .22s cubic-bezier(.2,.7,.3,1); }
+    .topbar--refresh .desktop-main { align-items: center; justify-content: center; gap: 2px; margin-inline: auto 18px; }
+    .topbar--refresh .desktop-main a {
+      padding: 9px 10px; border-radius: var(--radius-pill); color: var(--ink); text-decoration: none;
+      font-family: var(--font-display); font-size: .82rem; font-weight: 600; white-space: nowrap;
+    }
+    .topbar--refresh .desktop-main a:hover, .topbar--refresh .desktop-main a:focus-visible { background: var(--surface); }
+    .topbar--refresh .desktop-main a[aria-current="page"] { color: var(--coral); }
+    :global(body.is-scrolled) .topbar--refresh { border-bottom-color: var(--line); background: rgba(255,255,255,.96); }
+    :global(body.is-scrolled) .topbar--refresh .logo img { height: 30px; }
+  }
+
+  @media (min-width: 1080px) {
+    .topbar--refresh .desktop-main { display: flex; }
+    .menu--refresh { display: none; }
+  }
+
+  @media (max-width: 899px) {
+    .topbar--refresh {
+      height: var(--topbar-height, 66px); padding-block: 0;
+      transition: height .22s cubic-bezier(.2,.7,.3,1), background .22s ease, border-color .22s ease;
+    }
+    .topbar--refresh .logo img { height: 34px; transition: height .22s cubic-bezier(.2,.7,.3,1); }
+    :global(body.is-scrolled) .topbar--refresh { border-bottom-color: var(--line); background: rgba(255,255,255,.96); }
+    :global(body.is-scrolled) .topbar--refresh .logo img { height: 26px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .topbar--refresh, .topbar--refresh .logo img { transition: none; }
   }
 </style>
 

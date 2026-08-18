@@ -5,10 +5,10 @@ const {
 } = Astro.props;
 ---
 
-<nav class="section-nav" aria-label={label}>
+<nav class="section-nav" aria-label={label} data-section-nav>
   <div class="section-nav__rail">
     {items.map((item) => (
-      <a href={item.href}>{item.label}</a>
+      <a href={item.href} data-section-link>{item.label}</a>
     ))}
   </div>
 </nav>
@@ -16,12 +16,14 @@ const {
 <style>
   .section-nav {
     position: sticky;
-    top: 65px;
+    top: var(--topbar-height, 65px);
     z-index: 32;
     padding-inline: max(20px, calc((100vw - 960px) / 2));
     border-block: 1px solid var(--line);
-    background: color-mix(in srgb, var(--sage-pale) 92%, white);
+    background: rgba(255,255,255,.94);
+    backdrop-filter: blur(12px);
     box-shadow: 0 8px 18px rgba(10, 44, 48, .06);
+    transition: top .22s cubic-bezier(.2,.7,.3,1);
   }
 
   .section-nav__rail {
@@ -42,18 +44,20 @@ const {
     align-items: center;
     padding: 7px 13px;
     border-radius: var(--radius-pill);
-    color: var(--sage-deep);
+    color: var(--ink-soft);
     font-family: var(--font-display);
     font-size: .78rem;
     font-weight: 600;
     text-decoration: none;
     white-space: nowrap;
+    background: var(--surface);
     transition: background .16s ease, color .16s ease, transform .16s ease;
   }
 
   a:hover,
-  a:focus-visible {
-    background: var(--sage-deep);
+  a:focus-visible,
+  a.is-active {
+    background: var(--ink);
     color: #fff;
     transform: translateY(-1px);
   }
@@ -64,6 +68,38 @@ const {
   }
 
   @media (prefers-reduced-motion: reduce) {
-    a { transition: none; }
+    .section-nav, a { transition: none; }
   }
 </style>
+
+<script>
+  document.querySelectorAll('[data-section-nav]').forEach((nav) => {
+    const links = Array.from(nav.querySelectorAll('[data-section-link]'));
+    const targets = links.map((link) => {
+      const href = link.getAttribute('href') || '';
+      return href.startsWith('#') ? document.getElementById(href.slice(1)) : null;
+    });
+
+    const setActive = (index) => {
+      links.forEach((link, linkIndex) => {
+        const active = linkIndex === index;
+        link.classList.toggle('is-active', active);
+        if (active) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      });
+    };
+
+    const sync = () => {
+      const offset = Number.parseFloat(getComputedStyle(document.body).getPropertyValue('--topbar-height')) + nav.getBoundingClientRect().height + 28;
+      let active = 0;
+      targets.forEach((target, index) => {
+        if (target && target.getBoundingClientRect().top <= offset) active = index;
+      });
+      setActive(active);
+    };
+
+    window.addEventListener('scroll', sync, { passive: true });
+    window.addEventListener('resize', sync, { passive: true });
+    sync();
+  });
+</script>

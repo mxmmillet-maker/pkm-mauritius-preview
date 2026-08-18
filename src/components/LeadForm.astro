@@ -25,14 +25,20 @@ const t = {
   ...labels,
 };
 ---
-<form class="lead-form" id="lead-form" data-wa-phone={waPhone}>
+<form class="lead-form" id="lead-form" data-wa-phone={waPhone} novalidate>
+  <div class="form-heading">
+    <span>Ta demande</span>
+    <b>4 informations, puis on continue sur WhatsApp</b>
+  </div>
   <div class="field">
     <label for="firstName">{t.firstName}</label>
-    <input id="firstName" name="firstName" type="text" required minlength="1" />
+    <input id="firstName" name="firstName" type="text" autocomplete="given-name" required aria-describedby="firstName-error" />
+    <small class="field-error" id="firstName-error" data-error="firstName"></small>
   </div>
   <div class="field">
     <label for="phone">{t.phone}</label>
-    <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required />
+    <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+230 …" required aria-describedby="phone-error" />
+    <small class="field-error" id="phone-error" data-error="phone"></small>
   </div>
   <div class="date-grid">
     <div class="field">
@@ -50,6 +56,10 @@ const t = {
       {t.levelOptions.map((opt) => <option>{opt}</option>)}
     </select>
   </div>
+  <aside class="message-preview" aria-live="polite">
+    <span>Aperçu du message</span>
+    <p data-message-preview></p>
+  </aside>
   <button class="btn btn-wa btn-block" type="submit">
     <svg aria-hidden="true" viewBox="0 0 24 24"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.009-.371-.011-.57-.011-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.29.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.981.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884a9.82 9.82 0 0 1 7.021 2.91 9.825 9.825 0 0 1 2.9 7.034c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.14 1.588 5.945L.057 24l6.3-1.654a11.88 11.88 0 0 0 5.69 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.82 11.82 0 0 0-3.481-8.413Z" /></svg>
     {t.submit}
@@ -58,7 +68,10 @@ const t = {
 </form>
 
 <style>
-  .lead-form { background: var(--surface); border-radius: 20px; padding: 22px 18px; }
+  .lead-form { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 22px 18px; box-shadow: 0 18px 44px rgba(10,44,48,.08); }
+  .form-heading { display: grid; gap: 2px; margin-bottom: 18px; }
+  .form-heading span { color: var(--coral); font-family: var(--font-display); font-size: .66rem; font-weight: 600; letter-spacing: .15em; text-transform: uppercase; }
+  .form-heading b { font-family: var(--font-display); font-size: 1rem; }
   .field { margin-bottom: 13px; }
   .date-grid { display: grid; gap: 0; }
   label { display: block; font-family: var(--font-display); font-weight: 600; font-size: .83rem; margin-bottom: 5px; }
@@ -68,27 +81,87 @@ const t = {
     color: var(--ink); min-height: var(--tap-min);
   }
   input:focus, select:focus { outline: 2px solid var(--sage-deep); outline-offset: 1px; border-color: transparent; }
+  input[aria-invalid="true"] { border-color: var(--coral); background: #fff8f6; }
+  .field-error { display: none; margin-top: 5px; color: var(--coral); font-size: .75rem; line-height: 1.35; }
+  .field-error:not(:empty) { display: block; }
+  .message-preview { margin: 4px 0 16px; padding: 14px; border-radius: var(--radius-sm); background: var(--sage-pale); }
+  .message-preview > span { color: var(--sage-deep); font-family: var(--font-display); font-size: .65rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+  .message-preview p { margin: 7px 0 0; color: var(--ink-soft); font-size: .78rem; line-height: 1.55; }
+  .btn {
+    display: flex; width: 100%; min-height: var(--tap-min); align-items: center; justify-content: center; gap: 9px;
+    padding: 15px 20px; border: 0; border-radius: var(--radius-pill); background: var(--wa); color: #fff;
+    font-family: var(--font-display); font-size: 1rem; font-weight: 600; cursor: pointer;
+  }
   button svg { width: 20px; height: 20px; flex: 0 0 auto; }
   .legal { font-size: .76rem; color: var(--ink-soft); line-height: 1.5; margin: 12px 0 0; }
   @media (min-width: 900px) {
-    .lead-form { max-width: 680px; padding: 28px; }
+    .lead-form { padding: 28px; }
     .date-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
   }
 </style>
 
 <script>
-  // Redirection WhatsApp immédiate. La capture en base (Cloudflare Worker → Google
-  // Sheet) viendra se brancher ici sans changer ce qui suit — voir TODO en tête de fichier.
   const form = document.getElementById('lead-form');
+  const preview = form?.querySelector('[data-message-preview]');
+  let attempted = false;
+
+  const formatDate = (value) => {
+    if (!value) return 'à préciser';
+    const parts = String(value).split('-');
+    return parts.length === 3 ? `${parts[2]}/${parts[1]}/${parts[0]}` : String(value);
+  };
+
+  const getMessage = () => {
+    if (!(form instanceof HTMLFormElement)) return '';
+    const data = new FormData(form);
+    const firstName = String(data.get('firstName') || '').trim() || '…';
+    const phone = String(data.get('phone') || '').trim() || '…';
+    const interest = String(data.get('level') || 'un programme adapté');
+    const start = formatDate(data.get('arrival'));
+    const end = formatDate(data.get('departure'));
+    return document.documentElement.lang === 'en'
+      ? `Hello PKM! I'm ${firstName}, interested in ${interest}. I'll be on the island from ${start} to ${end}. My number: ${phone}`
+      : `Bonjour PKM ! Je suis ${firstName}, intéressé(e) par ${interest}. Je suis sur l'île du ${start} au ${end}. Mon numéro : ${phone}`;
+  };
+
+  const showErrors = () => {
+    if (!(form instanceof HTMLFormElement)) return false;
+    const firstName = form.elements.namedItem('firstName');
+    const phone = form.elements.namedItem('phone');
+    const errors = { firstName: '', phone: '' };
+    if (firstName instanceof HTMLInputElement && !firstName.value.trim()) errors.firstName = "Dis-nous comment on t'appelle.";
+    if (phone instanceof HTMLInputElement) {
+      const digits = phone.value.replace(/\D/g, '').length;
+      if (!phone.value.trim()) errors.phone = 'On répond sur WhatsApp, il nous faut ton numéro.';
+      else if (digits < 8) errors.phone = 'Numéro incomplet : indicatif compris.';
+    }
+    Object.entries(errors).forEach(([name, message]) => {
+      const input = form.elements.namedItem(name);
+      const output = form.querySelector(`[data-error="${name}"]`);
+      if (input instanceof HTMLElement) input.setAttribute('aria-invalid', String(Boolean(message)));
+      if (output) output.textContent = message;
+    });
+    return !errors.firstName && !errors.phone;
+  };
+
+  const updatePreview = () => {
+    if (preview) preview.textContent = getMessage();
+    if (attempted) showErrors();
+  };
+
+  form?.addEventListener('input', updatePreview);
+  form?.addEventListener('change', updatePreview);
   form?.addEventListener('submit', (e) => {
     e.preventDefault();
-    const data = new FormData(form);
+    if (!(form instanceof HTMLFormElement)) return;
+    attempted = true;
+    if (!showErrors()) {
+      const invalid = form.querySelector('[aria-invalid="true"]');
+      if (invalid instanceof HTMLElement) invalid.focus();
+      return;
+    }
     const phone = form.dataset.waPhone;
-    const start = data.get('arrival') || 'à préciser';
-    const end = data.get('departure') || 'à préciser';
-    const msg = document.documentElement.lang === 'en'
-      ? `Hello PKM! I'm ${data.get('firstName')}, interested in ${data.get('level')}. I'll be on the island from ${start} to ${end}. My number: ${data.get('phone')}`
-      : `Bonjour PKM ! Je suis ${data.get('firstName')}, intéressé(e) par ${data.get('level')}. Je suis sur l'île du ${start} au ${end}. Mon numéro : ${data.get('phone')}`;
-    window.location.href = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
+    window.location.href = `https://wa.me/${phone}?text=${encodeURIComponent(getMessage())}`;
   });
+  updatePreview();
 </script>

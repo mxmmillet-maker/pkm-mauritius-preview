@@ -19,51 +19,78 @@ const waPhone = site.phones[0].replace(/\D/g, '');
   translations={translations}
   tarifsHref="/fr/tarifs/"
   waHref="/fr/reserver/"
+  scrollRefresh={true}
   jsonLd={[breadcrumbList([
     { name: 'Accueil', url: `${site.url}/fr/` },
     { name: 'Réserver', url: `${site.url}/fr/reserver/` },
   ])]}
 >
-  <section class="pad">
-    <h1 style="font-size:1.85rem">Réserver</h1>
-    <p class="sub">
-      Indique tes dates et ce que tu veux travailler. L’équipe revient vers toi
-      sur WhatsApp avec un programme, les créneaux et la prévision de vent.
-    </p>
-    <LeadForm
-      waPhone={waPhone}
-      labels={{
-        firstName: 'Prénom',
-        phone: 'Numéro WhatsApp',
-        arrival: 'Date d’arrivée sur l’île',
-        departure: 'Date de départ',
-        level: 'Ce qui t\'intéresse',
-        levelOptions: ['Séjour famille ou groupe, niveaux mixtes', 'Cours débutant', 'Reprise en confiance', 'Cours privé', 'Cours semi-privé', 'Cours enfant', 'Wingfoil', 'Location de matériel', 'Coaching freestyle', 'Coaching vagues', 'Supervision', 'Downwind ou VIP'],
-        submit: 'Continuer sur WhatsApp',
-        legal: 'Réponse sous 2 h entre 8 h et 19 h, heure de Maurice. Ton numéro sert uniquement à traiter cette demande.',
-      }}
-    />
-    <div class="booking-benefits">
-      <span class="kicker">Offres réservées en ligne</span>
-      <div class="proofs">
-        <div class="proof"><b>10 % dès 3 personnes</b><span>Pour une famille ou un groupe réservé ensemble, même avec des niveaux différents.</span></div>
-        <div class="proof"><b>Première supervision offerte</b><span>Offre cumulable avec la réduction groupe.</span></div>
-        <div class="proof"><b>Pas de vent</b><span>La séance est déplacée sur un autre créneau sans frais.</span></div>
-      </div>
+  <section class="booking-hero">
+    <img src="/images/lagoon-le-morne.jpg" alt="Le lagon du Morne et ses eaux turquoise" width="1600" height="1067" fetchpriority="high" />
+    <span aria-hidden="true"></span>
+    <div class="pad">
+      <span class="kicker">Organise ton séjour</span>
+      <h1>Dis-nous quand tu viens</h1>
+      <p>Quelques informations suffisent. L’équipe te répond sur WhatsApp avec un programme adapté aux niveaux du groupe et aux conditions.</p>
     </div>
-    <div style="background:var(--surface);border-radius:16px;padding:18px;margin-top:16px">
-      <h3>Ou directement</h3>
-      <p class="sub" style="font-size:.9rem;margin:8px 0 12px">
-        {site.phones.join(' · ')} · {site.email}
-      </p>
-      <p class="sub" style="font-size:.86rem;margin:0">
-        Réservation confirmée par un acompte de 10 % (virement ou PayPal).
-        Solde sur place en roupies, euros, dollars, livres ou par carte.
-      </p>
+  </section>
+
+  <section class="pad booking-main">
+    <div class="booking-grid">
+      <LeadForm
+        waPhone={waPhone}
+        labels={{
+          firstName: 'Prénom',
+          phone: 'Numéro WhatsApp',
+          arrival: 'Date d’arrivée sur l’île',
+          departure: 'Date de départ',
+          level: 'Ce qui t\'intéresse',
+          levelOptions: ['Séjour famille ou groupe, niveaux mixtes', 'Cours débutant', 'Reprise en confiance', 'Cours privé', 'Cours semi-privé', 'Cours enfant', 'Wingfoil', 'Location de matériel', 'Coaching freestyle', 'Coaching vagues', 'Supervision', 'Downwind ou VIP'],
+          submit: 'Continuer sur WhatsApp',
+          legal: 'Réponse sous 2 h entre 8 h et 19 h, heure de Maurice. Ton numéro sert uniquement à traiter cette demande.',
+        }}
+      />
+      <aside class="booking-side">
+        <div class="booking-benefits">
+          <span class="kicker">Offres réservées en ligne</span>
+          <div class="proofs">
+            <div class="proof"><b>10 % dès 3 personnes</b><span>Pour une famille ou un groupe réservé ensemble, même avec des niveaux différents.</span></div>
+            <div class="proof"><b>Première supervision offerte</b><span>Offre cumulable avec la réduction groupe.</span></div>
+            <div class="proof"><b>Pas de vent</b><span>La séance est déplacée sur un autre créneau sans frais.</span></div>
+          </div>
+        </div>
+        <div class="booking-direct">
+          <h3>Tu préfères nous joindre directement ?</h3>
+          <p>{site.phones.join(' · ')}<br />{site.email}</p>
+          <small>Réservation confirmée par un acompte de 10 % (virement ou PayPal). Solde sur place en roupies, euros, dollars, livres ou par carte.</small>
+        </div>
+      </aside>
     </div>
   </section>
 </Layout>
 
 <style>
-  .booking-benefits { margin-top: 18px; padding: 18px; border-radius: var(--radius-md); background: var(--sage-pale); }
+  .booking-hero { position: relative; min-height: 330px; display: grid; align-items: end; overflow: hidden; isolation: isolate; color: #fff; }
+  .booking-hero > img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; object-position: center 58%; }
+  .booking-hero > span { position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(10,44,48,.14), rgba(10,44,48,.92)); }
+  .booking-hero > div { width: 100%; padding-block: 110px 30px; }
+  .booking-hero .kicker { color: var(--sage-pale); }
+  .booking-hero h1 { max-width: 620px; margin-bottom: 9px; }
+  .booking-hero p { max-width: 610px; margin: 0; color: rgba(255,255,255,.84); font-size: .94rem; }
+  .booking-main { background: #fff; }
+  .booking-grid { display: grid; gap: 20px; }
+  .booking-side { display: grid; gap: 14px; align-content: start; }
+  .booking-benefits { padding: 18px; border-radius: var(--radius-md); background: var(--sage-pale); }
+  .booking-direct { padding: 19px; border: 1px solid var(--line); border-radius: var(--radius-md); }
+  .booking-direct h3 { margin-bottom: 7px; }
+  .booking-direct p { color: var(--ink-soft); font-size: .88rem; }
+  .booking-direct small { display: block; color: var(--ink-soft); font-size: .76rem; line-height: 1.55; }
+
+  @media (min-width: 900px) {
+    .booking-hero { min-height: 470px; }
+    .booking-hero > span { background: linear-gradient(90deg, rgba(10,44,48,.9), rgba(10,44,48,.18)); }
+    .booking-hero > div { padding-block: 170px 64px; }
+    .booking-hero h1 { font-size: clamp(3.2rem, 5vw, 5rem); }
+    .booking-grid { grid-template-columns: minmax(0, 1.12fr) minmax(300px, .88fr); gap: 28px; align-items: start; }
+  }
 </style>

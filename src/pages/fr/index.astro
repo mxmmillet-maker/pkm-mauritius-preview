@@ -1,8 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Button from '../../components/Button.astro';
-import PriceFrom from '../../components/PriceFrom.astro';
-import ProfileSlider from '../../components/ProfileSlider.astro';
+import ScrollJourney from '../../components/ScrollJourney.astro';
 import Faq from '../../components/Faq.astro';
 import SectionNav from '../../components/SectionNav.astro';
 import { sportsActivityLocation, faqPage, breadcrumbList } from '../../lib/schema';
@@ -12,6 +11,7 @@ const translations = { fr: '/fr/', en: '/en/' };
 const waPhone = site.phones[0].replace(/\D/g, '');
 const waLink = `https://wa.me/${waPhone}?text=${encodeURIComponent("Bonjour l'équipe PKM, j'aimerais organiser des séances au Morne.")}`;
 const googleReviewsUrl = 'https://www.google.com/maps/search/?api=1&query=Paradise+Kitesurfing+Mauritius+Le+Morne';
+const osmEmbed = 'https://www.openstreetmap.org/export/embed.html?bbox=57.285%2C-20.505%2C57.405%2C-20.395&layer=mapnik';
 const sectionNav = [
   { label: 'Ton parcours', href: '#parcours' },
   { label: 'Le spot', href: '#spot' },
@@ -81,19 +81,25 @@ const faqItems = [
   translations={translations}
   tarifsHref="/fr/tarifs/"
   waHref="/fr/reserver/"
+  scrollRefresh={true}
   jsonLd={[
     sportsActivityLocation(),
     faqPage(faqItems),
     breadcrumbList([{ name: 'Accueil', url: `${site.url}/fr/` }]),
   ]}
 >
-  <section class="hero-photo pad">
-    <img class="hero-photo__media" src="/images/kitesurf-lagoon-aerial-pexels.jpg" alt="Kitesurfeur vu du ciel le long d’un récif dans une eau turquoise" width="1800" height="1013" fetchpriority="high" />
+  <section class="hero-photo hero-photo--refresh pad" data-hero-refresh>
+    <img class="hero-photo__media" data-hero-media src="/images/kitesurf-lagoon-aerial-pexels.jpg" alt="Kitesurfeur vu du ciel le long d’un récif dans une eau turquoise" width="1800" height="1013" fetchpriority="high" />
     <span class="hero-photo__shade" aria-hidden="true"></span>
     <div class="hero-photo__copy">
-      <span class="kicker">Le Morne, île Maurice</span>
-      <h1>Du premier waterstart aux vagues du Morne</h1>
-      <p>Débutant, en reprise ou déjà autonome, l’équipe construit avec toi un programme adapté à ton niveau et aux conditions du jour.</p>
+      <span class="hero-eyebrow">Kiteschool · Wingschool · Le Morne<br />Depuis {site.foundedYear}</span>
+      <h1>Du <span>waterstart</span> <em>aux vagues</em></h1>
+      <p>Un programme construit avec toi, selon ton niveau et les conditions du jour.</p>
+      <div class="hero-proofline" aria-label="Repères de l’école">
+        <span><b>{site.googleReviews.rating.toFixed(1).replace('.', ',')}</b><small>Google · {site.googleReviews.count} avis</small></span>
+        <span><b>{site.team.maxStudentsPerInstructor} max.</b><small>élèves par moniteur</small></span>
+        <span><b>IKO</b><small>fondateur certifié</small></span>
+      </div>
       <div class="hero-actions">
         <Button variant="wa" href={waLink}>Discuter sur WhatsApp</Button>
         <Button variant="line" href="/fr/cours-de-kitesurf/">Découvrir les cours</Button>
@@ -125,12 +131,7 @@ const faqItems = [
 
   <SectionNav items={sectionNav} label="Accès rapide aux sections de la page" />
 
-  <section class="pad profile-section" id="parcours">
-    <span class="kicker">Ton programme</span>
-    <h2>Tu veux faire quoi sur l’eau ?</h2>
-    <p class="sub">Fais glisser les cartes. Chacun peut suivre son propre parcours, même quand vous venez en famille ou en couple.</p>
-    <ProfileSlider items={profiles} label="Choisir un parcours selon son niveau" />
-  </section>
+  <ScrollJourney items={profiles} label="Choisir un parcours selon son niveau" />
 
   <section class="pad spot-section" id="spot">
     <div>
@@ -147,6 +148,18 @@ const faqItems = [
         <div><b>Toute l’année</b><small>Eau entre 22 et 28 °C</small></div>
       </div>
       <p class="data-note">Des repères saisonniers, pas une promesse météo : les créneaux sont ajustés à la prévision réelle de ton séjour.</p>
+    </div>
+    <div class="home-map">
+      <div class="home-map__frame">
+        <iframe src={osmEmbed} title="Carte générale du Morne et de La Gaulette" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <div class="home-map__copy">
+        <span class="kicker">Se repérer</span>
+        <h3>Du lagon aux vagues</h3>
+        <p>La zone de navigation change selon ton niveau, le vent et la marée. Cette carte situe Le Morne ; le briefing fixe le vrai point de rendez-vous.</p>
+        <a href="/fr/kitesurf-le-morne/#carte">Explorer la carte et les zones →</a>
+        <small>Carte générale OpenStreetMap, sans point GPS fictif pour l’école.</small>
+      </div>
     </div>
   </section>
 
@@ -200,11 +213,25 @@ const faqItems = [
   <section class="pad prices-preview" id="tarifs">
     <span class="kicker">Repères tarifaires</span>
     <h2>Choisir une première formule</h2>
-    <div class="fromgrid">
-      <PriceFrom label="Cours à partir de" amount="4 500" currency="Rs · ≈ 90 €" detail="2 h en semi-privé, par personne" />
-      <PriceFrom label="Location à partir de" amount="2 250" currency="Rs · ≈ 45 €" detail="2 h, aile et planche" />
+    <div class="price-stack">
+      <article class="price-glance price-glance--hot">
+        <span>Semi-privé</span>
+        <div><b>Rs 4 500</b><small>≈ 90 €</small></div>
+        <p>2 h, par personne · 2 élèves maximum</p>
+        <strong>+ 1 séance surveillée offerte en réservant en ligne</strong>
+      </article>
+      <article class="price-glance">
+        <span>Cours privé</span>
+        <div><b>Rs 8 000</b><small>≈ 160 €</small></div>
+        <p>2 h · 1 moniteur pour 1 élève</p>
+        <strong>+ 1 séance surveillée offerte en réservant en ligne</strong>
+      </article>
+      <article class="price-glance price-glance--dark">
+        <span>Location de matériel</span>
+        <div><b>Rs 2 250</b><small>≈ 45 €</small></div>
+        <p>2 h, aile et planche. Tarif dégressif à la journée ou à la semaine.</p>
+      </article>
     </div>
-    <div class="offer-lite"><b>Location dégressive :</b> 2 h, journée ou semaine. Le tarif baisse quand la durée augmente.</div>
     <Button variant="ghost" href="/fr/tarifs/">Comparer toutes les formules</Button>
   </section>
 
@@ -289,4 +316,22 @@ const faqItems = [
       <Button variant="line" href="/fr/reserver/">Décrire mon séjour</Button>
     </div>
   </section>
+
+  <script>
+    const hero = document.querySelector('[data-hero-refresh]');
+    const heroMedia = hero?.querySelector('[data-hero-media]');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (hero && heroMedia instanceof HTMLElement && !reducedMotion) {
+      let heroFrame = 0;
+      const moveHero = () => {
+        heroFrame = 0;
+        const rect = hero.getBoundingClientRect();
+        if (rect.bottom > 0) heroMedia.style.transform = `translate3d(0, ${Math.max(0, window.scrollY * .16)}px, 0)`;
+      };
+      window.addEventListener('scroll', () => {
+        if (!heroFrame) heroFrame = window.requestAnimationFrame(moveHero);
+      }, { passive: true });
+      moveHero();
+    }
+  </script>
 </Layout>

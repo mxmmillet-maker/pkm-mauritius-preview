@@ -1,0 +1,181 @@
+---
+export interface JourneyItem {
+  eyebrow: string;
+  title: string;
+  text: string;
+  href: string;
+  image: string;
+  alt: string;
+  linkLabel: string;
+}
+
+const {
+  items,
+  label,
+  id = 'parcours',
+} = Astro.props as { items: JourneyItem[]; label: string; id?: string };
+---
+
+<section class="journey-scroll" id={id} data-journey data-no-reveal>
+  <div class="journey-sticky">
+    <div class="journey-intro pad">
+      <span class="kicker">Ton programme</span>
+      <h2>Tu veux faire quoi sur l’eau ?</h2>
+      <p>Chacun peut suivre son propre parcours, même quand vous venez en famille ou en couple.</p>
+      <div class="journey-meter" aria-hidden="true">
+        <span data-journey-step>1 / {items.length}</span>
+        <i><b data-journey-progress></b></i>
+      </div>
+    </div>
+
+    <div class="journey-viewport" data-journey-viewport role="region" aria-label={label}>
+      <div class="journey-track" data-journey-track>
+        {items.map((item, index) => (
+          <a class="journey-card" href={item.href} data-journey-card>
+            <img src={item.image} alt={item.alt} width="1600" height="1067" loading="lazy" />
+            <span class="journey-shade" aria-hidden="true"></span>
+            <span class="journey-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+            <span class="journey-copy">
+              <small>{item.eyebrow}</small>
+              <strong>{item.title}</strong>
+              <span>{item.text}</span>
+              <b>{item.linkLabel} <span aria-hidden="true">→</span></b>
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .journey-scroll {
+    --journey-top: calc(var(--topbar-height, 66px) + 55px);
+    position: relative;
+    height: 1900px;
+    padding-block: 0;
+    background: var(--surface);
+  }
+
+  .journey-sticky {
+    position: sticky;
+    top: var(--journey-top);
+    height: calc(100svh - var(--journey-top));
+    min-height: 0;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    align-content: start;
+    overflow: hidden;
+    padding-block: 26px 22px;
+  }
+
+  .journey-intro { padding-bottom: 18px; }
+  .journey-intro h2 { max-width: 520px; margin-bottom: 8px; }
+  .journey-intro p { max-width: 610px; margin: 0; color: var(--ink-soft); font-size: .9rem; }
+
+  .journey-meter { display: flex; align-items: center; gap: 12px; margin-top: 15px; }
+  .journey-meter > span {
+    flex: 0 0 auto; font-family: var(--font-display); font-size: .72rem; font-weight: 600;
+    color: var(--ink); font-variant-numeric: tabular-nums;
+  }
+  .journey-meter > i { position: relative; width: min(220px, 48vw); height: 2px; overflow: hidden; border-radius: 2px; background: var(--line); }
+  .journey-meter b { position: absolute; inset: 0; width: 100%; background: var(--coral); transform: scaleX(0); transform-origin: left; }
+
+  .journey-viewport {
+    min-width: 0; overflow-x: auto; overflow-y: hidden; padding: 0 20px 8px;
+    overscroll-behavior-inline: contain; scrollbar-width: none;
+  }
+  .journey-viewport::-webkit-scrollbar { display: none; }
+  .journey-scroll.is-ready .journey-viewport { overflow-x: hidden; }
+
+  .journey-track { display: flex; width: max-content; gap: 14px; will-change: transform; }
+  .journey-card {
+    position: relative; width: min(264px, 72vw); height: clamp(285px, calc(100svh - var(--journey-top) - 215px), 420px);
+    flex: 0 0 auto; overflow: hidden; border-radius: var(--radius-md); isolation: isolate;
+    background: var(--ink); color: #fff; text-decoration: none; box-shadow: 0 18px 38px rgba(10,44,48,.15);
+  }
+  .journey-card img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; transition: transform .45s ease; }
+  .journey-shade { position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(10,44,48,.05) 20%, rgba(10,44,48,.94) 100%); }
+  .journey-number {
+    position: absolute; top: 14px; right: 16px; font-family: var(--font-display); font-size: 2rem;
+    font-weight: 700; line-height: 1; color: rgba(255,255,255,.72); font-variant-numeric: tabular-nums;
+  }
+  .journey-copy { position: absolute; inset: auto 0 0; display: grid; gap: 7px; padding: 22px 20px; }
+  .journey-copy small { color: var(--sage-pale); font-family: var(--font-display); font-size: .64rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+  .journey-copy strong { font-family: var(--font-display); font-size: 1.42rem; line-height: 1.08; }
+  .journey-copy > span { color: rgba(255,255,255,.84); font-size: .82rem; line-height: 1.5; }
+  .journey-copy b { margin-top: 3px; font-family: var(--font-display); font-size: .76rem; }
+  .journey-card:hover img, .journey-card:focus-visible img { transform: scale(1.04); }
+  .journey-card:focus-visible { outline: 3px solid var(--sun); outline-offset: -4px; }
+
+  @media (min-width: 900px) {
+    .journey-scroll { --journey-top: calc(var(--topbar-height, 84px) + 59px); height: 1560px; }
+    .journey-sticky {
+      grid-template-columns: minmax(270px, .72fr) minmax(0, 1.28fr); grid-template-rows: 1fr;
+      column-gap: 42px; align-items: center; min-height: 0; padding: 36px max(24px, calc((100vw - 1120px) / 2));
+    }
+    .journey-intro { padding: 0; }
+    .journey-intro h2 { font-size: clamp(2.35rem, 3.2vw, 3.35rem); }
+    .journey-intro p { font-size: 1rem; }
+    .journey-meter > i { width: min(240px, 18vw); }
+    .journey-viewport { align-self: center; padding: 14px 0 18px; }
+    .journey-track { gap: 18px; }
+    .journey-card { width: min(340px, 26vw); height: clamp(360px, 61svh, 510px); }
+    .journey-copy { padding: 27px 24px; }
+    .journey-copy strong { font-size: 1.75rem; }
+    .journey-copy > span { font-size: .9rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .journey-scroll { height: auto; padding-block: 44px; }
+    .journey-sticky { position: static; height: auto; min-height: 0; overflow: visible; padding: 0; }
+    .journey-viewport, .journey-scroll.is-ready .journey-viewport { overflow-x: auto; padding-block: 0 16px; }
+    .journey-track { transform: none !important; will-change: auto; }
+    .journey-card img { transition: none; }
+    .journey-meter { display: none; }
+  }
+</style>
+
+<script>
+  const journeys = document.querySelectorAll('[data-journey]');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  journeys.forEach((section) => {
+    const sticky = section.querySelector('.journey-sticky');
+    const viewport = section.querySelector('[data-journey-viewport]');
+    const track = section.querySelector('[data-journey-track]');
+    const progress = section.querySelector('[data-journey-progress]');
+    const step = section.querySelector('[data-journey-step]');
+    const cards = Array.from(section.querySelectorAll('[data-journey-card]'));
+    if (!(section instanceof HTMLElement) || !(sticky instanceof HTMLElement) || !(viewport instanceof HTMLElement) || !(track instanceof HTMLElement)) return;
+    if (reducedMotion) return;
+
+    section.classList.add('is-ready');
+    let frame = 0;
+
+    const update = () => {
+      frame = 0;
+      const stickyTop = Number.parseFloat(getComputedStyle(sticky).top) || 0;
+      const start = section.offsetTop - stickyTop;
+      const span = Math.max(1, section.offsetHeight - sticky.offsetHeight);
+      const amount = Math.max(0, Math.min(1, (window.scrollY - start) / span));
+      const maxX = Math.max(0, track.scrollWidth - viewport.clientWidth);
+      track.style.transform = `translate3d(${-amount * maxX}px, 0, 0)`;
+      if (progress instanceof HTMLElement) progress.style.transform = `scaleX(${amount})`;
+      if (step) step.textContent = `${Math.min(cards.length, Math.floor(amount * cards.length) + 1)} / ${cards.length}`;
+    };
+
+    const requestUpdate = () => {
+      if (!frame) frame = window.requestAnimationFrame(update);
+    };
+
+    window.addEventListener('scroll', requestUpdate, { passive: true });
+    window.addEventListener('resize', requestUpdate, { passive: true });
+    cards.forEach((card, index) => card.addEventListener('focus', () => {
+      const maxX = Math.max(0, track.scrollWidth - viewport.clientWidth);
+      const cardX = Math.min(maxX, index * ((card instanceof HTMLElement ? card.offsetWidth : 0) + 14));
+      track.style.transform = `translate3d(${-cardX}px, 0, 0)`;
+    }));
+    update();
+  });
+</script>

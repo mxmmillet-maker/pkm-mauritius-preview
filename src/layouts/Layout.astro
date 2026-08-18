@@ -28,6 +28,7 @@ const {
   jsonLd = [],
   tarifsHref,
   waHref,
+  scrollRefresh = false,
 } = Astro.props;
 
 const canonical = new URL(translations[locale] ?? Astro.url.pathname, Astro.site);
@@ -82,8 +83,8 @@ const footerColumns = locale === 'fr'
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
   ))}
 </head>
-<body>
-  <Topbar locale={locale} translations={translations} nav={NAV[locale] ?? []} />
+<body class:list={{ 'scroll-refresh': scrollRefresh }}>
+  <Topbar locale={locale} translations={translations} nav={NAV[locale] ?? []} scrollRefresh={scrollRefresh} />
   <main>
     <slot />
   </main>
@@ -106,7 +107,7 @@ const footerColumns = locale === 'fr'
     // ~15 lignes, natif au navigateur (IntersectionObserver).
     // La toute première section de la page (le hero) n'est jamais concernée :
     // elle doit s'afficher immédiatement, sans attendre le JS.
-    const sections = document.querySelectorAll('main section:not(:first-of-type)');
+    const sections = document.querySelectorAll('main section:not(:first-of-type):not([data-no-reveal])');
     sections.forEach((el) => el.setAttribute('data-reveal', ''));
 
     if ('IntersectionObserver' in window) {
@@ -128,5 +129,19 @@ const footerColumns = locale === 'fr'
       sections.forEach((el) => el.classList.add('in'));
     }
   </script>
+  {scrollRefresh && (
+    <script>
+      const body = document.body;
+      let compactFrame = 0;
+      const syncCompactHeader = () => {
+        compactFrame = 0;
+        body.classList.toggle('is-scrolled', window.scrollY > 60);
+      };
+      window.addEventListener('scroll', () => {
+        if (!compactFrame) compactFrame = window.requestAnimationFrame(syncCompactHeader);
+      }, { passive: true });
+      syncCompactHeader();
+    </script>
+  )}
 </body>
 </html>
