@@ -30,4 +30,4 @@ Le site ne transmet aucune donnée personnelle à cet endpoint tant que cette va
 ## À confirmer administrativement
 
 - BRN de `PARADISE KITESURFING (MAURITIUS) LTD` avant paiement et facturation en ligne.
-- Hébergeur définitif après bascule du domaine, pour remplacer la mention GitHub Pages de la préversion.
+- Vérifier le BRN et le compléter dans les mentions légales avant d'activer le paiement en ligne.

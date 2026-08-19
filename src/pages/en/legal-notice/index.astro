@@ -8,7 +8,7 @@ const sections = [
   { title: 'Website publisher', paragraphs: [`The <strong>${site.name}</strong> website is published by <strong>${site.legal.legalName}</strong>, established at ${address}.`, `Kitesurfing activity licensed by the <strong>${site.legal.tourismLicenceAuthority}</strong>, licence no. <strong>${site.legal.tourismLicence}</strong>.`] },
   { title: 'Contact', items: [`Email: <a href="mailto:${site.email}">${site.email}</a>`, ...site.phones.map((phone) => `Telephone / WhatsApp: <a href="tel:${phone.replace(/\s/g, '')}">${phone}</a>`)] },
   { title: 'Activity location', paragraphs: [`The school welcomes clients at <strong>${site.geo.name}, Mauritius</strong>. This operational meeting point is separate from the company's registered address.`], items: [`<a href="${site.geo.googleMapsUrl}">Open the GPS point in Google Maps</a>`] },
-  { title: 'Hosting', paragraphs: [`The public preview of this website is hosted by ${site.legal.previewHosting}. Hosting information will be updated when the final domain goes live.`] },
+  { title: 'Hosting', paragraphs: [`This website is hosted by ${site.legal.hosting}.`] },
   { title: 'Content and liability', paragraphs: ['Website copy, photographs, logos and graphic elements are protected and may not be reproduced without prior permission.', 'Wind, sea and safety conditions may require the team to change or postpone a session. Website information does not replace the on-site assessment made by the instructors.'] },
 ];
 ---

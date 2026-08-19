@@ -8,7 +8,7 @@ const sections = [
   { title: 'Éditeur du site', paragraphs: [`Le site <strong>${site.name}</strong> est édité par <strong>${site.legal.legalName}</strong>, société établie à l’adresse suivante : ${address}.`, `Activité de kitesurf autorisée par la <strong>${site.legal.tourismLicenceAuthority}</strong>, licence n° <strong>${site.legal.tourismLicence}</strong>.`] },
   { title: 'Contact', items: [`E-mail : <a href="mailto:${site.email}">${site.email}</a>`, ...site.phones.map((phone) => `Téléphone / WhatsApp : <a href="tel:${phone.replace(/\s/g, '')}">${phone}</a>`)] },
   { title: 'Lieu d’activité', paragraphs: [`L’école accueille ses clients à <strong>${site.geo.name}, Île Maurice</strong>. Ce point de rendez-vous opérationnel est distinct de l’adresse administrative de la société.`], items: [`<a href="${site.geo.googleMapsUrl}">Ouvrir le point GPS dans Google Maps</a>`] },
-  { title: 'Hébergement', paragraphs: [`La préversion publique de ce site est hébergée par ${site.legal.previewHosting}. Les informations d’hébergement seront actualisées lors de la mise en production sur le domaine définitif.`] },
+  { title: 'Hébergement', paragraphs: [`Ce site est hébergé par ${site.legal.hosting}.`] },
   { title: 'Contenus et responsabilité', paragraphs: ['Les textes, photographies, logos et éléments graphiques du site sont protégés. Leur reproduction sans autorisation préalable est interdite.', 'Les conditions de vent, de mer et de sécurité peuvent conduire l’équipe à modifier ou reporter une séance. Les informations du site ne remplacent pas l’évaluation réalisée sur place par les moniteurs.'] },
 ];
 ---

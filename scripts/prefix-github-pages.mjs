@@ -2,6 +2,10 @@ import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { extname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+// Un domaine personnalisé GitHub Pages est servi à la racine : aucun préfixe
+// de dépôt ne doit être ajouté aux liens du build.
+if (process.env.CUSTOM_DOMAIN) process.exit(0);
+
 const repository = process.env.GITHUB_REPOSITORY?.split('/')[1];
 
 if (!repository) {

@@ -31,7 +31,7 @@
     },
     "businessRegistrationNumber": null,
     "businessRegistrationNumberNote": "BRN à confirmer avec l'entreprise avant d'activer un paiement et une facturation en ligne.",
-    "previewHosting": "GitHub Pages — GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA"
+    "hosting": "GitHub Pages — GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA"
   },
 
   "geo": {
