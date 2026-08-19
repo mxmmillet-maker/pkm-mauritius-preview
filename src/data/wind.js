@@ -23,6 +23,7 @@ export const WIND_MONTHS = [
 export const MONTH_NAMES = {
   fr: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
   en: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+  de: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
 };
 
 const RELIABILITY_EN = {
@@ -34,12 +35,21 @@ const RELIABILITY_EN = {
   'excellente': 'excellent',
 };
 
+const RELIABILITY_DE = {
+  'faible à moyenne': 'gering bis mittel',
+  'moyenne': 'mittel',
+  'bonne': 'gut',
+  'bonne à très bonne': 'gut bis sehr gut',
+  'très bonne': 'sehr gut',
+  'excellente': 'ausgezeichnet',
+};
+
 export function windRows(locale) {
   const names = MONTH_NAMES[locale] ?? MONTH_NAMES.fr;
   return WIND_MONTHS.map((m) => ({
     month: names[m.i],
-    wind: locale === 'en' ? m.wind.replace('nds', 'kn') : m.wind,
-    reliability: locale === 'en' ? RELIABILITY_EN[m.reliability] : m.reliability,
+    wind: locale === 'en' || locale === 'de' ? m.wind.replace('nds', 'kn') : m.wind,
+    reliability: locale === 'en' ? RELIABILITY_EN[m.reliability] : locale === 'de' ? RELIABILITY_DE[m.reliability] : m.reliability,
     water: m.water,
     kite: m.kite,
   }));

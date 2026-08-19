@@ -1,0 +1,143 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Button from '../../../components/Button.astro';
+import PricePack from '../../../components/PricePack.astro';
+import SectionNav from '../../../components/SectionNav.astro';
+import { offer, breadcrumbList } from '../../../lib/schema';
+import site from '../../../data/site.json';
+
+const translations = { fr: '/fr/tarifs/', en: '/en/prices/', de: '/de/preise/' };
+const sectionNav = [
+  { label: 'Privat', href: '#privatkurs' },
+  { label: 'Semi-privat', href: '#semi-privatkurs' },
+  { label: 'Miete', href: '#miete' },
+  { label: 'Coaching', href: '#coaching' },
+  { label: 'Wingfoil', href: '#wingfoil' },
+  { label: 'Inklusive', href: '#inklusive' },
+];
+---
+<Layout
+  title="Preise für Kitesurfen und Wingfoil in Le Morne — PKM"
+  description="Preise 2026 für Kitesurf- und Wingfoilkurse bei Paradise Kitesurfing Mauritius in Le Morne: privat, semi-privat, Miete, Coaching und Downwind."
+  locale="de"
+  translations={translations}
+  tarifsHref="/de/preise/"
+  waHref="/de/buchen/"
+  jsonLd={[
+    offer({
+      name: '2 Stunden privater Kitesurfkurs',
+      description: 'Zweistündiger Privatkurs mit Lehrer in Le Morne, Material inklusive.',
+      price: site.prices.kitesurfPrive['2h'],
+      url: `${site.url}/de/preise/`,
+    }),
+    breadcrumbList([
+      { name: 'Startseite', url: `${site.url}/de/` },
+      { name: 'Preise', url: `${site.url}/de/preise/` },
+    ]),
+  ]}
+>
+  <section class="pad" style="padding-bottom:20px">
+    <h1 style="font-size:1.9rem">Preise für Kitesurfen und Wingfoil in Le Morne</h1>
+    <p class="sub">Preise 2026 pro Person, Material inklusive. Mauritische Rupien mit Euro-Richtwert.</p>
+    <div style="display:flex;gap:7px;flex-wrap:wrap;margin-top:12px">
+      <span class="tag">Kite und Board</span><span class="tag">Helm und Weste</span><span class="tag">Neoprenanzug</span><span class="tag">Material je nach Paket</span>
+    </div>
+  </section>
+
+  <SectionNav items={sectionNav} label="Schnellzugriff auf alle Pakete" />
+
+  <section class="pad" style="padding-top:6px">
+    <h2 style="text-transform:uppercase;letter-spacing:.08em;font-size:.78rem;color:var(--ink-soft)">Kitesurfen</h2>
+
+    <div class="group-deal">
+      <span>Familien und Gruppen</span>
+      <b>10 % Rabatt ab 3 gemeinsam gebuchten Personen</b>
+      <p>Jede Person kann ein Paket für ihr eigenes Level wählen. Der Rabatt ist mit der ersten betreuten Session gratis kombinierbar.</p>
+    </div>
+
+    <PricePack id="privatkurs" eyebrow="Kitesurfen" title="Privatkurs" subtitle="1 Lehrer pro Schüler" badge="Am beliebtesten" priceLabel="Ab" price="Rs 8.000" euro="160 € · 2 Std." open hot>
+      <div class="body">
+        <div class="row"><span>2 Stunden</span><b>Rs 8.000<span class="eur">160 €</span></b></div>
+        <div class="row"><span>6 Stunden<br /><small style="color:var(--sage-deep)">bis zum betreuten Fahren</small><br /><span class="pill-offer">+ 1 betreute Session gratis</span></span><b>Rs 23.250<span class="eur">465 €</span></b></div>
+        <div class="row"><span>8 Stunden</span><b>Rs 31.000<span class="eur">620 €</span></b></div>
+        <div class="row"><span>10 Stunden<br /><small style="color:var(--sage-deep)">volle Selbstständigkeit und IKO</small></span><b>Rs 38.000<span class="eur">760 €</span></b></div>
+      </div>
+    </PricePack>
+
+    <PricePack id="semi-privatkurs" eyebrow="Kitesurfen" title="Semi-Privatkurs" subtitle="1 Lehrer für 2 Schüler · je ein Kite und Board" priceLabel="Pro Person" price="Rs 4.500" euro="90 € · 2 Std.">
+      <div class="body">
+        <div class="row"><span>2 Stunden</span><b>Rs 4.500<span class="eur">90 €</span></b></div>
+        <div class="row"><span>6 Stunden<br /><small style="color:var(--sage-deep)">bis zum betreuten Fahren</small><br /><span class="pill-offer">+ 1 betreute Session gratis</span></span><b>Rs 12.500<span class="eur">250 €</span></b></div>
+        <div class="row"><span>8 Stunden</span><b>Rs 16.250<span class="eur">325 €</span></b></div>
+        <div class="row"><span>10 Stunden<br /><small style="color:var(--sage-deep)">volle Selbstständigkeit und IKO</small></span><b>Rs 19.250<span class="eur">385 €</span></b></div>
+      </div>
+    </PricePack>
+
+    <PricePack id="miete" eyebrow="Selbstständige Fahrer" title="Materialmiete" subtitle="Twintip und Strapless · sinkender Durchschnittspreis" priceLabel="Ab" price="Rs 2.250" euro="45 € · 2 Std.">
+      <div class="body">
+        <div class="row"><span>Kite + Board · 2 Std.<br /><small>Kurzformat</small></span><b>Rs 2.250<span class="eur">45 €</span></b></div>
+        <div class="row"><span>Kite + Board · 1 Tag<br /><small style="color:var(--sage-deep)">Rs 500 weniger als zweimal 2 Std.</small></span><b>Rs 4.000<span class="eur">80 €</span></b></div>
+        <div class="row"><span>Kite + Board · 1 Woche<br /><small style="color:var(--sage-deep)">Langzeittarif</small></span><b>Rs 27.000<span class="eur">540 €</span></b></div>
+        <div class="row"><span>Betreuung + Miete · 2 Std.<br /><small style="color:var(--sage-deep)">Material gestellt</small></span><b>Rs 3.250<span class="eur">65 €</span></b></div>
+        <div class="row"><span>Nur Betreuung · 2 Std.<br /><small style="color:var(--sage-deep)">mit eigenem Material</small><br /><span class="pill-offer">Gratis bei Online-Buchung</span></span><b>Rs 1.500<span class="eur">30 €</span></b></div>
+        <p class="sub" style="font-size:.88rem;padding-top:12px">Je länger du das Material behältst, desto niedriger wird der Durchschnittspreis. Twintip oder Strapless nach Verfügbarkeit, mit Größenwechsel bei veränderten Bedingungen. Trapez, Helm und Weste inklusive.</p>
+        <div style="background:var(--sage-pale);border-radius:13px;padding:13px 14px;margin-top:14px">
+          <div style="font-family:var(--font-display);font-weight:600;font-size:.88rem;margin-bottom:5px">Was eine betreute Session beinhaltet</div>
+          <p class="sub" style="font-size:.86rem;margin:0">Ein Lehrer beobachtet dich vom Strand oder vom Wasser, hilft beim Starten und Landen und holt dich bei Problemen zurück. Technische Korrekturen gehören in einen Kurs oder ein Coaching.</p>
+        </div>
+      </div>
+    </PricePack>
+
+    <PricePack id="coaching" eyebrow="Freestyle oder Wellen" title="Stundenweises Coaching" subtitle="Ein klares Ziel, der Lehrer fährt neben dir" badge="Auf Anfrage" priceLabel="Format" price="1 oder 2 Std.">
+      <div class="body">
+        <span class="pill-offer">+ 1 betreute Session gratis</span>
+        <p class="sub" style="font-size:.88rem;padding-top:12px"><b>Twintip</b>: Höhe laufen, erster Sprung, Transitions, Rotationen.<br /><b>Strapless</b>: vom Twintip zum Directional Board, Jibe, erste Wellen am Small Reef und später Manawa.<br />Mit deinem eigenen Material oder gegen Aufpreis mit unserem. Buchbar am Vortag je nach Windfenster. Den genauen Preis bestätigt das Team auf WhatsApp.</p>
+        <Button variant="ghost" block href="/de/buchen/">Angebot anfragen</Button>
+      </div>
+    </PricePack>
+
+    <h2 id="wingfoil" style="text-transform:uppercase;letter-spacing:.08em;font-size:.78rem;color:var(--ink-soft);margin-top:26px">Wingfoil</h2>
+
+    <PricePack id="privat-wingfoil" eyebrow="Wingfoil" title="Privatkurs" subtitle="1 Lehrer pro Schüler" priceLabel="Ab" price="Rs 8.500" euro="170 € · 2 Std." group="wingfoil-packs">
+      <div class="body">
+        <div class="row"><span>2 Stunden</span><b>Rs 8.500<span class="eur">170 €</span></b></div>
+        <div class="row"><span>6 Stunden</span><b>Rs 24.500<span class="eur">490 €</span></b></div>
+        <div class="row"><span>8 Stunden</span><b>Rs 32.500<span class="eur">650 €</span></b></div>
+        <div class="row"><span>10 Stunden</span><b>Rs 39.500<span class="eur">790 €</span></b></div>
+      </div>
+    </PricePack>
+
+    <PricePack id="semi-privat-wingfoil" eyebrow="Wingfoil" title="Semi-Privatkurs" subtitle="Preis pro Person" priceLabel="Ab" price="Rs 7.000" euro="140 € · 2 Std." group="wingfoil-packs">
+      <div class="body">
+        <div class="row"><span>2 Stunden</span><b>Rs 7.000<span class="eur">140 €</span></b></div>
+        <div class="row"><span>6 Stunden</span><b>Rs 20.000<span class="eur">400 €</span></b></div>
+        <div class="row"><span>8 Stunden</span><b>Rs 26.500<span class="eur">530 €</span></b></div>
+        <div class="row"><span>10 Stunden</span><b>Rs 32.500<span class="eur">650 €</span></b></div>
+      </div>
+    </PricePack>
+
+    <PricePack id="downwind" eyebrow="Erlebnis" title="Downwind und VIP-Kurse" subtitle="Geteiltes Boot, Skipper und Guide" priceLabel="Preis" price="Auf Anfrage" group="wingfoil-packs">
+      <div class="body">
+        <p class="sub" style="font-size:.9rem;padding-top:10px">Der Preis hängt von der Teilnehmerzahl ab: Sicherheitsboot, Skipper und Guide werden geteilt. Downwind ab 4 Personen, maximal 8. Preisantwort innerhalb von 2 Stunden auf WhatsApp.</p>
+        <Button variant="ghost" block href="/de/buchen/">Angebot anfragen</Button>
+      </div>
+    </PricePack>
+
+    <div id="inklusive" style="background:var(--surface);border-radius:16px;padding:18px;margin-top:8px">
+      <h3>Was immer im Preis enthalten ist</h3>
+      <p class="sub" style="font-size:.9rem;margin:8px 0 0">Das für das Paket aufgeführte Material und die Sicherheitsausrüstung sowie bei Kursen das Honorar des Lehrers. VHF-Funk wird in geeigneten Lernformaten eingesetzt und nicht für fortgeschrittenes Coaching versprochen. Bei Windmangel wird die Session kostenlos verschoben.</p>
+    </div>
+  </section>
+
+  <section class="pad">
+    <p class="sub">Du möchtest mit dem übrigen Markt vergleichen? <a href="/de/guide/kosten-kitesurfen-mauritius/" style="color:var(--coral);font-weight:600;text-decoration:none">Die realistischen Preisspannen in Le Morne ansehen →</a></p>
+  </section>
+</Layout>
+
+<style>
+  .tag {
+    display: inline-flex; align-items: center; font-family: var(--font-display);
+    font-weight: 500; font-size: .74rem; padding: 5px 10px; border-radius: var(--radius-pill);
+    background: var(--sage-pale); color: var(--sage-deep);
+  }
+</style>

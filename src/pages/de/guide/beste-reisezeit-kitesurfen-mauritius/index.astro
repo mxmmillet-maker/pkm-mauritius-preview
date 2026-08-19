@@ -1,0 +1,118 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import WindMonthTable from '../../../../components/WindMonthTable.astro';
+import Faq from '../../../../components/Faq.astro';
+import { faqPage, breadcrumbList } from '../../../../lib/schema';
+import { windRows } from '../../../../data/wind';
+import site from '../../../../data/site.json';
+
+const translations = {
+  fr: '/fr/guide/kitesurf-maurice-saison-vent/',
+  en: '/en/guide/kitesurfing-mauritius-best-season/',
+  de: '/de/guide/beste-reisezeit-kitesurfen-mauritius/',
+};
+
+const faqItems = [
+  {
+    question: 'Wann ist die beste Saison zum Kitesurfen auf Mauritius?',
+    answer: 'Von Mai bis Oktober, getragen vom Südostpassat. Juli und August sind die zuverlässigsten Monate mit Wind an fast jedem Tag.',
+  },
+  {
+    question: 'Kann man außerhalb der Passatsaison auf Mauritius kiten?',
+    answer: 'Ja, aber seltener. Von November bis April ist der Wind unregelmäßiger. In manchen Wochen sind Sessions möglich, oft dank der thermischen Brise am Nachmittag.',
+  },
+  {
+    question: 'Welche Kitegröße brauche ich in Le Morne?',
+    answer: 'In der Hauptsaison, besonders Juli und August, reicht für viele Fahrer ein 7- bis 9-m²-Kite. In der Nebensaison solltest du eher mit 12 bis 14 m² rechnen.',
+  },
+  {
+    question: 'Warum hat Le Morne statistisch mehr Wind als der Rest der Insel?',
+    answer: 'Wegen des Venturi-Effekts: Der Berg Le Morne Brabant zwingt den Passat, sich an seinen Seiten zu bündeln. Dadurch beschleunigt er gegenüber der allgemeinen Mauritius-Prognose um etwa 3 bis 5 Knoten.',
+  },
+  {
+    question: 'Welche Windrichtung ist in Le Morne am besten?',
+    answer: 'Südost — die vorherrschende Passatrichtung in mehr als 70 % der Saison. Sie hält die gesamte Lagune im Wind, während das Riff den Fahrbereich schützt.',
+  },
+];
+---
+<Layout
+  title="Beste Reisezeit zum Kitesurfen auf Mauritius — Wind nach Monat — PKM"
+  description="Die beste Kitesurfsaison auf Mauritius dauert von Mai bis Oktober. Monatstabelle mit Windstärke, Zuverlässigkeit, Wassertemperatur und Kitegröße."
+  locale="de"
+  translations={translations}
+  tarifsHref="/de/preise/"
+  waHref="/de/buchen/"
+  jsonLd={[
+    faqPage(faqItems),
+    breadcrumbList([
+      { name: 'Startseite', url: `${site.url}/de/` },
+      { name: 'Guides', url: `${site.url}/de/guide/` },
+      { name: 'Beste Reisezeit', url: `${site.url}/de/guide/beste-reisezeit-kitesurfen-mauritius/` },
+    ]),
+  ]}
+>
+  <section class="pad">
+    <span class="kicker">Guide</span>
+    <h1>Wann zum Kitesurfen nach Mauritius?</h1>
+    <p class="sub">Bei PKM reicht die Hauptsaison von <b>Juni bis September</b> mit 18 bis 35 Knoten. Im April, Mai, Oktober und November sind 10 bis 25 Knoten möglich. Von Dezember bis März gibt es ebenfalls solche Stärken, aber weniger Windtage.</p>
+  </section>
+
+  <section class="pad">
+    <h2>Wind in Le Morne nach Angaben von PKM</h2>
+    <div class="windbox">
+      <h3>Wann kommen?</h3>
+      <div class="wgrid">
+        <div class="peak"><b>Juni → September</b><small>18 bis 35 Knoten · Hauptsaison</small></div>
+        <div><b>April, Mai, Okt., Nov.</b><small>10 bis 25 Knoten · wärmer</small></div>
+        <div><b>Dez. → März</b><small>10 bis 25 Knoten · weniger Windtage</small></div>
+        <div><b>Ganzjährig</b><small>Wasser zwischen 22 und 28 °C</small></div>
+      </div>
+    </div>
+    <p class="sub" style="font-size:.86rem;margin-top:10px">Angaben der Schule vor Ort — für diesen Spot aussagekräftiger als allgemeine Online-Durchschnittswerte.</p>
+  </section>
+
+  <section class="pad" style="background:var(--surface)">
+    <h2>Wind Monat für Monat — Marktdaten</h2>
+    <p class="sub">Diese detailliertere Tabelle basiert auf aggregierten öffentlichen Winddaten für Mauritius, nicht auf Messungen von PKM. Sie zeigt Richtwerte, keine Tagesprognose, und sollte vor verbindlicher Planung mit einem Lehrer vor Ort abgeglichen werden.</p>
+    <WindMonthTable rows={windRows('de')} headers={{ month: 'Monat', wind: 'Wind', reliability: 'Zuverlässigkeit', water: 'Wasser', kite: 'Kite (75 kg)' }} />
+  </section>
+
+  <section class="pad">
+    <h2>So liest du die Tabelle</h2>
+    <p>Der vorherrschende Wind ist in mehr als 70 % der Fälle ein Südostpassat.</p>
+    <p>Von Juni bis September sind in Le Morne mehr als 25 Knoten keine Seltenheit.</p>
+    <p>Von November bis April sind in manchen Wochen Sessions möglich, oft am Nachmittag durch die Thermik.</p>
+    <p>In der Hauptsaison sicherst du dir einen Kursplatz am besten zwei bis vier Monate im Voraus.</p>
+  </section>
+
+  <section class="pad">
+    <h2>Warum Le Morne statistisch mehr Wind bekommt</h2>
+    <p>Le Morne Brabant wirkt wie ein Trichter: Trifft der Südostpassat auf den Berg, wird die Luft an den Seiten des Massivs zusammengedrängt.</p>
+    <p>Die gleiche Luftmenge strömt durch weniger Raum und wird schneller — der Venturi-Effekt.</p>
+    <p>In der Praxis bedeutet das an der Lagune etwa 3 bis 5 Knoten mehr als in der allgemeinen Prognose für Mauritius.</p>
+  </section>
+
+  <section class="pad">
+    <h2>Die beste Windrichtung</h2>
+    <p>Südost, ohne Zögern — der vorherrschende Passat in mehr als 70 % der Saison.</p>
+    <p>Bei Südostwind bleibt die gesamte Breite der Lagune belüftet, während das Riff den Fahrbereich schützt.</p>
+    <p>Andere Richtungen kommen vor, sind aber seltener und verändern die empfohlene Fahrzone.</p>
+  </section>
+
+  <section class="pad">
+    <h2>Windprognose vor der Reise richtig lesen</h2>
+    <p>Achte immer auf Stärke und Richtung zusammen: 20 Knoten aus Südost sind in Le Morne etwas völlig anderes als 20 Knoten aus Nordwest.</p>
+    <p>Für eine grobe Einschätzung kannst du wegen des Venturi-Effekts 3 bis 5 Knoten zur allgemeinen Mauritius-Prognose addieren.</p>
+    <p>Vertraue einer Prognose für drei bis vier Tage mehr als einer Zehntagesprognose. Die Zuverlässigkeit sinkt nach vier bis fünf Tagen deutlich.</p>
+    <p class="sub">Das Team bestätigt das geeignete Zeitfenster anhand der aktuellen lokalen Prognose.</p>
+  </section>
+
+  <section class="pad">
+    <p class="sub">Du fährst bereits selbstständig und möchtest wissen, wie der Wind an Manawa oder One Eye steht? <a href="/de/wellen-freestyle-coaching/" style="color:var(--coral);font-weight:600;text-decoration:none">Zum Guide für Wellen- und Freestyle-Coaching →</a></p>
+  </section>
+
+  <section class="pad">
+    <h2>Häufige Fragen</h2>
+    <Faq items={faqItems} />
+  </section>
+</Layout>

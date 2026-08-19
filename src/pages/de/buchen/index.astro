@@ -1,0 +1,70 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import LeadForm from '../../../components/LeadForm.astro';
+import { breadcrumbList } from '../../../lib/schema';
+import site from '../../../data/site.json';
+
+const translations = { fr: '/fr/reserver/', en: '/en/book/', de: '/de/buchen/' };
+const waPhone = site.phones[0].replace(/\D/g, '');
+---
+<Layout
+  title="Kitesurfkurs buchen — PKM Le Morne"
+  description="Schick uns deine Reisedaten und dein Level. Das Team antwortet auf WhatsApp mit einem passenden Programm, freien Zeiten und der Windprognose."
+  locale="de"
+  translations={translations}
+  tarifsHref="/de/preise/"
+  waHref="/de/buchen/"
+  jsonLd={[breadcrumbList([
+    { name: 'Startseite', url: `${site.url}/de/` },
+    { name: 'Buchen', url: `${site.url}/de/buchen/` },
+  ])]}
+>
+  <section class="pad">
+    <h1 style="font-size:1.85rem">Buchen</h1>
+    <p class="sub">
+      Sag uns, wann du auf Mauritius bist und woran du arbeiten möchtest. Das
+      Team meldet sich auf WhatsApp mit einem Programm, freien Zeiten und der Windprognose.
+    </p>
+    <LeadForm
+      waPhone={waPhone}
+      labels={{
+        firstName: 'Vorname',
+        phone: 'WhatsApp-Nummer',
+        arrival: 'Ankunft auf der Insel',
+        departure: 'Abreisedatum',
+        level: 'Wofür interessierst du dich?',
+        levelOptions: ['Familien- oder Gruppenreise mit verschiedenen Levels', 'Anfängerkurs', 'Auffrischung und mehr Sicherheit', 'Privatkurs', 'Semi-Privatkurs', 'Kinderkurs', 'Wingfoil', 'Materialmiete', 'Freestyle-Coaching', 'Wellen-Coaching', 'Betreutes Fahren', 'Downwind oder VIP'],
+        submit: 'Auf WhatsApp fortfahren',
+        legal: 'Antwort innerhalb von 2 Stunden zwischen 8 und 19 Uhr mauritischer Zeit. Deine Nummer wird nur für diese Anfrage verwendet.',
+        headingEyebrow: 'Deine Anfrage',
+        heading: '4 Angaben, dann geht es auf WhatsApp weiter',
+        preview: 'Nachrichtenvorschau',
+        missingName: 'Sag uns bitte, wie du heißt.',
+        missingPhone: 'Wir antworten auf WhatsApp und brauchen dafür deine Nummer.',
+        invalidPhone: 'Die Nummer ist unvollständig. Bitte mit Ländervorwahl eingeben.',
+        dateFallback: 'noch offen',
+        interestFallback: 'ein passendes Programm',
+      }}
+    />
+    <div class="booking-benefits">
+      <span class="kicker">Vorteile der Online-Buchung</span>
+      <div class="proofs">
+        <div class="proof"><b>10 % Rabatt ab 3 Personen</b><span>Für Familien oder Gruppen, auch mit unterschiedlichen Levels.</span></div>
+        <div class="proof"><b>Erste betreute Session gratis</b><span>Mit dem Gruppenrabatt kombinierbar.</span></div>
+        <div class="proof"><b>Kein Wind</b><span>Die Session wird kostenlos auf einen anderen Termin verschoben.</span></div>
+      </div>
+    </div>
+    <div style="background:var(--surface);border-radius:16px;padding:18px;margin-top:16px">
+      <h3>Oder direkt</h3>
+      <p class="sub" style="font-size:.9rem;margin:8px 0 12px">{site.phones.join(' · ')} · {site.email}</p>
+      <p class="sub" style="font-size:.86rem;margin:0">
+        Eine Anzahlung von 10 % bestätigt die Buchung, per Überweisung oder PayPal.
+        Den Rest zahlst du vor Ort in Rupien, Euro, Dollar, Pfund oder per Karte.
+      </p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .booking-benefits { margin-top: 18px; padding: 18px; border-radius: var(--radius-md); background: var(--sage-pale); }
+</style>

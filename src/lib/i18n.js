@@ -1,10 +1,10 @@
 // Langues du site. "live" = pages réellement publiées, "planned" = prévu mais pas encore
-// écrit (voir doc stratégie §3 : FR+EN en phase 1, DE en phase 2, RU en phase 3).
+// écrit (FR, EN et DE sont publiés ; RU reste prévu pour une phase ultérieure).
 // x-default pointe vers l'anglais, comme convenu dans le doc stratégie.
 export const LOCALES = {
   fr: { label: 'FR', name: 'Français', live: true },
   en: { label: 'EN', name: 'English', live: true },
-  de: { label: 'DE', name: 'Deutsch', live: false },
+  de: { label: 'DE', name: 'Deutsch', live: true },
   ru: { label: 'RU', name: 'Русский', live: false },
 };
 
@@ -34,6 +34,15 @@ export const NAV = {
     { label: 'FAQ', href: '/en/faq/' },
     { label: 'Book', href: '/en/book/' },
   ],
+  de: [
+    { label: 'Startseite', href: '/de/' },
+    { label: 'Kitesurfkurse', href: '/de/kitesurf-kurse/' },
+    { label: 'Wellen & Freestyle', href: '/de/wellen-freestyle-coaching/' },
+    { label: 'Preise', href: '/de/preise/' },
+    { label: 'Guides', href: '/de/guide/' },
+    { label: 'FAQ', href: '/de/faq/' },
+    { label: 'Buchen', href: '/de/buchen/' },
+  ],
 };
 
 /**
@@ -41,13 +50,15 @@ export const NAV = {
  * `translations` : objet { fr: '/fr/tarifs/', en: '/en/prices/' } — uniquement
  * les langues où CETTE page existe réellement, jamais une langue à venir.
  */
-export function hreflangLinks(translations, siteUrl) {
+export function hreflangLinks(translations, siteUrl, base = '/') {
+  const basePath = base === '/' ? '' : base.replace(/\/$/, '');
+  const localizedUrl = (path) => new URL(`${basePath}/${path.replace(/^\/+/, '')}`, siteUrl).toString();
   const links = Object.entries(translations).map(([locale, path]) => ({
     hreflang: locale,
-    href: new URL(path, siteUrl).toString(),
+    href: localizedUrl(path),
   }));
   if (translations[DEFAULT_LOCALE]) {
-    links.push({ hreflang: 'x-default', href: new URL(translations[DEFAULT_LOCALE], siteUrl).toString() });
+    links.push({ hreflang: 'x-default', href: localizedUrl(translations[DEFAULT_LOCALE]) });
   }
   return links;
 }

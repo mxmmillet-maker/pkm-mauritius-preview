@@ -1,0 +1,76 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import Faq from '../../../../components/Faq.astro';
+import Button from '../../../../components/Button.astro';
+import { faqPage, breadcrumbList } from '../../../../lib/schema';
+import site from '../../../../data/site.json';
+
+const translations = {
+  fr: '/fr/guide/combien-de-temps-apprendre-kitesurf/',
+  en: '/en/guide/how-long-to-learn-kitesurfing/',
+  de: '/de/guide/wie-lange-kitesurfen-lernen/',
+};
+
+const faqItems = [
+  {
+    question: 'Wie viele Stunden brauche ich, um selbstständig zu fahren?',
+    answer: 'Im Durchschnitt 10 bis 12 Unterrichtsstunden über 5 bis 7 Tage, entsprechend den IKO-Richtwerten. Manche schaffen es in drei intensiven Tagen, andere brauchen acht.',
+  },
+  {
+    question: 'Hilft Erfahrung in anderen Boardsportarten?',
+    answer: 'Ja. Wakeboarden, Windsurfen oder Surfen geben dir einen Vorsprung bei Balance und Boardgefühl. Die Kitekontrolle ist jedoch für alle neu und braucht ihre eigene Lernzeit.',
+  },
+  {
+    question: 'Kann ich Kitesurfen in einer Urlaubswoche lernen?',
+    answer: 'Ja. Das häufigste Format sind zwei Stunden Unterricht pro Tag über fünf bis sieben Tage. Bei guten Windbedingungen reicht das meist bis zur Selbstständigkeit.',
+  },
+];
+---
+<Layout
+  title="Wie lange dauert es, Kitesurfen zu lernen? — PKM"
+  description="Plane 10 bis 12 Unterrichtsstunden über 5 bis 7 Tage ein, um selbstständig Kitesurfen zu können. Der Lernweg vom Kitehandling bis zum Fahren."
+  locale="de"
+  translations={translations}
+  tarifsHref="/de/preise/"
+  waHref="/de/buchen/"
+  jsonLd={[
+    faqPage(faqItems),
+    breadcrumbList([
+      { name: 'Startseite', url: `${site.url}/de/` },
+      { name: 'Guides', url: `${site.url}/de/guide/` },
+      { name: 'Kitesurfen lernen', url: `${site.url}/de/guide/wie-lange-kitesurfen-lernen/` },
+    ]),
+  ]}
+>
+  <section class="pad">
+    <span class="kicker">Guide</span>
+    <h1>Wie lange dauert es, Kitesurfen zu lernen?</h1>
+    <p class="sub">Rechne mit <b>10 bis 12 Unterrichtsstunden</b> über <b>5 bis 7 Tage</b>, um bei guten Bedingungen selbstständig zu fahren — der übliche Richtwert IKO-zertifizierter Schulen.</p>
+  </section>
+
+  <section class="pad">
+    <h2>Der Fortschritt Tag für Tag</h2>
+    <p><b>Tag 1</b> — Kitekontrolle am Strand, dann die ersten echten Flugübungen vom Ufer.</p>
+    <p><b>Tag 2</b> — ins Wasser: Bodydrag ohne Board und das Board wiederfinden.</p>
+    <p><b>Tag 3</b> — erste Waterstarts und kurze Fahrten.</p>
+    <p><b>Tag 4</b> — zuverlässigere Waterstarts, längere Fahrten in beide Richtungen.</p>
+    <p><b>Tag 5</b> — längere Distanzen, weniger Stürze.</p>
+    <p><b>Tag 6–7, optional</b> — Höhe laufen, Transitions und der Einstieg ins mittlere Level.</p>
+  </section>
+
+  <section class="pad">
+    <h2>Was den Fortschritt beschleunigt oder bremst</h2>
+    <p>Wakeboard-, Windsurf- oder Surferfahrung hilft bei der Balance, nicht bei der Kitekontrolle.</p>
+    <p>Der Wind ist genauso wichtig wie die Stundenzahl: Bei 10 Knoten dauert der Fortschritt länger als bei 20.</p>
+    <p>Ein Privatkurs mit einem Schüler und einem Lehrer ist zwangsläufig schneller als Gruppenunterricht.</p>
+  </section>
+
+  <section class="pad" style="text-align:center">
+    <Button variant="primary" href="/de/preise/">Kurspakete ansehen</Button>
+  </section>
+
+  <section class="pad">
+    <h2>Häufige Fragen</h2>
+    <Faq items={faqItems} />
+  </section>
+</Layout>

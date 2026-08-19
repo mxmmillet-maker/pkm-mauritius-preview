@@ -6,28 +6,28 @@ import site from '../../../data/site.json';
 const translations = { fr: '/fr/guide/', en: '/en/guide/', de: '/de/guide/' };
 
 const guides = [
-  { title: 'Best time to kitesurf in Mauritius', desc: 'Wind, month by month.', href: '/en/guide/kitesurfing-mauritius-best-season/' },
-  { title: 'The Le Morne spot', desc: 'Lagoon, reef, tides, zones by level.', href: '/en/kitesurf-le-morne/' },
-  { title: 'How long to learn?', desc: 'The day-by-day progression.', href: '/en/guide/how-long-to-learn-kitesurfing/' },
-  { title: 'How much does it cost?', desc: 'Real market price ranges.', href: '/en/guide/kitesurfing-mauritius-cost/' },
-  { title: 'FAQ', desc: 'Everything we get asked before booking.', href: '/en/faq/' },
+  { title: 'Beste Reisezeit zum Kitesurfen auf Mauritius', desc: 'Wind und Bedingungen Monat für Monat.', href: '/de/guide/beste-reisezeit-kitesurfen-mauritius/' },
+  { title: 'Der Kitespot Le Morne', desc: 'Lagune, Riff, Tide und Zonen nach Level.', href: '/de/kitesurfen-le-morne/' },
+  { title: 'Wie lange dauert es, Kitesurfen zu lernen?', desc: 'Der Fortschritt Tag für Tag.', href: '/de/guide/wie-lange-kitesurfen-lernen/' },
+  { title: 'Wie viel kostet Kitesurfen?', desc: 'Realistische Preisspannen am Markt.', href: '/de/guide/kosten-kitesurfen-mauritius/' },
+  { title: 'FAQ', desc: 'Alles, was uns vor der Buchung gefragt wird.', href: '/de/faq/' },
 ];
 ---
 <Layout
-  title="Kitesurfing Guides for Mauritius — PKM"
-  description="Wind by month, the Le Morne spot, how long it takes to learn, budget: every practical guide to plan your kitesurfing trip to Mauritius."
-  locale="en"
+  title="Kitesurf-Guides für Mauritius — PKM"
+  description="Wind nach Monaten, der Spot Le Morne, Lerndauer und Budget: praktische Guides für deine Kitesurfreise nach Mauritius."
+  locale="de"
   translations={translations}
-  tarifsHref="/en/prices/"
-  waHref="/en/book/"
+  tarifsHref="/de/preise/"
+  waHref="/de/buchen/"
   jsonLd={[breadcrumbList([
-    { name: 'Home', url: `${site.url}/en/` },
-    { name: 'Guides', url: `${site.url}/en/guide/` },
+    { name: 'Startseite', url: `${site.url}/de/` },
+    { name: 'Guides', url: `${site.url}/de/guide/` },
   ])]}
 >
   <section class="pad">
     <span class="kicker">Guides</span>
-    <h1>Everything to plan your kitesurfing trip</h1>
+    <h1>Alles für die Planung deiner Kitesurfreise</h1>
   </section>
   <section class="pad">
     <div class="picker">

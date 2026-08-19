@@ -1,0 +1,84 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import Faq from '../../../../components/Faq.astro';
+import Button from '../../../../components/Button.astro';
+import { faqPage, breadcrumbList } from '../../../../lib/schema';
+import site from '../../../../data/site.json';
+
+const translations = {
+  fr: '/fr/guide/budget-kitesurf-ile-maurice/',
+  en: '/en/guide/kitesurfing-mauritius-cost/',
+  de: '/de/guide/kosten-kitesurfen-mauritius/',
+};
+
+const faqItems = [
+  {
+    question: 'Wie viel kostet ein Kitesurfkurs auf Mauritius?',
+    answer: 'Je nach Schule liegen private Kurse meist zwischen 80 und 130 € pro Stunde. Für einen vollständigen Kurs über fünf bis sieben Tage solltest du mit etwa 350 bis 580 € rechnen.',
+  },
+  {
+    question: 'Ist Materialmiete günstiger als Unterricht?',
+    answer: 'Ja, sie ist aber nur für bereits selbstständige Fahrer gedacht: etwa 40 bis 60 € pro Tag und 200 bis 280 € pro Woche.',
+  },
+  {
+    question: 'Warum unterscheiden sich die Preise der Schulen so stark?',
+    answer: 'Vor allem wegen des Verhältnisses von Schülern zu Lehrern. Ein Privatkurs mit einem Schüler kostet zwangsläufig mehr als Gruppenunterricht mit bis zu vier Schülern.',
+  },
+];
+---
+<Layout
+  title="Was kostet Kitesurfen auf Mauritius? — PKM"
+  description="Ein privater Kitesurfkurs auf Mauritius kostet je nach Schule etwa 80 bis 130 € pro Stunde. Realistische Preisspannen für Kurse, Miete und Pakete."
+  locale="de"
+  translations={translations}
+  tarifsHref="/de/preise/"
+  waHref="/de/buchen/"
+  jsonLd={[
+    faqPage(faqItems),
+    breadcrumbList([
+      { name: 'Startseite', url: `${site.url}/de/` },
+      { name: 'Guides', url: `${site.url}/de/guide/` },
+      { name: 'Kosten', url: `${site.url}/de/guide/kosten-kitesurfen-mauritius/` },
+    ]),
+  ]}
+>
+  <section class="pad">
+    <span class="kicker">Guide</span>
+    <h1>Wie viel kostet Kitesurfen auf Mauritius?</h1>
+    <p class="sub">Ein Privatkurs kostet bei den Schulen in Le Morne im Durchschnitt <b>80 bis 130 € pro Stunde</b>. Entscheidend ist vor allem, wie viele Schüler ein Lehrer gleichzeitig betreut.</p>
+  </section>
+
+  <section class="pad">
+    <h2>Preisspannen am Markt</h2>
+    <p><b>Privatkurs, 2 Std.</b> — 80 bis 100 € bei günstigeren Schulen, bis zu 130 € im Premiumsegment.</p>
+    <p><b>Gruppenkurs, 2–4 Schüler</b> — 50 bis 70 € pro Person.</p>
+    <p><b>Semi-Privatkurs, 2 Schüler</b> — 60 bis 80 € pro Person.</p>
+    <p><b>3-Tages-Kurs</b> — 220 bis 280 €.</p>
+    <p><b>5-Tages-Kurs</b> — 350 bis 450 €.</p>
+    <p><b>7-Tages-Kurs</b> — 450 bis 580 €.</p>
+    <p><b>Komplette Materialmiete</b> — 40 bis 60 € pro Tag, 200 bis 280 € pro Woche.</p>
+    <p class="sub">Richtwerte aus einem Marktvergleich in Le Morne; der genaue Preis hängt vom Format und Leistungsumfang ab.</p>
+  </section>
+
+  <section class="pad" style="background:var(--surface)">
+    <h2>Wo PKM in diesen Spannen liegt</h2>
+    <p>Bei Paradise Kitesurfing Mauritius kostet ein zweistündiger Privatkurs 8.000 Rs, etwa 160 €. Das liegt im oberen Marktsegment und entspricht einem Verhältnis von einem Lehrer zu einem Schüler. Semi-privat zu zweit kostet 4.500 Rs pro Person, etwa 90 €.</p>
+    <p class="sub" style="font-size:.9rem">Preise 2026, Material inklusive. Alle Details stehen auf der Preisseite.</p>
+  </section>
+
+  <section class="pad">
+    <h2>Warum die Preise so unterschiedlich sind</h2>
+    <p>Der wichtigste Faktor ist das Verhältnis von Schülern zu Lehrern: Ein Privatkurs kostet bei gleicher Lehrerqualität mehr als eine Vierergruppe.</p>
+    <p>Auch das Material spielt eine Rolle. Schulen, die ihren Bestand regelmäßig erneuern, tragen höhere Kosten.</p>
+    <p>Ein Sicherheitsboot verursacht Wartungs- und Betriebskosten, die ebenfalls einen Teil des Preisunterschieds erklären.</p>
+  </section>
+
+  <section class="pad" style="text-align:center">
+    <Button variant="primary" href="/de/preise/">PKM-Preise ansehen</Button>
+  </section>
+
+  <section class="pad">
+    <h2>Häufige Fragen</h2>
+    <Faq items={faqItems} />
+  </section>
+</Layout>

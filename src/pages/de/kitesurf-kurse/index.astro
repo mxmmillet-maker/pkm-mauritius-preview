@@ -1,0 +1,107 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Faq from '../../../components/Faq.astro';
+import Button from '../../../components/Button.astro';
+import { faqPage, breadcrumbList, course } from '../../../lib/schema';
+import site from '../../../data/site.json';
+
+const translations = { fr: '/fr/cours-de-kitesurf/', en: '/en/kitesurf-lessons/', de: '/de/kitesurf-kurse/' };
+const waPhone = site.phones[0].replace(/\D/g, '');
+const waLink = `https://wa.me/${waPhone}?text=${encodeURIComponent('Hallo PKM-Team, ich brauche Hilfe bei der Wahl zwischen Privat- und Semi-Privatkurs.')}`;
+
+const faqItems = [
+  {
+    question: 'Muss ich schwimmen können?',
+    answer: 'Ja, du solltest dich im Wasser wohlfühlen. In einem großen Teil des Lernbereichs kannst du stehen, trotzdem wird immer eine Auftriebsweste getragen.',
+  },
+  {
+    question: 'Brauche ich Erfahrung in einer anderen Boardsportart?',
+    answer: 'Nein. Kitesurfen lernst du zuerst mit den Händen, nicht mit den Füßen. Wakeboard- oder Snowboard-Erfahrung hilft später beim Boardgefühl, nicht bei der Kitekontrolle.',
+  },
+  {
+    question: 'Wie viel Pause sollte zwischen zwei Sessions liegen?',
+    answer: 'Ideal ist jeden zweiten Tag oder zwei Tage hintereinander mit anschließendem Ruhetag. Sechs Stunden an einem Tag sind kontraproduktiv: Müdigkeit nimmt dir den Lernerfolg.',
+  },
+  {
+    question: 'Können zwei unterschiedliche Levels einen Kurs teilen?',
+    answer: 'Ja, wenn der Unterschied erlaubt, beide sicher zu betreuen und jedem ein klares Ziel zu geben. Ist der Abstand zu groß, schlägt das Team zwei koordinierte Zeitfenster vor.',
+  },
+];
+---
+<Layout
+  title="Kitesurfkurse für Anfänger in Le Morne — PKM"
+  description="Sechs Stunden bis zum betreuten Fahren, zehn bis zur Selbstständigkeit. Privat oder zu zweit, ab 4.500 Rs für zwei Stunden. Der Ablauf im Detail."
+  locale="de"
+  translations={translations}
+  tarifsHref="/de/preise/"
+  waHref="/de/buchen/"
+  jsonLd={[
+    faqPage(faqItems),
+    course({
+      name: 'Kitesurfkurse für Anfänger in Le Morne',
+      description: 'Schrittweise vom sicheren Umgang mit dem Kite über den Waterstart bis zum betreuten und selbstständigen Fahren.',
+    }),
+    breadcrumbList([
+      { name: 'Startseite', url: `${site.url}/de/` },
+      { name: 'Kitesurfkurse', url: `${site.url}/de/kitesurf-kurse/` },
+    ]),
+  ]}
+>
+  <section class="pad" style="padding-bottom:18px">
+    <span class="kicker">Kitesurfkurse</span>
+    <h1 style="font-size:1.85rem">Anfängerkurse in Le Morne</h1>
+    <p class="sub">Ein Programm für dein Level — von der ersten Kitekontrolle bis zur Selbstständigkeit. Privat oder zu zweit, ab 4.500 Rs für zwei Stunden.</p>
+    <div style="display:flex;gap:10px;margin-top:16px">
+      <Button variant="primary" href="/de/buchen/">Buchen</Button>
+      <Button variant="ghost" href="/de/preise/">Preise</Button>
+    </div>
+  </section>
+
+  <section class="pad" style="padding-top:6px">
+    <h2>So läuft ein Kurs ab</h2>
+    <p class="course-note">Dieser Ablauf ist ein Richtwert. Das Tempo hängt von Wind, Müdigkeit, Sicherheit im Wasser und deiner Vorerfahrung ab.</p>
+    <div class="course-timeline">
+      <div class="course-step">
+        <span>01</span>
+        <div><b>Erste Phase · Sicherheit und Kitekontrolle</b><span>Windfenster, Auslösesysteme und Positionierung. Erst steuerst du einen Trainerkite im Sand, danach im Wasser.</span></div>
+      </div>
+      <div class="course-step">
+        <span>02</span>
+        <div><b>Zweite Phase · Bodydrag</b><span>Vom Kite durch das Wasser ziehen lassen, Höhe gewinnen und das Board wiederfinden. Ein entscheidender Schritt, den man nicht überspringen sollte.</span></div>
+      </div>
+      <div class="course-step">
+        <span>03</span>
+        <div><b>Dritte Phase · Waterstart und erste Schläge</b><span>Aufstehen, losfahren, anhalten. Am Ende des 6-Stunden-Pakets fahren viele Schüler bereits unter Aufsicht in der Lagune. Betreute Sessions kosten separat 1.500 Rs für zwei Stunden; die erste ist bei Online-Buchung gratis.</span></div>
+      </div>
+      <div class="course-step">
+        <span>04</span>
+        <div><b>Vierte Phase · Richtung Selbstständigkeit</b><span>In beide Richtungen fahren, Höhe laufen, den Kite allein neu starten und das Material von A bis Z handhaben. Danach kannst du ohne Betreuung mieten und die IKO-Zertifizierung ablegen.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pad family-offer" id="auffrischung">
+    <div>
+      <span class="kicker">Auffrischung und gemischte Levels</span>
+      <h2>Zurück aufs Wasser, ohne wieder bei null anzufangen</h2>
+      <p>Du bist schon gefahren, aber die letzte Session liegt länger zurück? Der Lehrer prüft Kitekontrolle, Auslösesysteme und ob du Höhe halten kannst. Danach geht es direkt zu dem Ziel, das dir wichtig ist.</p>
+      <ul class="clean-list">
+        <li>Eine Auffrischung vor der ersten vollen Session deiner Reise</li>
+        <li>Paare können an zwei unterschiedlichen Zielen arbeiten</li>
+        <li>10 % Rabatt ab 3 gemeinsam gebuchten Personen</li>
+      </ul>
+    </div>
+    <img src="/images/pkm-ground-lesson.webp" alt="Schülerin bereitet mit einem PKM-Lehrer einen Kite vor" width="1600" height="1200" loading="lazy" />
+  </section>
+
+  <section class="pad" style="background:var(--surface)">
+    <h2>Privat oder semi-privat?</h2>
+    <p class="sub">Semi-privat kostet pro Person ungefähr die Hälfte, jede Person hat eigenes Material. Bei ähnlichem Level und Körperbau ist der Fortschritt fast genauso schnell. Im Privatkurs gehört das gesamte Tempo dir, besonders in den ersten Stunden.</p>
+    <Button variant="wa" block href={waLink}>Auf WhatsApp beraten lassen</Button>
+  </section>
+
+  <section class="pad">
+    <h2>Fragen zu Anfängerkursen</h2>
+    <Faq items={faqItems} />
+  </section>
+</Layout>

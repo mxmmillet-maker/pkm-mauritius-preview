@@ -1,0 +1,299 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Button from '../../components/Button.astro';
+import PriceFrom from '../../components/PriceFrom.astro';
+import ProfileSlider from '../../components/ProfileSlider.astro';
+import Faq from '../../components/Faq.astro';
+import SectionNav from '../../components/SectionNav.astro';
+import { sportsActivityLocation, faqPage, breadcrumbList } from '../../lib/schema';
+import site from '../../data/site.json';
+
+const translations = { fr: '/fr/', en: '/en/', de: '/de/' };
+const waPhone = site.phones[0].replace(/\D/g, '');
+const waLink = `https://wa.me/${waPhone}?text=${encodeURIComponent('Hallo PKM-Team, ich möchte Sessions in Le Morne planen.')}`;
+const googleReviewsUrl = 'https://www.google.com/maps/search/?api=1&query=Paradise+Kitesurfing+Mauritius+Le+Morne';
+const sectionNav = [
+  { label: 'Dein Weg', href: '#programm' },
+  { label: 'Der Spot', href: '#spot' },
+  { label: 'Coaching', href: '#coaching' },
+  { label: 'Preise', href: '#preise' },
+  { label: 'Das Team', href: '#team' },
+  { label: 'Bewertungen', href: '#bewertungen' },
+];
+
+const profiles = [
+  {
+    eyebrow: 'Erste Session', title: 'Ich bin Anfänger',
+    text: 'Kite steuern, Waterstart lernen und Schritt für Schritt unter Betreuung durch die Lagune fahren.',
+    href: '/de/kitesurf-kurse/', image: '/images/pkm-beginner-lesson.webp',
+    alt: 'Schülerin lernt mit einem PKM-Lehrer die Kitekontrolle in der Lagune', linkLabel: 'Anfängerkurse ansehen',
+  },
+  {
+    eyebrow: 'Auffrischung', title: 'Ich möchte wieder Sicherheit gewinnen',
+    text: 'Eine Session für den Wiedereinstieg, die an deinem aktuellen Stand ansetzt, ohne wieder bei null zu beginnen.',
+    href: '/de/kitesurf-kurse/#auffrischung', image: '/images/pkm-confidence-lesson.webp',
+    alt: 'Kitesurfer gewinnt vor dem Berg Le Morne wieder Sicherheit', linkLabel: 'Auffrischung planen',
+  },
+  {
+    eyebrow: 'Freestyle', title: 'Ich möchte den nächsten Schritt machen',
+    text: 'Höhe laufen, Toeside, Transitions, erste Sprünge oder Rotationen — passend zu deinem Ziel.',
+    href: '/de/wellen-freestyle-coaching/#freestyle', image: '/images/pkm-freestyle-morne.webp',
+    alt: 'Kitesurfer springt vor dem Berg Le Morne', linkLabel: 'Freestyle-Coaching entdecken',
+  },
+  {
+    eyebrow: 'Wellen', title: 'Ich möchte Wellen fahren',
+    text: 'Positionierung, Jibes, Wellen lesen und schrittweise Selbstständigkeit vom Small Reef bis Manawa.',
+    href: '/de/wellen-freestyle-coaching/#wellen', image: '/images/pkm-wave-riding.webp',
+    alt: 'Kitesurfer auf einem Directional Surfboard in einer Welle', linkLabel: 'Den Wellenweg ansehen',
+  },
+  {
+    eyebrow: 'Wingfoil', title: 'Ich möchte Wingfoilen ausprobieren',
+    text: 'Erste Session, erste Flüge oder Fortschritt auf dem Foil — privat oder semi-privat.',
+    href: '/de/preise/#wingfoil', image: '/images/pkm-wingfoil.webp',
+    alt: 'Lehrer zeigt zwei Schülern die Handhabung eines Wings', linkLabel: 'Wingfoil-Angebote ansehen',
+  },
+];
+
+const faqItems = [
+  {
+    question: 'Können wir mit unterschiedlichen Levels kommen?',
+    answer: 'Ja. Eine Familie oder ein Paar kann ein gemeinsames Programm mit unterschiedlichen Sessions zusammenstellen: Anfängerkurs in der Lagune, Auffrischung, Freestyle-Coaching oder geführte Wellen. Ab drei gemeinsam gebuchten Personen gibt es 10 % Rabatt.',
+  },
+  {
+    question: 'Was passiert, wenn kein Wind ist?',
+    answer: 'Die Session wird kostenlos auf ein anderes Zeitfenster verschoben. Das Programm wird während deines Aufenthalts an die Wetterlage angepasst.',
+  },
+  {
+    question: 'Wie viel kostet ein Kitesurfkurs in Le Morne?',
+    answer: 'Ein zweistündiger Semi-Privatkurs kostet 4.500 Rs pro Person, ein Privatkurs 8.000 Rs. Das für das Paket angegebene Material und die Sicherheitsausrüstung sind enthalten.',
+  },
+  {
+    question: 'Wie buche ich?',
+    answer: 'Schick uns Reisedaten, Level und Gruppengröße. Das Team antwortet auf WhatsApp mit einem Programmvorschlag und freien Zeiten. Eine Anzahlung von 10 % bestätigt die Buchung.',
+  },
+];
+---
+
+<Layout
+  title="Kitesurfschule in Le Morne, Mauritius | Paradise Kitesurfing Mauritius"
+  description="Anfängerkurse, Auffrischung, Freestyle, Wellen-Coaching und Wingfoil in Le Morne. Individuelle Programme für Familien und unterschiedliche Levels."
+  locale="de"
+  translations={translations}
+  tarifsHref="/de/preise/"
+  waHref="/de/buchen/"
+  jsonLd={[
+    sportsActivityLocation(),
+    faqPage(faqItems),
+    breadcrumbList([{ name: 'Startseite', url: `${site.url}/de/` }]),
+  ]}
+>
+  <section class="hero-photo pad">
+    <span class="hero-photo__media">
+      <img class="hero-photo__mobile" src="/images/pkm-hero-mobile.webp" alt="Kitesurfer springt über die Lagune von Le Morne" width="900" height="1600" fetchpriority="high" />
+      <img class="hero-photo__desktop" src="/images/pkm-hero-desktop.webp" alt="Kitesurfer springt über die Lagune von Le Morne" width="1920" height="1277" fetchpriority="high" />
+    </span>
+    <span class="hero-photo__shade" aria-hidden="true"></span>
+    <div class="hero-photo__copy">
+      <span class="kicker">Le Morne, Mauritius</span>
+      <h1>Vom ersten Waterstart bis zu den Wellen von Le Morne</h1>
+      <p>Ob Anfänger, Wiedereinsteiger oder selbstständiger Fahrer: Das Team plant mit dir ein Programm für dein Level und die Bedingungen des Tages.</p>
+      <div class="hero-actions">
+        <Button variant="wa" href={waLink}>Auf WhatsApp schreiben</Button>
+        <Button variant="line" href="/de/kitesurf-kurse/">Kurse entdecken</Button>
+      </div>
+      <small class="hero-photo__credit">PKM-Fotos · Le Morne</small>
+    </div>
+  </section>
+
+  <section class="trust-strip pad" aria-label="Vertrauensmerkmale">
+    <a class="trust-card trust-card--google" href={googleReviewsUrl} target="_blank" rel="noreferrer">
+      <span class="trust-brand"><img src="/images/google-g.svg" alt="" width="24" height="24" /><strong>Google</strong></span>
+      <span class="trust-score"><b>{site.googleReviews.rating.toFixed(1)}</b><span class="stars" aria-label="5 Sterne">★★★★★</span></span>
+      <small>{site.googleReviews.count} öffentliche Bewertungen</small>
+      <span class="trust-link">Bewertungen lesen →</span>
+    </a>
+    <a class="trust-card trust-card--tripadvisor" href={site.tripAdvisorReviews.url} target="_blank" rel="noreferrer">
+      <span class="trust-brand"><img src="/images/tripadvisor.svg" alt="" width="28" height="28" /><strong>TripAdvisor</strong></span>
+      <span class="trust-score"><b>{site.tripAdvisorReviews.rating.toFixed(1)}</b><span class="stars" aria-label="5 Sterne">★★★★★</span></span>
+      <small>{site.tripAdvisorReviews.count} öffentliche Bewertungen</small>
+      <span class="trust-link">Bewertungen lesen →</span>
+    </a>
+    <a class="trust-card trust-card--deal" href="/de/buchen/">
+      <span class="deal-badge">10 % Rabatt</span>
+      <strong>Familien- und Gruppenangebot</strong>
+      <small>Ab 3 gemeinsam gebuchten Personen</small>
+      <span class="trust-link">Reise zusammenstellen →</span>
+    </a>
+  </section>
+
+  <SectionNav items={sectionNav} label="Schnellzugriff auf die Bereiche der Seite" />
+
+  <section class="pad profile-section" id="programm">
+    <span class="kicker">Dein Programm</span>
+    <h2>Was möchtest du auf dem Wasser machen?</h2>
+    <p class="sub">Wische durch die Karten. Auch als Familie oder Paar kann jede Person ihren eigenen Weg verfolgen.</p>
+    <ProfileSlider items={profiles} label="Programm passend zum Fahrlevel wählen" />
+  </section>
+
+  <section class="pad spot-section" id="spot">
+    <div>
+      <span class="kicker">Der Spot</span>
+      <h2>Die Lagune ist ein echtes Trainingsrevier</h2>
+      <p class="sub">Sehr flaches Wasser für einzelne Bewegungen, Chop für die ersten Sprünge und genug Platz, um Abstand zu anderen Kursen zu halten. Sandiger Grund und Stehbereiche machen das Lernen angenehmer.</p>
+    </div>
+    <div class="windbox">
+      <h3>Wann kommen?</h3>
+      <div class="wgrid">
+        <div class="peak"><b>Juni → September</b><small>18 bis 35 Knoten · Hauptsaison</small></div>
+        <div><b>April, Mai, Okt., Nov.</b><small>10 bis 25 Knoten · wärmer</small></div>
+        <div><b>Dez. → März</b><small>10 bis 25 Knoten · weniger Windtage</small></div>
+        <div><b>Ganzjährig</b><small>Wasser zwischen 22 und 28 °C</small></div>
+      </div>
+      <p class="data-note">Saisonale Orientierung, keine Wettergarantie: Die Termine werden während deines Aufenthalts an die tatsächliche Prognose angepasst.</p>
+    </div>
+    <figure class="spot-aerial">
+      <img src="/images/pkm-le-morne-aerial.webp" alt="Luftaufnahme von Le Morne Brabant, der Lagune und dem Korallenriff" width="1920" height="1280" loading="lazy" />
+      <figcaption>Le Morne Brabant, Lagune und Korallenriff · Unsplash-Foto</figcaption>
+    </figure>
+  </section>
+
+  <section class="pad progression-section" id="coaching">
+    <span class="kicker">Coaching</span>
+    <h2>Fortschritt im Freestyle oder in den Wellen</h2>
+    <p class="sub">Zwei unterschiedliche Wege. Der Ausgangspunkt wird nach einer Einschätzung deines aktuellen Levels gewählt.</p>
+    <div class="track-grid">
+      <article class="track-card" id="freestyle">
+        <span>Freestyle · Lagune</span>
+        <h3>Erst Kontrolle, dann mehr Höhe</h3>
+        <ol>
+          <li><b>Wiedereinstieg</b><small>Höhe halten, Höhe laufen, Transitions</small></li>
+          <li><b>Mittelstufe</b><small>Toeside, Pop, erste Sprünge</small></li>
+          <li><b>Fortgeschritten</b><small>Rotationen und individuelle Ziele</small></li>
+        </ol>
+        <a href="/de/wellen-freestyle-coaching/#freestyle">Freestyle-Coaching ansehen →</a>
+      </article>
+      <article class="track-card track-card--wave" id="wellen">
+        <span>Surf · Riff</span>
+        <h3>Vom Directional Board zur Selbstständigkeit in Wellen</h3>
+        <ol>
+          <li><b>Small Reef</b><small>Jibe, Positionierung, erste Lines</small></li>
+          <li><b>Chameaux und Manawa</b><small>Lesen, Turns, strategische Zone</small></li>
+          <li><b>One Eye</b><small>Nur bei passendem Level und geeigneten Bedingungen</small></li>
+        </ol>
+        <a href="/de/wellen-freestyle-coaching/#wellen">Den Wellenweg ansehen →</a>
+      </article>
+    </div>
+    <div class="reassure">
+      <b>Du fängst gerade erst an? Die Lagune bietet alles, was du brauchst.</b>
+      <p>Flaches Wasser, Chop, viel Platz und mehrere Arbeitszonen. Du kannst die ganze Woche Fortschritte machen, ohne ans Riff zu fahren.</p>
+    </div>
+  </section>
+
+  <section class="pad family-offer">
+    <div>
+      <span class="kicker">Familien und Paare</span>
+      <h2>Eine Reise, mehrere Levels</h2>
+      <p>Ein Elternteil kann an den Wellen arbeiten, während der andere Sicherheit zurückgewinnt und ein jüngerer Fahrer anfängt. Auch ein Paar kann eine Session mit zwei Zielen teilen, wenn das Format es erlaubt.</p>
+      <ul class="clean-list">
+        <li>10 % Rabatt ab 3 gemeinsam gebuchten Personen</li>
+        <li>Ein Programm passend zum Level jeder Person</li>
+        <li>Erste betreute Session gratis, Angebot kombinierbar</li>
+      </ul>
+      <Button variant="primary" href="/de/buchen/">Unser Programm zusammenstellen</Button>
+    </div>
+    <img src="/images/pkm-shared-stay.webp" alt="Lächelnder Kitesurfer fährt durch die Lagune von Le Morne" width="1600" height="1200" loading="lazy" />
+  </section>
+
+  <section class="pad prices-preview" id="preise">
+    <span class="kicker">Preisübersicht</span>
+    <h2>Ein passendes Einstiegspaket wählen</h2>
+    <div class="fromgrid">
+      <PriceFrom label="Kurse ab" amount="4.500" currency="Rs · ca. 90 €" detail="2 Std. semi-privat, pro Person" />
+      <PriceFrom label="Miete ab" amount="2.250" currency="Rs · ca. 45 €" detail="2 Std., Kite und Board" />
+    </div>
+    <div class="offer-lite"><b>Sinkende Mietpreise:</b> 2 Stunden, Tag oder Woche. Je länger die Dauer, desto niedriger der Durchschnittspreis.</div>
+    <Button variant="ghost" href="/de/preise/">Alle Pakete vergleichen</Button>
+  </section>
+
+  <section class="pad school-section" id="team">
+    <div class="school-intro">
+      <span class="kicker">Das Team</span>
+      <h2>Mehrere Menschen, von der ersten Nachricht bis aufs Wasser</h2>
+      <p>Auf WhatsApp, beim Material, in der Lagune und im Boot arbeitet das Team zusammen, bereitet die Sessions vor und passt das Programm an die Bedingungen an.</p>
+      <div class="auth">
+        <div><b>Empfang</b><span>Antworten auf WhatsApp und Planung</span></div>
+        <div><b>Lehrer</b><span>mehrere Profile während der Saison</span></div>
+        <div><b>Logistik</b><span>Duotone-Material, Vorbereitung und Boot</span></div>
+        <div><b>Max. 2</b><span>Schüler pro Lehrer</span></div>
+      </div>
+    </div>
+    <div class="team-gallery" aria-label="Das Team im Einsatz">
+      <figure>
+        <img src="/images/pkm-gary.webp" alt="Gary, Gründer und Lehrer von PKM, auf dem Wasser in Le Morne" width="900" height="1350" loading="lazy" />
+        <figcaption>Gary · Gründer und Lehrer</figcaption>
+      </figure>
+      <figure>
+        <img src="/images/pkm-equipment-wide.webp" alt="Schultruck und Materialpark von PKM in Le Morne" width="1600" height="1280" loading="lazy" />
+        <figcaption>Schultruck und Materialpark · PKM</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="pad reviews-section" id="bewertungen">
+    <span class="kicker">Bewertungen</span>
+    <h2>Zwei Plattformen, dieselben wiederkehrenden Stärken</h2>
+    <p class="sub">Einige Auszüge aus öffentlichen Bewertungen. Auf dem Handy kannst du durch die Karten wischen und anschließend die vollständige Bewertung auf der Plattform öffnen.</p>
+    <div class="review-platforms">
+      <article>
+        <span class="platform-title"><img src="/images/google-g.svg" alt="" width="24" height="24" />Google</span>
+        <h3>Google · {site.googleReviews.count} Bewertungen</h3>
+        <p>Die öffentlichen Rückmeldungen betonen Geduld, Sicherheit und persönliche Betreuung.</p>
+        <a href={googleReviewsUrl} target="_blank" rel="noreferrer">Google-Bewertungen ansehen →</a>
+      </article>
+      <article>
+        <span class="platform-title"><img src="/images/tripadvisor.svg" alt="" width="28" height="28" />TripAdvisor</span>
+        <h3>TripAdvisor · {site.tripAdvisorReviews.count} Bewertungen</h3>
+        <p>Der Eintrag zeigt eine Bewertung von {site.tripAdvisorReviews.rating.toFixed(1)} von 5.</p>
+        <a href={site.tripAdvisorReviews.url} target="_blank" rel="noreferrer">TripAdvisor-Bewertungen ansehen →</a>
+      </article>
+    </div>
+    <div class="review-snaps" aria-label="Auszüge aus Kundenbewertungen">
+      <a class="review-snap" href={googleReviewsUrl} target="_blank" rel="noreferrer">
+        <span class="review-snap__top"><span><img src="/images/google-g.svg" alt="" width="20" height="20" />Google</span><span class="stars" aria-label="5 Sterne">★★★★★</span></span>
+        <blockquote>„Ich habe mich die ganze Zeit sehr sicher und gut betreut gefühlt.“</blockquote>
+        <span class="review-snap__meta"><b>Nicolas O.</b><small>Oktober 2025</small></span>
+      </a>
+      <a class="review-snap" href={googleReviewsUrl} target="_blank" rel="noreferrer">
+        <span class="review-snap__top"><span><img src="/images/google-g.svg" alt="" width="20" height="20" />Google</span><span class="stars" aria-label="5 Sterne">★★★★★</span></span>
+        <blockquote>„Großartige Lehrer und unglaublich geduldig.“</blockquote>
+        <span class="review-snap__meta"><b>Neil B.</b><small>Oktober 2025</small></span>
+      </a>
+      <a class="review-snap" href={site.tripAdvisorReviews.url} target="_blank" rel="noreferrer">
+        <span class="review-snap__top"><span><img src="/images/tripadvisor.svg" alt="" width="23" height="23" />TripAdvisor</span><span class="stars" aria-label="5 Sterne">★★★★★</span></span>
+        <blockquote>„Geduldig, freundlich, herzlich, professionell und immer mit einem großen Lächeln.“</blockquote>
+        <span class="review-snap__meta"><b>Z0e2011</b><small>Juli 2024</small></span>
+      </a>
+      <a class="review-snap" href={site.tripAdvisorReviews.url} target="_blank" rel="noreferrer">
+        <span class="review-snap__top"><span><img src="/images/tripadvisor.svg" alt="" width="23" height="23" />TripAdvisor</span><span class="stars" aria-label="5 Sterne">★★★★★</span></span>
+        <blockquote>„Das Team war unglaublich freundlich, geduldig und flexibel.“</blockquote>
+        <span class="review-snap__meta"><b>Vlassis T.</b><small>Oktober 2023</small></span>
+      </a>
+    </div>
+  </section>
+
+  <section class="pad faq-section">
+    <span class="kicker">FAQ</span>
+    <h2>Häufige Fragen</h2>
+    <Faq items={faqItems} />
+  </section>
+
+  <section class="pad final-cta" id="kontakt">
+    <span class="kicker">Nou ale?</span>
+    <h2>Kurs, Coaching oder einzelne Sessions planen</h2>
+    <p>Schick uns deine Reisedaten und die Levels der Gruppe. Das Team schlägt dir auf WhatsApp ein realistisches Programm vor.</p>
+    <div class="hero-actions">
+      <Button variant="wa" href={waLink}>Mit dem Team sprechen</Button>
+      <Button variant="line" href="/de/buchen/">Meine Reise beschreiben</Button>
+    </div>
+  </section>
+</Layout>

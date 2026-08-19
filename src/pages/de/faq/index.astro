@@ -1,0 +1,83 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Faq from '../../../components/Faq.astro';
+import { faqPage, breadcrumbList } from '../../../lib/schema';
+import site from '../../../data/site.json';
+
+const translations = { fr: '/fr/questions-frequentes/', en: '/en/faq/', de: '/de/faq/' };
+
+const faqItems = [
+  {
+    question: 'Wie viel kostet ein Kitesurfkurs bei PKM in Le Morne?',
+    answer: 'Ein zweistündiger Privatkurs kostet 8.000 Rs (ca. 160 €). Semi-privat zu zweit: 4.500 Rs pro Person (ca. 90 €). Das 6-Stunden-Paket bis zum betreuten Fahren kostet privat 23.250 Rs und semi-privat 12.500 Rs pro Person. Alle Details findest du auf der Preisseite.',
+  },
+  {
+    question: 'Wie lange dauert es, Kitesurfen zu lernen?',
+    answer: 'Mit dem 6-Stunden-Paket erreichen die meisten Schüler das betreute Fahren auf der Lagune. Nach zehn Stunden geht es um vollständige Selbstständigkeit: in beide Richtungen fahren, den Kite allein neu starten, das Material selbst handhaben und die IKO-Zertifizierung ablegen.',
+  },
+  {
+    question: 'Wann ist die beste Reisezeit zum Kitesurfen in Le Morne?',
+    answer: 'Von Juni bis September ist Hauptsaison mit 18 bis 35 Knoten. Im April, Mai, Oktober und November ist der Wind moderater (10 bis 25 Knoten), dafür ist es wärmer. Von Dezember bis März gibt es weniger Windtage. Das Wasser bleibt das ganze Jahr zwischen 22 und 28 °C.',
+  },
+  {
+    question: 'Muss ich schwimmen können?',
+    answer: 'Ja, du solltest dich im Wasser wohlfühlen. In einem großen Teil des Lernbereichs der Lagune kannst du stehen. Eine Auftriebsweste wird gestellt und immer getragen.',
+  },
+  {
+    question: 'Ab welchem Alter können Kinder anfangen?',
+    answer: 'Je nach Körpergröße und Sicherheit im Wasser ab etwa 8 oder 9 Jahren. Kinder erhalten ausschließlich Privatunterricht mit Helm, Auftriebsweste und VHF-Funk, wenn das Lernformat dafür geeignet ist.',
+  },
+  {
+    question: 'Ist die Ausrüstung im Kurs enthalten?',
+    answer: 'Das für das jeweilige Paket angegebene Material und die Sicherheitsausrüstung sind enthalten. VHF-Funk wird in geeigneten Lernformaten eingesetzt. Beim fortgeschrittenen Wellen-Coaching fährt der Lehrer stattdessen mit dir auf dem Wasser.',
+  },
+  {
+    question: 'Was ist der Unterschied zwischen Kitesurfen und Wingfoilen?',
+    answer: 'Beim Kitesurfen fliegst du einen Kite an Leinen. Beim Wingfoilen hältst du einen Wing direkt in der Hand und fährst ein Foilboard. PKM unterrichtet beides privat oder semi-privat.',
+  },
+  {
+    question: 'Was ist die IKO-Zertifizierung?',
+    answer: 'IKO, die International Kiteboarding Organization, ist ein internationaler Referenzverband für Kitesurflehrer. Gary, Gründer von PKM, ist seit 2012 IKO-zertifiziert, ein Jahr nachdem er mit dem Unterrichten begann.',
+  },
+  {
+    question: 'Was passiert, wenn am Kurstag kein Wind ist?',
+    answer: 'Die Session wird ohne Zusatzkosten auf einen anderen freien Termin verschoben.',
+  },
+  {
+    question: 'Sind die Kurse wirklich auf zwei Schüler pro Lehrer begrenzt?',
+    answer: 'Ja. Bei PKM betreut ein Lehrer höchstens zwei Schüler, auch im Semi-Privatkurs. In der Saison sind mehrere Lehrer im Einsatz.',
+  },
+  {
+    question: 'Wie buche und bezahle ich?',
+    answer: 'Per WhatsApp oder über das Formular. Eine Anzahlung von 10 % per Überweisung oder PayPal bestätigt den Termin. Den Rest zahlst du vor Ort in Rupien, Euro, Dollar, Pfund oder per Karte. Buche mindestens 24 Stunden vorher, in der Hauptsaison möglichst ein bis zwei Wochen im Voraus.',
+  },
+  {
+    question: 'Was bietet PKM außer Anfängerkursen?',
+    answer: 'Stundenweises Coaching vom Twintip zum Strapless-Fahren, bis zu den Wellen am Small Reef und später Manawa. Alle Details stehen auf der Seite für Wellen- und Freestyle-Coaching.',
+  },
+];
+---
+<Layout
+  title="Häufige Fragen zum Kitesurfen in Le Morne — PKM"
+  description="Preise, Lerndauer, Saison, Mindestalter, Ausrüstung und Buchung: klare Antworten auf die häufigsten Fragen zu den Kitesurfkursen von PKM."
+  locale="de"
+  translations={translations}
+  tarifsHref="/de/preise/"
+  waHref="/de/buchen/"
+  jsonLd={[
+    faqPage(faqItems),
+    breadcrumbList([
+      { name: 'Startseite', url: `${site.url}/de/` },
+      { name: 'FAQ', url: `${site.url}/de/faq/` },
+    ]),
+  ]}
+>
+  <section class="pad">
+    <span class="kicker">FAQ</span>
+    <h1>Alles, was vor der Buchung wichtig ist</h1>
+    <p class="sub">Preise, Lerndauer, Saison, Alter und Material — klare Antworten ohne Umwege.</p>
+  </section>
+  <section class="pad">
+    <Faq items={faqItems} />
+  </section>
+</Layout>

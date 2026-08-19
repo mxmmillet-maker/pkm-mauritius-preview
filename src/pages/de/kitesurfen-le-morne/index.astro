@@ -1,0 +1,124 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Button from '../../../components/Button.astro';
+import Faq from '../../../components/Faq.astro';
+import SectionNav from '../../../components/SectionNav.astro';
+import { faqPage, breadcrumbList } from '../../../lib/schema';
+import site from '../../../data/site.json';
+
+const translations = { fr: '/fr/kitesurf-le-morne/', en: '/en/kitesurf-le-morne/', de: '/de/kitesurfen-le-morne/' };
+const waPhone = site.phones[0].replace(/\D/g, '');
+const meetingWa = `https://wa.me/${waPhone}?text=${encodeURIComponent('Hallo PKM-Team, könnt ihr mir bitte den Treffpunkt in Le Morne schicken?')}`;
+const mapsUrl = 'https://www.google.com/maps/search/?api=1&query=Le+Morne+Brabant+Mauritius';
+const osmEmbed = 'https://www.openstreetmap.org/export/embed.html?bbox=57.285%2C-20.505%2C57.405%2C-20.395&layer=mapnik';
+const sectionNav = [
+  { label: 'Lagune & Riff', href: '#lagune-riff' },
+  { label: 'Level', href: '#level' },
+  { label: 'Karte', href: '#karte' },
+  { label: 'Hinweise', href: '#hinweise' },
+  { label: 'FAQ', href: '#faq' },
+];
+
+const faqItems = [
+  {
+    question: 'Ist die Lagune von Le Morne für Anfänger geeignet?',
+    answer: 'Ja. Die Lagune ist je nach Tide etwa 50 cm bis 1,5 m tief und wird durch das Riff geschützt. So entsteht ruhiges Wasser, das sich sehr gut zum Lernen eignet.',
+  },
+  {
+    question: 'Spielt die Tide in Le Morne eine Rolle?',
+    answer: 'Ja. Bei Ebbe kann Koralle knapp unter der Oberfläche liegen. Bei Flut wird das Wasser tiefer und die Strömung stärker. Der Lehrer passt den Fahrbereich entsprechend an.',
+  },
+  {
+    question: 'Wie kommt man zum Kitespot Le Morne?',
+    answer: 'Von La Gaulette folgst du der Straße Richtung Morne Brabant bis zum Riu-Hotel. Parkmöglichkeiten gibt es in den schattigen Bereichen nahe der Startzone.',
+  },
+];
+---
+<Layout
+  title="Kitesurfen in Le Morne, Mauritius — Spot-Guide"
+  description="Le Morne ist einer der bekanntesten Kitespots im Indischen Ozean: flache Lagune, geschütztes Riff und Zonen für Anfänger bis Experten. Anfahrt, Tide und Sicherheit."
+  locale="de"
+  translations={translations}
+  tarifsHref="/de/preise/"
+  waHref="/de/buchen/"
+  jsonLd={[
+    faqPage(faqItems),
+    breadcrumbList([
+      { name: 'Startseite', url: `${site.url}/de/` },
+      { name: 'Le Morne', url: `${site.url}/de/kitesurfen-le-morne/` },
+    ]),
+  ]}
+>
+  <section class="pad">
+    <span class="kicker">Der Spot</span>
+    <h1>Le Morne, der Referenzspot im Indischen Ozean</h1>
+    <p class="sub">
+      Le Morne ist eine flache, von einem Korallenriff geschützte Lagune.
+      Ruhiges Wasser in dieser Größe ist selten — ideal für Anfänger und
+      gleichzeitig Ausgangspunkt für erfahrene Wellenfahrer.
+    </p>
+  </section>
+
+  <SectionNav items={sectionNav} label="Schnellzugriff auf den Spot-Guide" />
+
+  <section class="pad" id="lagune-riff">
+    <h2>Lagune und Riff</h2>
+    <p>Die Wassertiefe liegt je nach Tide zwischen etwa 50 cm und 1,5 m.</p>
+    <p>Das Riff hält den Swell aus der Lagune und bildet weiter draußen Wellen für erfahrene Fahrer.</p>
+    <p>Bei Ebbe liegt Koralle stellenweise nur wenige Zentimeter unter der Oberfläche — eine echte Gefahr für Füße und Material.</p>
+    <p>Bei Flut wird das Wasser tiefer und die Strömung stärker.</p>
+  </section>
+
+  <section class="pad spot-zones" id="level">
+    <h2>Zonen nach Fahrlevel</h2>
+    <div class="spot-zones__grid">
+      <article><span>01</span><b>Anfänger · Lagune</b><p>Flaches Wasser, getrennt von erfahrenen Fahrern.</p></article>
+      <article><span>02</span><b>Mittelstufe · Lagune & Small Reef</b><p>Mehr Raum, erste Lines und erste geführte Wellen.</p></article>
+      <article><span>03</span><b>Fortgeschritten · Manawa</b><p>Swell lesen, Positionierung und schrittweise Selbstständigkeit.</p></article>
+      <article><span>04</span><b>Experte · One Eye</b><p>Nur mit passendem Level, Tide und Bedingungen.</p></article>
+    </div>
+  </section>
+
+  <section class="pad" id="anfahrt">
+    <h2>Anfahrt und Parken</h2>
+    <p>Von La Gaulette folgst du der Straße Richtung Morne Brabant bis zum Riu-Hotel.</p>
+    <p>Parkmöglichkeiten gibt es auf den schattigen Grasflächen in der Nähe der Startzone.</p>
+  </section>
+
+  <section class="pad spot-map" id="karte">
+    <div class="spot-map__copy">
+      <span class="kicker">Orientierung</span>
+      <h2>Le Morne auf einen Blick</h2>
+      <p>Die Karte zeigt die Halbinsel, La Gaulette und die wichtigsten Zufahrten. Sie ersetzt kein Briefing: Fahrbereich und Treffpunkt hängen von Wind, Tide und deinem Programm ab.</p>
+      <div class="map-key" aria-label="Legende nach Level">
+        <span><i class="map-dot map-dot--lagoon"></i><b>Lagune</b> · Lernen</span>
+        <span><i class="map-dot map-dot--reef"></i><b>Riff</b> · selbstständige Fahrer</span>
+        <span><i class="map-dot map-dot--wave"></i><b>Wellen</b> · geführt nach Level</span>
+      </div>
+      <div class="map-actions">
+        <Button variant="primary" href={mapsUrl}>In Google Maps öffnen</Button>
+        <Button variant="wa" href={meetingWa}>Treffpunkt erhalten</Button>
+      </div>
+      <small>Allgemeine OpenStreetMap-Ansicht. Der genaue Treffpunkt der Schule wird vor deiner Session bestätigt.</small>
+    </div>
+    <div class="spot-map__frame">
+      <iframe src={osmEmbed} title="Karte von Le Morne und La Gaulette" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </section>
+
+  <section class="pad" id="hinweise">
+    <h2>Wichtige Hinweise</h2>
+    <p>Trage Riffschuhe als Schutz vor Koralle und Seeigeln.</p>
+    <p>Steinfische sind selten, kommen auf diesem Untergrund aber vor — ein weiterer Grund, nicht barfuß zu laufen.</p>
+    <p>In der Hauptsaison kann es voll werden. Ein Lehrer hilft, Zeitfenster und Zone passend zu wählen.</p>
+  </section>
+
+  <section class="pad" id="faq">
+    <p class="sub">Sicherheitsrelevante Details werden vor jeder Session anhand der aktuellen Bedingungen bestätigt.</p>
+  </section>
+
+  <section class="pad">
+    <h2>Häufige Fragen</h2>
+    <Faq items={faqItems} />
+  </section>
+</Layout>

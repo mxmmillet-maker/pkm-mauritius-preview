@@ -1,0 +1,118 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Faq from '../../../components/Faq.astro';
+import Button from '../../../components/Button.astro';
+import { faqPage, breadcrumbList, course } from '../../../lib/schema';
+import site from '../../../data/site.json';
+
+const translations = { fr: '/fr/perfectionnement/', en: '/en/wave-freestyle-coaching/', de: '/de/wellen-freestyle-coaching/' };
+const waPhone = site.phones[0].replace(/\D/g, '');
+const waLink = `https://wa.me/${waPhone}?text=${encodeURIComponent('Hallo PKM-Team, ich möchte ein Coaching für Fortgeschrittene in Le Morne planen.')}`;
+
+const faqItems = [
+  {
+    question: 'Wie funktioniert Coaching ohne Mikrofon im Helm?',
+    answer: 'Beim fortgeschrittenen und Wellen-Coaching fährt der Lehrer mit dir. Vor dem Start werden Ziel und Zone festgelegt, auf dem Wasser beobachtet er dich und zwischen den Runs gibt es eine kurze Auswertung. Für dieses Format wird derzeit kein Bordmikrofon versprochen.',
+  },
+  {
+    question: 'Kann ein Paar mit zwei Levels eine Session teilen?',
+    answer: 'Ja, wenn beide Ziele zur Zone und zu den Bedingungen passen. Eine Person kann Höhe laufen oder Toeside üben, während die andere an Transitions oder Positionierung arbeitet. Das Team bestätigt das Format vorab.',
+  },
+  {
+    question: 'Welches Level brauche ich für die ersten Wellen?',
+    answer: 'Du solltest in beide Richtungen fahren, Höhe laufen, dein Material selbst handhaben und einer markierten Zone ausweichen können. Zuerst übst du auf einem Directional Board und in einer passenden Zone, bevor Manawa infrage kommt.',
+  },
+  {
+    question: 'Kann ich direkt zu One Eye?',
+    answer: 'Nein. Der Zugang hängt von deinem tatsächlichen Level, Swell, Wind und Verkehr ab. One Eye wird erst nach einer Einschätzung und mit geeigneter Betreuung und Sicherheitsplanung erwogen.',
+  },
+];
+---
+<Layout
+  title="Freestyle- und Wellen-Coaching in Le Morne | PKM"
+  description="Individuelles Coaching in Le Morne für Höhe laufen, Toeside, Freestyle, Directional Board und Wellen. Auch für Paare mit unterschiedlichen Levels."
+  locale="de"
+  translations={translations}
+  tarifsHref="/de/preise/"
+  waHref="/de/buchen/"
+  jsonLd={[
+    faqPage(faqItems),
+    course({
+      name: 'Freestyle- und Wellen-Coaching in Le Morne',
+      description: 'Persönliches Coaching in der Lagune und in den Wellen, mit einem Ziel passend zu Level und Bedingungen.',
+    }),
+    breadcrumbList([
+      { name: 'Startseite', url: `${site.url}/de/` },
+      { name: 'Coaching', url: `${site.url}/de/wellen-freestyle-coaching/` },
+    ]),
+  ]}
+>
+  <section class="pad family-offer coaching-hero">
+    <div>
+      <span class="kicker">Coaching für Fortgeschrittene</span>
+      <h1>Ein klares Ziel, eine Session für dein Fahrlevel</h1>
+      <p>Du kannst bereits fahren. Das Coaching festigt deine Selbstständigkeit, hilft bei einem neuen Trick oder zeigt dir, wo du dich in den Wellen von Le Morne positionierst.</p>
+      <div class="hero-actions">
+        <Button variant="wa" href={waLink}>Mein Level besprechen</Button>
+        <Button variant="ghost" href="/de/preise/">Preise ansehen</Button>
+      </div>
+    </div>
+    <img src="/images/pkm-action-morne.webp" alt="Kitesurfer beim dynamischen Carven in Le Morne" width="1920" height="1277" fetchpriority="high" />
+  </section>
+
+  <section class="pad progression-section">
+    <span class="kicker">Zwei Wege</span>
+    <h2>Freestyle in der Lagune oder selbstständig in die Wellen</h2>
+    <p class="sub">Der genaue Inhalt wird nach einem Gespräch über dein Level und anhand der Bedingungen festgelegt.</p>
+    <div class="track-grid">
+      <article class="track-card" id="freestyle">
+        <span>Freestyle · Lagune</span>
+        <h3>Solider, kontrollierter und flüssiger fahren</h3>
+        <ol>
+          <li><b>Selbstständige Basis</b><small>Höhe halten, Höhe laufen, die Zone managen</small></li>
+          <li><b>Kontrolle</b><small>Toeside, Transitions, Richtungswechsel</small></li>
+          <li><b>Fortschritt</b><small>Pop, erste Sprünge und Rotationen passend zu deinem Level</small></li>
+        </ol>
+        <p>Auf flachem Wasser isolierst du die Bewegung. Im Chop setzt du sie anschließend im echten Fahren um.</p>
+      </article>
+      <article class="track-card track-card--wave" id="wellen">
+        <span>Surf · Riff</span>
+        <h3>Die Welle lesen und die richtige Zone wählen</h3>
+        <ol>
+          <li><b>Directional Board</b><small>Position, Jibe, Umstieg vom Twintip</small></li>
+          <li><b>Small Reef</b><small>Erste Lines und Positionierung ohne Schritte zu überspringen</small></li>
+          <li><b>Chameaux und Manawa</b><small>Turns, Vorfahrt, strategische Zone und Selbstständigkeit</small></li>
+        </ol>
+        <p>One Eye bleibt ein eigener Schritt und kommt nur nach einer Einschätzung von Fahrer und Bedingungen infrage.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="pad ride-together">
+    <div>
+      <span class="kicker">Auf dem Wasser</span>
+      <h2>Der Lehrer fährt mit dir</h2>
+      <p>Für diese fortgeschrittenen Sessions gibt es derzeit kein Bordmikrofon im Helm. Die Betreuung ist deshalb anders organisiert:</p>
+      <div class="proofs">
+        <div class="proof"><b>Vor dem Start</b><span>Ein beobachtbares Ziel, eine Arbeitszone und die Sicherheitspunkte.</span></div>
+        <div class="proof"><b>Beim Fahren</b><span>Der Lehrer fährt mit, beobachtet deine Lines und zeigt die Positionierung.</span></div>
+        <div class="proof"><b>Zwischen den Runs</b><span>Kurze Auswertung, eine präzise Korrektur, nächster Versuch.</span></div>
+      </div>
+    </div>
+    <img src="/images/pkm-freestyle-morne.webp" alt="Kitesurfer springt vor dem Berg Le Morne" width="1280" height="1600" loading="lazy" />
+  </section>
+
+  <section class="pad mixed-levels">
+    <span class="kicker">Paare</span>
+    <h2>Zwei Levels in einer Session, wenn es sinnvoll ist</h2>
+    <p class="sub">Eine Person kann Toeside oder Höhe laufen üben, während die andere Transitions oder das Directional Board festigt. Wenn der Abstand oder die Bedingungen das Format ineffizient machen, schlägt das Team zwei koordinierte Zeiten vor.</p>
+    <div class="offer-lite"><b>Gruppen:</b> 10 % Rabatt ab 3 gemeinsam gebuchten Personen, kombinierbar mit der ersten betreuten Session gratis.</div>
+    <Button variant="wa" href={waLink}>Die Levels der Gruppe beschreiben</Button>
+  </section>
+
+  <section class="pad faq-section">
+    <span class="kicker">FAQ</span>
+    <h2>Fragen zum Coaching für Fortgeschrittene</h2>
+    <Faq items={faqItems} />
+  </section>
+</Layout>

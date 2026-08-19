@@ -50,8 +50,8 @@
     "radioCoaching": "Radio VHF utilisée pour les formats d'apprentissage qui le permettent. Pas de micro embarqué annoncé pour le coaching avancé ou vagues."
   },
 
-  "languagesLive": ["fr", "en"],
-  "languagesPlanned": ["de", "ru"],
+  "languagesLive": ["fr", "en", "de"],
+  "languagesPlanned": ["ru"],
 
   "prices": {
     "currency": "MUR",

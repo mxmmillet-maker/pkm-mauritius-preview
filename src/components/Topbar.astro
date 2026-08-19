@@ -2,8 +2,8 @@
 import { LOCALES } from '../lib/i18n';
 
 /*
-  locale       : langue de la page courante ('fr' | 'en' | ...)
-  translations : { fr: '/fr/', en: '/en/' } — équivalents réels de CETTE page
+  locale       : langue de la page courante ('fr' | 'en' | 'de' | ...)
+  translations : { fr: '/fr/', en: '/en/', de: '/de/' } — équivalents réels de CETTE page
   logoSrc      : chemin du logo (fond clair)
   nav          : [{ label, href }]
 */
@@ -16,12 +16,12 @@ const currentPath = Astro.url.pathname;
     <img src={logoSrc} alt="PKM — Paradise Kitesurfing Mauritius" width="800" height="293" />
   </a>
   {scrollRefresh && (
-    <nav class="desktop-main" aria-label={locale === 'fr' ? 'Navigation principale' : 'Main navigation'}>
+    <nav class="desktop-main" aria-label={locale === 'fr' ? 'Navigation principale' : locale === 'de' ? 'Hauptnavigation' : 'Main navigation'}>
       {nav.map((item) => <a href={item.href} aria-current={currentPath === item.href ? 'page' : undefined}>{item.label}</a>)}
     </nav>
   )}
   <div class="topright">
-    <nav class="lang" aria-label={locale === 'fr' ? 'Langue' : 'Language'}>
+    <nav class="lang" aria-label={locale === 'fr' ? 'Langue' : locale === 'de' ? 'Sprache' : 'Language'}>
       {liveLocales.map(([code, l]) => (
         translations[code]
           ? <a class:list={['pill', { on: code === locale }]} href={translations[code]} aria-current={code === locale ? 'page' : undefined}>{l.label}</a>
@@ -34,7 +34,7 @@ const currentPath = Astro.url.pathname;
   </div>
 </header>
 
-<nav id="mobile-menu" class:list={['menu', { 'menu--refresh': scrollRefresh }]} aria-label={locale === 'fr' ? 'Navigation principale' : 'Main navigation'}>
+<nav id="mobile-menu" class:list={['menu', { 'menu--refresh': scrollRefresh }]} aria-label={locale === 'fr' ? 'Navigation principale' : locale === 'de' ? 'Hauptnavigation' : 'Main navigation'}>
   {nav.map((item) => <a href={item.href} aria-current={currentPath === item.href ? 'page' : undefined}>{item.label}</a>)}
 </nav>
 

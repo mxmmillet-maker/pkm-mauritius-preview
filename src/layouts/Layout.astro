@@ -15,8 +15,8 @@ import site from '../data/site.json';
 
 /*
   title / description : uniques par page, jamais génériques (règle SEO du brief).
-  locale               : 'fr' | 'en'
-  translations         : { fr: '/fr/...', en: '/en/...' } — équivalents réels de CETTE page
+  locale               : 'fr' | 'en' | 'de'
+  translations         : { fr: '/fr/...', en: '/en/...', de: '/de/...' } — équivalents réels de CETTE page
   jsonLd               : tableau d'objets schema.org (voir lib/schema.js)
   tarifsHref / waHref  : liens du Dock, propres à chaque page/langue
 */
@@ -31,8 +31,11 @@ const {
   scrollRefresh = false,
 } = Astro.props;
 
-const canonical = new URL(translations[locale] ?? Astro.url.pathname, Astro.site);
-const alternates = hreflangLinks(translations, Astro.site);
+const baseUrl = import.meta.env.BASE_URL ?? '/';
+const basePath = baseUrl === '/' ? '' : baseUrl.replace(/\/$/, '');
+const withBase = (path) => `${basePath}/${path.replace(/^\/+/, '')}`;
+const canonical = new URL(withBase(translations[locale] ?? Astro.url.pathname), Astro.site);
+const alternates = hreflangLinks(translations, Astro.site, baseUrl);
 const footerColumns = locale === 'fr'
   ? [
       { title: 'École', links: [
@@ -46,7 +49,20 @@ const footerColumns = locale === 'fr'
         { label: 'Questions fréquentes', href: '/fr/questions-frequentes/' },
       ] },
     ]
-  : [
+  : locale === 'de'
+    ? [
+        { title: 'Kiteschule', links: [
+          { label: 'Kitesurfkurse', href: '/de/kitesurf-kurse/' },
+          { label: 'Preise', href: '/de/preise/' },
+          { label: 'Buchen', href: '/de/buchen/' },
+        ] },
+        { title: 'Reise planen', links: [
+          { label: 'Der Spot Le Morne', href: '/de/kitesurfen-le-morne/' },
+          { label: 'Guides', href: '/de/guide/' },
+          { label: 'Häufige Fragen', href: '/de/faq/' },
+        ] },
+      ]
+    : [
       { title: 'School', links: [
         { label: 'Kitesurf lessons', href: '/en/kitesurf-lessons/' },
         { label: 'Prices', href: '/en/prices/' },
@@ -96,8 +112,8 @@ const footerColumns = locale === 'fr'
   <Dock
     tarifsHref={tarifsHref}
     waHref={waHref}
-    tarifsLabel={locale === 'fr' ? 'Tarifs' : 'Prices'}
-    waLabel={locale === 'fr' ? 'Réserver' : 'Book'}
+    tarifsLabel={locale === 'fr' ? 'Tarifs' : locale === 'de' ? 'Preise' : 'Prices'}
+    waLabel={locale === 'fr' ? 'Réserver' : locale === 'de' ? 'Buchen' : 'Book'}
   />
 
   <script>

@@ -22,13 +22,31 @@ const t = {
   levelOptions: ['Débutant', 'Confirmé', 'Perfectionnement'],
   submit: 'Envoyer sur WhatsApp',
   legal: 'En envoyant ce formulaire, tu acceptes d’être recontacté par WhatsApp au sujet de ta demande.',
+  headingEyebrow: 'Ta demande',
+  heading: '4 informations, puis on continue sur WhatsApp',
+  preview: 'Aperçu du message',
+  missingName: "Dis-nous comment on t'appelle.",
+  missingPhone: 'On répond sur WhatsApp, il nous faut ton numéro.',
+  invalidPhone: 'Numéro incomplet : indicatif compris.',
+  dateFallback: 'à préciser',
+  interestFallback: 'un programme adapté',
   ...labels,
 };
 ---
-<form class="lead-form" id="lead-form" data-wa-phone={waPhone} novalidate>
+<form
+  class="lead-form"
+  id="lead-form"
+  data-wa-phone={waPhone}
+  data-missing-name={t.missingName}
+  data-missing-phone={t.missingPhone}
+  data-invalid-phone={t.invalidPhone}
+  data-date-fallback={t.dateFallback}
+  data-interest-fallback={t.interestFallback}
+  novalidate
+>
   <div class="form-heading">
-    <span>Ta demande</span>
-    <b>4 informations, puis on continue sur WhatsApp</b>
+    <span>{t.headingEyebrow}</span>
+    <b>{t.heading}</b>
   </div>
   <div class="field">
     <label for="firstName">{t.firstName}</label>
@@ -57,7 +75,7 @@ const t = {
     </select>
   </div>
   <aside class="message-preview" aria-live="polite">
-    <span>Aperçu du message</span>
+    <span>{t.preview}</span>
     <p data-message-preview></p>
   </aside>
   <button class="btn btn-wa btn-block" type="submit">
@@ -106,7 +124,7 @@ const t = {
   let attempted = false;
 
   const formatDate = (value) => {
-    if (!value) return 'à préciser';
+    if (!value) return form?.dataset.dateFallback || 'à préciser';
     const parts = String(value).split('-');
     return parts.length === 3 ? `${parts[2]}/${parts[1]}/${parts[0]}` : String(value);
   };
@@ -116,12 +134,16 @@ const t = {
     const data = new FormData(form);
     const firstName = String(data.get('firstName') || '').trim() || '…';
     const phone = String(data.get('phone') || '').trim() || '…';
-    const interest = String(data.get('level') || 'un programme adapté');
+    const interest = String(data.get('level') || form.dataset.interestFallback || 'un programme adapté');
     const start = formatDate(data.get('arrival'));
     const end = formatDate(data.get('departure'));
-    return document.documentElement.lang === 'en'
-      ? `Hello PKM! I'm ${firstName}, interested in ${interest}. I'll be on the island from ${start} to ${end}. My number: ${phone}`
-      : `Bonjour PKM ! Je suis ${firstName}, intéressé(e) par ${interest}. Je suis sur l'île du ${start} au ${end}. Mon numéro : ${phone}`;
+    if (document.documentElement.lang === 'en') {
+      return `Hello PKM! I'm ${firstName}, interested in ${interest}. I'll be on the island from ${start} to ${end}. My number: ${phone}`;
+    }
+    if (document.documentElement.lang === 'de') {
+      return `Hallo PKM! Ich bin ${firstName} und interessiere mich für ${interest}. Ich bin vom ${start} bis ${end} auf der Insel. Meine Nummer: ${phone}`;
+    }
+    return `Bonjour PKM ! Je suis ${firstName}, intéressé(e) par ${interest}. Je suis sur l'île du ${start} au ${end}. Mon numéro : ${phone}`;
   };
 
   const showErrors = () => {
@@ -129,11 +151,11 @@ const t = {
     const firstName = form.elements.namedItem('firstName');
     const phone = form.elements.namedItem('phone');
     const errors = { firstName: '', phone: '' };
-    if (firstName instanceof HTMLInputElement && !firstName.value.trim()) errors.firstName = "Dis-nous comment on t'appelle.";
+    if (firstName instanceof HTMLInputElement && !firstName.value.trim()) errors.firstName = form.dataset.missingName || "Dis-nous comment on t'appelle.";
     if (phone instanceof HTMLInputElement) {
       const digits = phone.value.replace(/\D/g, '').length;
-      if (!phone.value.trim()) errors.phone = 'On répond sur WhatsApp, il nous faut ton numéro.';
-      else if (digits < 8) errors.phone = 'Numéro incomplet : indicatif compris.';
+      if (!phone.value.trim()) errors.phone = form.dataset.missingPhone || 'On répond sur WhatsApp, il nous faut ton numéro.';
+      else if (digits < 8) errors.phone = form.dataset.invalidPhone || 'Numéro incomplet : indicatif compris.';
     }
     Object.entries(errors).forEach(([name, message]) => {
       const input = form.elements.namedItem(name);
