@@ -81,27 +81,35 @@ const faqItems = [
   translations={translations}
   tarifsHref="/en/prices/"
   waHref="/en/book/"
+  scrollRefresh={true}
   jsonLd={[
     sportsActivityLocation(),
     faqPage(faqItems),
     breadcrumbList([{ name: 'Home', url: `${site.url}/en/` }]),
   ]}
 >
-  <section class="hero-photo pad">
-    <span class="hero-photo__media">
-      <img class="hero-photo__mobile" src="/images/pkm-hero-mobile.webp" alt="Kitesurfer jumping across Le Morne lagoon" width="900" height="1600" fetchpriority="high" />
+  <section class="hero-photo hero-photo--refresh pad" data-hero-refresh>
+    <span class="hero-photo__media" data-hero-media>
+      <img class="hero-photo__mobile is-active" data-hero-mobile="default" src="/images/pkm-hero-mobile.webp" alt="Kitesurfer jumping across Le Morne lagoon" width="900" height="1600" fetchpriority="high" />
+      <img class="hero-photo__mobile" data-hero-mobile="spot" data-file="pkm-hero-mobile-spot.webp" alt="Aerial view of Le Morne Brabant and its lagoon" width="900" height="1600" />
+      <img class="hero-photo__mobile" data-hero-mobile="3685" data-file="pkm-hero-mobile-rfp3685.webp" alt="Kitesurfer rotating above Le Morne lagoon" width="900" height="1600" />
       <img class="hero-photo__desktop" src="/images/pkm-hero-desktop.webp" alt="Kitesurfer jumping across Le Morne lagoon" width="1920" height="1277" fetchpriority="high" />
     </span>
     <span class="hero-photo__shade" aria-hidden="true"></span>
     <div class="hero-photo__copy">
-      <span class="kicker">Le Morne, Mauritius</span>
-      <h1>From your first waterstart to the waves of Le Morne</h1>
-      <p>Beginner, returning rider or already independent, the team builds a programme with you around your level and the day's conditions.</p>
+      <span class="hero-eyebrow">Kiteschool · Wingschool · Le Morne<br />Since {site.foundedYear}</span>
+      <h1>From the <span>waterstart</span> <em>to the waves</em></h1>
+      <p>A programme built with you, around your level and the day's conditions.</p>
+      <div class="hero-proofline" aria-label="Key facts about the school">
+        <span><b>{site.googleReviews.rating.toFixed(1)}</b><small>Google · {site.googleReviews.count} reviews</small></span>
+        <span><b>{site.team.maxStudentsPerInstructor} max.</b><small>students per instructor</small></span>
+        <span><b>IKO</b><small>certified founder</small></span>
+      </div>
       <div class="hero-actions">
         <Button variant="wa" href={waLink}>Talk on WhatsApp</Button>
         <Button variant="line" href="/en/kitesurf-lessons/">Explore the lessons</Button>
       </div>
-      <small class="hero-photo__credit">PKM photos · Le Morne</small>
+      <small class="hero-photo__credit" data-hero-credit>PKM photos · Le Morne</small>
     </div>
   </section>
 
