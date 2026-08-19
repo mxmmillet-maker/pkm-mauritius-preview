@@ -76,6 +76,17 @@
 .proof b { display: block; font-family: var(--font-display); font-weight: 600; font-size: .95rem; margin-bottom: 3px; }
 .proof span { font-size: .88rem; color: var(--ink-soft); }
 
+/* Photo éditoriale compacte dans les guides */
+.guide-photo { max-width: 760px; margin: 24px auto 0; }
+.guide-photo img {
+  display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover;
+  object-position: center 55%; border-radius: var(--radius-md); box-shadow: var(--shadow);
+}
+.guide-photo figcaption {
+  margin-top: 8px; color: var(--ink-soft); font-size: .8rem; line-height: 1.4;
+  text-align: center;
+}
+
 /* Bandeau d'autorité (chiffres de l'école) */
 .auth { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 6px; }
 .auth > div b { display: block; font-family: var(--font-display); font-weight: 700; font-size: 1.3rem; color: var(--ink); }
