@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://paradisekitesurfingmauritius.com/sitemap.xml
+Sitemap: https://paradisekitesurfingmauritius.com/sitemap-index.xml

@@ -25,4 +25,5 @@ const { logoSrc = '/logo-white.png', columns = [] } = Astro.props;
   footer a { color: #C3D6D4; text-decoration: none; display: block; padding: 5px 0; }
   .footer-logo { display: block; width: auto; height: 58px; margin-bottom: 22px; }
   .fgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 22px; }
+  @media (min-width: 720px) { .fgrid { grid-template-columns: repeat(3, 1fr); } }
 </style>

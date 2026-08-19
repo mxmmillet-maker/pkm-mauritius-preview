@@ -1,0 +1,52 @@
+---
+import Layout from '../layouts/Layout.astro';
+const baseUrl = import.meta.env.BASE_URL ?? '/';
+---
+<Layout
+  title="Page not found — Paradise Kitesurfing Mauritius"
+  description="This page no longer exists. Find the PKM kitesurf school, lessons and prices at Le Morne."
+  locale="en"
+  translations={{ en: '/en/', fr: '/fr/', de: '/de/' }}
+  tarifsHref="/en/prices/"
+  waHref="/en/book/"
+  noindex={true}
+>
+  <section class="not-found pad" data-no-reveal>
+    <span class="kicker">404</span>
+    <h1>Wrong tack. Let’s head back to the lagoon.</h1>
+    <p>The page may have moved. Choose your language to continue.</p>
+    <nav aria-label="Choose a language">
+      <a href="/fr/">Continuer en français</a>
+      <a href="/en/">Continue in English</a>
+      <a href="/de/">Auf Deutsch weiter</a>
+    </nav>
+  </section>
+</Layout>
+
+<style>
+  .not-found { min-height: 62vh; display: grid; align-content: center; justify-items: start; background: var(--sage-pale); }
+  .not-found h1 { max-width: 720px; margin-block: 8px 12px; }
+  .not-found p { color: var(--ink-soft); }
+  .not-found nav { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 16px; }
+  .not-found a { padding: 12px 16px; border-radius: var(--radius-pill); background: var(--ink); color: #fff; font: 600 .84rem var(--font-display); text-decoration: none; }
+</style>
+
+<script define:vars={{ baseUrl }}>
+  const aliases = {
+    '/tarifs': '/fr/tarifs/',
+    '/cours': '/fr/cours-de-kitesurf/',
+    '/perfectionnement': '/fr/perfectionnement/',
+    '/reserver': '/fr/reserver/',
+    '/reservation': '/fr/reserver/',
+    '/faq': '/fr/questions-frequentes/',
+    '/prices': '/en/prices/',
+    '/lessons': '/en/kitesurf-lessons/',
+    '/booking': '/en/book/',
+    '/book': '/en/book/',
+    '/kitesurf-lessons': '/en/kitesurf-lessons/',
+    '/kitesurf-le-morne': '/en/kitesurf-le-morne/',
+  };
+  const basePath = baseUrl === '/' ? '' : baseUrl.replace(/\/$/, '');
+  const requestPath = window.location.pathname.replace(basePath, '').replace(/\/$/, '') || '/';
+  if (aliases[requestPath]) window.location.replace(`${basePath}${aliases[requestPath]}`);
+</script>

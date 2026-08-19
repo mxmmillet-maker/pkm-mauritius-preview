@@ -30,6 +30,7 @@ jobs:
       - run: npm run build:github-pages
         env:
           GITHUB_REPOSITORY: ${{ github.repository }}
+          PUBLIC_GA_MEASUREMENT_ID: ${{ secrets.PUBLIC_GA_MEASUREMENT_ID }}
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

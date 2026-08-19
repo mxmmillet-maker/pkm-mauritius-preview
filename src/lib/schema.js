@@ -9,9 +9,18 @@ export function sportsActivityLocation() {
     '@type': 'SportsActivityLocation',
     name: site.name,
     url: site.url,
-    address: site.spot,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: site.geo.name,
+      addressLocality: 'Le Morne',
+      addressRegion: 'Black River',
+      addressCountry: 'MU',
+    },
     telephone: site.phones?.[0],
     email: site.email,
+    image: `${site.url}/images/pkm-hero-desktop.webp`,
+    hasMap: site.geo.googleMapsUrl,
+    sameAs: [site.tripAdvisorReviews.url],
     ...(site.geo.latitude && site.geo.longitude
       ? { geo: { '@type': 'GeoCoordinates', latitude: site.geo.latitude, longitude: site.geo.longitude } }
       : {}),

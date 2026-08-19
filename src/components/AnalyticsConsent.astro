@@ -1,0 +1,109 @@
+---
+const { locale = 'fr' } = Astro.props;
+const measurementId = (import.meta.env.PUBLIC_GA_MEASUREMENT_ID ?? '').trim();
+const copy = {
+  fr: {
+    text: 'Avec ton accord, nous mesurons les visites et les clics utiles pour améliorer le site. Aucun suivi publicitaire.',
+    accept: 'Accepter la mesure',
+    decline: 'Continuer sans',
+  },
+  en: {
+    text: 'With your permission, we measure visits and useful clicks to improve the site. No advertising tracking.',
+    accept: 'Allow analytics',
+    decline: 'Continue without',
+  },
+  de: {
+    text: 'Mit deiner Zustimmung messen wir Besuche und wichtige Klicks, um die Website zu verbessern. Kein Werbetracking.',
+    accept: 'Analyse erlauben',
+    decline: 'Ohne fortfahren',
+  },
+}[locale] ?? {
+  text: 'With your permission, we measure visits and useful clicks to improve the site. No advertising tracking.',
+  accept: 'Allow analytics',
+  decline: 'Continue without',
+};
+---
+
+{measurementId && (
+  <aside class="analytics-consent" data-analytics-consent hidden aria-label="Analytics">
+    <p>{copy.text}</p>
+    <div>
+      <button type="button" data-consent="granted">{copy.accept}</button>
+      <button type="button" class="secondary" data-consent="denied">{copy.decline}</button>
+    </div>
+  </aside>
+)}
+
+<style>
+  .analytics-consent {
+    position: fixed; z-index: 90; right: 16px; bottom: calc(78px + env(safe-area-inset-bottom));
+    width: min(420px, calc(100vw - 32px)); padding: 16px; border: 1px solid var(--line);
+    border-radius: 16px; background: #fff; box-shadow: 0 18px 52px rgba(10,44,48,.2);
+  }
+  .analytics-consent p { margin: 0 0 12px; color: var(--ink-soft); font-size: .82rem; line-height: 1.5; }
+  .analytics-consent div { display: flex; flex-wrap: wrap; gap: 8px; }
+  .analytics-consent button {
+    min-height: var(--tap-min); padding: 9px 14px; border: 0; border-radius: var(--radius-pill);
+    background: var(--ink); color: #fff; font: 600 .78rem var(--font-display); cursor: pointer;
+  }
+  .analytics-consent button.secondary { border: 1px solid var(--line); background: #fff; color: var(--ink); }
+  @media (min-width: 900px) { .analytics-consent { bottom: 20px; } }
+</style>
+
+<script define:vars={{ measurementId }}>
+  const consentKey = 'pkm_analytics_consent';
+  const consentBox = document.querySelector('[data-analytics-consent]');
+  let analyticsLoaded = false;
+
+  const readConsent = () => {
+    try { return localStorage.getItem(consentKey); } catch { return null; }
+  };
+
+  const loadAnalytics = () => {
+    if (!measurementId || analyticsLoaded) return;
+    analyticsLoaded = true;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = window.gtag || function gtag(){ window.dataLayer.push(arguments); };
+    window.gtag('js', new Date());
+    window.gtag('config', measurementId, { anonymize_ip: true, allow_google_signals: false });
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(measurementId)}`;
+    document.head.appendChild(script);
+  };
+
+  window.pkmTrack = (eventName, parameters = {}) => {
+    window.dispatchEvent(new CustomEvent('pkm:track', { detail: { eventName, parameters } }));
+    if (measurementId && readConsent() === 'granted') {
+      loadAnalytics();
+      window.gtag?.('event', eventName, parameters);
+    }
+  };
+
+  const setConsent = (value) => {
+    try { localStorage.setItem(consentKey, value); } catch {}
+    if (value === 'granted') loadAnalytics();
+    if (consentBox instanceof HTMLElement) consentBox.hidden = true;
+  };
+
+  const currentConsent = readConsent();
+  if (currentConsent === 'granted') loadAnalytics();
+  else if (!currentConsent && consentBox instanceof HTMLElement) consentBox.hidden = false;
+
+  consentBox?.querySelectorAll('[data-consent]').forEach((button) => {
+    button.addEventListener('click', () => setConsent(button.getAttribute('data-consent') || 'denied'));
+  });
+
+  document.addEventListener('click', (event) => {
+    const target = event.target instanceof Element ? event.target.closest('a') : null;
+    if (!(target instanceof HTMLAnchorElement)) return;
+    const href = target.href;
+    const path = target.pathname;
+    if (href.includes('wa.me/')) window.pkmTrack('whatsapp_click');
+    else if (href.startsWith('tel:')) window.pkmTrack('phone_click');
+    else if (href.startsWith('mailto:')) window.pkmTrack('email_click');
+    else if (/\/(reserver|book|buchen)\//.test(path)) window.pkmTrack('booking_click', { page_path: path });
+    else if (/\/(tarifs|prices|preise)\//.test(path)) window.pkmTrack('pricing_click', { page_path: path });
+    else if (target.origin !== window.location.origin) window.pkmTrack('outbound_click', { destination: target.hostname });
+  });
+</script>

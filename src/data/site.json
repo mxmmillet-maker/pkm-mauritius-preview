@@ -19,10 +19,27 @@
   "phones": ["+230 5843 3810", "+230 5726 4012"],
   "email": "info@paradisekitesurfingmauritius.com",
 
+  "legal": {
+    "legalName": "PARADISE KITESURFING (MAURITIUS) LTD",
+    "tourismLicence": "16536",
+    "tourismLicenceAuthority": "Mauritius Tourism Authority",
+    "registeredAddress": {
+      "street": "Royal Road",
+      "locality": "Chemin Grenier",
+      "district": "Savanne",
+      "country": "Mauritius"
+    },
+    "businessRegistrationNumber": null,
+    "businessRegistrationNumberNote": "BRN à confirmer avec l'entreprise avant d'activer un paiement et une facturation en ligne.",
+    "previewHosting": "GitHub Pages — GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA"
+  },
+
   "geo": {
-    "note": "Coordonnées GPS exactes à récupérer sur la fiche Google Business avant publication.",
-    "latitude": null,
-    "longitude": null
+    "name": "Kite Lagoon, Le Morne",
+    "note": "Point de rendez-vous opérationnel de l'école, distinct de l'adresse administrative de la société.",
+    "latitude": -20.46591,
+    "longitude": 57.31739,
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=-20.46591%2C57.31739"
   },
 
   "googleReviews": {

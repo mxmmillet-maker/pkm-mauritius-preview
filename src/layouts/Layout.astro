@@ -10,6 +10,7 @@ import '../styles/blocks.css';
 import Topbar from '../components/Topbar.astro';
 import Dock from '../components/Dock.astro';
 import Footer from '../components/Footer.astro';
+import AnalyticsConsent from '../components/AnalyticsConsent.astro';
 import { NAV, hreflangLinks } from '../lib/i18n';
 import site from '../data/site.json';
 
@@ -29,12 +30,17 @@ const {
   tarifsHref,
   waHref,
   scrollRefresh = false,
+  ogImage = '/images/pkm-hero-desktop.webp',
+  ogImageAlt,
+  noindex = false,
 } = Astro.props;
 
 const baseUrl = import.meta.env.BASE_URL ?? '/';
 const basePath = baseUrl === '/' ? '' : baseUrl.replace(/\/$/, '');
 const withBase = (path) => `${basePath}/${path.replace(/^\/+/, '')}`;
 const canonical = new URL(withBase(translations[locale] ?? Astro.url.pathname), Astro.site);
+const socialImage = new URL(withBase(ogImage), Astro.site);
+const isPreview = basePath !== '';
 const alternates = hreflangLinks(translations, Astro.site, baseUrl);
 const footerColumns = locale === 'fr'
   ? [
@@ -74,6 +80,28 @@ const footerColumns = locale === 'fr'
         { label: 'Frequently asked questions', href: '/en/faq/' },
       ] },
     ];
+footerColumns.push(locale === 'fr'
+  ? { title: 'Informations', links: [
+      { label: 'Mentions légales', href: '/fr/mentions-legales/' },
+      { label: 'Confidentialité', href: '/fr/confidentialite/' },
+      { label: 'Localisation Google Maps', href: site.geo.googleMapsUrl },
+    ] }
+  : locale === 'de'
+    ? { title: 'Informationen', links: [
+        { label: 'Impressum', href: '/de/impressum/' },
+        { label: 'Datenschutz', href: '/de/datenschutz/' },
+        { label: 'Standort auf Google Maps', href: site.geo.googleMapsUrl },
+      ] }
+    : { title: 'Information', links: [
+        { label: 'Legal notice', href: '/en/legal-notice/' },
+        { label: 'Privacy', href: '/en/privacy/' },
+        { label: 'Location on Google Maps', href: site.geo.googleMapsUrl },
+      ] });
+const resolvedOgAlt = ogImageAlt ?? (locale === 'fr'
+  ? 'Cours de kitesurf PKM dans le lagon du Morne à l’île Maurice'
+  : locale === 'de'
+    ? 'PKM-Kitesurfkurs in der Lagune von Le Morne auf Mauritius'
+    : 'PKM kitesurf lesson in Le Morne lagoon, Mauritius');
 ---
 <!doctype html>
 <html lang={locale}>
@@ -83,18 +111,28 @@ const footerColumns = locale === 'fr'
   <script is:inline>document.documentElement.classList.add('js');</script>
   <title>{title}</title>
   <meta name="description" content={description} />
+  <meta name="robots" content={(isPreview || noindex) ? 'noindex,nofollow' : 'index,follow,max-image-preview:large'} />
+  <meta name="theme-color" content="#0A2C30" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content={site.name} />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
   <meta property="og:url" content={canonical} />
-  <meta name="twitter:card" content="summary" />
+  <meta property="og:locale" content={locale === 'fr' ? 'fr_FR' : locale === 'de' ? 'de_DE' : 'en_GB'} />
+  <meta property="og:image" content={socialImage} />
+  <meta property="og:image:width" content="1920" />
+  <meta property="og:image:height" content="1277" />
+  <meta property="og:image:alt" content={resolvedOgAlt} />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={socialImage} />
+  <meta name="twitter:image:alt" content={resolvedOgAlt} />
   <link rel="canonical" href={canonical} />
   {alternates.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
   <link rel="icon" type="image/png" sizes="256x256" href="/favicon.png" />
   <link rel="apple-touch-icon" href="/favicon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
   {jsonLd.map((schema) => (
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
   ))}
@@ -108,6 +146,9 @@ const footerColumns = locale === 'fr'
     <p style="margin-top:16px;color:#7C9A98">
       © {new Date().getFullYear()} {site.name} — {site.spot}
     </p>
+    <p style="margin:6px 0 0;color:#7C9A98;font-size:.76rem">
+      {site.legal.legalName} · {site.legal.tourismLicenceAuthority} n° {site.legal.tourismLicence}
+    </p>
   </Footer>
   <Dock
     tarifsHref={tarifsHref}
@@ -115,6 +156,7 @@ const footerColumns = locale === 'fr'
     tarifsLabel={locale === 'fr' ? 'Tarifs' : locale === 'de' ? 'Preise' : 'Prices'}
     waLabel={locale === 'fr' ? 'Réserver' : locale === 'de' ? 'Buchen' : 'Book'}
   />
+  <AnalyticsConsent locale={locale} />
 
   <script>
     // Apparition progressive des sections au scroll — voir tokens.css pour le

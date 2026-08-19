@@ -1,0 +1,16 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import LegalPage from '../../../components/LegalPage.astro';
+import site from '../../../data/site.json';
+const translations = { fr: '/fr/confidentialite/', en: '/en/privacy/', de: '/de/datenschutz/' };
+const sections = [
+  { title: 'Verarbeitete Daten', paragraphs: ['Wenn du ein Programm oder eine Buchung anfragst, verarbeiten wir die eingegebenen Angaben: Vorname, WhatsApp-Nummer, Reisedaten, Niveau und gewünschte Aktivität. Der anschließende Austausch über WhatsApp unterliegt diesem Dienst.', 'Wenn du der Reichweitenmessung zustimmst, können nicht direkt identifizierende technische Daten erfasst werden: aufgerufene Seiten, Sprache, Gerätetyp und Klicks auf wichtige Aktionen. Nachrichteninhalte, Telefonnummern und E-Mail-Adressen werden nicht an das Analysetool übermittelt.'] },
+  { title: 'Zwecke', items: ['Deine Anfrage beantworten und passende Termine oder Pakete vorschlagen.', 'Die Buchung vorbereiten und verwalten, einschließlich Änderungen aufgrund der Windbedingungen.', 'Nur mit deiner Zustimmung die Leistung der Website messen und den Kontaktweg verbessern.'] },
+  { title: 'Empfänger und Speicherdauer', paragraphs: ['Anfragen sind nur für das PKM-Team und technisch notwendige Dienstleister zugänglich. Eine Anfrage ohne anschließende Buchung wird höchstens 12 Monate nach dem letzten Austausch gespeichert, sofern keine gesetzliche Pflicht besteht oder du eine frühere Löschung verlangst.', 'WhatsApp ist ein Dienst von Meta und kann Daten außerhalb von Mauritius verarbeiten. Bitte lies die eigenen Datenschutzbestimmungen des Dienstes, bevor du das Gespräch fortsetzt.'] },
+  { title: 'Analyse und Cookies', paragraphs: ['Vor deiner Zustimmung wird kein Reichweitenmessungs-Tool geladen. Deine Wahl wird im Browser gespeichert und kann jederzeit durch Löschen der Websitedaten entfernt werden. Werbetracking ist nicht vorgesehen.'] },
+  { title: 'Deine Rechte', paragraphs: [`Du kannst Auskunft, Berichtigung oder Löschung deiner Daten verlangen oder ihrer Nutzung widersprechen. Schreibe dazu an <a href="mailto:${site.email}">${site.email}</a>. Wir können Angaben anfordern, um zu prüfen, dass die Anfrage deine Daten betrifft.`] },
+];
+---
+<Layout title="Datenschutz — Paradise Kitesurfing Mauritius" description="Wie Paradise Kitesurfing Mauritius Daten aus Buchungsanfragen verwendet und schützt." locale="de" translations={translations} tarifsHref="/de/preise/" waHref="/de/buchen/">
+  <LegalPage eyebrow="Personenbezogene Daten" title="Datenschutzerklärung" intro="Eine verständliche Erklärung der Informationen, die bei einer Kontaktaufnahme über die Website verwendet werden." sections={sections} updated="Zuletzt aktualisiert: 19. August 2026." />
+</Layout>

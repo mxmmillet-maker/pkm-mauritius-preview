@@ -1,0 +1,36 @@
+---
+const { eyebrow, title, intro, sections = [], updated } = Astro.props;
+---
+
+<section class="legal-hero pad">
+  <span class="kicker">{eyebrow}</span>
+  <h1>{title}</h1>
+  <p>{intro}</p>
+</section>
+
+<section class="legal-body pad" data-no-reveal>
+  <article>
+    {sections.map((section) => (
+      <section>
+        <h2>{section.title}</h2>
+        {section.paragraphs?.map((paragraph) => <p set:html={paragraph} />)}
+        {section.items?.length ? <ul>{section.items.map((item) => <li set:html={item} />)}</ul> : null}
+      </section>
+    ))}
+    <p class="updated">{updated}</p>
+  </article>
+</section>
+
+<style>
+  .legal-hero { padding-top: 72px; padding-bottom: 42px; background: var(--sage-pale); }
+  .legal-hero h1 { max-width: 780px; margin-block: 8px 12px; }
+  .legal-hero p { max-width: 720px; margin: 0; color: var(--ink-soft); }
+  .legal-body { background: #fff; }
+  article { max-width: 780px; margin-inline: auto; }
+  article section { margin-bottom: 36px; }
+  article h2 { margin-bottom: 10px; font-size: clamp(1.35rem, 3vw, 1.9rem); }
+  article p, article li { color: var(--ink-soft); line-height: 1.75; }
+  article ul { padding-left: 1.25rem; }
+  article a { color: var(--sage-deep); font-weight: 600; }
+  .updated { padding-top: 22px; border-top: 1px solid var(--line); font-size: .78rem; }
+</style>
