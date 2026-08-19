@@ -14,21 +14,21 @@ const translations = {
 const faqItems = [
   {
     question: 'Wie viel kostet ein Kitesurfkurs auf Mauritius?',
-    answer: 'Je nach Schule liegen private Kurse meist zwischen 80 und 130 € pro Stunde. Für einen vollständigen Kurs über fünf bis sieben Tage solltest du mit etwa 350 bis 580 € rechnen.',
+    answer: 'Bei PKM kostet ein zweistündiger Privatkurs 8.000 Rs. Semi-privat zu zweit kostet ein zweistündiger Kurs 4.500 Rs pro Person. Vergleiche bei anderen Schulen immer dieselbe Dauer und dieselbe Anzahl von Schülern pro Lehrer.',
   },
   {
-    question: 'Ist Materialmiete günstiger als Unterricht?',
-    answer: 'Ja, sie ist aber nur für bereits selbstständige Fahrer gedacht: etwa 40 bis 60 € pro Tag und 200 bis 280 € pro Woche.',
+    question: 'Ist PKM teurer als andere Schulen in Le Morne?',
+    answer: 'PKM liegt in einem wettbewerbsfähigen Preisbereich. Born to Kite ist je nach Paket meist etwas günstiger, LMKS etwas teurer und ION CLUB deutlich teurer.',
   },
   {
-    question: 'Warum unterscheiden sich die Preise der Schulen so stark?',
-    answer: 'Vor allem wegen des Verhältnisses von Schülern zu Lehrern. Ein Privatkurs mit einem Schüler kostet zwangsläufig mehr als Gruppenunterricht mit bis zu vier Schülern.',
+    question: 'Was sollte ich vor der Wahl einer Schule vergleichen?',
+    answer: 'Vergleiche die tatsächliche Unterrichtsdauer, das Verhältnis von Schülern zu Lehrern, das enthaltene Material, das Sicherheitsboot, die Regelung bei fehlendem Wind und den gesamten Paketumfang.',
   },
 ];
 ---
 <Layout
-  title="Was kostet Kitesurfen auf Mauritius? — PKM"
-  description="Ein privater Kitesurfkurs auf Mauritius kostet je nach Schule etwa 80 bis 130 € pro Stunde. Realistische Preisspannen für Kurse, Miete und Pakete."
+  title="Was kostet Kitesurfen auf Mauritius? | PKM"
+  description="Vergleiche die Preise der Kiteschulen in Le Morne bei gleicher Dauer und Betreuung. Position von PKM gegenüber Born to Kite, LMKS und ION CLUB."
   locale="de"
   translations={translations}
   tarifsHref="/de/preise/"
@@ -45,32 +45,29 @@ const faqItems = [
   <section class="pad">
     <span class="kicker">Guide</span>
     <h1>Wie viel kostet Kitesurfen auf Mauritius?</h1>
-    <p class="sub">Ein Privatkurs kostet bei den Schulen in Le Morne im Durchschnitt <b>80 bis 130 € pro Stunde</b>. Entscheidend ist vor allem, wie viele Schüler ein Lehrer gleichzeitig betreut.</p>
+    <p class="sub">PKM liegt in Le Morne in einem wettbewerbsfähigen Preisbereich. Bei vergleichbaren Angeboten ist Born to Kite meist etwas günstiger, LMKS etwas teurer und ION CLUB deutlich teurer.</p>
   </section>
 
   <section class="pad">
-    <h2>Preisspannen am Markt</h2>
-    <p><b>Privatkurs, 2 Std.</b> — 80 bis 100 € bei günstigeren Schulen, bis zu 130 € im Premiumsegment.</p>
-    <p><b>Gruppenkurs, 2–4 Schüler</b> — 50 bis 70 € pro Person.</p>
-    <p><b>Semi-Privatkurs, 2 Schüler</b> — 60 bis 80 € pro Person.</p>
-    <p><b>3-Tages-Kurs</b> — 220 bis 280 €.</p>
-    <p><b>5-Tages-Kurs</b> — 350 bis 450 €.</p>
-    <p><b>7-Tages-Kurs</b> — 450 bis 580 €.</p>
-    <p><b>Komplette Materialmiete</b> — 40 bis 60 € pro Tag, 200 bis 280 € pro Woche.</p>
-    <p class="sub">Richtwerte aus einem Marktvergleich in Le Morne; der genaue Preis hängt vom Format und Leistungsumfang ab.</p>
+    <h2>Die richtige Preisreihenfolge in Le Morne</h2>
+    <p><b>Born to Kite:</b> je nach Dauer und Paket meist etwas günstiger als PKM.</p>
+    <p><b>Paradise Kitesurfing Mauritius:</b> der Vergleichspunkt, mit 8.000 Rs für 2 Stunden Privatunterricht und 4.500 Rs pro Person für 2 Stunden semi-privat zu zweit.</p>
+    <p><b>LMKS:</b> bei Privatkursen und mehreren vergleichbaren Paketen etwas teurer als PKM.</p>
+    <p><b>ION CLUB:</b> deutlich teurer als PKM und als internationales Wassersportzentrum positioniert.</p>
+    <p class="sub">Preislisten ändern sich von Saison zu Saison. Diese Reihenfolge zeigt die relative Position der Schulen, ohne Kurse mit unterschiedlicher Dauer oder Betreuung zu einem künstlichen Durchschnitt zusammenzufassen.</p>
   </section>
 
   <section class="pad" style="background:var(--surface)">
-    <h2>Wo PKM in diesen Spannen liegt</h2>
-    <p>Bei Paradise Kitesurfing Mauritius kostet ein zweistündiger Privatkurs 8.000 Rs, etwa 160 €. Das liegt im oberen Marktsegment und entspricht einem Verhältnis von einem Lehrer zu einem Schüler. Semi-privat zu zweit kostet 4.500 Rs pro Person, etwa 90 €.</p>
-    <p class="sub" style="font-size:.9rem">Preise 2026, Material inklusive. Alle Details stehen auf der Preisseite.</p>
+    <h2>Der PKM-Vergleichspunkt</h2>
+    <p>Bei Paradise Kitesurfing Mauritius betreut im Privatkurs 1 Lehrer 1 Schüler für 2 Stunden zum Preis von 8.000 Rs. Semi-privat betreut 1 Lehrer 2 Schüler für 2 Stunden zum Preis von 4.500 Rs pro Person. Die Pakete mit 6, 8 und 10 Stunden senken anschließend den Stundenpreis.</p>
+    <p class="sub" style="font-size:.9rem">Material inklusive. Aktuelle Details und Pakete findest du auf der Preisseite.</p>
   </section>
 
   <section class="pad">
-    <h2>Warum die Preise so unterschiedlich sind</h2>
-    <p>Der wichtigste Faktor ist das Verhältnis von Schülern zu Lehrern: Ein Privatkurs kostet bei gleicher Lehrerqualität mehr als eine Vierergruppe.</p>
-    <p>Auch das Material spielt eine Rolle. Schulen, die ihren Bestand regelmäßig erneuern, tragen höhere Kosten.</p>
-    <p>Ein Sicherheitsboot verursacht Wartungs- und Betriebskosten, die ebenfalls einen Teil des Preisunterschieds erklären.</p>
+    <h2>So vergleichst du die Preise richtig</h2>
+    <p><b>Gleiche Dauer:</b> Vergleiche einen zweistündigen Kurs mit einem anderen zweistündigen Kurs oder ein 6-Stunden-Paket mit einem anderen 6-Stunden-Paket.</p>
+    <p><b>Gleiche Betreuung:</b> Ein Privatkurs im Verhältnis 1 zu 1 lässt sich nicht mit dem Preis pro Person in einer Gruppe von 3 oder 4 Schülern vergleichen.</p>
+    <p><b>Gleiche Leistungen:</b> Prüfe Material, Versicherung, Sicherheitsboot, möglichen Transport und die Regelung bei fehlendem Wind.</p>
   </section>
 
   <section class="pad" style="text-align:center">

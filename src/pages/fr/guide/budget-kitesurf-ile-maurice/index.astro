@@ -14,21 +14,21 @@ const translations = {
 const faqItems = [
   {
     question: 'Combien coûte un cours de kitesurf à Maurice ?',
-    answer: 'Compter de 80 à 130 € l’heure de cours privé selon l’école, et entre 350 et 580 € pour un stage complet de 5 à 7 jours.',
+    answer: 'Chez PKM, 2 heures en privé coûtent Rs 8 000. En semi-privé à deux, le tarif est de Rs 4 500 par personne. Pour comparer avec une autre école, vérifie toujours la même durée et le même nombre d’élèves par moniteur.',
   },
   {
-    question: 'La location de matériel est-elle moins chère que les cours ?',
-    answer: 'Oui, mais réservée aux riders déjà autonomes : 40 à 60 € par jour, 200 à 280 € par semaine.',
+    question: 'PKM est-elle plus chère que les autres écoles du Morne ?',
+    answer: 'PKM se situe dans une zone tarifaire compétitive. Born to Kite est généralement un peu moins cher selon la formule, LMKS un peu plus cher et ION CLUB nettement plus cher.',
   },
   {
-    question: 'Pourquoi les prix varient-ils autant d’une école à l’autre ?',
-    answer: 'Surtout le ratio élève/moniteur : un cours privé (1 élève) coûte mécaniquement plus cher qu’un cours collectif (jusqu’à 4 élèves), à moniteur égal.',
+    question: 'Que faut-il comparer avant de choisir une école ?',
+    answer: 'Compare la durée réelle du cours, le ratio élève/moniteur, le matériel inclus, le bateau de sécurité, les conditions sans vent et le contenu du forfait.',
   },
 ];
 ---
 <Layout
-  title="Combien coûte un cours de kitesurf à Maurice ? — PKM"
-  description="Un cours privé de kitesurf à Maurice coûte entre 80 et 130 € de l'heure selon l'école. Fourchettes de prix du marché, cours, location, stages — sans enjoliver."
+  title="Combien coûte un cours de kitesurf à Maurice ? | PKM"
+  description="Compare les tarifs des écoles de kitesurf au Morne à durée et ratio identiques. Positionnement de PKM face à Born to Kite, LMKS et ION CLUB."
   locale="fr"
   translations={translations}
   tarifsHref="/fr/tarifs/"
@@ -46,44 +46,41 @@ const faqItems = [
     <span class="kicker">Guide</span>
     <h1>Combien coûte un cours de kitesurf à Maurice ?</h1>
     <p class="sub">
-      Un cours privé coûte en moyenne <b>80 à 130 € de l'heure</b> selon les
-      écoles du Morne. Le prix dépend surtout d'un facteur : le nombre
-      d'élèves par moniteur.
+      PKM se place dans une zone tarifaire compétitive au Morne. À formule
+      comparable, Born to Kite est généralement un peu moins cher, LMKS un peu
+      plus cher et ION CLUB nettement plus cher.
     </p>
   </section>
 
   <section class="pad">
-    <h2>Fourchettes de prix constatées sur le marché</h2>
-    <p><b>Cours privé (2 h)</b> — 80 à 100 € en école d'entrée de gamme, jusqu'à 130 € en haut de gamme.</p>
-    <p><b>Cours collectif (2 à 4 élèves)</b> — 50 à 70 € par personne.</p>
-    <p><b>Cours semi-privé (2 élèves)</b> — 60 à 80 € par personne.</p>
-    <p><b>Stage 3 jours</b> — 220 à 280 €.</p>
-    <p><b>Stage 5 jours</b> — 350 à 450 €.</p>
-    <p><b>Stage 7 jours</b> — 450 à 580 €.</p>
-    <p><b>Location du matériel complet</b> — 40 à 60 € par jour, 200 à 280 € par semaine.</p>
+    <h2>Le bon classement des prix au Morne</h2>
+    <p><b>Born to Kite :</b> généralement un peu moins cher que PKM, selon la durée et la formule retenues.</p>
+    <p><b>Paradise Kitesurfing Mauritius :</b> le repère de comparaison, avec Rs 8 000 pour 2 h en privé et Rs 4 500 par personne pour 2 h en semi-privé à deux.</p>
+    <p><b>LMKS :</b> légèrement plus cher que PKM sur les cours privés et plusieurs forfaits comparables.</p>
+    <p><b>ION CLUB :</b> nettement plus cher que PKM, avec un positionnement de centre international.</p>
     <p class="sub">
-      Fourchettes issues d'une comparaison du marché du Morne — panier moyen
-      constaté 87 à 580 € selon le format (voir doc état des lieux du
-      projet).
+      Les grilles changent selon les saisons. Ce classement sert à situer les
+      écoles entre elles, sans fabriquer une moyenne à partir de cours qui
+      n'ont ni la même durée ni le même ratio d'encadrement.
     </p>
   </section>
 
   <section class="pad" style="background:var(--surface)">
-    <h2>Où se situe PKM sur ces fourchettes</h2>
+    <h2>Le repère PKM</h2>
     <p>
-      Chez Paradise Kitesurfing Mauritius, un cours privé de 2 h coûte
-      Rs 8 000 (environ 160 €), dans le haut de la fourchette de marché — le
-      prix d'un ratio d'1 moniteur pour 1 élève. En semi-privé à deux, Rs 4 500
-      par personne (environ 90 €), au milieu de la fourchette.
+      Chez Paradise Kitesurfing Mauritius, le cours privé réunit 1 moniteur et
+      1 élève pendant 2 h pour Rs 8 000. Le semi-privé réunit 1 moniteur et 2
+      élèves pendant 2 h pour Rs 4 500 par personne. Les forfaits de 6, 8 et
+      10 heures rendent ensuite le tarif dégressif.
     </p>
-    <p class="sub" style="font-size:.9rem">Tarifs 2026, matériel compris. Détail complet sur la page tarifs.</p>
+    <p class="sub" style="font-size:.9rem">Matériel compris. Le détail et les forfaits à jour sont disponibles sur la page tarifs.</p>
   </section>
 
   <section class="pad">
-    <h2>Pourquoi le prix varie autant</h2>
-    <p>Le facteur numéro un est le ratio élève/moniteur : un cours privé coûte plus cher qu'un cours à 4, à qualité de moniteur égale.</p>
-    <p>Le matériel joue aussi : les écoles qui renouvellent leur flotte chaque saison répercutent ce coût.</p>
-    <p>Un bateau de sécurité, quand il existe, a un coût d'entretien que peu d'écoles supportent — c'est aussi ce qui explique une partie de l'écart de prix.</p>
+    <h2>Comment comparer sans se tromper</h2>
+    <p><b>Même durée :</b> compare un cours de 2 h avec un autre cours de 2 h, ou un forfait de 6 h avec un forfait de 6 h.</p>
+    <p><b>Même encadrement :</b> un cours privé 1 pour 1 ne se compare pas au prix par personne d'un groupe de 3 ou 4 élèves.</p>
+    <p><b>Mêmes services :</b> vérifie le matériel, l'assurance, le bateau de sécurité, le transport éventuel et les conditions prévues quand le vent manque.</p>
   </section>
 
   <section class="pad" style="text-align:center">
