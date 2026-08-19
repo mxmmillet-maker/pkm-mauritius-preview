@@ -14,11 +14,11 @@ const translations = {
 const faqItems = [
   {
     question: 'Wie viel kostet ein Kitesurfkurs auf Mauritius?',
-    answer: 'Bei PKM kostet ein zweistündiger Privatkurs 8.000 Rs. Semi-privat zu zweit kostet ein zweistündiger Kurs 4.500 Rs pro Person. Vergleiche bei anderen Schulen immer dieselbe Dauer und dieselbe Anzahl von Schülern pro Lehrer.',
+    answer: 'In Le Morne liegen semi-private Kurse für zwei Schüler meist zwischen 1.900 und 3.000 Rs pro Stunde und Person. Privatunterricht mit einem Lehrer für einen Schüler kostet ungefähr 3.800 bis 5.000 Rs pro Stunde.',
   },
   {
-    question: 'Ist PKM teurer als andere Schulen in Le Morne?',
-    answer: 'PKM liegt in einem wettbewerbsfähigen Preisbereich. Born to Kite ist je nach Paket meist etwas günstiger, LMKS etwas teurer und ION CLUB deutlich teurer.',
+    question: 'Welches Preis-Leistungs-Verhältnis bietet PKM?',
+    answer: 'PKM liegt im wettbewerbsfähigen Teil der beobachteten Spannen. Eine zweistündige Einheit kostet 4.000 Rs pro Stunde privat und 2.250 Rs pro Stunde und Person semi-privat. Pakete senken den Stundenpreis weiter.',
   },
   {
     question: 'Was sollte ich vor der Wahl einer Schule vergleichen?',
@@ -28,7 +28,7 @@ const faqItems = [
 ---
 <Layout
   title="Was kostet Kitesurfen auf Mauritius? | PKM"
-  description="Vergleiche die Preise der Kiteschulen in Le Morne bei gleicher Dauer und Betreuung. Position von PKM gegenüber Born to Kite, LMKS und ION CLUB."
+  description="Stündliche Preisspannen für Kitesurfkurse in Le Morne sowie Tipps zum Vergleich von Betreuung, Material und Sicherheit."
   locale="de"
   translations={translations}
   tarifsHref="/de/preise/"
@@ -45,29 +45,28 @@ const faqItems = [
   <section class="pad">
     <span class="kicker">Guide</span>
     <h1>Wie viel kostet Kitesurfen auf Mauritius?</h1>
-    <p class="sub">PKM liegt in Le Morne in einem wettbewerbsfähigen Preisbereich. Bei vergleichbaren Angeboten ist Born to Kite meist etwas günstiger, LMKS etwas teurer und ION CLUB deutlich teurer.</p>
+    <p class="sub">In Le Morne zahlst du für semi-private Kurse meist <b>1.900 bis 3.000 Rs pro Stunde und Person</b>. Privatunterricht kostet ungefähr <b>3.800 bis 5.000 Rs pro Stunde</b>. Für einen fairen Vergleich zählen vor allem die Betreuungsquote und die enthaltenen Leistungen.</p>
   </section>
 
   <section class="pad">
-    <h2>Die richtige Preisreihenfolge in Le Morne</h2>
-    <p><b>Born to Kite:</b> je nach Dauer und Paket meist etwas günstiger als PKM.</p>
-    <p><b>Paradise Kitesurfing Mauritius:</b> der Vergleichspunkt, mit 8.000 Rs für 2 Stunden Privatunterricht und 4.500 Rs pro Person für 2 Stunden semi-privat zu zweit.</p>
-    <p><b>LMKS:</b> bei Privatkursen und mehreren vergleichbaren Paketen etwas teurer als PKM.</p>
-    <p><b>ION CLUB:</b> deutlich teurer als PKM und als internationales Wassersportzentrum positioniert.</p>
-    <p class="sub">Preislisten ändern sich von Saison zu Saison. Diese Reihenfolge zeigt die relative Position der Schulen, ohne Kurse mit unterschiedlicher Dauer oder Betreuung zu einem künstlichen Durchschnitt zusammenzufassen.</p>
+    <h2>Stündliche Preisspannen in Le Morne</h2>
+    <p><b>Semi-privat, 2 Schüler:</b> ungefähr 1.900 bis 3.000 Rs pro Stunde und Person.</p>
+    <p><b>Privat, 1 Lehrer für 1 Schüler:</b> ungefähr 3.800 bis 5.000 Rs pro Stunde.</p>
+    <p><b>Pakete mit mehreren Einheiten:</b> ab 6 gebuchten Stunden sinkt der Stundenpreis in der Regel.</p>
+    <p class="sub">Diese Richtwerte basieren auf öffentlich verfügbaren Preislisten für Le Morne. Saison, Gruppengröße, Material und enthaltene Leistungen können den Endpreis verändern.</p>
   </section>
 
   <section class="pad" style="background:var(--surface)">
-    <h2>Der PKM-Vergleichspunkt</h2>
-    <p>Bei Paradise Kitesurfing Mauritius betreut im Privatkurs 1 Lehrer 1 Schüler für 2 Stunden zum Preis von 8.000 Rs. Semi-privat betreut 1 Lehrer 2 Schüler für 2 Stunden zum Preis von 4.500 Rs pro Person. Die Pakete mit 6, 8 und 10 Stunden senken anschließend den Stundenpreis.</p>
+    <h2>Wo PKM liegt</h2>
+    <p>Eine zweistündige Einheit kostet <b>4.000 Rs pro Stunde privat</b> und <b>2.250 Rs pro Stunde und Person semi-privat</b>. Beim 10-Stunden-Paket sinkt der Preis auf 3.800 Rs pro Stunde privat und 1.925 Rs pro Stunde und Person semi-privat.</p>
     <p class="sub" style="font-size:.9rem">Material inklusive. Aktuelle Details und Pakete findest du auf der Preisseite.</p>
   </section>
 
   <section class="pad">
-    <h2>So vergleichst du die Preise richtig</h2>
-    <p><b>Gleiche Dauer:</b> Vergleiche einen zweistündigen Kurs mit einem anderen zweistündigen Kurs oder ein 6-Stunden-Paket mit einem anderen 6-Stunden-Paket.</p>
-    <p><b>Gleiche Betreuung:</b> Ein Privatkurs im Verhältnis 1 zu 1 lässt sich nicht mit dem Preis pro Person in einer Gruppe von 3 oder 4 Schülern vergleichen.</p>
-    <p><b>Gleiche Leistungen:</b> Prüfe Material, Versicherung, Sicherheitsboot, möglichen Transport und die Regelung bei fehlendem Wind.</p>
+    <h2>Was im Kurspreis steckt</h2>
+    <p><b>Enge Betreuung:</b> höchstens 2 Schüler pro Lehrer, im semi-privaten Kurs mit einem Kite und einem Board für jede Person.</p>
+    <p><b>Sicherheit am Spot:</b> Helm und Prallschutzweste, je nach Programm und Bedingungen ein verfügbares Sicherheitsboot sowie VHF-Funk bei geeigneten Lernformaten.</p>
+    <p><b>Planbare Buchung:</b> fehlt der Wind, wird die Einheit ohne zusätzliche Kosten verschoben.</p>
   </section>
 
   <section class="pad" style="text-align:center">
