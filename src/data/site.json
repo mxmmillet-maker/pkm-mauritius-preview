@@ -43,11 +43,14 @@
   "team": {
     "maxStudentsPerInstructor": 2,
     "multipleInstructorsInSeason": true,
+    "instructorsCertified": true,
     "boat": "Bateau de sécurité disponible selon le programme et les conditions, radio VHF à bord",
     "equipmentBrand": "Duotone",
+    "equipmentCondition": "Parc de matériel récent ; année exacte à confirmer avec Gary",
     "equipmentYear": null,
     "equipmentYearNote": "Demander à Gary l'année exacte du parc destiné à la location avant toute publication.",
-    "radioCoaching": "Radio VHF utilisée pour les formats d'apprentissage qui le permettent. Pas de micro embarqué annoncé pour le coaching avancé ou vagues."
+    "radioCoaching": "Radio VHF utilisée pour les formats d'apprentissage qui le permettent. Pas de micro embarqué annoncé pour le coaching avancé ou vagues.",
+    "beachBase": "Quelques transats pour attendre, se reposer entre deux séances ou regarder les autres membres du groupe"
   },
 
   "languagesLive": ["fr", "en", "de"],

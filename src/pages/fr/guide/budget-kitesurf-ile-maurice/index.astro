@@ -14,21 +14,25 @@ const translations = {
 const faqItems = [
   {
     question: 'Combien coûte un cours de kitesurf à Maurice ?',
-    answer: 'Au Morne, compte généralement entre Rs 1 900 et Rs 3 000 par heure et par personne en semi-privé à deux. En privé avec un moniteur pour un élève, la fourchette se situe autour de Rs 3 800 à Rs 5 000 par heure.',
+    answer: 'À Maurice, les grilles publiques disponibles se situent généralement entre Rs 1 900 et Rs 3 400 par heure et par personne en petit groupe ou semi-privé, soit environ 38 à 68 €. En privé, compte environ Rs 3 500 à Rs 6 500 par heure, soit 70 à 130 €.',
   },
   {
     question: 'Quel rapport qualité-prix propose PKM ?',
-    answer: 'PKM se situe dans la partie compétitive des fourchettes observées, avec Rs 4 000 par heure en privé et Rs 2 250 par heure et par personne en semi-privé sur une séance de 2 heures. Les forfaits font encore baisser le tarif horaire.',
+    answer: 'PKM se situe dans la moyenne des tarifs observés à Maurice. Une séance de 2 heures revient à Rs 4 000 par heure en privé, soit environ 80 €, et à Rs 2 250 par heure et par personne en semi-privé, soit environ 45 €. Le matériel récent, l’encadrement certifié et les équipements de sécurité sont compris.',
   },
   {
     question: 'Que faut-il comparer avant de choisir une école ?',
     answer: 'Compare la durée réelle du cours, le ratio élève/moniteur, le matériel inclus, le bateau de sécurité, les conditions sans vent et le contenu du forfait.',
   },
+  {
+    question: 'Les prix sont-ils indiqués en roupies ou en euros ?',
+    answer: 'La monnaie utilisée à Maurice est la roupie mauricienne. PKM affiche ses tarifs en roupies avec un équivalent indicatif en euros calculé sur une base simple de Rs 50 pour 1 €. Le montant converti par une banque peut varier.',
+  },
 ];
 ---
 <Layout
   title="Combien coûte un cours de kitesurf à Maurice ? | PKM"
-  description="Fourchettes horaires des cours de kitesurf au Morne et conseils pour comparer le ratio d'encadrement, le matériel et la sécurité."
+  description="Prix d'un cours de kitesurf à Maurice en roupies et en euros. Fourchettes horaires, tarifs PKM, encadrement certifié, matériel et sécurité."
   locale="fr"
   translations={translations}
   tarifsHref="/fr/tarifs/"
@@ -46,40 +50,109 @@ const faqItems = [
     <span class="kicker">Guide</span>
     <h1>Combien coûte un cours de kitesurf à Maurice ?</h1>
     <p class="sub">
-      Au Morne, compte généralement <b>Rs 1 900 à Rs 3 000 par heure et par
-      personne en semi-privé</b>, et <b>Rs 3 800 à Rs 5 000 par heure en
-      privé</b>. La bonne comparaison commence par le ratio d'encadrement et
-      les services réellement inclus.
+      À Maurice, compte généralement <b>Rs 1 900 à Rs 3 400 par heure et par
+      personne en petit groupe ou semi-privé (environ 38 à 68 €)</b>, et
+      <b>Rs 3 500 à Rs 6 500 par heure en privé (environ 70 à 130 €)</b>.
+      Le ratio d'encadrement et les services inclus expliquent une grande partie
+      de l'écart.
     </p>
   </section>
 
   <section class="pad">
-    <h2>Fourchettes horaires constatées au Morne</h2>
-    <p><b>Semi-privé, 2 élèves :</b> environ Rs 1 900 à Rs 3 000 par heure et par personne.</p>
-    <p><b>Privé, 1 moniteur pour 1 élève :</b> environ Rs 3 800 à Rs 5 000 par heure.</p>
-    <p><b>Forfaits de plusieurs séances :</b> le prix horaire baisse généralement à partir de 6 heures réservées.</p>
+    <h2>Les repères de prix à Maurice</h2>
+    <div class="proofs">
+      <div class="proof">
+        <b>Petit groupe ou semi-privé</b>
+        <span>Rs 1 900 à Rs 3 400 par heure et par personne, soit environ 38 à 68 €.</span>
+      </div>
+      <div class="proof">
+        <b>Cours privé, 1 pour 1</b>
+        <span>Rs 3 500 à Rs 6 500 par heure, soit environ 70 à 130 €.</span>
+      </div>
+      <div class="proof">
+        <b>Forfaits de 6 à 10 heures</b>
+        <span>Le prix horaire baisse généralement quand plusieurs séances sont réservées ensemble.</span>
+      </div>
+    </div>
     <p class="sub">
-      Ces repères sont calculés à partir de grilles publiques disponibles pour
-      le Morne. Ils restent indicatifs : la saison, le nombre d'élèves, le
-      matériel et les services inclus peuvent faire varier le prix.
+      Ces repères sont calculés à partir de grilles publiques disponibles à
+      Maurice. Ils restent indicatifs. Les équivalents en euros sont arrondis
+      sur la base utilisée par PKM, soit environ 1 € pour Rs 50.
     </p>
   </section>
 
   <section class="pad" style="background:var(--surface)">
-    <h2>Où se situe PKM</h2>
-    <p>
-      Une séance de 2 heures revient à <b>Rs 4 000 par heure en privé</b> et à&nbsp;<b>Rs 2 250 par heure et par personne en semi-privé</b>. Sur le forfait
-      de 10 heures, le tarif descend à Rs 3 800 par heure en privé et à
-      Rs 1 925 par heure et par personne en semi-privé.
-    </p>
-    <p class="sub" style="font-size:.9rem">Matériel compris. Le détail et les forfaits à jour sont disponibles sur la page tarifs.</p>
+    <h2>Comment lire une grille tarifaire</h2>
+    <div class="proofs">
+      <div class="proof">
+        <b>Le prix est-il par personne ?</b>
+        <span>Un tarif semi-privé est souvent affiché pour une personne, même si deux élèves participent.</span>
+      </div>
+      <div class="proof">
+        <b>Combien d'élèves pour un moniteur ?</b>
+        <span>Un groupe de quatre et un cours privé ne donnent ni le même temps de pratique ni le même suivi.</span>
+      </div>
+      <div class="proof">
+        <b>Le matériel et la sécurité sont-ils inclus ?</b>
+        <span>Vérifie l'aile, la planche, le casque, le gilet, la surveillance et les conditions prévues sans vent.</span>
+      </div>
+    </div>
   </section>
 
   <section class="pad">
+    <h2>Où se situe PKM</h2>
+    <p>
+      PKM se situe <b>dans la moyenne des tarifs observés à Maurice</b>, avec un
+      parc de matériel récent, des moniteurs certifiés et un encadrement limité
+      à deux élèves. Une séance de 2 heures revient à Rs 4 000 par heure en
+      privé (environ 80 €) et à&nbsp;Rs 2 250 par heure et par personne en
+      semi-privé (environ 45 €).
+    </p>
+    <div class="proofs">
+      <div class="proof">
+        <b>Privé, 2 heures</b>
+        <span>Rs 8 000, environ 160 €. Un moniteur pour un élève.</span>
+      </div>
+      <div class="proof">
+        <b>Semi-privé, 2 heures</b>
+        <span>Rs 4 500 par personne, environ 90 €. Deux élèves maximum.</span>
+      </div>
+      <div class="proof">
+        <b>Forfait de 10 heures</b>
+        <span>Le tarif descend à Rs 3 800 par heure en privé et Rs 1 925 par heure et par personne en semi-privé.</span>
+      </div>
+    </div>
+    <p class="sub" style="font-size:.9rem">Tarifs 2026. Le matériel et les équipements indiqués dans chaque formule sont compris.</p>
+  </section>
+
+  <section class="pad" style="background:var(--surface)">
     <h2>Ce que tu achètes avec le cours</h2>
-    <p><b>Un encadrement resserré :</b> 2 élèves maximum par moniteur, avec une aile et une planche pour chacun en semi-privé.</p>
-    <p><b>La sécurité sur le spot :</b> casque et gilet, bateau disponible selon le programme et les conditions, radio VHF sur les formats d'apprentissage adaptés.</p>
-    <p><b>Une réservation plus sereine :</b> si le vent manque, la séance est reportée sans frais.</p>
+    <div class="proofs">
+      <div class="proof">
+        <b>Des moniteurs certifiés</b>
+        <span>Un cadre pédagogique clair pour apprendre, reprendre confiance ou travailler un objectif précis.</span>
+      </div>
+      <div class="proof">
+        <b>Du matériel récent</b>
+        <span>Un parc Duotone adapté au niveau de l'élève et aux conditions du jour.</span>
+      </div>
+      <div class="proof">
+        <b>Un encadrement resserré</b>
+        <span>Deux élèves maximum par moniteur, avec une aile et une planche pour chacun en semi-privé.</span>
+      </div>
+      <div class="proof">
+        <b>La sécurité sur le spot</b>
+        <span>Casque et gilet, bateau disponible selon le programme et les conditions, radio VHF sur les formats adaptés.</span>
+      </div>
+      <div class="proof">
+        <b>Une vraie ambiance d'école</b>
+        <span>Une équipe accessible et quelques transats pour attendre, souffler entre deux séances ou regarder les autres membres du groupe.</span>
+      </div>
+      <div class="proof">
+        <b>Le report sans frais</b>
+        <span>Si le vent manque, la séance est déplacée sur un autre créneau.</span>
+      </div>
+    </div>
   </section>
 
   <section class="pad" style="text-align:center">

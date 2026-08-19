@@ -14,21 +14,25 @@ const translations = {
 const faqItems = [
   {
     question: 'Wie viel kostet ein Kitesurfkurs auf Mauritius?',
-    answer: 'In Le Morne liegen semi-private Kurse für zwei Schüler meist zwischen 1.900 und 3.000 Rs pro Stunde und Person. Privatunterricht mit einem Lehrer für einen Schüler kostet ungefähr 3.800 bis 5.000 Rs pro Stunde.',
+    answer: 'Auf Mauritius liegen öffentlich verfügbare Preise für kleine Gruppen oder semi-private Kurse meist zwischen 1.900 und 3.400 Rs pro Stunde und Person, also ungefähr 38 bis 68 €. Privatunterricht kostet etwa 3.500 bis 6.500 Rs pro Stunde, ungefähr 70 bis 130 €.',
   },
   {
     question: 'Welches Preis-Leistungs-Verhältnis bietet PKM?',
-    answer: 'PKM liegt im wettbewerbsfähigen Teil der beobachteten Spannen. Eine zweistündige Einheit kostet 4.000 Rs pro Stunde privat und 2.250 Rs pro Stunde und Person semi-privat. Pakete senken den Stundenpreis weiter.',
+    answer: 'PKM liegt im Durchschnitt der auf Mauritius beobachteten Preise. Eine zweistündige Einheit kostet 4.000 Rs pro Stunde privat, ungefähr 80 €, und 2.250 Rs pro Stunde und Person semi-privat, ungefähr 45 €. Aktuelles Material, zertifizierter Unterricht und Sicherheitsausrüstung sind enthalten.',
   },
   {
     question: 'Was sollte ich vor der Wahl einer Schule vergleichen?',
     answer: 'Vergleiche die tatsächliche Unterrichtsdauer, das Verhältnis von Schülern zu Lehrern, das enthaltene Material, das Sicherheitsboot, die Regelung bei fehlendem Wind und den gesamten Paketumfang.',
   },
+  {
+    question: 'Werden die Preise in mauritischen Rupien oder Euro angegeben?',
+    answer: 'Die Währung auf Mauritius ist die mauritische Rupie. PKM zeigt seine Preise in Rupien und ergänzt einen ungefähren Eurobetrag auf Basis eines einfachen Richtwerts von 50 Rs für 1 €. Der tatsächlich von deiner Bank umgerechnete Betrag kann abweichen.',
+  },
 ];
 ---
 <Layout
   title="Was kostet Kitesurfen auf Mauritius? | PKM"
-  description="Stündliche Preisspannen für Kitesurfkurse in Le Morne sowie Tipps zum Vergleich von Betreuung, Material und Sicherheit."
+  description="Preise für Kitesurfkurse auf Mauritius in Rupien und Euro. Stundensätze, PKM-Preise, zertifizierter Unterricht, Material und Sicherheit."
   locale="de"
   translations={translations}
   tarifsHref="/de/preise/"
@@ -45,28 +49,94 @@ const faqItems = [
   <section class="pad">
     <span class="kicker">Guide</span>
     <h1>Wie viel kostet Kitesurfen auf Mauritius?</h1>
-    <p class="sub">In Le Morne zahlst du für semi-private Kurse meist <b>1.900 bis 3.000 Rs pro Stunde und Person</b>. Privatunterricht kostet ungefähr <b>3.800 bis 5.000 Rs pro Stunde</b>. Für einen fairen Vergleich zählen vor allem die Betreuungsquote und die enthaltenen Leistungen.</p>
+    <p class="sub">Auf Mauritius zahlst du für kleine Gruppen oder semi-private Kurse meist <b>1.900 bis 3.400 Rs pro Stunde und Person, ungefähr 38 bis 68 €</b>. Privatunterricht kostet etwa <b>3.500 bis 6.500 Rs pro Stunde, ungefähr 70 bis 130 €</b>. Betreuungsquote und enthaltene Leistungen erklären einen großen Teil des Unterschieds.</p>
   </section>
 
   <section class="pad">
-    <h2>Stündliche Preisspannen in Le Morne</h2>
-    <p><b>Semi-privat, 2 Schüler:</b> ungefähr 1.900 bis 3.000 Rs pro Stunde und Person.</p>
-    <p><b>Privat, 1 Lehrer für 1 Schüler:</b> ungefähr 3.800 bis 5.000 Rs pro Stunde.</p>
-    <p><b>Pakete mit mehreren Einheiten:</b> ab 6 gebuchten Stunden sinkt der Stundenpreis in der Regel.</p>
-    <p class="sub">Diese Richtwerte basieren auf öffentlich verfügbaren Preislisten für Le Morne. Saison, Gruppengröße, Material und enthaltene Leistungen können den Endpreis verändern.</p>
+    <h2>Preisrichtwerte auf Mauritius</h2>
+    <div class="proofs">
+      <div class="proof">
+        <b>Kleine Gruppe oder semi-privat</b>
+        <span>1.900 bis 3.400 Rs pro Stunde und Person, ungefähr 38 bis 68 €.</span>
+      </div>
+      <div class="proof">
+        <b>Privatunterricht, 1 zu 1</b>
+        <span>3.500 bis 6.500 Rs pro Stunde, ungefähr 70 bis 130 €.</span>
+      </div>
+      <div class="proof">
+        <b>Pakete mit 6 bis 10 Stunden</b>
+        <span>Der Stundenpreis sinkt in der Regel, wenn mehrere Einheiten zusammen gebucht werden.</span>
+      </div>
+    </div>
+    <p class="sub">Diese Richtwerte basieren auf öffentlich verfügbaren Preislisten für Mauritius. Sie bleiben unverbindlich. Die Eurobeträge sind mit dem PKM-Richtwert von ungefähr 1 € für 50 Rs gerundet.</p>
   </section>
 
   <section class="pad" style="background:var(--surface)">
-    <h2>Wo PKM liegt</h2>
-    <p>Eine zweistündige Einheit kostet <b>4.000 Rs pro Stunde privat</b> und <b>2.250 Rs pro Stunde und Person semi-privat</b>. Beim 10-Stunden-Paket sinkt der Preis auf 3.800 Rs pro Stunde privat und 1.925 Rs pro Stunde und Person semi-privat.</p>
-    <p class="sub" style="font-size:.9rem">Material inklusive. Aktuelle Details und Pakete findest du auf der Preisseite.</p>
+    <h2>So liest du eine Preisliste richtig</h2>
+    <div class="proofs">
+      <div class="proof">
+        <b>Gilt der Preis pro Person?</b>
+        <span>Ein semi-privater Preis wird oft für eine Person angegeben, obwohl zwei Schüler teilnehmen.</span>
+      </div>
+      <div class="proof">
+        <b>Wie viele Schüler betreut ein Lehrer?</b>
+        <span>Eine Vierergruppe und Privatunterricht bieten sehr unterschiedliche Übungszeit und Rückmeldung.</span>
+      </div>
+      <div class="proof">
+        <b>Sind Material und Sicherheit enthalten?</b>
+        <span>Prüfe Kite, Board, Helm, Prallschutzweste, Aufsicht und die Regelung bei fehlendem Wind.</span>
+      </div>
+    </div>
   </section>
 
   <section class="pad">
+    <h2>Wo PKM liegt</h2>
+    <p>PKM liegt <b>im Durchschnitt der auf Mauritius beobachteten Preise</b>. Dazu kommen aktuelles Material, zertifizierte Lehrer und höchstens zwei Schüler pro Lehrer. Eine zweistündige Einheit kostet 4.000 Rs pro Stunde privat, ungefähr 80 €, und 2.250 Rs pro Stunde und Person semi-privat, ungefähr 45 €.</p>
+    <div class="proofs">
+      <div class="proof">
+        <b>Privat, 2 Stunden</b>
+        <span>8.000 Rs, ungefähr 160 €. Ein Lehrer für einen Schüler.</span>
+      </div>
+      <div class="proof">
+        <b>Semi-privat, 2 Stunden</b>
+        <span>4.500 Rs pro Person, ungefähr 90 €. Höchstens zwei Schüler.</span>
+      </div>
+      <div class="proof">
+        <b>10-Stunden-Paket</b>
+        <span>Der Preis sinkt auf 3.800 Rs pro Stunde privat und 1.925 Rs pro Stunde und Person semi-privat.</span>
+      </div>
+    </div>
+    <p class="sub" style="font-size:.9rem">Preise 2026. Die für jedes Paket aufgeführten Materialien und Sicherheitsausrüstungen sind enthalten.</p>
+  </section>
+
+  <section class="pad" style="background:var(--surface)">
     <h2>Was im Kurspreis steckt</h2>
-    <p><b>Enge Betreuung:</b> höchstens 2 Schüler pro Lehrer, im semi-privaten Kurs mit einem Kite und einem Board für jede Person.</p>
-    <p><b>Sicherheit am Spot:</b> Helm und Prallschutzweste, je nach Programm und Bedingungen ein verfügbares Sicherheitsboot sowie VHF-Funk bei geeigneten Lernformaten.</p>
-    <p><b>Planbare Buchung:</b> fehlt der Wind, wird die Einheit ohne zusätzliche Kosten verschoben.</p>
+    <div class="proofs">
+      <div class="proof">
+        <b>Zertifizierte Lehrer</b>
+        <span>Ein klarer Lernrahmen für Einsteiger, den Wiedereinstieg oder ein konkretes Trainingsziel.</span>
+      </div>
+      <div class="proof">
+        <b>Aktuelles Material</b>
+        <span>Duotone-Material passend zum Niveau des Schülers und zu den Bedingungen des Tages.</span>
+      </div>
+      <div class="proof">
+        <b>Enge Betreuung</b>
+        <span>Höchstens zwei Schüler pro Lehrer, im semi-privaten Kurs mit einem Kite und einem Board für jede Person.</span>
+      </div>
+      <div class="proof">
+        <b>Sicherheit am Spot</b>
+        <span>Helm und Prallschutzweste, je nach Programm und Bedingungen ein verfügbares Boot sowie VHF-Funk bei geeigneten Formaten.</span>
+      </div>
+      <div class="proof">
+        <b>Echte Kiteschul-Atmosphäre</b>
+        <span>Ein offenes Team und einige Liegestühle zum Warten, Entspannen zwischen den Einheiten oder Zuschauen.</span>
+      </div>
+      <div class="proof">
+        <b>Kostenlose Verschiebung</b>
+        <span>Fehlt der Wind, wird die Einheit ohne zusätzliche Kosten auf einen anderen Termin verlegt.</span>
+      </div>
+    </div>
   </section>
 
   <section class="pad" style="text-align:center">

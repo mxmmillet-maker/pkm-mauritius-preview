@@ -14,21 +14,25 @@ const translations = {
 const faqItems = [
   {
     question: 'How much does a kitesurfing lesson cost in Mauritius?',
-    answer: 'At Le Morne, semi-private lessons for two generally range from Rs 1,900 to Rs 3,000 per hour and per person. A private lesson with one instructor for one student is usually around Rs 3,800 to Rs 5,000 per hour.',
+    answer: 'Across Mauritius, publicly available price lists generally range from Rs 1,900 to Rs 3,400 per hour and per person for a small group or semi-private lesson, around €38 to €68. Private lessons usually cost Rs 3,500 to Rs 6,500 per hour, around €70 to €130.',
   },
   {
     question: 'What value does PKM offer?',
-    answer: 'PKM sits in the competitive part of the observed ranges, at Rs 4,000 per hour for a private lesson and Rs 2,250 per hour and per person for a 2-hour semi-private lesson. Packages reduce the hourly price further.',
+    answer: 'PKM sits within the average price range observed in Mauritius. A 2-hour session works out at Rs 4,000 per hour privately, around €80, and Rs 2,250 per hour and per person semi-privately, around €45. Recent equipment, certified instruction and safety gear are included.',
   },
   {
     question: 'What should I compare before choosing a school?',
     answer: 'Compare the actual lesson time, student-to-instructor ratio, included equipment, safety boat, no-wind policy and everything included in the package.',
   },
+  {
+    question: 'Are prices shown in Mauritian rupees or euros?',
+    answer: 'The currency used in Mauritius is the Mauritian rupee. PKM displays its rates in rupees with an indicative euro equivalent based on a simple reference of Rs 50 for €1. Your bank’s converted amount may vary.',
+  },
 ];
 ---
 <Layout
   title="How Much Does Kitesurfing Cost in Mauritius? | PKM"
-  description="Hourly kitesurfing lesson price ranges at Le Morne, with advice on comparing teaching ratios, equipment and safety services."
+  description="Kitesurfing lesson prices in Mauritius in rupees and euros. Hourly ranges, PKM rates, certified instruction, equipment and safety."
   locale="en"
   translations={translations}
   tarifsHref="/en/prices/"
@@ -46,41 +50,109 @@ const faqItems = [
     <span class="kicker">Guide</span>
     <h1>How much does kitesurfing cost in Mauritius?</h1>
     <p class="sub">
-      At Le Morne, expect around <b>Rs 1,900 to Rs 3,000 per hour and per
-      person for semi-private lessons</b>, and <b>Rs 3,800 to Rs 5,000 per hour
-      for private lessons</b>. A fair comparison starts with the teaching ratio
-      and the services actually included.
+      Across Mauritius, expect around <b>Rs 1,900 to Rs 3,400 per hour and per
+      person for a small group or semi-private lesson (approximately €38 to
+      €68)</b>, and <b>Rs 3,500 to Rs 6,500 per hour privately (approximately
+      €70 to €130)</b>. The teaching ratio and included services explain much
+      of the difference.
     </p>
   </section>
 
   <section class="pad">
-    <h2>Hourly price ranges at Le Morne</h2>
-    <p><b>Semi-private, 2 students:</b> approximately Rs 1,900 to Rs 3,000 per hour and per person.</p>
-    <p><b>Private, 1 instructor for 1 student:</b> approximately Rs 3,800 to Rs 5,000 per hour.</p>
-    <p><b>Multi-session packages:</b> the hourly price generally drops from 6 booked hours.</p>
+    <h2>Price benchmarks across Mauritius</h2>
+    <div class="proofs">
+      <div class="proof">
+        <b>Small group or semi-private</b>
+        <span>Rs 1,900 to Rs 3,400 per hour and per person, approximately €38 to €68.</span>
+      </div>
+      <div class="proof">
+        <b>Private lesson, 1 to 1</b>
+        <span>Rs 3,500 to Rs 6,500 per hour, approximately €70 to €130.</span>
+      </div>
+      <div class="proof">
+        <b>6 to 10-hour packages</b>
+        <span>The hourly price generally falls when several sessions are booked together.</span>
+      </div>
+    </div>
     <p class="sub">
-      These benchmarks are calculated from public price lists available for Le
-      Morne. They remain indicative because season, group size, equipment and
-      included services can change the final price.
+      These benchmarks are calculated from public price lists available across
+      Mauritius. They remain indicative. Euro equivalents are rounded using
+      PKM's reference of approximately €1 for Rs 50.
     </p>
   </section>
 
   <section class="pad" style="background:var(--surface)">
-    <h2>Where PKM sits</h2>
-    <p>
-      A 2-hour session works out at <b>Rs 4,000 per hour for a private lesson</b>
-      and <b>Rs 2,250 per hour and per person for a semi-private lesson</b>. On
-      the 10-hour package, the price falls to Rs 3,800 per hour privately and
-      Rs 1,925 per hour and per person semi-privately.
-    </p>
-    <p class="sub" style="font-size:.9rem">Equipment included. Current details and packages are available on the prices page.</p>
+    <h2>How to read a price list</h2>
+    <div class="proofs">
+      <div class="proof">
+        <b>Is the price per person?</b>
+        <span>A semi-private rate is often displayed for one person even though two students take part.</span>
+      </div>
+      <div class="proof">
+        <b>How many students share an instructor?</b>
+        <span>A group of four and a private lesson offer very different practice time and feedback.</span>
+      </div>
+      <div class="proof">
+        <b>Are equipment and safety included?</b>
+        <span>Check the kite, board, helmet, impact vest, supervision and the policy when there is no wind.</span>
+      </div>
+    </div>
   </section>
 
   <section class="pad">
+    <h2>Where PKM sits</h2>
+    <p>
+      PKM sits <b>within the average price range observed in Mauritius</b>, with
+      recent equipment, certified instructors and no more than two students per
+      instructor. A 2-hour session works out at Rs 4,000 per hour privately
+      (approximately €80) and Rs 2,250 per hour and per person semi-privately
+      (approximately €45).
+    </p>
+    <div class="proofs">
+      <div class="proof">
+        <b>Private, 2 hours</b>
+        <span>Rs 8,000, approximately €160. One instructor for one student.</span>
+      </div>
+      <div class="proof">
+        <b>Semi-private, 2 hours</b>
+        <span>Rs 4,500 per person, approximately €90. Two students maximum.</span>
+      </div>
+      <div class="proof">
+        <b>10-hour package</b>
+        <span>As low as Rs 3,800 per hour privately and Rs 1,925 per hour and per person semi-privately.</span>
+      </div>
+    </div>
+    <p class="sub" style="font-size:.9rem">2026 rates. The equipment and safety gear listed for each package are included.</p>
+  </section>
+
+  <section class="pad" style="background:var(--surface)">
     <h2>What your lesson price covers</h2>
-    <p><b>Close instruction:</b> no more than 2 students per instructor, with one kite and one board each in semi-private lessons.</p>
-    <p><b>Safety on the spot:</b> helmet and impact vest, a boat available depending on the programme and conditions, plus VHF radio on suitable learning formats.</p>
-    <p><b>A safer booking:</b> if the wind does not cooperate, the lesson is rescheduled at no extra cost.</p>
+    <div class="proofs">
+      <div class="proof">
+        <b>Certified instructors</b>
+        <span>A clear teaching framework for learning, rebuilding confidence or working on a specific goal.</span>
+      </div>
+      <div class="proof">
+        <b>Recent equipment</b>
+        <span>A Duotone equipment range matched to the student's level and the day's conditions.</span>
+      </div>
+      <div class="proof">
+        <b>Close instruction</b>
+        <span>No more than two students per instructor, with one kite and one board each in semi-private lessons.</span>
+      </div>
+      <div class="proof">
+        <b>Safety on the spot</b>
+        <span>Helmet and impact vest, a boat available depending on the programme and conditions, plus VHF radio on suitable formats.</span>
+      </div>
+      <div class="proof">
+        <b>A genuine school atmosphere</b>
+        <span>An approachable team and a few loungers for waiting, relaxing between sessions or watching the rest of your group.</span>
+      </div>
+      <div class="proof">
+        <b>Free rescheduling</b>
+        <span>If the wind does not cooperate, the lesson moves to another time slot at no extra cost.</span>
+      </div>
+    </div>
   </section>
 
   <section class="pad" style="text-align:center">
