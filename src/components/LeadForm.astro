@@ -134,7 +134,7 @@ const t = {
     const data = new FormData(form);
     const firstName = String(data.get('firstName') || '').trim() || '…';
     const phone = String(data.get('phone') || '').trim() || '…';
-    const interest = String(data.get('level') || form.dataset.interestFallback || 'un programme adapté');
+    const interest = String(data.get('level') || form.dataset.interestFallback || '');
     const start = formatDate(data.get('arrival'));
     const end = formatDate(data.get('departure'));
     if (document.documentElement.lang === 'en') {
