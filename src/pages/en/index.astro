@@ -1,8 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Button from '../../components/Button.astro';
-import PriceFrom from '../../components/PriceFrom.astro';
-import ProfileSlider from '../../components/ProfileSlider.astro';
+import ScrollJourney from '../../components/ScrollJourney.astro';
 import Faq from '../../components/Faq.astro';
 import SectionNav from '../../components/SectionNav.astro';
 import { sportsActivityLocation, faqPage, breadcrumbList } from '../../lib/schema';
@@ -12,6 +11,7 @@ const translations = { fr: '/fr/', en: '/en/', de: '/de/' };
 const waPhone = site.phones[0].replace(/\D/g, '');
 const waLink = `https://wa.me/${waPhone}?text=${encodeURIComponent("Hello PKM team, I'd like to organise sessions at Le Morne.")}`;
 const googleReviewsUrl = 'https://www.google.com/maps/search/?api=1&query=Paradise+Kitesurfing+Mauritius+Le+Morne';
+const osmEmbed = 'https://www.openstreetmap.org/export/embed.html?bbox=57.285%2C-20.505%2C57.405%2C-20.395&layer=mapnik';
 const sectionNav = [
   { label: 'Your pathway', href: '#pathway' },
   { label: 'The spot', href: '#spot' },
@@ -136,12 +136,14 @@ const faqItems = [
 
   <SectionNav items={sectionNav} label="Quick access to page sections" />
 
-  <section class="pad profile-section" id="pathway">
-    <span class="kicker">Your program</span>
-    <h2>What do you want to do on the water?</h2>
-    <p class="sub">Swipe through the cards. Each person can follow their own pathway, even when you come as a family or couple.</p>
-    <ProfileSlider items={profiles} label="Choose a pathway based on your level" />
-  </section>
+  <ScrollJourney
+    items={profiles}
+    id="pathway"
+    eyebrow="Your program"
+    title="What do you want to do on the water?"
+    text="Each person can follow their own pathway, even when you come as a family or couple."
+    label="Choose a pathway based on your level"
+  />
 
   <section class="pad spot-section" id="spot">
     <div>
@@ -163,6 +165,18 @@ const faqItems = [
       <img src="/images/pkm-le-morne-aerial.webp" alt="Aerial view of Le Morne Brabant, its lagoon and the coral reef" width="1920" height="1280" loading="lazy" />
       <figcaption>Le Morne Brabant, the lagoon and the coral reef · Unsplash photo</figcaption>
     </figure>
+    <div class="home-map">
+      <div class="home-map__frame">
+        <iframe src={osmEmbed} title="General map of Le Morne and La Gaulette" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <div class="home-map__copy">
+        <span class="kicker">Find your bearings</span>
+        <h3>From the lagoon to the waves</h3>
+        <p>Your riding area changes with your level, the wind and the tide. This map places Le Morne; the briefing confirms the actual meeting point.</p>
+        <a href="/en/kitesurf-le-morne/#map">Explore the map and riding zones →</a>
+        <small>General OpenStreetMap view, without a made-up GPS point for the school.</small>
+      </div>
+    </div>
   </section>
 
   <section class="pad progression-section" id="coaching">
@@ -215,11 +229,25 @@ const faqItems = [
   <section class="pad prices-preview" id="prices">
     <span class="kicker">Price guide</span>
     <h2>Choose a starting package</h2>
-    <div class="fromgrid">
-      <PriceFrom label="Lessons from" amount="4,500" currency="Rs · about €90" detail="2h semi-private, per person" />
-      <PriceFrom label="Rental from" amount="2,250" currency="Rs · about €45" detail="2h, kite and board" />
+    <div class="price-stack">
+      <article class="price-glance price-glance--hot">
+        <span>Semi-private</span>
+        <div><b>Rs 4,500</b><small>about €90</small></div>
+        <p>2 hours, per person · maximum 2 students</p>
+        <strong>+ 1 supervised session free when booking online</strong>
+      </article>
+      <article class="price-glance">
+        <span>Private lesson</span>
+        <div><b>Rs 8,000</b><small>about €160</small></div>
+        <p>2 hours · 1 instructor for 1 student</p>
+        <strong>+ 1 supervised session free when booking online</strong>
+      </article>
+      <article class="price-glance price-glance--dark">
+        <span>Equipment rental</span>
+        <div><b>Rs 2,250</b><small>about €45</small></div>
+        <p>2 hours, kite and board. Sliding rates for a day or a week.</p>
+      </article>
     </div>
-    <div class="offer-lite"><b>Sliding rental rates:</b> 2 hours, day or week. The rate falls as the duration grows.</div>
     <Button variant="ghost" href="/en/prices/">Compare all packages</Button>
   </section>
 
@@ -304,4 +332,38 @@ const faqItems = [
       <Button variant="line" href="/en/book/">Describe my trip</Button>
     </div>
   </section>
+
+  <script>
+    const hero = document.querySelector('[data-hero-refresh]');
+    const heroMedia = hero?.querySelector('[data-hero-media]');
+    const mobileHeroChoice = new URLSearchParams(window.location.search).get('hero');
+    const mobileHeroVariants = hero?.querySelectorAll('[data-hero-mobile]');
+    if (mobileHeroVariants?.length && (mobileHeroChoice === 'spot' || mobileHeroChoice === '3685')) {
+      const defaultMobileHero = hero?.querySelector('[data-hero-mobile="default"]');
+      const selectedMobileHero = hero?.querySelector(`[data-hero-mobile="${mobileHeroChoice}"]`);
+      if (defaultMobileHero instanceof HTMLImageElement && selectedMobileHero instanceof HTMLImageElement) {
+        const sourceFile = selectedMobileHero.dataset.file;
+        if (sourceFile) selectedMobileHero.src = defaultMobileHero.src.replace(/pkm-hero-mobile\.webp$/, sourceFile);
+        mobileHeroVariants.forEach((image) => image.classList.remove('is-active'));
+        selectedMobileHero.classList.add('is-active');
+        const credit = hero?.querySelector('[data-hero-credit]');
+        if (credit) credit.textContent = mobileHeroChoice === 'spot'
+          ? 'Mobile test A · Aerial view of Le Morne'
+          : 'Mobile test B · RFP3685';
+      }
+    }
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (hero && heroMedia instanceof HTMLElement && !reducedMotion) {
+      let heroFrame = 0;
+      const moveHero = () => {
+        heroFrame = 0;
+        const rect = hero.getBoundingClientRect();
+        if (rect.bottom > 0) heroMedia.style.transform = `translate3d(0, ${Math.max(0, window.scrollY * .16)}px, 0)`;
+      };
+      window.addEventListener('scroll', () => {
+        if (!heroFrame) heroFrame = window.requestAnimationFrame(moveHero);
+      }, { passive: true });
+      moveHero();
+    }
+  </script>
 </Layout>

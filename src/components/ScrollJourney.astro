@@ -13,15 +13,25 @@ const {
   items,
   label,
   id = 'parcours',
-} = Astro.props as { items: JourneyItem[]; label: string; id?: string };
+  eyebrow = 'Ton programme',
+  title = 'Tu veux faire quoi sur l’eau ?',
+  text = 'Chacun peut suivre son propre parcours, même quand vous venez en famille ou en couple.',
+} = Astro.props as {
+  items: JourneyItem[];
+  label: string;
+  id?: string;
+  eyebrow?: string;
+  title?: string;
+  text?: string;
+};
 ---
 
 <section class="journey-scroll" id={id} data-journey data-no-reveal>
   <div class="journey-sticky">
     <div class="journey-intro pad">
-      <span class="kicker">Ton programme</span>
-      <h2>Tu veux faire quoi sur l’eau ?</h2>
-      <p>Chacun peut suivre son propre parcours, même quand vous venez en famille ou en couple.</p>
+      <span class="kicker">{eyebrow}</span>
+      <h2>{title}</h2>
+      <p>{text}</p>
       <div class="journey-meter" aria-hidden="true">
         <span data-journey-step>1 / {items.length}</span>
         <i><b data-journey-progress></b></i>

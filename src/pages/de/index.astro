@@ -1,8 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Button from '../../components/Button.astro';
-import PriceFrom from '../../components/PriceFrom.astro';
-import ProfileSlider from '../../components/ProfileSlider.astro';
+import ScrollJourney from '../../components/ScrollJourney.astro';
 import Faq from '../../components/Faq.astro';
 import SectionNav from '../../components/SectionNav.astro';
 import { sportsActivityLocation, faqPage, breadcrumbList } from '../../lib/schema';
@@ -12,6 +11,7 @@ const translations = { fr: '/fr/', en: '/en/', de: '/de/' };
 const waPhone = site.phones[0].replace(/\D/g, '');
 const waLink = `https://wa.me/${waPhone}?text=${encodeURIComponent('Hallo PKM-Team, ich möchte Sessions in Le Morne planen.')}`;
 const googleReviewsUrl = 'https://www.google.com/maps/search/?api=1&query=Paradise+Kitesurfing+Mauritius+Le+Morne';
+const osmEmbed = 'https://www.openstreetmap.org/export/embed.html?bbox=57.285%2C-20.505%2C57.405%2C-20.395&layer=mapnik';
 const sectionNav = [
   { label: 'Dein Weg', href: '#programm' },
   { label: 'Der Spot', href: '#spot' },
@@ -136,12 +136,14 @@ const faqItems = [
 
   <SectionNav items={sectionNav} label="Schnellzugriff auf die Bereiche der Seite" />
 
-  <section class="pad profile-section" id="programm">
-    <span class="kicker">Dein Programm</span>
-    <h2>Was möchtest du auf dem Wasser machen?</h2>
-    <p class="sub">Wische durch die Karten. Auch als Familie oder Paar kann jede Person ihren eigenen Weg verfolgen.</p>
-    <ProfileSlider items={profiles} label="Programm passend zum Fahrlevel wählen" />
-  </section>
+  <ScrollJourney
+    items={profiles}
+    id="programm"
+    eyebrow="Dein Programm"
+    title="Was möchtest du auf dem Wasser machen?"
+    text="Auch als Familie oder Paar kann jede Person ihren eigenen Weg verfolgen."
+    label="Programm passend zum Fahrlevel wählen"
+  />
 
   <section class="pad spot-section" id="spot">
     <div>
@@ -163,6 +165,18 @@ const faqItems = [
       <img src="/images/pkm-le-morne-aerial.webp" alt="Luftaufnahme von Le Morne Brabant, der Lagune und dem Korallenriff" width="1920" height="1280" loading="lazy" />
       <figcaption>Le Morne Brabant, Lagune und Korallenriff · Unsplash-Foto</figcaption>
     </figure>
+    <div class="home-map">
+      <div class="home-map__frame">
+        <iframe src={osmEmbed} title="Übersichtskarte von Le Morne und La Gaulette" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <div class="home-map__copy">
+        <span class="kicker">Orientierung</span>
+        <h3>Von der Lagune zu den Wellen</h3>
+        <p>Dein Fahrbereich ändert sich je nach Level, Wind und Gezeiten. Diese Karte zeigt Le Morne; beim Briefing wird der tatsächliche Treffpunkt festgelegt.</p>
+        <a href="/de/kitesurfen-le-morne/#karte">Karte und Fahrbereiche erkunden →</a>
+        <small>Allgemeine OpenStreetMap-Karte, ohne erfundenen GPS-Punkt für die Schule.</small>
+      </div>
+    </div>
   </section>
 
   <section class="pad progression-section" id="coaching">
@@ -215,11 +229,25 @@ const faqItems = [
   <section class="pad prices-preview" id="preise">
     <span class="kicker">Preisübersicht</span>
     <h2>Ein passendes Einstiegspaket wählen</h2>
-    <div class="fromgrid">
-      <PriceFrom label="Kurse ab" amount="4.500" currency="Rs · ca. 90 €" detail="2 Std. semi-privat, pro Person" />
-      <PriceFrom label="Miete ab" amount="2.250" currency="Rs · ca. 45 €" detail="2 Std., Kite und Board" />
+    <div class="price-stack">
+      <article class="price-glance price-glance--hot">
+        <span>Semi-privat</span>
+        <div><b>Rs 4.500</b><small>ca. 90 €</small></div>
+        <p>2 Stunden, pro Person · maximal 2 Schüler</p>
+        <strong>+ 1 betreute Session gratis bei Online-Buchung</strong>
+      </article>
+      <article class="price-glance">
+        <span>Privatkurs</span>
+        <div><b>Rs 8.000</b><small>ca. 160 €</small></div>
+        <p>2 Stunden · 1 Lehrer für 1 Schüler</p>
+        <strong>+ 1 betreute Session gratis bei Online-Buchung</strong>
+      </article>
+      <article class="price-glance price-glance--dark">
+        <span>Materialmiete</span>
+        <div><b>Rs 2.250</b><small>ca. 45 €</small></div>
+        <p>2 Stunden, Kite und Board. Sinkende Tarife für einen Tag oder eine Woche.</p>
+      </article>
     </div>
-    <div class="offer-lite"><b>Sinkende Mietpreise:</b> 2 Stunden, Tag oder Woche. Je länger die Dauer, desto niedriger der Durchschnittspreis.</div>
     <Button variant="ghost" href="/de/preise/">Alle Pakete vergleichen</Button>
   </section>
 
@@ -304,4 +332,38 @@ const faqItems = [
       <Button variant="line" href="/de/buchen/">Meine Reise beschreiben</Button>
     </div>
   </section>
+
+  <script>
+    const hero = document.querySelector('[data-hero-refresh]');
+    const heroMedia = hero?.querySelector('[data-hero-media]');
+    const mobileHeroChoice = new URLSearchParams(window.location.search).get('hero');
+    const mobileHeroVariants = hero?.querySelectorAll('[data-hero-mobile]');
+    if (mobileHeroVariants?.length && (mobileHeroChoice === 'spot' || mobileHeroChoice === '3685')) {
+      const defaultMobileHero = hero?.querySelector('[data-hero-mobile="default"]');
+      const selectedMobileHero = hero?.querySelector(`[data-hero-mobile="${mobileHeroChoice}"]`);
+      if (defaultMobileHero instanceof HTMLImageElement && selectedMobileHero instanceof HTMLImageElement) {
+        const sourceFile = selectedMobileHero.dataset.file;
+        if (sourceFile) selectedMobileHero.src = defaultMobileHero.src.replace(/pkm-hero-mobile\.webp$/, sourceFile);
+        mobileHeroVariants.forEach((image) => image.classList.remove('is-active'));
+        selectedMobileHero.classList.add('is-active');
+        const credit = hero?.querySelector('[data-hero-credit]');
+        if (credit) credit.textContent = mobileHeroChoice === 'spot'
+          ? 'Mobiler Test A · Luftaufnahme von Le Morne'
+          : 'Mobiler Test B · RFP3685';
+      }
+    }
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (hero && heroMedia instanceof HTMLElement && !reducedMotion) {
+      let heroFrame = 0;
+      const moveHero = () => {
+        heroFrame = 0;
+        const rect = hero.getBoundingClientRect();
+        if (rect.bottom > 0) heroMedia.style.transform = `translate3d(0, ${Math.max(0, window.scrollY * .16)}px, 0)`;
+      };
+      window.addEventListener('scroll', () => {
+        if (!heroFrame) heroFrame = window.requestAnimationFrame(moveHero);
+      }, { passive: true });
+      moveHero();
+    }
+  </script>
 </Layout>
