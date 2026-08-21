@@ -1,8 +1,8 @@
 ---
 /*
-  Micro-formulaire court → capture le numéro AVANT la bascule WhatsApp
-  (voir doc stratégie §8 "Tunnel WhatsApp"). Volontairement minimal : chaque
-  champ en plus coûte environ 10 % de complétion.
+  Micro-formulaire court → prépare une demande avant la bascule WhatsApp.
+  Aucune donnée personnelle n'est enregistrée par le site : le message n'est
+  transmis que si la personne confirme ensuite son envoi dans WhatsApp.
 
   Le modèle Google Apps Script est préparé dans integrations/, mais aucun envoi
   de données personnelles n'est branché avant validation du classeur PKM.
@@ -11,26 +11,66 @@
 const { waPhone, labels = {} } = Astro.props;
 const locale = Astro.url.pathname.split('/').filter(Boolean)[0] ?? 'fr';
 const privacyHref = locale === 'fr' ? '/fr/confidentialite/' : locale === 'de' ? '/de/datenschutz/' : '/en/privacy/';
-const t = {
-  firstName: 'Prénom',
-  phone: 'Numéro (WhatsApp)',
-  arrival: 'Date d’arrivée',
-  departure: 'Date de départ',
-  level: 'Niveau',
-  levelOptions: ['Débutant', 'Confirmé', 'Perfectionnement'],
-  submit: 'Envoyer sur WhatsApp',
-  legal: 'En envoyant ce formulaire, tu acceptes d’être recontacté par WhatsApp au sujet de ta demande.',
-  headingEyebrow: 'Ta demande',
-  heading: '4 informations, puis on continue sur WhatsApp',
-  preview: 'Aperçu du message',
-  missingName: "Dis-nous comment on t'appelle.",
-  missingPhone: 'On répond sur WhatsApp, il nous faut ton numéro.',
-  invalidPhone: 'Numéro incomplet : indicatif compris.',
-  dateFallback: 'à préciser',
-  interestFallback: 'un programme adapté',
-  privacy: locale === 'fr' ? 'Confidentialité' : locale === 'de' ? 'Datenschutz' : 'Privacy',
-  ...labels,
+const defaults = {
+  fr: {
+    firstName: 'Prénom',
+    phone: 'Numéro (WhatsApp)',
+    arrival: 'Date d’arrivée',
+    departure: 'Date de départ',
+    level: 'Niveau',
+    levelOptions: ['Débutant', 'Confirmé', 'Perfectionnement'],
+    submit: 'Envoyer sur WhatsApp',
+    legal: 'En envoyant ce formulaire, tu acceptes d’être recontacté par WhatsApp au sujet de ta demande.',
+    headingEyebrow: 'Ta demande',
+    heading: '4 informations, puis on continue sur WhatsApp',
+    preview: 'Aperçu du message',
+    missingName: "Dis-nous comment on t'appelle.",
+    missingPhone: 'On répond sur WhatsApp, il nous faut ton numéro.',
+    invalidPhone: 'Numéro incomplet : indicatif compris.',
+    dateFallback: 'à préciser',
+    interestFallback: 'un programme adapté',
+    privacy: 'Confidentialité',
+  },
+  en: {
+    firstName: 'First name',
+    phone: 'WhatsApp number',
+    arrival: 'Arrival date',
+    departure: 'Departure date',
+    level: 'Level',
+    levelOptions: ['Beginner', 'Independent rider', 'Coaching'],
+    submit: 'Continue on WhatsApp',
+    legal: 'By submitting this form, you agree to be contacted on WhatsApp about your request.',
+    headingEyebrow: 'Your request',
+    heading: '4 details, then continue on WhatsApp',
+    preview: 'Message preview',
+    missingName: 'Please tell us your first name.',
+    missingPhone: 'We reply on WhatsApp, so we need your number.',
+    invalidPhone: 'The number is incomplete. Include the country code.',
+    dateFallback: 'to be confirmed',
+    interestFallback: 'a suitable program',
+    privacy: 'Privacy',
+  },
+  de: {
+    firstName: 'Vorname',
+    phone: 'WhatsApp-Nummer',
+    arrival: 'Ankunftsdatum',
+    departure: 'Abreisedatum',
+    level: 'Level',
+    levelOptions: ['Anfänger', 'Selbstständig', 'Coaching'],
+    submit: 'Auf WhatsApp fortfahren',
+    legal: 'Mit dem Absenden stimmst du zu, dass wir dich zu deiner Anfrage über WhatsApp kontaktieren.',
+    headingEyebrow: 'Deine Anfrage',
+    heading: '4 Angaben, dann geht es auf WhatsApp weiter',
+    preview: 'Nachrichtenvorschau',
+    missingName: 'Sag uns bitte, wie du heißt.',
+    missingPhone: 'Wir antworten auf WhatsApp und brauchen dafür deine Nummer.',
+    invalidPhone: 'Die Nummer ist unvollständig. Bitte mit Ländervorwahl eingeben.',
+    dateFallback: 'noch offen',
+    interestFallback: 'ein passendes Programm',
+    privacy: 'Datenschutz',
+  },
 };
+const t = { ...(defaults[locale] ?? defaults.en), ...labels };
 ---
 <form
   class="lead-form"
@@ -121,10 +161,11 @@ const t = {
 <script>
   const form = document.getElementById('lead-form');
   const preview = form?.querySelector('[data-message-preview]');
+  const submitButton = form?.querySelector('button[type="submit"]');
   let attempted = false;
 
   const formatDate = (value) => {
-    if (!value) return form?.dataset.dateFallback || 'à préciser';
+    if (!value) return form?.dataset.dateFallback || '';
     const parts = String(value).split('-');
     return parts.length === 3 ? `${parts[2]}/${parts[1]}/${parts[0]}` : String(value);
   };
@@ -151,11 +192,11 @@ const t = {
     const firstName = form.elements.namedItem('firstName');
     const phone = form.elements.namedItem('phone');
     const errors = { firstName: '', phone: '' };
-    if (firstName instanceof HTMLInputElement && !firstName.value.trim()) errors.firstName = form.dataset.missingName || "Dis-nous comment on t'appelle.";
+    if (firstName instanceof HTMLInputElement && !firstName.value.trim()) errors.firstName = form.dataset.missingName || 'Required.';
     if (phone instanceof HTMLInputElement) {
       const digits = phone.value.replace(/\D/g, '').length;
-      if (!phone.value.trim()) errors.phone = form.dataset.missingPhone || 'On répond sur WhatsApp, il nous faut ton numéro.';
-      else if (digits < 8) errors.phone = form.dataset.invalidPhone || 'Numéro incomplet : indicatif compris.';
+      if (!phone.value.trim()) errors.phone = form.dataset.missingPhone || 'Required.';
+      else if (digits < 8) errors.phone = form.dataset.invalidPhone || 'Invalid phone number.';
     }
     Object.entries(errors).forEach(([name, message]) => {
       const input = form.elements.namedItem(name);
@@ -173,20 +214,29 @@ const t = {
 
   form?.addEventListener('input', updatePreview);
   form?.addEventListener('change', updatePreview);
-  form?.addEventListener('submit', (e) => {
+  form?.addEventListener('submit', async (e) => {
     e.preventDefault();
-    if (!(form instanceof HTMLFormElement)) return;
+    if (!(form instanceof HTMLFormElement) || (submitButton instanceof HTMLButtonElement && submitButton.disabled)) return;
     attempted = true;
     if (!showErrors()) {
       const invalid = form.querySelector('[aria-invalid="true"]');
       if (invalid instanceof HTMLElement) invalid.focus();
-      window.pkmTrack?.('lead_validation_error');
+      await window.pkmTrack?.('form_validation_error', {
+        form_name: 'booking',
+        page_language: document.documentElement.lang || 'en',
+      });
       return;
     }
-    window.pkmTrack?.('lead_submit');
+    if (submitButton instanceof HTMLButtonElement) submitButton.disabled = true;
+    const data = new FormData(form);
+    await window.pkmTrack?.('generate_lead', {
+      method: 'whatsapp_form',
+      form_name: 'booking',
+      page_language: document.documentElement.lang || 'en',
+      interest: String(data.get('level') || form.dataset.interestFallback || ''),
+    });
     const phone = form.dataset.waPhone;
-    window.pkmTrack?.('lead_whatsapp_open');
-    window.location.href = `https://wa.me/${phone}?text=${encodeURIComponent(getMessage())}`;
+    window.location.assign(`https://wa.me/${phone}?text=${encodeURIComponent(getMessage())}`);
   });
   updatePreview();
 </script>

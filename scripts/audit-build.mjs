@@ -4,6 +4,7 @@ import { extname, join, relative } from 'node:path';
 const root = new URL('../dist/', import.meta.url);
 const failures = [];
 const warnings = [];
+const measurementId = (process.env.PUBLIC_GA_MEASUREMENT_ID ?? '').trim();
 
 async function walk(directory) {
   const entries = await readdir(directory, { withFileTypes: true });
@@ -30,6 +31,11 @@ for (const file of htmlFiles) {
   if (!isRedirect && !is404 && !/<link\s+rel="canonical"/i.test(html)) failures.push(`${name}: canonical absente`);
   if (!isRedirect && !is404 && !/<meta\s+property="og:image"/i.test(html)) failures.push(`${name}: image de partage absente`);
   if (/<img(?![^>]*\salt=)[^>]*>/i.test(html)) failures.push(`${name}: image sans attribut alt`);
+  if (measurementId && !isRedirect) {
+    if (!html.includes(`measurementId = "${measurementId}"`)) failures.push(`${name}: identifiant GA4 absent du build`);
+    if (!html.includes('data-analytics-consent')) failures.push(`${name}: panneau de consentement absent`);
+    if (!html.includes('data-analytics-settings')) failures.push(`${name}: gestion du consentement absente`);
+  }
 }
 
 for (const file of files.filter((item) => /\.(css|js)$/i.test(item))) {
