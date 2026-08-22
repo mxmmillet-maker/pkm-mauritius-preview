@@ -116,6 +116,17 @@ const currentPath = Astro.url.pathname;
   }
 
   @media (max-width: 899px) {
+    .menu.open {
+      position: fixed;
+      top: var(--topbar-height, 66px);
+      right: 0;
+      left: 0;
+      z-index: 39;
+      max-height: calc(100dvh - var(--topbar-height, 66px) - 76px - env(safe-area-inset-bottom));
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      box-shadow: var(--shadow);
+    }
     .topbar--refresh {
       height: var(--topbar-height, 66px); padding-block: 0;
       transition: height .22s cubic-bezier(.2,.7,.3,1), background .22s ease, border-color .22s ease;
