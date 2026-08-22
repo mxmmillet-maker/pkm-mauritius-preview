@@ -24,10 +24,9 @@ pas au compte personnel d'un prestataire.
 3. Dans **Administration > Gestion des accès à la propriété**, ajouter les
    prestataires avec le rôle minimal nécessaire (`Éditeur` le plus souvent),
    sans retirer au propriétaire PKM son accès administrateur.
-4. Copier l'identifiant de mesure du flux, de type `G-XXXXXXXXXX`.
-5. Dans GitHub, ouvrir **Settings > Secrets and variables > Actions**, créer le
-   secret `PUBLIC_GA_MEASUREMENT_ID`, puis relancer le workflow Pages.
-6. Dans GA4, marquer `generate_lead` comme événement clé après sa première
+4. L'identifiant de mesure `G-87ERM5TB25` est intégré au workflow de déploiement.
+   Il est public par nature et n'a pas besoin d'être enregistré comme secret.
+5. Dans GA4, marquer `generate_lead` comme événement clé après sa première
    réception. Ne pas marquer les simples clics de navigation comme conversions.
 
 Le déploiement échoue volontairement si l'identifiant est absent ou invalide.
