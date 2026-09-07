@@ -8,7 +8,7 @@ const copy = locale === 'fr' ? ['Afficher les prix en', 'Conversion indicative s
   <p>{copy[1]} <a href="https://mcb.mu/" target="_blank" rel="noreferrer">MCB</a></p>
 </div>
 <script>
-  document.querySelectorAll('.currency-prices').forEach((root) => { const rates = JSON.parse(root.dataset.rates || '{}'); const select = root.querySelector('[data-currency]'); const update = () => { const currency = select.value; const multiplier = rates.EUR / rates[currency]; document.querySelectorAll('.pcard .row b').forEach((node) => { const euro = node.querySelector('.eur')?.textContent.match(/[0-9]+/); if (euro) node.textContent = new Intl.NumberFormat(undefined, { style: 'currency', currency, maximumFractionDigits: 0 }).format(Number(euro[0]) * multiplier); }); }; select.addEventListener('change', update); update(); });
+  document.querySelectorAll('.currency-prices').forEach((root) => { const rates = JSON.parse(root.dataset.rates || '{}'); const select = root.querySelector('[data-currency]'); const update = () => { const currency = select.value; const multiplier = rates.EUR / rates[currency]; document.querySelectorAll('.pcard .row b').forEach((node) => { const euro = node.dataset.eur || node.querySelector('.eur')?.textContent.match(/[0-9]+/)?.[0]; if (euro) { node.dataset.eur = euro; node.textContent = new Intl.NumberFormat(undefined, { style: 'currency', currency, maximumFractionDigits: 0 }).format(Number(euro) * multiplier); } }); }; select.addEventListener('change', update); update(); });
 </script>
 <style>
   .currency-prices { margin: 16px 0; padding: 14px 15px; border: 1px solid var(--line); border-radius: var(--radius-md); background: #fff; }
