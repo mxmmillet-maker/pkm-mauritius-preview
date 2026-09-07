@@ -23,7 +23,7 @@ const {
     </span>
     <span class="pack-price">
       <small>{priceLabel}</small>
-      <strong>{price}</strong>
+      <strong>{euro ? euro.split(' · ')[0] : price}</strong>
       {euro && <span>{euro}</span>}
     </span>
     <span class="pack-toggle" aria-hidden="true">+</span>

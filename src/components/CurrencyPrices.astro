@@ -1,0 +1,18 @@
+---
+import rates from '../data/mcb-rates.json';
+const { locale = 'en' } = Astro.props;
+const copy = locale === 'fr' ? ['Afficher les prix en', 'Conversion indicative selon les taux MCB du jour.'] : ['Display prices in', 'Indicative conversion using today’s MCB rates.'];
+---
+<div class="currency-prices" data-rates={JSON.stringify(rates.rates)}>
+  <label><span>{copy[0]}</span><select aria-label={copy[0]} data-currency><option value="EUR">EUR €</option><option value="GBP">GBP £</option><option value="USD">USD $</option><option value="AUD">AUD $</option><option value="CAD">CAD $</option><option value="CHF">CHF</option></select></label>
+  <p>{copy[1]} <a href="https://mcb.mu/" target="_blank" rel="noreferrer">MCB</a></p>
+</div>
+<script>
+  document.querySelectorAll('.currency-prices').forEach((root) => { const rates = JSON.parse(root.dataset.rates || '{}'); const select = root.querySelector('[data-currency]'); const update = () => { const currency = select.value; const multiplier = rates.EUR / rates[currency]; document.querySelectorAll('.pcard .row b').forEach((node) => { const euro = node.querySelector('.eur')?.textContent.match(/[0-9]+/); if (euro) node.textContent = new Intl.NumberFormat(undefined, { style: 'currency', currency, maximumFractionDigits: 0 }).format(Number(euro[0]) * multiplier); }); }; select.addEventListener('change', update); update(); });
+</script>
+<style>
+  .currency-prices { margin: 16px 0; padding: 14px 15px; border: 1px solid var(--line); border-radius: var(--radius-md); background: #fff; }
+  .currency-prices label { display:flex; align-items:center; justify-content:space-between; gap:12px; font-family:var(--font-display); font-weight:600; }
+  .currency-prices select { min-height:40px; padding:0 28px 0 10px; border:1px solid var(--line); border-radius:9px; background:#fff; font:inherit; }
+  .currency-prices p { margin:8px 0 0; color:var(--ink-soft); font-size:.78rem; } .currency-prices a { color:var(--sage-deep); }
+</style>

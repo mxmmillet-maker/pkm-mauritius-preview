@@ -4,6 +4,7 @@ import Layout from '../../../layouts/Layout.astro';
 import Button from '../../../components/Button.astro';
 import PricePack from '../../../components/PricePack.astro';
 import SectionNav from '../../../components/SectionNav.astro';
+import CurrencyPrices from '../../../components/CurrencyPrices.astro';
 import { offer, breadcrumbList } from '../../../lib/schema';
 import site from '../../../data/site.json';
 
@@ -39,11 +40,13 @@ const sectionNav = [
 >
   <section class="pad" style="padding-bottom:20px">
     <h1 style="font-size:1.9rem">Kitesurfing and wingfoil prices in Le Morne</h1>
-    <p class="sub">2026 prices, per person, gear included. Mauritian rupees with the euro equivalent.</p>
+    <p class="sub">2026 prices in euros, per person, gear included.</p>
     <div style="display:flex;gap:7px;flex-wrap:wrap;margin-top:12px">
       <span class="tag">Kite and board</span><span class="tag">Helmet and vest</span><span class="tag">Wetsuit</span><span class="tag">Equipment by package</span>
     </div>
   </section>
+
+  <section class="pad" style="padding-top:0"><CurrencyPrices locale="en" /></section>
 
   <SectionNav items={sectionNav} label="Quick access to packages" />
 

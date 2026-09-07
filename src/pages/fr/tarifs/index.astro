@@ -4,6 +4,7 @@ import Layout from '../../../layouts/Layout.astro';
 import Button from '../../../components/Button.astro';
 import PricePack from '../../../components/PricePack.astro';
 import SectionNav from '../../../components/SectionNav.astro';
+import CurrencyPrices from '../../../components/CurrencyPrices.astro';
 import { offer, breadcrumbList } from '../../../lib/schema';
 import site from '../../../data/site.json';
 
@@ -39,11 +40,13 @@ const sectionNav = [
 >
   <section class="pad" style="padding-bottom:20px">
     <h1 style="font-size:1.9rem">Tarifs kitesurf et wingfoil au Morne</h1>
-    <p class="sub">Prix 2026, par personne, matériel compris. Roupies mauriciennes et équivalent en euros.</p>
+    <p class="sub">Prix 2026 en euros, par personne, matériel compris.</p>
     <div style="display:flex;gap:7px;flex-wrap:wrap;margin-top:12px">
       <span class="tag">Aile et planche</span><span class="tag">Casque et gilet</span><span class="tag">Combinaison</span><span class="tag">Équipement selon la formule</span>
     </div>
   </section>
+
+  <section class="pad" style="padding-top:0"><CurrencyPrices locale="fr" /></section>
 
   <SectionNav items={sectionNav} label="Accès rapide aux formules" />
 

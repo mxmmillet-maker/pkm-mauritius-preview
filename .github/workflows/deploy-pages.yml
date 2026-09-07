@@ -6,6 +6,8 @@ on:
   pull_request:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    - cron: '20 4 * * *'
 
 permissions: {}
 
@@ -53,6 +55,7 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - run: node scripts/update-mcb-rates.mjs
       - run: npm run validate:production
       - run: npm run build:github-pages
       - run: npm run audit:dist
