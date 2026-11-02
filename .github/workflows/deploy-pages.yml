@@ -20,6 +20,20 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  dependency-security:
+    name: Dependency security audit
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npm audit --audit-level=high
+
   quality:
     runs-on: ubuntu-latest
     permissions:
@@ -31,12 +45,11 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: npm audit --audit-level=high
       - run: npm run audit
 
   deploy:
     if: github.event_name != 'pull_request'
-    needs: quality
+    needs: [quality, dependency-security]
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
